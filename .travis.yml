@@ -1,0 +1,11 @@
+language: java
+
+git:
+  depth: 1
+
+branches:
+  only:
+    - travis
+
+script:
+  - mvn clean install
