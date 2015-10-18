@@ -5,7 +5,7 @@ git:
 
 branches:
   only:
-    - travis
+    - master
 
 script:
   - mvn clean install
