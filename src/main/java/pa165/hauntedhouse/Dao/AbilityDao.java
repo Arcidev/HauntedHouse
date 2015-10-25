@@ -6,16 +6,16 @@
 package pa165.hauntedhouse.Dao;
 
 import java.util.List;
-import pa165.hauntedhouse.Entity.Attribute;
+import pa165.hauntedhouse.Entity.Ability;
 
 /**
  *
  * @author Andrej Dobes
  */
-public interface AttributeDao {
-    public Attribute findById(int id);
-    public void create(Attribute attr);
-    public void delete(Attribute attr);
-    public List<Attribute> findAll();
-    public Attribute findByName(String name);
+public interface AbilityDao {
+    public Ability findById(int id);
+    public void create(Ability attr);
+    public void delete(Ability attr);
+    public List<Ability> findAll();
+    public Ability findByName(String name);
 }
