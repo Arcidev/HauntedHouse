@@ -21,7 +21,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-public class Attribute {
+public class Ability {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
@@ -69,11 +69,11 @@ public class Attribute {
             return false;
         }
         
-        if (!(obj instanceof Attribute)) {
+        if (!(obj instanceof Ability)) {
             return false;
         }
         
-        return id == ((Attribute)obj).getId();
+        return id == ((Ability)obj).getId();
     }
 
     @Override
