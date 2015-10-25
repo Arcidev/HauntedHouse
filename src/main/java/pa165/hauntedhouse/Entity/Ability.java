@@ -32,7 +32,7 @@ public class Ability {
     @NotNull
     private String info;
     
-    @ManyToMany(mappedBy="abilities", fetch=FetchType.LAZY) 
+    @ManyToMany(targetEntity=Spook.class, mappedBy="abilities", fetch=FetchType.LAZY) 
     private Set<Spook> spooks = new HashSet<>(); 
 
     public int getId() {
