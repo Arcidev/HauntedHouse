@@ -25,11 +25,12 @@ public class AbilityDaoImpl implements AbilityDao {
         return em.find(Ability.class, id);
     }
 
+    
     @Override
     public void create(Ability attr) {
         em.persist(attr);
     }
-
+    
     @Override
     public void delete(Ability attr) {
         em.remove(attr);
@@ -48,7 +49,5 @@ public class AbilityDaoImpl implements AbilityDao {
         } catch (NoResultException nrf) {
             return null;
         }
-
     }
-    
 }
