@@ -38,13 +38,13 @@ public class AbilityDaoImpl implements AbilityDao {
 
     @Override
     public List<Ability> findAll() {
-        return em.createQuery("select attr from Attribute attr", Ability.class).getResultList();
+        return em.createQuery("select a from Ability a", Ability.class).getResultList();
     }
 
     @Override
     public Ability findByName(String name) {
         try {
-            return em.createQuery("select attr from Attribute attr where name = NAME_PLACEHOLDER", Ability.class)
+            return em.createQuery("select a from Ability a where name = NAME_PLACEHOLDER", Ability.class)
                     .setParameter("NAME_PLACEHOLDER", name).getSingleResult();
         } catch (NoResultException nrf) {
             return null;

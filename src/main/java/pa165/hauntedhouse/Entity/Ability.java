@@ -7,8 +7,8 @@ package pa165.hauntedhouse.Entity;
 
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,13 +27,13 @@ public class Ability {
     private int id;
     
     @NotNull
-    @Column(nullable=false)
     private String name;
     
+    @NotNull
     private String info;
     
-    //@ManyToMany(mappedBy="attributes", fetch=FetchType.LAZY) 
-    //private Set<Spook> spooks = new HashSet<>(); 
+    @ManyToMany(mappedBy="abilities", fetch=FetchType.LAZY) 
+    private Set<Spook> spooks = new HashSet<>(); 
 
     public int getId() {
         return id;
@@ -55,9 +55,9 @@ public class Ability {
         this.info = info;
     }
     
-    //public Set<Spook> getSpooks() {
-    //    return spooks;
-    //}
+    public Set<Spook> getSpooks() {
+        return spooks;
+    }
     
     @Override
     public boolean equals(Object obj) {
