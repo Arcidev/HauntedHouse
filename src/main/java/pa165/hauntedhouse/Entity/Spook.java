@@ -5,29 +5,34 @@
  */
 package pa165.hauntedhouse.Entity;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 /**
  *
  * @author Martin Durcansky
  */
 @Entity
-public class Spook {
+public class Spook  {
     
     @Id
+    @Column(name="spok_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     
-    @NotNull
-    @Column(nullable=false)
+    @NotNull    
     private String name;
     
     @NotNull
@@ -38,6 +43,50 @@ public class Spook {
     
     @NotNull
     private Time hountsUntil;
+    
+    
+    @OneToMany
+    @JoinColumn(name="spok_id")
+    private Set<History> histories = new HashSet<>();
+
+    public Set<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(Set<History> histories) {
+        this.histories = histories;
+    }
+    
+    
+    
+    @ManyToMany(targetEntity=Ability.class, mappedBy="spooks", fetch=FetchType.EAGER) 
+    private Set<Ability> abilities = new HashSet<>();    
+
+    public Set<Ability> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(Set<Ability> abilities) {
+        this.abilities = abilities;
+    }
+         
+       
+      
+   /*
+    @ManyToOne
+    @JoinColumn(name = "house_id")
+    private House house;
+    
+
+    public House getHouse() {
+        return house;
+    }
+
+    public void setHouse(House house) {
+        this.house = house;
+    }
+    
+   */
 
     public int getId() {
         return id;
@@ -49,8 +98,8 @@ public class Spook {
     
     public String getName() {
         return name;
-    }
-    
+    }  
+  
   
     
     public void setHistory(String history) {
