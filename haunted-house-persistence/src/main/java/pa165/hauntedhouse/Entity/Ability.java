@@ -6,6 +6,7 @@
 package pa165.hauntedhouse.Entity;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -78,13 +79,18 @@ public class Ability {
             return false;
         }
         
-        return id == ((Ability)obj).getId();
+        Ability a = (Ability)obj;
+        return id == a.getId() &&
+                (name == null ? a.getName() == null : name.equals(a.getName())) &&
+                (info == null ? a.getInfo() == null : info.equals(a.getInfo()));
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.id;
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.info);
         return hash;
     }
 }
