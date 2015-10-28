@@ -102,15 +102,12 @@ public class House {
         if (this == obj) {
             return true;
         }
-        
         if (obj == null) {
             return false;
         }
-        
         if (!(obj instanceof House)) {
             return false;
         }
-        
         return id == ((House)obj).getId();
     }
 
@@ -119,8 +116,5 @@ public class House {
         int hash = 7;
         hash = 79 * hash + this.id;
         return hash;
-    }
-    
-    
-    
+    }    
 }
