@@ -9,14 +9,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Entity.Ability;
 
 /**
  *
  * @author Andrej Dobes
  */
-@Transactional
 public class AbilityDaoImpl implements AbilityDao {
 
     @PersistenceContext
@@ -46,8 +44,8 @@ public class AbilityDaoImpl implements AbilityDao {
     @Override
     public Ability findByName(String name) {
         try {
-            return em.createQuery("select a from Ability a where name = NAME_PLACEHOLDER", Ability.class)
-                    .setParameter("NAME_PLACEHOLDER", name).getSingleResult();
+            return em.createQuery("select a from Ability a where name = :name", Ability.class)
+                    .setParameter("name", name).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
         }

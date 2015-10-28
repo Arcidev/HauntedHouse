@@ -59,6 +59,11 @@ public class Ability {
         return spooks;
     }
     
+    public void addSpook(Spook s) {
+        spooks.add(s);
+        //s.addAbility(this);
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

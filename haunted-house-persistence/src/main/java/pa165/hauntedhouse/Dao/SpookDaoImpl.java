@@ -9,13 +9,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.Spook;
 /**
  *
  * @author Martin Durcansky
  */
-@Transactional
+@Repository
 public class SpookDaoImpl implements SpookDao{
     
     @PersistenceContext
@@ -43,8 +43,8 @@ public class SpookDaoImpl implements SpookDao{
     @Override
     public Spook findByName(String name) {
         try {
-            return em.createQuery("select spk from Spook spk where name = NAME_PLACEHOLDER", Spook.class)
-                    .setParameter("NAME_PLACEHOLDER", name).getSingleResult();
+            return em.createQuery("select spk from Spook spk where name = :name", Spook.class)
+                    .setParameter("name", name).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
         }

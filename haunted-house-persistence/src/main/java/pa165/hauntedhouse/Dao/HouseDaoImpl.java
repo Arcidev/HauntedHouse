@@ -10,14 +10,14 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.House;
 
 /**
  *
  * @author Milan
  */
-@Transactional
+@Repository
 public class HouseDaoImpl implements HouseDao{
     
     @PersistenceContext
@@ -46,8 +46,8 @@ public class HouseDaoImpl implements HouseDao{
     @Override
     public House findByName(String name) {
         try {
-            return em.createQuery("select hs from House hs where name = NAME_PLACEHOLDER", House.class)
-                    .setParameter("NAME_PLACEHOLDER", name).getSingleResult();
+            return em.createQuery("select hs from House hs where name = :name", House.class)
+                    .setParameter("name", name).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
         }

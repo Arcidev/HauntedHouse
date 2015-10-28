@@ -9,14 +9,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Entity.History;
 
 /**
  *
  * @author Luka
  */
-@Transactional
 public class HistoryDaoImpl implements HistoryDao{
     
     @PersistenceContext
@@ -46,7 +44,7 @@ public class HistoryDaoImpl implements HistoryDao{
     public History findByDate(java.util.Date historyDate) {
         try {
             return em.createQuery("select h from History h where h.historyDate = :date", History.class)
-                    .setParameter(":date", historyDate).getSingleResult();
+                    .setParameter("date", historyDate).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
         }

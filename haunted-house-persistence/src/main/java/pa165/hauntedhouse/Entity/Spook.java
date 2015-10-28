@@ -59,7 +59,7 @@ public class Spook  {
     
     
     
-    @ManyToMany(targetEntity=Ability.class, mappedBy="spooks", fetch=FetchType.EAGER) 
+    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER) 
     private Set<Ability> abilities = new HashSet<>();    
 
     public Set<Ability> getAbilities() {
@@ -74,7 +74,7 @@ public class Spook  {
       
    
     @ManyToOne
-    @JoinColumn(name = "house_id")
+    @JoinColumn(name = "House_id")
     private House house;
     
 
