@@ -25,16 +25,23 @@ public interface AbilityDao {
     /**
      * Creates new ability
      * 
-     * @param attr
+     * @param a
      */
-    public void create(Ability attr);
+    public void create(Ability a);
     
     /**
      * Deletes existing ability
      * 
-     * @param attr
+     * @param a
      */
-    public void delete(Ability attr);
+    public void delete(Ability a);
+    
+    /**
+     * Updates existing ability
+     * 
+     * @param a
+     */
+    public void update(Ability a);
     
     /**
      * Gets all abilities that are stored in database

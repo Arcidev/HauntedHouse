@@ -27,13 +27,19 @@ public class AbilityDaoImpl implements AbilityDao {
 
     
     @Override
-    public void create(Ability attr) {
-        em.persist(attr);
+    public void create(Ability a) {
+        em.persist(a);
     }
     
     @Override
-    public void delete(Ability attr) {
-        em.remove(attr);
+    public void delete(Ability a) {
+        Ability ability = em.find(Ability.class, a.getId());
+        em.remove(ability);
+    }
+    
+    @Override
+    public void update(Ability a) {
+        em.merge(a);
     }
 
     @Override

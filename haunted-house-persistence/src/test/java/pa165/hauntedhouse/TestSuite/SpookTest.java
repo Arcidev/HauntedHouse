@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dao.HouseDao;
 import pa165.hauntedhouse.Dao.SpookDao;
@@ -31,7 +33,6 @@ import pa165.hauntedhouse.PersistenceApplicationContext;
  */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
-@Transactional
 public class SpookTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
@@ -64,7 +65,8 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         return new Time(cal.getTime().getTime());
     }
     
-    private void createTestData() {
+    @BeforeClass
+    public void createTestData() {
         Date date = getTestDate();
         Time timeSince = getTime(20, 45, 30);
         Time timeUntil = getTime(6, 30, 00);
@@ -97,31 +99,43 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         //spook.addHistory(history2);
         
         spookDao.create(spook);
-    }
-    
-    private void testSpookData() {
-        List<Spook> spooks = spookDao.findAll();
-        Assert.assertEquals(spooks.size(), 1);
         
-        Spook spook = spookDao.findById(1);
-        Assert.assertEquals(spook.getName(), "Spookie");
-        Assert.assertEquals(spook.getHistory(), "Test history");
-        Assert.assertEquals(spook.getHountsSince(), getTime(20, 45, 30));
-        Assert.assertEquals(spook.getHountsUntil(), getTime(6, 30, 00));
-    }
-    
-    private void testSpookHouseAssosiation() {
-        House house = spookDao.findByName("Spookie").getHouse();
-        Assert.assertEquals(house.getName(), "Spookie's House");
-        Assert.assertEquals(house.getAdress(), "Spookie's House Adress");
-        Assert.assertEquals(house.getHauntedSince(), getTestDate());
-        Assert.assertEquals(house.getHistory(), "Spookie's House History");
+        spook = new Spook();
+        spook.setName("Freddy Krueger");
+        spook.setHountsSince(timeSince);
+        spook.setHountsUntil(timeUntil);
+        spook.setHistory("He gets burned once");
+        
+        spookDao.create(spook);
     }
     
     @Test
-    public void createFindDeleteTest() {
-        createTestData();
-        testSpookData();
-        testSpookHouseAssosiation();
-    }    
+    public void testSpookData() {
+        List<Spook> spooks = spookDao.findAll();
+        Assert.assertEquals(spooks.size(), 2);
+        
+        Spook spook = spookDao.findByName("Spookie");
+        Assert.assertEquals(spook.getName(), "Spookie");
+        Assert.assertEquals(spook.getHistory(), "Test history");
+        Assert.assertEquals(spook.getHountsSince().toString(), getTime(20, 45, 30).toString());
+        Assert.assertEquals(spook.getHountsUntil().toString(), getTime(6, 30, 00).toString());
+        
+        spook = spookDao.findByName("Freddy Krueger");
+        //spook.setName("Jason Voorhees");
+        //spookDao.update(spook);
+        //Assert.assertEquals(spook.getName(), "Jason Voorhees");
+        
+        //spookDao.delete(spook);
+        //spooks = spookDao.findAll();
+        //Assert.assertEquals(spooks.size(), 1);
+    }
+    
+    @Test
+    public void testSpookHouseAssosiation() {
+        House house = spookDao.findByName("Spookie").getHouse();
+        Assert.assertEquals(house.getName(), "Spookie's House");
+        Assert.assertEquals(house.getAdress(), "Spookie's House Adress");
+        Assert.assertEquals(house.getHauntedSince().toString(), getTestDate().toString());
+        Assert.assertEquals(house.getHistory(), "Spookie's House History");
+    }
 }
