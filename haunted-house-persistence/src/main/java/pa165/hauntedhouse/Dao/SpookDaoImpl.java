@@ -9,11 +9,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Entity.Spook;
 /**
  *
  * @author Martin Durcansky
  */
+@Transactional
 public class SpookDaoImpl implements SpookDao{
     
     @PersistenceContext
