@@ -72,7 +72,7 @@ public class Spook  {
          
        
       
-   /*
+   
     @ManyToOne
     @JoinColumn(name = "house_id")
     private House house;
@@ -86,7 +86,7 @@ public class Spook  {
         this.house = house;
     }
     
-   */
+   
 
     public int getId() {
         return id;
