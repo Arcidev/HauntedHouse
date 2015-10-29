@@ -13,7 +13,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -33,7 +35,7 @@ public class History {
     
     private String historyInfo;
     
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "spook_id")
     private Spook spook;
     
@@ -43,8 +45,7 @@ public class History {
     
     public void setSpook(Spook spook){
 	this.spook=spook;
-    }*/
-    
+    }
     
     
     public int getID(){
@@ -62,13 +63,6 @@ public class History {
     public void setInfo(String historyInfo){
         this.historyInfo = historyInfo;
     }
-    
-    /*public History(){
-    }
-    public History(String historyInfo){
-	setInfo(historyInfo);
-    }
-    */
     
     @Override
     public boolean equals(Object obj) {
