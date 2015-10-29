@@ -8,6 +8,7 @@ package pa165.hauntedhouse.Entity;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -56,7 +57,7 @@ public class Spook  {
     private House house;
 
     public Set<History> getHistories() {
-        return histories;
+        return Collections.unmodifiableSet(histories);        
     }
 
     public void addHistory(History history) {
@@ -64,7 +65,7 @@ public class Spook  {
     }    
 
     public Set<Ability> getAbilities() {
-        return abilities;
+        return Collections.unmodifiableSet(abilities);
     }
 
     
