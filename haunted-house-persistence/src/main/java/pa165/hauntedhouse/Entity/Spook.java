@@ -45,8 +45,7 @@ public class Spook  {
     @NotNull
     private Time hauntsUntil;
         
-    @OneToMany(fetch=FetchType.EAGER)
-    @JoinColumn(name="spok_id")
+    @OneToMany(mappedBy = "spook",fetch=FetchType.EAGER)    
     private Set<History> histories = new HashSet<>();
     
     @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER) 
