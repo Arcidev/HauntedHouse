@@ -24,8 +24,8 @@ public class AbilityDaoImpl implements AbilityDao {
     public Ability findById(int id) {
         return em.find(Ability.class, id);
     }
-
-    
+     
+  
     @Override
     public void create(Ability a) {
         em.persist(a);
