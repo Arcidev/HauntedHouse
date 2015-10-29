@@ -9,15 +9,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.Spook;
 /**
  *
  * @author Martin Durcansky
  */
-@Repository
-@Transactional
+
 public class SpookDaoImpl implements SpookDao{
     
     @PersistenceContext
@@ -31,10 +28,15 @@ public class SpookDaoImpl implements SpookDao{
     public void create(Spook spk) {
         em.persist(spk);
     }
+    @Override
+    public void update(Spook spk) {
+        em.merge(spk);
+    }
 
     @Override
     public void delete(Spook spk) {
-        em.remove(spk);
+        Spook spook = em.find(Spook.class, spk.getId());
+        em.remove(spook);
     }
 
     @Override

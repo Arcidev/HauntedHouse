@@ -28,12 +28,18 @@ public interface SpookDao {
      * @param spk
      */
     public void create(Spook spk);
-    
+    /**
+     * Updates existing spook
+     * 
+     * @param apk
+     */
+    public void update(Spook spk);
     /**
      * Deletes existing spook
      * 
      * @param spk
      */
+    
     public void delete(Spook spk);
     /**
      * Gets all spooks that are stored in database
