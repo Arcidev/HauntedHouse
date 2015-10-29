@@ -73,7 +73,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         
         Spook spook = new Spook();
         spook.setName("Spookie");
-        spook.setHountsSince(timeSince);
+        spook.setHauntsSince(timeSince);
         spook.setHauntsUntil(timeUntil);
         spook.setHistory("Test history");
         
@@ -102,7 +102,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         
         spook = new Spook();
         spook.setName("Freddy Krueger");
-        spook.setHountsSince(timeSince);
+        spook.setHauntsSince(timeSince);
         spook.setHauntsUntil(timeUntil);
         spook.setHistory("He gets burned once");
         
@@ -117,7 +117,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         Spook spook = spookDao.findByName("Spookie");
         Assert.assertEquals(spook.getName(), "Spookie");
         Assert.assertEquals(spook.getHistory(), "Test history");
-        Assert.assertEquals(spook.getHountsSince().toString(), getTime(20, 45, 30).toString());
+        Assert.assertEquals(spook.getHauntsSince().toString(), getTime(20, 45, 30).toString());
         Assert.assertEquals(spook.getHauntsUntil().toString(), getTime(6, 30, 00).toString());
         
         spook = spookDao.findByName("Freddy Krueger");

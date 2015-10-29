@@ -49,7 +49,7 @@ public class Spook  {
     @JoinColumn(name="spok_id")
     private Set<History> histories = new HashSet<>();
     
-    @ManyToMany(targetEntity=Ability.class, mappedBy="spooks", fetch=FetchType.EAGER) 
+    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER) 
     private Set<Ability> abilities = new HashSet<>();
     
     @ManyToOne
