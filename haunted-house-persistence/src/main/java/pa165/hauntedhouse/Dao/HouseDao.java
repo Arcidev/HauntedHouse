@@ -36,6 +36,12 @@ public interface HouseDao {
      */
     public void delete(House hs);
     /**
+     * Updates existing house
+     * 
+     * @param hs
+     */
+    public void update(House hs);
+    /**
      * Gets all houses that are stored in database
      * 
      * @return the list of all houses

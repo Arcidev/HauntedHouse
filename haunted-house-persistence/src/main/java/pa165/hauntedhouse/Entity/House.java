@@ -7,6 +7,7 @@
 package pa165.hauntedhouse.Entity;
 
 import java.sql.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -110,13 +111,23 @@ public class House {
         if (!(obj instanceof House)) {
             return false;
         }
-        return id == ((House)obj).getId();
+        
+        House hs = (House)obj;
+        return id == hs.getId() &&
+                (name == null ? hs.getName() == null : name.equals(hs.getName())) &&
+                (adress == null ? hs.getAdress() == null : adress.equals(hs.getAdress())) &&
+                (history == null ? hs.getHistory() == null : history.equals(hs.getHistory())) &&
+                (hauntedSince == null ? hs.getHauntedSince() == null : hauntedSince.equals(hs.getHauntedSince()));
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.id;
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.adress);
+        hash = 59 * hash + Objects.hashCode(this.history);
+        hash = 59 * hash + Objects.hashCode(this.hauntedSince);
         return hash;
     }    
 }

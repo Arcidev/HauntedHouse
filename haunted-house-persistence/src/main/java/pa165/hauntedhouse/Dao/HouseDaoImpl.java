@@ -10,16 +10,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.House;
 
 /**
  *
  * @author Milan
  */
-@Repository
-@Transactional
 public class HouseDaoImpl implements HouseDao{
     
     @PersistenceContext
@@ -38,6 +34,11 @@ public class HouseDaoImpl implements HouseDao{
     @Override
     public void delete(House hs) {
         em.remove(hs);
+    }
+    
+    @Override
+    public void update(House hs) {
+        em.merge(hs);
     }
 
     @Override
