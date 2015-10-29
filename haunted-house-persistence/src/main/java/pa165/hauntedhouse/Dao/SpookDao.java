@@ -31,7 +31,7 @@ public interface SpookDao {
     /**
      * Updates existing spook
      * 
-     * @param apk
+     * @param spk
      */
     public void update(Spook spk);
     /**
