@@ -15,7 +15,7 @@ import pa165.hauntedhouse.Entity.History;
 
 /**
  *
- * @author Luka
+ * @author Lucie Smidova
  */
 @Repository
 @Transactional
@@ -32,6 +32,11 @@ public class HistoryDaoImpl implements HistoryDao{
     @Override
     public void delete(History h) {
         em.remove(h);
+    }
+    
+    @Override
+    public void update(History h){
+        em.merge(h);
     }
     
     @Override
