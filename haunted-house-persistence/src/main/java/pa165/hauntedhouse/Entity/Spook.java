@@ -45,7 +45,7 @@ public class Spook  {
     @NotNull
     private Time hauntsUntil;
         
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name="spok_id")
     private Set<History> histories = new HashSet<>();
     

@@ -5,6 +5,7 @@
  */
 package pa165.hauntedhouse.Entity;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -33,7 +34,7 @@ public class Ability {
     @NotNull
     private String info;
     
-    @ManyToMany(targetEntity=Spook.class, mappedBy="abilities", fetch=FetchType.LAZY) 
+    @ManyToMany(targetEntity=Spook.class, mappedBy="abilities", fetch=FetchType.EAGER) 
     private Set<Spook> spooks = new HashSet<>(); 
 
     public int getId() {
@@ -57,12 +58,12 @@ public class Ability {
     }
     
     public Set<Spook> getSpooks() {
-        return spooks;
+        return Collections.unmodifiableSet(spooks);
     }
     
     public void addSpook(Spook s) {
         spooks.add(s);
-        //s.addAbility(this);
+        s.addAbility(this);
     }
     
     @Override

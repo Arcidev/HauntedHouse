@@ -8,7 +8,9 @@ package pa165.hauntedhouse.TestSuite;
 import java.util.Calendar;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -19,6 +21,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import pa165.hauntedhouse.Dao.AbilityDao;
+import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Dao.HouseDao;
 import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.Ability;
@@ -40,6 +44,12 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
     private HouseDao houseDao;
+    
+    @Autowired
+    private HistoryDao historyDao;
+    
+    @Autowired
+    private AbilityDao abilityDao;
     
     private Date getTestDate() {
         Calendar cal = Calendar.getInstance();
@@ -85,18 +95,28 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         houseDao.create(house);
         
         Ability ability = new Ability();
+        ability.setName("Scare");
+        ability.setInfo("Scares somenone");
         Ability ability2 = new Ability();
+        ability2.setName("Sleep");
+        ability2.setInfo("Brings somenone to sleep");
+        abilityDao.create(ability);
+        abilityDao.create(ability2);
         
         History history = new History();
+        history.setInfo("history 1");
         History history2 = new History();
+        history2.setInfo("history 2");
+        historyDao.create(history);
+        historyDao.create(history2);
         
-        //spook.addAbility(ability);
-        //spook.addAbility(ability2);
+        spook.addAbility(ability);
+        spook.addAbility(ability2);
         
         spook.setHouse(house);
         
-        //spook.addHistory(history);
-        //spook.addHistory(history2);
+        spook.addHistory(history);
+        spook.addHistory(history2);
         
         spookDao.create(spook);
         
@@ -121,13 +141,13 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(spook.getHauntsUntil().toString(), getTime(6, 30, 00).toString());
         
         spook = spookDao.findByName("Freddy Krueger");
-        //spook.setName("Jason Voorhees");
-        //spookDao.update(spook);
-        //Assert.assertEquals(spook.getName(), "Jason Voorhees");
+        spook.setName("Jason Voorhees");
+        spookDao.update(spook);
+        Assert.assertEquals(spook.getName(), "Jason Voorhees");
         
-        //spookDao.delete(spook);
-        //spooks = spookDao.findAll();
-        //Assert.assertEquals(spooks.size(), 1);
+        spookDao.delete(spook);
+        spooks = spookDao.findAll();
+        Assert.assertEquals(spooks.size(), 1);
     }
     
     @Test
@@ -137,5 +157,49 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(house.getAdress(), "Spookie's House Adress");
         Assert.assertEquals(house.getHauntedSince().toString(), getTestDate().toString());
         Assert.assertEquals(house.getHistory(), "Spookie's House History");
+        //Assert.assertEquals(house.getSpooks().size(), 1);
+    }
+    
+    @Test
+    public void testSpookAbilityAssosiation() {
+        Set<Ability> abilities = spookDao.findByName("Spookie").getAbilities();
+        Assert.assertEquals(abilities.size(), 2);
+        
+        Ability ability = null;
+        Iterator iter = abilities.iterator();
+        while (iter.hasNext()) {
+            ability = (Ability)iter.next();
+            if ("Scare".equals(ability.getName())) {
+                break;
+            }
+        }
+        
+        if (ability == null) {
+            throw new NullPointerException("Ability in list of Spookie's abilities cannot be null");
+        }
+        Assert.assertEquals(ability.getName(), "Scare");
+        Assert.assertEquals(ability.getInfo(), "Scares somenone");
+        Assert.assertEquals(ability.getSpooks().size(), 1);
+    }
+    
+    @Test
+    public void testSpookHistoryAssociation() {
+        Set<History> histories = spookDao.findByName("Spookie").getHistories();
+        Assert.assertEquals(histories.size(), 2);
+        
+        History history = null;
+        Iterator iter = histories.iterator();
+        while (iter.hasNext()) {
+            history = (History)iter.next();
+            if ("history 1".equals(history.getInfo())) {
+                break;
+            }
+        }
+        
+        if (history == null) {
+            throw new NullPointerException("History in list of Spookie's histories cannot be null");
+        }
+        Assert.assertEquals(history.getInfo(), "history 1");
+        //Assert.assertEquals(history.getSpook().getName, "Spookie");
     }
 }
