@@ -39,45 +39,39 @@ public class Spook  {
     private String history;
     
     @NotNull
-    private Time hountsSince;
+    private Time hauntsSince;
     
     @NotNull
-    private Time hountsUntil;
-    
-    
+    private Time hauntsUntil;
+        
     @OneToMany
     @JoinColumn(name="spok_id")
     private Set<History> histories = new HashSet<>();
+    
+    @ManyToMany(targetEntity=Ability.class, mappedBy="spooks", fetch=FetchType.EAGER) 
+    private Set<Ability> abilities = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "House_id")
+    private House house;
 
     public Set<History> getHistories() {
         return histories;
     }
 
-    public void setHistories(Set<History> histories) {
-        this.histories = histories;
-    }
-    
-    
-    
-    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER) 
-    private Set<Ability> abilities = new HashSet<>();    
+    public void addHistory(History history) {
+        this.histories.add(history);
+    }    
 
     public Set<Ability> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(Set<Ability> abilities) {
-        this.abilities = abilities;
-    }
-         
-       
-      
-   
-    @ManyToOne
-    @JoinColumn(name = "House_id")
-    private House house;
     
-
+    public void addAbility(Ability ability) {
+        abilities.add(ability);
+    }     
+    
     public House getHouse() {
         return house;
     }
@@ -99,8 +93,6 @@ public class Spook  {
     public String getName() {
         return name;
     }  
-  
-  
     
     public void setHistory(String history) {
         this.history = history;
@@ -110,18 +102,18 @@ public class Spook  {
         return history;
     }
     
-    public void setHountsSince(Time hountsSince) {
-        this.hountsSince = hountsSince;
+    public void setHauntsSince(Time hauntsSince) {
+        this.hauntsSince = hauntsSince;
     }
-    public Time getHountsSince() {
-        return hountsSince;
+    public Time getHauntsSince() {
+        return hauntsSince;
     }
     
-    public void setHountsUntil(Time hountsUntil) {
-        this.hountsUntil = hountsUntil;
+    public void setHauntsUntil(Time hauntsUntil) {
+        this.hauntsUntil = hauntsUntil;
     }
-    public Time getHountsUntil() {
-        return hountsUntil;
+    public Time getHauntsUntil() {
+        return hauntsUntil;
     }
     
    
