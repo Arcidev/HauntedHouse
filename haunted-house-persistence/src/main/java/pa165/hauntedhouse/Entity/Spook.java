@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.sql.Time;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -133,14 +134,23 @@ public class Spook  {
         if (!(obj instanceof Spook)) {
             return false;
         }
-        
-        return id == ((Spook)obj).getId();
+        Spook s = (Spook)obj;
+        return id == s.getId() &&
+                (name == null ? s.getName() == null : name.equals(s.getName())) &&
+                (history == null ? s.getHistory() == null : history.equals(s.getHistory())) &&
+                (hauntsSince == null ? s.getHauntsSince() == null : hauntsSince.equals(s.getHauntsSince())) &&
+                (hauntsUntil == null ? s.getHauntsUntil() == null : hauntsUntil.equals(s.getHauntsUntil()));
+                
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + this.id;
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.history);
+        hash = 59 * hash + Objects.hashCode(this.hauntsSince);
+        hash = 59 * hash + Objects.hashCode(this.hauntsUntil);
         return hash;
     }
 }
