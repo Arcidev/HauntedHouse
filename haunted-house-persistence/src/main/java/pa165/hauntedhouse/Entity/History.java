@@ -6,6 +6,7 @@
 package pa165.hauntedhouse.Entity;
 
 
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -14,7 +15,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,8 +30,8 @@ public class History {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     
-    @Temporal(TemporalType.DATE)
-    private java.util.Date historyDate;
+    @NotNull
+    private Date historyDate;
     
     private String historyInfo;
     
@@ -52,8 +52,16 @@ public class History {
         return id;
     }
     
-    public java.util.Date getHistoryDate(){
+    /**
+     *
+     * @return
+     */
+    public Date getHistoryDate(){
         return historyDate;
+    }
+    
+    public void setHistoryDate(Date historyDate){
+        this.historyDate = historyDate;
     }
     
     public String getInfo(){
@@ -78,7 +86,10 @@ public class History {
             return false;
         }
         
-        return id == ((History)obj).getID();
+        History h = (History)obj;
+        return id == ((History)obj).getID()&&
+                (historyDate == null ? h.getHistoryDate() == null : historyDate.equals(h.getHistoryDate())) &&
+                (historyInfo == null ? h.getInfo() == null : historyInfo.equals(h.getInfo()));
     }
 
     @Override
