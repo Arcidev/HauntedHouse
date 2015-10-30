@@ -87,13 +87,6 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         spook.setHauntsUntil(timeUntil);
         spook.setHistory("Test history");
         
-        House house = new House();
-        house.setAddress("Spookie's House Adress");
-        house.setHauntedSince(date);
-        house.setName("Spookie's House");
-        house.setHistory("Spookie's House History");
-        houseDao.create(house);
-        
         Ability ability = new Ability();
         ability.setName("Scare");
         ability.setInfo("Scares somenone");
@@ -113,14 +106,21 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         spook.addAbility(ability);
         spook.addAbility(ability2);
         
-        spook.setHouse(house);
-        
         spook.addHistory(history);
         spook.addHistory(history2);
         
         spookDao.create(spook);
         historyDao.update(history);
         historyDao.update(history2);
+        
+        House house = new House();
+        house.setAddress("Spookie's House Adress");
+        house.setHauntedSince(date);
+        house.setName("Spookie's House");
+        house.setHistory("Spookie's House History");
+        house.addSpook(spook);
+        houseDao.create(house);
+        spookDao.update(spook);
         
         spook = new Spook();
         spook.setName("Freddy Krueger");
@@ -159,7 +159,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(house.getAddress(), "Spookie's House Adress");
         Assert.assertEquals(house.getHauntedSince().toString(), getTestDate().toString());
         Assert.assertEquals(house.getHistory(), "Spookie's House History");
-        //Assert.assertEquals(house.getSpooks().size(), 1);
+        Assert.assertEquals(house.getSpooks().size(), 1);
     }
     
     @Test
