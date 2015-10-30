@@ -11,12 +11,10 @@ import java.sql.Time;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.springframework.test.context.transaction.AfterTransaction;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -134,7 +132,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testSpookData() {
         List<Spook> spooks = spookDao.findAll();
-        Assert.assertEquals(spooks.size(), 2);
+        int spooksCount = spooks.size();
         
         Spook spook = spookDao.findByName("Spookie");
         Assert.assertEquals(spook.getName(), "Spookie");
@@ -149,7 +147,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         
         spookDao.delete(spook);
         spooks = spookDao.findAll();
-        Assert.assertEquals(spooks.size(), 1);
+        Assert.assertEquals(spooks.size(), spooksCount - 1);
     }
     
     @Test
