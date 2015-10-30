@@ -38,8 +38,7 @@ public class SpookDaoImpl implements SpookDao{
 
     @Override
     public void delete(Spook spk) {
-        Spook spook = em.find(Spook.class, spk.getId());
-        em.remove(spook);
+        em.remove(spk);
     }
 
     @Override

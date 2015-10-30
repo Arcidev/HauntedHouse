@@ -11,6 +11,7 @@ import java.sql.Time;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -35,6 +36,7 @@ import pa165.hauntedhouse.PersistenceApplicationContext;
  */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class SpookTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
