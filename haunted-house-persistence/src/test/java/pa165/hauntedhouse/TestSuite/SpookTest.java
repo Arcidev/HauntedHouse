@@ -134,7 +134,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testSpookData() {
         List<Spook> spooks = spookDao.findAll();
-        Assert.assertEquals(spooks.size(), 2);
+        int spooksCount = spooks.size();
         
         Spook spook = spookDao.findByName("Spookie");
         Assert.assertEquals(spook.getName(), "Spookie");
@@ -149,7 +149,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         
         spookDao.delete(spook);
         spooks = spookDao.findAll();
-        Assert.assertEquals(spooks.size(), 1);
+        Assert.assertEquals(spooks.size(), spooksCount - 1);
     }
     
     @Test
