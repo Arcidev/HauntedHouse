@@ -92,6 +92,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         
         h3.addSpook(spook);
         houseDao.create(h3);
+        spookDao.update(spook); 
         
         House h = new House();
         h.setName("Chroptici chyse");
@@ -148,7 +149,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         }
         
         Assert.assertEquals(s.getName(), "Skorobezhlavy Nick");
-       /* Assert.assertEquals(s.getHouse().getAddress(), "Les");*/
+       Assert.assertEquals(s.getHouse().getAddress(), "Les");
     }
     
 }
