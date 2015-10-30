@@ -46,7 +46,7 @@ public class Spook  {
     @NotNull
     private Time hauntsUntil;
         
-    @OneToMany(mappedBy = "spook",fetch=FetchType.EAGER)    
+    @OneToMany(fetch=FetchType.EAGER)    
     private Set<History> histories = new HashSet<>();
     
     @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER) 
@@ -62,6 +62,7 @@ public class Spook  {
 
     public void addHistory(History history) {
         this.histories.add(history);
+        history.setSpook(this);
     }    
 
     public Set<Ability> getAbilities() {
