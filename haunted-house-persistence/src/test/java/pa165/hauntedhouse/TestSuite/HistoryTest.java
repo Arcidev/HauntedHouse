@@ -32,10 +32,7 @@ import pa165.hauntedhouse.PersistenceApplicationContext;
 public class HistoryTest extends AbstractTestNGSpringContextTests{
     
     @Autowired
-    private HistoryDao historyDao;
-
-    @PersistenceContext
-    private EntityManager em;    
+    private HistoryDao historyDao;    
 
     @Test
     public void haveToFindAll(){
