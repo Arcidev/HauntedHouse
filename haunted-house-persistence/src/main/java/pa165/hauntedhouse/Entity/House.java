@@ -7,11 +7,15 @@
 package pa165.hauntedhouse.Entity;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -36,7 +40,7 @@ public class House {
     
     @NotNull
     private Date hauntedSince;
-
+    
     /**
      * @return the id
      */
@@ -61,14 +65,14 @@ public class House {
     /**
      * @return the address
      */
-    public String getAdress() {
+    public String getAddress() {
         return address;
     }
 
     /**
      * @param adress the adress to set
      */
-    public void setAdress(String adress) {
+    public void setAddress(String adress) {
         this.address = adress;
     }
 
@@ -115,7 +119,7 @@ public class House {
         House hs = (House)obj;
         return id == hs.getId() &&
                 (name == null ? hs.getName() == null : name.equals(hs.getName())) &&
-                (address == null ? hs.getAdress() == null : address.equals(hs.getAdress())) &&
+                (address == null ? hs.getAddress() == null : address.equals(hs.getAddress())) &&
                 (history == null ? hs.getHistory() == null : history.equals(hs.getHistory())) &&
                 (hauntedSince == null ? hs.getHauntedSince() == null : hauntedSince.equals(hs.getHauntedSince()));
     }
