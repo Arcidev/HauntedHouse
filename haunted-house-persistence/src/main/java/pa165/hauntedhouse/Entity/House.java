@@ -108,6 +108,7 @@ public class House {
         this.hauntedSince = hauntedSince;
     }
     
+    
         /**
      * @return the spooks
      */
