@@ -101,4 +101,5 @@ public class HistoryTest extends AbstractTestNGSpringContextTests{
         Assert.assertEquals(history1.getSpook().getName(), "Spook1");
         Assert.assertEquals(history1.getInfo(), "InfoInfo");
     }
+    
 }
