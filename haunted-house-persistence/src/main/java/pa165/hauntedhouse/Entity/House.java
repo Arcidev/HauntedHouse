@@ -7,6 +7,7 @@
 package pa165.hauntedhouse.Entity;
 
 import java.sql.Date;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -40,6 +41,9 @@ public class House {
     
     @NotNull
     private Date hauntedSince;
+    
+    @OneToMany(fetch=FetchType.EAGER)    
+    private Set<Spook> spooks = new HashSet<>();
     
     /**
      * @return the id
@@ -104,6 +108,18 @@ public class House {
         this.hauntedSince = hauntedSince;
     }
     
+        /**
+     * @return the spooks
+     */
+    public Set<Spook> getSpooks() {
+        return Collections.unmodifiableSet(spooks); 
+    }
+
+    public void addSpook(Spook spook) {
+        this.spooks.add(spook);
+        spook.setHouse(this);
+    }   
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -133,5 +149,5 @@ public class House {
         hash = 59 * hash + Objects.hashCode(this.history);
         hash = 59 * hash + Objects.hashCode(this.hauntedSince);
         return hash;
-    }    
+    }     
 }
