@@ -20,12 +20,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pa165.hauntedhouse.Dao.AbilityDao;
-import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Dao.HouseDao;
 import pa165.hauntedhouse.Dao.SpookDao;
-import pa165.hauntedhouse.Entity.Ability;
-import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.PersistenceApplicationContext;
@@ -33,17 +29,18 @@ import pa165.hauntedhouse.PersistenceApplicationContext;
 /**
  *
  * @author Lucie Smidova
+ * 
  */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class HouseTest extends AbstractTestNGSpringContextTests{
+    
     @Autowired
     private SpookDao spookDao;
     
     @Autowired
     private HouseDao houseDao;
-    
     
     private Date getTestDate() {
         Calendar cal = Calendar.getInstance();
@@ -100,7 +97,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         h.setHauntedSince(date);
         h.setHistory("Chroptici historie");
         
-      houseDao.create(h);
+        houseDao.create(h);
         
         House h2 = new House();
         h2.setName("Chaloupka na kuri nozce");
@@ -120,6 +117,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         House h = houseDao.findByName("Chroptici chyse");
         Assert.assertEquals(h.getName(), "Chroptici chyse");
         Assert.assertEquals(h.getAddress(), "Prasinky");
+        Assert.assertEquals(h.getHistory(), "Chroptici historie");
         
         h = houseDao.findByName("Chaloupka na kuri nozce");
         h.setName("Panelak na kurnozce");
@@ -133,8 +131,11 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
    
     @Test
     public void testHouseSpookAssosiation() {
+        Date date = getTestDate();
         Set<Spook> spooks = houseDao.findByName("Pernikova chaloupka").getSpooks();
         Assert.assertEquals(spooks.size(), 1);
+        
+        House h = houseDao.findByName("Pernikova chaloupka");
         
         Spook s = null;
         Iterator iter = spooks.iterator();
@@ -148,8 +149,11 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
             throw new NullPointerException("cant be null");
         }
         
-        Assert.assertEquals(s.getName(), "Skorobezhlavy Nick");
+       Assert.assertEquals(s.getName(), "Skorobezhlavy Nick");
+       Assert.assertEquals(s.getHistory(), "Test history");
        Assert.assertEquals(s.getHouse().getAddress(), "Les");
+       Assert.assertEquals(s.getHouse().getName(), "Pernikova chaloupka");
+       Assert.assertEquals(s.getHouse(), h);
     }
     
 }
