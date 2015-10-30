@@ -96,8 +96,10 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         
         History history = new History();
         history.setInfo("history 1");
+        history.setHistoryDate(date);
         History history2 = new History();
         history2.setInfo("history 2");
+        history2.setHistoryDate(date);
         historyDao.create(history);
         historyDao.create(history2);
         
