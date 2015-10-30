@@ -29,8 +29,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Spook  {
     
-    @Id
-    @Column(name="spook_id")
+    @Id    
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     
