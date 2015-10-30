@@ -11,6 +11,7 @@ import java.sql.Time;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.Entity;
@@ -45,13 +46,13 @@ public class Spook  {
     @NotNull
     private Time hauntsUntil;
         
-    @OneToMany(fetch=FetchType.EAGER)    
+    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)    
     private Set<History> histories = new HashSet<>();
     
-    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER) 
+    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER, cascade = CascadeType.PERSIST) 
     private Set<Ability> abilities = new HashSet<>();
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "House_id")
     private House house;
 
