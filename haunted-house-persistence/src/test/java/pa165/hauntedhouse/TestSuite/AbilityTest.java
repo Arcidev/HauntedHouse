@@ -95,6 +95,8 @@ public class AbilityTest extends AbstractTestNGSpringContextTests{
         ability2.setName("Kricanie");
         ability2.setInfo("zensky krik");
         abilityDao.create(ability2);
+        spookDao.update(spook);
+        spookDao.update(spook2);
     }
     
      @Test
@@ -116,7 +118,7 @@ public class AbilityTest extends AbstractTestNGSpringContextTests{
         abilities = abilityDao.findAll();
         Assert.assertEquals(abilities.size(), abilitiesCounts - 1);
     }
-    /*
+    
     @Test
     public void testAbilitySpookAssosiation() {
         Set<Spook> spooks = abilityDao.findByName("Vydavanie zvukov").getSpooks();
@@ -138,5 +140,5 @@ public class AbilityTest extends AbstractTestNGSpringContextTests{
         Assert.assertEquals(spook.getHistory(), "Test history");
         Assert.assertEquals(spook.getAbilities().size(), 1);
     }
-    */
+    
 }
