@@ -119,6 +119,8 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         spook.addHistory(history2);
         
         spookDao.create(spook);
+        historyDao.update(history);
+        historyDao.update(history2);
         
         spook = new Spook();
         spook.setName("Freddy Krueger");
@@ -200,6 +202,6 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
             throw new NullPointerException("History in list of Spookie's histories cannot be null");
         }
         Assert.assertEquals(history.getInfo(), "history 1");
-        //Assert.assertEquals(history.getSpook().getName, "Spookie");
+        Assert.assertEquals(history.getSpook().getName(), "Spookie");
     }
 }
