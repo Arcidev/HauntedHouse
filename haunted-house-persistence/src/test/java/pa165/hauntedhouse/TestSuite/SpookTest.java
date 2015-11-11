@@ -11,6 +11,7 @@ import java.sql.Time;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -35,6 +36,7 @@ import pa165.hauntedhouse.PersistenceApplicationContext;
  */
 @ContextConfiguration(classes = PersistenceApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
 public class SpookTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
@@ -79,6 +81,12 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         Time timeSince = getTime(20, 45, 30);
         Time timeUntil = getTime(6, 30, 00);
         
+        House house = new House();
+        house.setAddress("Spookie's House Adress");
+        house.setHauntedSince(date);
+        house.setName("Spookie's House");
+        house.setHistory("Spookie's House History");
+        
         Spook spook = new Spook();
         spook.setName("Spookie");
         spook.setHauntsSince(timeSince);
@@ -91,8 +99,6 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         Ability ability2 = new Ability();
         ability2.setName("Sleep");
         ability2.setInfo("Brings somenone to sleep");
-        abilityDao.create(ability);
-        abilityDao.create(ability2);
         
         History history = new History();
         history.setInfo("history 1");
@@ -100,27 +106,14 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         History history2 = new History();
         history2.setInfo("history 2");
         history2.setHistoryDate(date);
-        historyDao.create(history);
-        historyDao.create(history2);
         
+        house.addSpook(spook);
         spook.addAbility(ability);
         spook.addAbility(ability2);
-        
         spook.addHistory(history);
         spook.addHistory(history2);
         
         spookDao.create(spook);
-        historyDao.update(history);
-        historyDao.update(history2);
-        
-        House house = new House();
-        house.setAddress("Spookie's House Adress");
-        house.setHauntedSince(date);
-        house.setName("Spookie's House");
-        house.setHistory("Spookie's House History");
-        house.addSpook(spook);
-        houseDao.create(house);
-        spookDao.update(spook);
         
         spook = new Spook();
         spook.setName("Freddy Krueger");

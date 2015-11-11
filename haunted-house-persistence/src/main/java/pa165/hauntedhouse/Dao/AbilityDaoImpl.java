@@ -37,8 +37,7 @@ public class AbilityDaoImpl implements AbilityDao {
     
     @Override
     public void delete(Ability a) {
-        Ability ability = em.find(Ability.class, a.getId());
-        em.remove(ability);
+        em.remove(a);
     }
     
     @Override
