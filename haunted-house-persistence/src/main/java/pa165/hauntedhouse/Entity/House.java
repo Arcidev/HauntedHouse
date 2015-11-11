@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author Milan
  */
+
 @Entity
 public class House {
     
