@@ -1,4 +1,4 @@
-package pa165.hauntedhouse;
+package pa165.hauntedhouse.PersistenceConfig;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;

@@ -28,7 +28,7 @@ import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Entity.Spook;
-import pa165.hauntedhouse.PersistenceApplicationContext;
+import pa165.hauntedhouse.PersistenceConfig.PersistenceApplicationContext;
 
 /**
  *

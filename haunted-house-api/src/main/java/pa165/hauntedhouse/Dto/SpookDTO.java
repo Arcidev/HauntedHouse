@@ -2,86 +2,54 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
-skuska git-u
  */
-package pa165.hauntedhouse.Entity;
+package pa165.hauntedhouse.Dto;
 
 import java.sql.Time;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.FetchType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+
 /**
  *
- * @author Martin Durcansky
+ * @author Andrej Dobes
  */
-@Entity
-public class Spook  {
-    
-    @Id    
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+public class SpookDTO {
     private int id;
-    
-    @NotNull    
     private String name;
-    
-    @NotNull
     private String history;
-    
-    @NotNull
     private Time hauntsSince;
-    
-    @NotNull
     private Time hauntsUntil;
-        
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)    
-    private Set<History> histories = new HashSet<>();
-    
-    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER, cascade = CascadeType.PERSIST) 
-    private Set<Ability> abilities = new HashSet<>();
-    
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "House_id")
-    private House house;
+    private Set<HistoryDTO> histories = new HashSet<>();
+    private Set<AbilityDTO> abilities = new HashSet<>();
+    private HouseDTO house;
 
-    public Set<History> getHistories() {
+    public Set<HistoryDTO> getHistories() {
         return Collections.unmodifiableSet(histories);        
     }
 
-    public void addHistory(History history) {
+    public void addHistory(HistoryDTO history) {
         this.histories.add(history);
         history.setSpook(this);
     }    
 
-    public Set<Ability> getAbilities() {
+    public Set<AbilityDTO> getAbilities() {
         return Collections.unmodifiableSet(abilities);
     }
 
     
-    public void addAbility(Ability ability) {
+    public void addAbility(AbilityDTO ability) {
         abilities.add(ability);
     }     
     
-    public House getHouse() {
+    public HouseDTO getHouse() {
         return house;
     }
 
-    public void setHouse(House house) {
+    public void setHouse(HouseDTO house) {
         this.house = house;
     }
-    
-   
 
     public int getId() {
         return id;
@@ -117,8 +85,6 @@ public class Spook  {
         return hauntsUntil;
     }
     
-   
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -129,10 +95,10 @@ public class Spook  {
             return false;
         }
         
-        if (!(obj instanceof Spook)) {
+        if (!(obj instanceof SpookDTO)) {
             return false;
         }
-        Spook s = (Spook)obj;
+        SpookDTO s = (SpookDTO)obj;
         return id == s.getId() &&
                 (name == null ? s.getName() == null : name.equals(s.getName())) &&
                 (history == null ? s.getHistory() == null : history.equals(s.getHistory())) &&

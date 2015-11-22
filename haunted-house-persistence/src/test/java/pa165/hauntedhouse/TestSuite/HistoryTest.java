@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
-import pa165.hauntedhouse.PersistenceApplicationContext;
+import pa165.hauntedhouse.PersistenceConfig.PersistenceApplicationContext;
 
 /**
  *

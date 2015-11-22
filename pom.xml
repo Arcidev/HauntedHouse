@@ -79,6 +79,8 @@
     
     <modules>
         <module>haunted-house-persistence</module>
+        <module>haunted-house-api</module>
+        <module>haunted-house-service</module>
     </modules>
 
 </project>

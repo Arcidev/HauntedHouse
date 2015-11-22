@@ -23,7 +23,7 @@ import pa165.hauntedhouse.Dao.AbilityDao;
 import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.Spook;
-import pa165.hauntedhouse.PersistenceApplicationContext;
+import pa165.hauntedhouse.PersistenceConfig.PersistenceApplicationContext;
 
 /**
  *

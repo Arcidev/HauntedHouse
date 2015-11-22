@@ -3,46 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pa165.hauntedhouse.Entity;
-
+package pa165.hauntedhouse.Dto;
 
 import java.sql.Date;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
+
 /**
  *
- * @author Lucie Smidova
- * date, id, info
+ * @author Andrej Dobes
  */
-@Entity
-public class History {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+public class HistoryDTO {
     private int id;
-    
-    @NotNull
     private Date historyDate;
-    
     private String historyInfo;
+    private SpookDTO spook;
     
-    @ManyToOne
-    @JoinColumn(name = "spook_id")
-    private Spook spook;
-    
-    public Spook getSpook(){
+    public SpookDTO getSpook(){
 	return spook;
     }
     
-    public void setSpook(Spook spook){
+    public void setSpook(SpookDTO spook){
 	this.spook=spook;
     }
-    
     
     public int getID(){
         return id;
@@ -74,22 +56,22 @@ public class History {
             return false;
         }
         
-        if (!(obj instanceof History)) {
+        if (!(obj instanceof HistoryDTO)) {
             return false;
         }
         
-        History h = (History)obj;
-        return id == ((History)obj).getID()&&
+        HistoryDTO h = (HistoryDTO)obj;
+        return id == h.getID()&&
                 (historyDate == null ? h.getHistoryDate() == null : historyDate.equals(h.getHistoryDate())) &&
                 (historyInfo == null ? h.getInfo() == null : historyInfo.equals(h.getInfo()));
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + this.id;
-        hash = 37 * hash + Objects.hashCode(this.historyDate);
-        hash = 37 * hash + Objects.hashCode(this.historyInfo);
+        int hash = 3;
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.historyDate);
+        hash = 43 * hash + Objects.hashCode(this.historyInfo);
         return hash;
     }
 }
