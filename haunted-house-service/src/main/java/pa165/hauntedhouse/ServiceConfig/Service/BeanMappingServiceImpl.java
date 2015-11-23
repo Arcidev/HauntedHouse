@@ -10,17 +10,19 @@ import java.util.Collection;
 import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Andrej Dobes
  */
+@Service
 public class BeanMappingServiceImpl implements BeanMappingService {
     @Autowired
     private Mapper mapper;
     
     @Override
-    public <T> List<T> mappTo(Collection<Object> source, Class<T> mapToClass) {
+    public <T> List<T> mapTo(Collection<?> source, Class<T> mapToClass) {
         List<T> result = new ArrayList<>();
         for(Object o : source){
             result.add(mapTo(o, mapToClass));

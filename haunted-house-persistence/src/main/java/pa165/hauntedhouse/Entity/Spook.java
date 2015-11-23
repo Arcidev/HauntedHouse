@@ -73,6 +73,10 @@ public class Spook  {
         abilities.add(ability);
     }     
     
+    public void removeAbility(Ability ability) {
+        abilities.remove(ability);
+    }   
+    
     public House getHouse() {
         return house;
     }

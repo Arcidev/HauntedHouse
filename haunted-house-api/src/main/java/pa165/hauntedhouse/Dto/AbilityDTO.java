@@ -18,7 +18,6 @@ public class AbilityDTO {
     private int id;
     private String name;
     private String info;
-    private Set<SpookDTO> spooks = new HashSet<>(); 
 
     public int getId() {
         return id;
@@ -38,15 +37,6 @@ public class AbilityDTO {
     
     public void setInfo(String info) {
         this.info = info;
-    }
-    
-    public Set<SpookDTO> getSpooks() {
-        return Collections.unmodifiableSet(spooks);
-    }
-    
-    public void addSpook(SpookDTO s) {
-        spooks.add(s);
-        s.addAbility(this);
     }
     
     @Override

@@ -66,6 +66,11 @@ public class Ability {
         s.addAbility(this);
     }
     
+    public void remove(Spook s) {
+        spooks.remove(s);
+        s.removeAbility(this);
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

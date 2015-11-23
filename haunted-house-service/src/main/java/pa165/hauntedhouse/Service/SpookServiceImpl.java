@@ -5,10 +5,29 @@
  */
 package pa165.hauntedhouse.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import pa165.hauntedhouse.Dao.SpookDao;
+import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Entity.Spook;
+
 /**
  *
  * @author Andrej Dobes
  */
 public class SpookServiceImpl implements SpookService {
     
+    @Autowired
+    private SpookDao spookDao;
+    
+    @Override
+    public List<Ability> getAbilitiesBySpookId(int spookId) {
+        Spook spook = spookDao.findById(spookId);
+        if (spook == null) {
+            return new ArrayList<>();
+        }
+        
+        return new ArrayList<>(spook.getAbilities());
+    }
 }

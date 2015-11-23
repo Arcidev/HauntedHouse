@@ -21,7 +21,6 @@ public class HouseDTO {
     private String address;
     private String history;
     private Date hauntedSince;
-    private Set<SpookDTO> spooks = new HashSet<>();
     
     public int getId() {
         return id;
@@ -58,15 +57,6 @@ public class HouseDTO {
     public void setHauntedSince(Date hauntedSince) {
         this.hauntedSince = hauntedSince;
     }
-
-    public Set<SpookDTO> getSpooks() {
-        return Collections.unmodifiableSet(spooks); 
-    }
-
-    public void addSpook(SpookDTO spook) {
-        this.spooks.add(spook);
-        spook.setHouse(this);
-    }   
     
     @Override
     public boolean equals(Object obj) {

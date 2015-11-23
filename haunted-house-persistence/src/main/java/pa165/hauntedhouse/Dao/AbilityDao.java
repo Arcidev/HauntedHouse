@@ -57,4 +57,12 @@ public interface AbilityDao {
      * @return the ability with specified name
      */
     public Ability findByName(String name);
+    
+    /**
+     * Searches abilities name by filter
+     * 
+     * @param filter
+     * @return abilities that match the filter
+     */
+    public List<Ability> searchByName(String filter);
 }

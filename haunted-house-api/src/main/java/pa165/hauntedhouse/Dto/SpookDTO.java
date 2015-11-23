@@ -21,35 +21,6 @@ public class SpookDTO {
     private String history;
     private Time hauntsSince;
     private Time hauntsUntil;
-    private Set<HistoryDTO> histories = new HashSet<>();
-    private Set<AbilityDTO> abilities = new HashSet<>();
-    private HouseDTO house;
-
-    public Set<HistoryDTO> getHistories() {
-        return Collections.unmodifiableSet(histories);        
-    }
-
-    public void addHistory(HistoryDTO history) {
-        this.histories.add(history);
-        history.setSpook(this);
-    }    
-
-    public Set<AbilityDTO> getAbilities() {
-        return Collections.unmodifiableSet(abilities);
-    }
-
-    
-    public void addAbility(AbilityDTO ability) {
-        abilities.add(ability);
-    }     
-    
-    public HouseDTO getHouse() {
-        return house;
-    }
-
-    public void setHouse(HouseDTO house) {
-        this.house = house;
-    }
 
     public int getId() {
         return id;

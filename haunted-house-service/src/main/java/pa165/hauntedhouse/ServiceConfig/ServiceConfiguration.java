@@ -9,6 +9,7 @@ import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import pa165.hauntedhouse.Dto.*;
@@ -21,6 +22,7 @@ import pa165.hauntedhouse.PersistenceConfig.PersistenceApplicationContext;
  */
 @Configuration
 @Import(PersistenceApplicationContext.class)
+@ComponentScan(basePackages = "pa165.hauntedhouse.ServiceConfig.Service")
 public class ServiceConfiguration {
 
     @Bean
@@ -38,11 +40,6 @@ public class ServiceConfiguration {
             mapping(History.class, HistoryDTO.class);
             mapping(House.class, HouseDTO.class);
             mapping(Spook.class, SpookDTO.class);
-
-            mapping(AbilityDTO.class, Ability.class);
-            mapping(HistoryDTO.class, History.class);
-            mapping(HouseDTO.class, House.class);
-            mapping(SpookDTO.class, Spook.class);
         }
     }
 }

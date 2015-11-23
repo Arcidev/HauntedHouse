@@ -14,7 +14,24 @@ import org.dozer.Mapper;
  * @author Andrej Dobes
  */
 public interface BeanMappingService {
-    public <T> List<T> mappTo(Collection<Object> source, Class<T> mapToClass);
+
+    /**
+     * Maps list of objects to specified type
+     * 
+     * @param <T>
+     * @param source
+     * @param mapToClass
+     * @return mapped objects
+     */
+    public <T> List<T> mapTo(Collection<?> source, Class<T> mapToClass);
+
+    /**
+     * Maps object into specified type
+     * @param <T>
+     * @param source
+     * @param output
+     * @return mapped object
+     */
     public <T> T mapTo(Object source, Class<T> output);
     
     public Mapper getMapper();

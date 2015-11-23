@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.AbilityDTO;
+import pa165.hauntedhouse.Dto.SpookDTO;
 
 /**
  *
@@ -23,11 +24,11 @@ public interface AbilityFacade {
     int createAbility(AbilityDTO a);
 
     /**
-     * Removes existing ability by id
+     * Removes existing ability
      * 
-     * @param abilityId
+     * @param a
      */
-    void deleteAbility(int abilityId);
+    void deleteAbility(AbilityDTO a);
 
     /**
      * Updates existing ability
@@ -39,18 +40,18 @@ public interface AbilityFacade {
     /**
      * Adds ability to spook
      * 
-     * @param abilityId
-     * @param spookId
+     * @param ability
+     * @param spook
      */
-    void addToSpook(int abilityId, int spookId);
+    void addToSpook(AbilityDTO ability, SpookDTO spook);
 
     /**
      * Removes abilty from spook
      * 
-     * @param abilityId
-     * @param spookId
+     * @param ability
+     * @param spook
      */
-    void removeFromSpook(int abilityId, int spookId);
+    void removeFromSpook(AbilityDTO ability, SpookDTO spook);
 
     /**
      * Gets all abilities

@@ -35,5 +35,10 @@
             <artifactId>dozer</artifactId>
             <version>5.5.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId> 
+            <scope>test</scope> 
+        </dependency>
     </dependencies>
 </project>

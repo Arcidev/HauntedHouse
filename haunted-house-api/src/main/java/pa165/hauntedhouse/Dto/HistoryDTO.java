@@ -16,15 +16,6 @@ public class HistoryDTO {
     private int id;
     private Date historyDate;
     private String historyInfo;
-    private SpookDTO spook;
-    
-    public SpookDTO getSpook(){
-	return spook;
-    }
-    
-    public void setSpook(SpookDTO spook){
-	this.spook=spook;
-    }
     
     public int getID(){
         return id;

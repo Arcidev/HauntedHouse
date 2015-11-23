@@ -18,23 +18,23 @@ public interface AbilityService {
      * Creates new ability
      * 
      * @param ability
+     * @return id of newly created ability
      */
-    void create(Ability ability);
+    int create(Ability ability);
     
     /**
      * Updates ability
      *
      * @param ability
-     * @return updated ability
      */
-    Ability update(Ability ability);
+    void update(Ability ability);
     
     /**
      * Removes existing ability
      * 
      * @param ability
      */
-    void remove(Ability ability);
+    void delete(Ability ability);
     
     /**
      * Get ability by id.
@@ -65,4 +65,12 @@ public interface AbilityService {
      * @param spook
      */
     void removeFromSpook(Ability ability, Spook spook);
+    
+    /**
+     * Finds all abilities whiche name matches filter
+     * 
+     * @param filter
+     * @return abilities matched by filter
+     */
+    List<Ability> searchAbilitiesByName(String filter);
 }

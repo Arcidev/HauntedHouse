@@ -5,10 +5,20 @@
  */
 package pa165.hauntedhouse.Service;
 
+import java.util.List;
+import pa165.hauntedhouse.Entity.Ability;
+
 /**
  *
  * @author Andrej Dobes
  */
 public interface SpookService {
     
+    /**
+     * Gets spook abilities
+     * 
+     * @param spookId
+     * @return all spook abilities
+     */
+    public List<Ability> getAbilitiesBySpookId(int spookId);
 }

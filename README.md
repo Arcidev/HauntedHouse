@@ -1,5 +1,5 @@
 # HauntedHouse
-This project is the part of PA165 Java course in Masaryk University.
+This project is a part of PA165 Java course in Masaryk University.
 
 ## Build Status
 [![Build Status](https://travis-ci.org/Arcidev/HauntedHouse.png)](https://travis-ci.org/Arcidev/HauntedHouse)
