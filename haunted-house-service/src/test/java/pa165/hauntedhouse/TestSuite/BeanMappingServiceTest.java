@@ -48,7 +48,7 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
         house.setAddress("Some adress");
         house.setHistory("None");
         
-    	Ability ability = new Ability();
+        Ability ability = new Ability();
         ability.setInfo("Test info");
         ability.setName("Test name");
         abilities.add(ability);
@@ -65,7 +65,7 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
         houseDTO.setAddress("Some adress");
         houseDTO.setHistory("None");
         
-    	AbilityDTO abilityDto = new AbilityDTO();
+        AbilityDTO abilityDto = new AbilityDTO();
         abilityDto.setInfo("Test info");
         abilityDto.setName("Test name");
         abilitiesDTO.add(abilityDto);
@@ -78,8 +78,8 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     
     @Test
     public void testAbilityMap(){
-    	List<AbilityDTO> cdtos = beanMappingService.mapTo(abilities, AbilityDTO.class);
-    	Assert.assertEquals(cdtos.size(), 2);
+        List<AbilityDTO> cdtos = beanMappingService.mapTo(abilities, AbilityDTO.class);
+        Assert.assertEquals(cdtos.size(), 2);
         
         AbilityDTO ability = cdtos.get(0);
         Assert.assertEquals(ability.getInfo(), "Test info");
@@ -92,7 +92,7 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     
     @Test
     public void testSpookMap(){
-    	SpookDTO spookDto = beanMappingService.mapTo(spook, SpookDTO.class);
+        SpookDTO spookDto = beanMappingService.mapTo(spook, SpookDTO.class);
         
         Assert.assertEquals(spookDto.getHistory(), "None");
         Assert.assertEquals(spookDto.getName(), "Test spook");
@@ -100,7 +100,7 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     
     @Test
     public void testHouseMap(){
-    	HouseDTO houseDto = beanMappingService.mapTo(house, HouseDTO.class);
+        HouseDTO houseDto = beanMappingService.mapTo(house, HouseDTO.class);
         
         Assert.assertEquals(houseDto.getHistory(), "None");
         Assert.assertEquals(houseDto.getName(), "Test house");
@@ -109,8 +109,8 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     
     @Test
     public void testAbilityDTOMap(){
-    	List<Ability> objects = beanMappingService.mapTo(abilitiesDTO, Ability.class);
-    	Assert.assertEquals(objects.size(), 2);
+        List<Ability> objects = beanMappingService.mapTo(abilitiesDTO, Ability.class);
+        Assert.assertEquals(objects.size(), 2);
         
         Ability ability = objects.get(0);
         Assert.assertEquals(ability.getInfo(), "Test info");
@@ -123,7 +123,7 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     
     @Test
     public void testSpookDTOMap(){
-    	Spook spookie = beanMappingService.mapTo(spookDTO, Spook.class);
+        Spook spookie = beanMappingService.mapTo(spookDTO, Spook.class);
         
         Assert.assertEquals(spookie.getHistory(), "None");
         Assert.assertEquals(spookie.getName(), "Test spook");
@@ -131,7 +131,7 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     
     @Test
     public void testHouseDTOMap(){
-    	House h = beanMappingService.mapTo(houseDTO, House.class);
+        House h = beanMappingService.mapTo(houseDTO, House.class);
         
         Assert.assertEquals(h.getHistory(), "None");
         Assert.assertEquals(h.getName(), "Test house");
