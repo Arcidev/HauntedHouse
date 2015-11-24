@@ -34,6 +34,7 @@ public class SpookServiceImpl implements SpookService {
 
     @Override
     public House getHouseBySpookId(int spookId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Spook spook = spookDao.findById(spookId);
+        return spook.getHouse();
     }
 }

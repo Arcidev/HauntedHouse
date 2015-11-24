@@ -12,6 +12,7 @@ import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.HouseService;
+import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 
 /**
@@ -22,6 +23,9 @@ public class HouseFacadeImpl implements HouseFacade {
     
     @Autowired
     private HouseService houseService;
+    
+    @Autowired
+    private SpookService spookService;
     
     @Autowired
     private BeanMappingService beanMappingService;
@@ -63,7 +67,7 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Override
     public HouseDTO getSpookHouse(int spookId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return beanMappingService.mapTo(spookService.getHouseBySpookId(spookId), HouseDTO.class);
     }
 
     @Override
