@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Entity.Spook;
 
 /**
@@ -29,5 +30,10 @@ public class SpookServiceImpl implements SpookService {
         }
         
         return new ArrayList<>(spook.getAbilities());
+    }
+
+    @Override
+    public House getHouseBySpookId(int spookId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

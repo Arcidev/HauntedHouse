@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dao.HouseDao;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
@@ -53,5 +54,18 @@ public class HouseServiceImpl implements HouseService {
             return new ArrayList<>();
         }
         return houses;
+    }
+
+    @Override
+    public void addToSpook(House house, Spook spook) {
+        house.addSpook(spook);
+        houseDao.update(house);
+    }
+
+    @Override
+    public void removeFromSpook(House house, Spook spook) {
+        house.removeSpook(spook);
+        houseDao.update(house);
+    
     }
 }

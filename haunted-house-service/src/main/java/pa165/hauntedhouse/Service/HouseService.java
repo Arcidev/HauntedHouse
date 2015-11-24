@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Service;
 
 import java.util.List;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
@@ -57,5 +58,20 @@ public interface HouseService {
      * @return abilities matched by filter
      */
     List<House> searchHousesByName(String filter);
+    
+    /**
+     * Adds house to spook
+     *
+     * @param house
+     * @param spook
+     */
+    void addToSpook(House house, Spook spook);
+    /**
+     * Removes house from spook
+     *
+     * @param house
+     * @param spook
+     */
+    void removeFromSpook(House house, Spook spook);
     
 }

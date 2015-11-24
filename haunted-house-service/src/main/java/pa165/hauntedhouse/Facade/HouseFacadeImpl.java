@@ -6,47 +6,59 @@
 package pa165.hauntedhouse.Facade;
 
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dto.HouseDTO;
+import pa165.hauntedhouse.Dto.SpookDTO;
+import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
+import pa165.hauntedhouse.Service.HouseService;
+import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 
 /**
  *
- * @author Andrej Dobes
+ * @author Milan
  */
 public class HouseFacadeImpl implements HouseFacade {
+    
+    @Autowired
+    private HouseService houseService;
+    
+    @Autowired
+    private BeanMappingService beanMappingService;
 
     @Override
     public int createHouse(HouseDTO h) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return houseService.create(beanMappingService.mapTo(h, House.class));
     }
 
     @Override
     public void deleteHouse(int houseId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        houseService.delete(beanMappingService.mapTo(houseId, House.class));
     }
 
     @Override
     public void updateHouse(HouseDTO h) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        houseService.update(beanMappingService.mapTo(h, House.class));
     }
 
     @Override
-    public void addSpook(int houseId, int spookId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addSpook(HouseDTO house, SpookDTO spook) {
+        houseService.addToSpook(beanMappingService.mapTo(house, House.class), beanMappingService.mapTo(spook, Spook.class));
     }
 
     @Override
-    public void removeSpook(int houseId, int spookId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void removeSpook(HouseDTO house, SpookDTO spook) {
+        houseService.removeFromSpook(beanMappingService.mapTo(house, House.class), beanMappingService.mapTo(spook, Spook.class));
     }
 
     @Override
     public List<HouseDTO> getAllHouses() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return beanMappingService.mapTo(houseService.findAll(), HouseDTO.class);
     }
 
     @Override
     public HouseDTO getHouseById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return beanMappingService.mapTo(houseService.findById(id), HouseDTO.class);
     }
 
     @Override
@@ -55,8 +67,8 @@ public class HouseFacadeImpl implements HouseFacade {
     }
 
     @Override
-    public List<HouseDTO> searchHousesByName(String filterName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<HouseDTO> searchHousesByName(String filter) {
+        return beanMappingService.mapTo(houseService.searchHousesByName(filter), HouseDTO.class);
     }
     
 }

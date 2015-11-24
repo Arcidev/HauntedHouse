@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Service;
 
 import java.util.List;
 import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Entity.House;
 
 /**
  *
@@ -21,4 +22,12 @@ public interface SpookService {
      * @return all spook abilities
      */
     public List<Ability> getAbilitiesBySpookId(int spookId);
+    
+    /**
+     * Gets spook's house
+     * 
+     * @param spookId
+     * @return spook's house
+     */
+    public House getHouseBySpookId(int spookId);
 }

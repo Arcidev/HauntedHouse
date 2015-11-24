@@ -109,7 +109,6 @@ public class House {
         this.hauntedSince = hauntedSince;
     }
     
-    
         /**
      * @return the spooks
      */
@@ -121,6 +120,10 @@ public class House {
         this.spooks.add(spook);
         spook.setHouse(this);
     }   
+    
+    public void removeSpook(Spook spook) {
+        this.spooks.remove(spook);
+    }
     
     @Override
     public boolean equals(Object obj) {
