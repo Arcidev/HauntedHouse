@@ -55,4 +55,12 @@ public interface HouseDao {
      * @return the house with specified name
      */
     public House findByName(String name);
+    
+    /**
+     * Searches houses name by filter
+     * 
+     * @param filter
+     * @return house that match the filter
+     */
+    public List<House> searchByName(String filter);
 }

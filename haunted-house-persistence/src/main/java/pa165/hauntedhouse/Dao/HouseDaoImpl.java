@@ -59,4 +59,14 @@ public class HouseDaoImpl implements HouseDao{
             return null;
         }
     }
+
+    @Override
+    public List<House> searchByName(String filter) {
+        try {
+            return em.createQuery("select hs from House hs where name like :filter", House.class)
+                    .setParameter("filter", filter).getResultList();
+        } catch (NoResultException nrf) {
+            return null;
+        }
+    }
 }
