@@ -58,4 +58,6 @@ public interface HistoryDao {
      */
     public List<History> findAll();
     
+    public List<History> searchByRange(java.util.Date Date1, java.util.Date Date2);
+    
 }
