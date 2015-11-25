@@ -7,10 +7,11 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.HistoryDTO;
+import pa165.hauntedhouse.Dto.SpookDTO;
 
 /**
  *
- * @author Andrej Dobes
+ * @author Lucie Smidova
  */
 public interface HistoryFacade {
 
@@ -25,9 +26,9 @@ public interface HistoryFacade {
     /**
      * Removes existing history by id
      * 
-     * @param historyId
+     * @param h
      */
-    void deleteHistory(int historyId);
+    void deleteHistory(HistoryDTO h);
 
     /**
      * Updates existing history
@@ -39,18 +40,18 @@ public interface HistoryFacade {
     /**
      * Adds history to spook
      * 
-     * @param historyId
-     * @param spookId
+     * @param h
+     * @param s
      */
-    void addToSpook(int historyId, int spookId);
+  //  void addToSpook(HistoryDTO h, SpookDTO s);
 
     /**
      * Removes history from spook
      * 
-     * @param historyId
-     * @param spookId
+     * @param h
+     * @param s
      */
-    void removeFromSpook(int historyId, int spookId);
+ //   void removeFromSpook(HistoryDTO h, SpookDTO s);
 
     /**
      * Gets all histories
@@ -74,4 +75,13 @@ public interface HistoryFacade {
      * @return spook history
      */
     List<HistoryDTO> getSpookHistory(int spookId);
+    
+    /**
+     * Finds history in date range
+     * 
+     * @param Date1
+     * @param Date2
+     * @return history in date1 and date2
+     */
+    List<HistoryDTO> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2);
 }
