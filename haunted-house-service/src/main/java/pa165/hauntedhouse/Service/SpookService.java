@@ -8,12 +8,21 @@ package pa165.hauntedhouse.Service;
 import java.util.List;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
  * @author Andrej Dobes
  */
 public interface SpookService {
+    
+    /**
+     * Creates new spook
+     * 
+     * @param spook
+     * @return id of newly created spook
+     */
+    int create(Spook spook);
     
     /**
      * Gets spook abilities

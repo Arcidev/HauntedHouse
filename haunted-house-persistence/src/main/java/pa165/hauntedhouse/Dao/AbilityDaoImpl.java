@@ -37,7 +37,7 @@ public class AbilityDaoImpl implements AbilityDao {
     
     @Override
     public void delete(Ability a) {
-        em.remove(a);
+        em.remove(em.merge(a));
     }
     
     @Override
@@ -64,7 +64,7 @@ public class AbilityDaoImpl implements AbilityDao {
     public List<Ability> searchByName(String filter) {
         try {
             return em.createQuery("select a from Ability a where name like :filter", Ability.class)
-                    .setParameter("filter", filter).getResultList();
+                    .setParameter("filter", '%' + filter + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
         }

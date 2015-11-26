@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.Ability;
-import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
 import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
@@ -47,12 +46,12 @@ public class AbilityFacadeImpl implements AbilityFacade {
 
     @Override
     public void addToSpook(AbilityDTO ability, SpookDTO spook) {
-        abilityService.addToSpook(beanMappingService.mapTo(ability, Ability.class), beanMappingService.mapTo(spook, Spook.class));
+        abilityService.addToSpook(ability.getId(), spook.getId());
     }
 
     @Override
     public void removeFromSpook(AbilityDTO ability, SpookDTO spook) {
-         abilityService.removeFromSpook(beanMappingService.mapTo(ability, Ability.class), beanMappingService.mapTo(spook, Spook.class));
+         abilityService.removeFromSpook(ability.getId(), spook.getId());
     }
 
     @Override

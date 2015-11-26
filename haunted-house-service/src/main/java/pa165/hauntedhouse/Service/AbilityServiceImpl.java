@@ -8,7 +8,9 @@ package pa165.hauntedhouse.Service;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pa165.hauntedhouse.Dao.AbilityDao;
+import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.Spook;
 
@@ -16,10 +18,14 @@ import pa165.hauntedhouse.Entity.Spook;
  *
  * @author Andrej Dobes
  */
+@Service
 public class AbilityServiceImpl implements AbilityService {
 
     @Autowired
     private AbilityDao abilityDao;
+    
+    @Autowired
+    private SpookDao spookDao;
     
     @Override
     public int create(Ability ability) {
@@ -48,15 +54,19 @@ public class AbilityServiceImpl implements AbilityService {
     }
 
     @Override
-    public void addToSpook(Ability ability, Spook spook) {
-        ability.addSpook(spook);
-        abilityDao.update(ability);
+    public void addToSpook(int abilityId, int spookId) {
+        Ability a = abilityDao.findById(abilityId);
+        Spook s = spookDao.findById(spookId);
+        a.addSpook(s);
+        spookDao.update(s); // updates ability with cascade
     }
 
     @Override
-    public void removeFromSpook(Ability ability, Spook spook) {
-        ability.remove(spook);
-        abilityDao.update(ability);
+    public void removeFromSpook(int abilityId, int spookId) {
+        Ability a = abilityDao.findById(abilityId);
+        Spook s = spookDao.findById(spookId);
+        a.remove(s);
+        spookDao.update(s); // updates ability with cascade
     }
     
     @Override

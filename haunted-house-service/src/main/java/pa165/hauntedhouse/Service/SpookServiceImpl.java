@@ -8,6 +8,8 @@ package pa165.hauntedhouse.Service;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.House;
@@ -17,10 +19,18 @@ import pa165.hauntedhouse.Entity.Spook;
  *
  * @author Andrej Dobes
  */
+@Service
+@Transactional
 public class SpookServiceImpl implements SpookService {
     
     @Autowired
     private SpookDao spookDao;
+    
+    @Override
+    public int create(Spook spook) {
+        spookDao.create(spook);
+        return spook.getId();
+    }
     
     @Override
     public List<Ability> getAbilitiesBySpookId(int spookId) {

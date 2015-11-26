@@ -22,7 +22,7 @@ import pa165.hauntedhouse.PersistenceConfig.PersistenceApplicationContext;
  */
 @Configuration
 @Import(PersistenceApplicationContext.class)
-@ComponentScan(basePackages = "pa165.hauntedhouse.ServiceConfig.Service")
+@ComponentScan(basePackages = { "pa165.hauntedhouse.ServiceConfig.Service", "pa165.hauntedhouse.Service" })
 public class ServiceConfiguration {
 
     @Bean
