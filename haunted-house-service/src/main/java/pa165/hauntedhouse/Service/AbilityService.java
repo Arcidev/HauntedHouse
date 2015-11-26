@@ -73,4 +73,6 @@ public interface AbilityService {
      * @return abilities matched by filter
      */
     List<Ability> searchAbilitiesByName(String filter);
+    
+     public List<Spook> getSpooksByAbilityId(int spookId);
 }

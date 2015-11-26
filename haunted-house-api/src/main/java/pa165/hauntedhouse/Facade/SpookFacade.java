@@ -6,6 +6,8 @@
 package pa165.hauntedhouse.Facade;
 
 import java.util.List;
+import pa165.hauntedhouse.Dto.AbilityDTO;
+import pa165.hauntedhouse.Dto.HistoryDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 
 /**
@@ -23,11 +25,11 @@ public interface SpookFacade {
     int createSpook(SpookDTO s);
 
     /**
-     * Removes existing spook by id
+     * Removes existing spook 
      * 
-     * @param spookId
+     * @param s
      */
-    void deleteSpook(int spookId);
+    void deleteSpook(SpookDTO s);
 
     /**
      * Updates existing spook
@@ -39,34 +41,42 @@ public interface SpookFacade {
     /**
      * Adds ability to spook
      * 
-     * @param spookId
-     * @param abilityId
+     * @param spook
+     * @param ability
      */
-    void addAbility(int spookId, int abilityId);
+    void addAbility(SpookDTO spook, AbilityDTO ability);
+    
+    
+    void getHistorySpook(int id);
+    
+    List<SpookDTO> getAbilitySpooks(int abilityId);
+    
+     //SpookDTO getHistorySpook(int historyId);
+    
 
     /**
      * Removes ability from spook
      * 
-     * @param spookId
-     * @param abilityId
+     * @param spook
+     * @param ability
      */
-    void removeAbility(int spookId, int abilityId);
+    void removeAbility(SpookDTO spook, AbilityDTO ability);
 
     /**
      * Adds history to spook
      * 
-     * @param spookId
-     * @param historyId
+     * @param spook
+     * @param history
      */
-    void addHistory(int spookId, int historyId);
+    void addHistory(SpookDTO spook, HistoryDTO history);
 
     /**
      * Removes history from spook
      * 
-     * @param spookId
-     * @param historyId
+     * @param spook
+     * @param history
      */
-    void removeHistory(int spookId, int historyId);
+    void removeHistory(SpookDTO spook, HistoryDTO history);
 
     /**
      * Sets house to spook

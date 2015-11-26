@@ -80,6 +80,9 @@ public class Spook  {
     public House getHouse() {
         return house;
     }
+     public void removeHistory(History history) {
+        histories.remove(history);
+    }
 
     public void setHouse(House house) {
         this.house = house;

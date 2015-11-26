@@ -78,4 +78,13 @@ public class AbilityServiceImpl implements AbilityService {
         
         return abilities;
     }
+    @Override
+    public List<Spook> getSpooksByAbilityId(int abilityId){
+    Ability ability = abilityDao.findById(abilityId);
+        if (ability == null) {
+            return new ArrayList<>();
+        }
+        
+        return new ArrayList<>(ability.getSpooks());
+    }
 }
