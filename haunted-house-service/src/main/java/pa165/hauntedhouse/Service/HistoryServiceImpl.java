@@ -14,7 +14,6 @@ import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
 
 /**
- *
  * @author Lucie Smidova
  */
 @Service
@@ -47,18 +46,6 @@ public class HistoryServiceImpl implements HistoryService {
     public List<History> getAllHistories() {
         return historyDao.findAll();
     }
-
- /*   @Override
-    public void addSpook(History h, Spook s) {
- //       h.addSpook(s);
-        historyDao.update(h);
-    }*/
-
-  /*  @Override
-    public void removeSpook(History h, Spook s) {
-     //   h.remove(s);
-  //      h.update(h);
-    }*/
     
     @Override
     public List<History> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2) {
