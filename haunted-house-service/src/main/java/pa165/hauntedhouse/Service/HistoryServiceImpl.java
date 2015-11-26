@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Entity.History;
+import pa165.hauntedhouse.Entity.Spook;
 
 /**
  * @author Lucie Smidova
