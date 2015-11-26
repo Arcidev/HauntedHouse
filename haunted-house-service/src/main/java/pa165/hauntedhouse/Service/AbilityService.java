@@ -32,9 +32,9 @@ public interface AbilityService {
     /**
      * Removes existing ability
      * 
-     * @param ability
+     * @param id
      */
-    void delete(Ability ability);
+    void delete(int id);
     
     /**
      * Get ability by id.
@@ -74,5 +74,11 @@ public interface AbilityService {
      */
     List<Ability> searchAbilitiesByName(String filter);
     
-     public List<Spook> getSpooksByAbilityId(int spookId);
+    /**
+     * Finds all spooks associated with passed abilityId
+     * 
+     * @param abilityId
+     * @return all spooks associated with passed abilityId
+     */
+    public List<Spook> getSpooksByAbilityId(int abilityId);
 }

@@ -8,6 +8,7 @@ package pa165.hauntedhouse.Service;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
@@ -16,6 +17,7 @@ import pa165.hauntedhouse.Entity.Spook;
  *
  * @author Lucie Smidova
  */
+@Service
 public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private HistoryDao historyDao;

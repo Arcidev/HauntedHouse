@@ -6,10 +6,7 @@
 package pa165.hauntedhouse.Dto;
 
 import java.sql.Time;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  *
@@ -22,6 +19,10 @@ public class SpookDTO {
     private Time hauntsSince;
     private Time hauntsUntil;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getId() {
         return id;
     }

@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import org.dozer.Mapping;
 /**
  *
  * @author Lucie Smidova
@@ -24,6 +25,7 @@ import javax.validation.constraints.NotNull;
 public class History {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Mapping
     private int id;
     
     @NotNull

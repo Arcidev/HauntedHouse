@@ -5,10 +5,7 @@
  */
 package pa165.hauntedhouse.Dto;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  *
@@ -19,6 +16,10 @@ public class AbilityDTO {
     private String name;
     private String info;
 
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public int getId() {
         return id;
     }

@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.Ability;
@@ -18,6 +19,7 @@ import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
  *
  * @author Andrej Dobes
  */
+@Service
 public class AbilityFacadeImpl implements AbilityFacade {
 
     @Autowired
@@ -30,13 +32,13 @@ public class AbilityFacadeImpl implements AbilityFacade {
     private SpookService spookService;
     
     @Override
-    public int createAbility(AbilityDTO a) {
-        return abilityService.create(beanMappingService.mapTo(a, Ability.class));
+    public void createAbility(AbilityDTO a) {
+        a.setId(abilityService.create(beanMappingService.mapTo(a, Ability.class)));
     }
 
     @Override
-    public void deleteAbility(AbilityDTO a) {
-        abilityService.delete(beanMappingService.mapTo(a, Ability.class));
+    public void deleteAbility(int id) {
+        abilityService.delete(id);
     }
 
     @Override
@@ -45,13 +47,13 @@ public class AbilityFacadeImpl implements AbilityFacade {
     }
 
     @Override
-    public void addToSpook(AbilityDTO ability, SpookDTO spook) {
-        abilityService.addToSpook(ability.getId(), spook.getId());
+    public void addToSpook(int abilityId, int spookId) {
+        abilityService.addToSpook(abilityId, spookId);
     }
 
     @Override
-    public void removeFromSpook(AbilityDTO ability, SpookDTO spook) {
-         abilityService.removeFromSpook(ability.getId(), spook.getId());
+    public void removeFromSpook(int abilityId, int spookId) {
+         abilityService.removeFromSpook(abilityId, spookId);
     }
 
     @Override
@@ -61,7 +63,12 @@ public class AbilityFacadeImpl implements AbilityFacade {
 
     @Override
     public AbilityDTO getAbilityById(int id) {
-        return beanMappingService.mapTo(abilityService.findById(id), AbilityDTO.class);
+        Ability a = abilityService.findById(id);
+        if (a == null) {
+            return null;
+        }
+        
+        return beanMappingService.mapTo(a, AbilityDTO.class);
     }
 
     @Override

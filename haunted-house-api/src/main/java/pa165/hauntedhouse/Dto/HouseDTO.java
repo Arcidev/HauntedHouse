@@ -6,10 +6,7 @@
 package pa165.hauntedhouse.Dto;
 
 import java.sql.Date;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  *

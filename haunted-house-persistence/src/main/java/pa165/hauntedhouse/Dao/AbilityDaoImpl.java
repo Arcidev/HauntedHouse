@@ -63,8 +63,8 @@ public class AbilityDaoImpl implements AbilityDao {
     @Override
     public List<Ability> searchByName(String filter) {
         try {
-            return em.createQuery("select a from Ability a where name like :filter", Ability.class)
-                    .setParameter("filter", '%' + filter + '%').getResultList();
+            return em.createQuery("select a from Ability a where lower(name) like :filter", Ability.class)
+                    .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
         }

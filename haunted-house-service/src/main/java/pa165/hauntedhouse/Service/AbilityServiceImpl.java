@@ -35,12 +35,17 @@ public class AbilityServiceImpl implements AbilityService {
 
     @Override
     public void update(Ability ability) {
-        abilityDao.update(ability);
+        Ability a = abilityDao.findById(ability.getId());
+        a.setInfo(ability.getName());
+        a.setInfo(ability.getInfo());
+        
+        abilityDao.update(a);
     }
 
     @Override
-    public void delete(Ability ability) {
-        abilityDao.delete(ability);
+    public void delete(int id) {
+        Ability a = abilityDao.findById(id);
+        abilityDao.delete(a);
     }
 
     @Override
@@ -78,6 +83,7 @@ public class AbilityServiceImpl implements AbilityService {
         
         return abilities;
     }
+    
     @Override
     public List<Spook> getSpooksByAbilityId(int abilityId){
     Ability ability = abilityDao.findById(abilityId);

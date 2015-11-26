@@ -19,16 +19,15 @@ public interface AbilityFacade {
      * Creates new ability
      * 
      * @param a
-     * @return id of newly created ability
      */
-    int createAbility(AbilityDTO a);
+    void createAbility(AbilityDTO a);
 
     /**
      * Removes existing ability
      * 
-     * @param a
+     * @param id
      */
-    void deleteAbility(AbilityDTO a);
+    void deleteAbility(int id);
 
     /**
      * Updates existing ability
@@ -40,18 +39,18 @@ public interface AbilityFacade {
     /**
      * Adds ability to spook
      * 
-     * @param ability
-     * @param spook
+     * @param abilityId
+     * @param spookId
      */
-    void addToSpook(AbilityDTO ability, SpookDTO spook);
+    void addToSpook(int abilityId, int spookId);
 
     /**
      * Removes abilty from spook
      * 
-     * @param ability
-     * @param spook
+     * @param abilityId
+     * @param spookId
      */
-    void removeFromSpook(AbilityDTO ability, SpookDTO spook);
+    void removeFromSpook(int abilityId, int spookId);
 
     /**
      * Gets all abilities

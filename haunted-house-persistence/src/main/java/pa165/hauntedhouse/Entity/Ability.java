@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+import org.dozer.Mapping;
 
 /**
  *
@@ -26,6 +27,7 @@ import javax.validation.constraints.NotNull;
 public class Ability {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Mapping
     private int id;
     
     @NotNull

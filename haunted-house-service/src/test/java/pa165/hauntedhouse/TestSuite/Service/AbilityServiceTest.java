@@ -22,10 +22,10 @@ import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 /**
  *
- * @author Andrej
+ * @author Andrej Dobes
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
+public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
     
     @Autowired
     private AbilityService abilityService;
@@ -64,7 +64,6 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void testCreation() {
-        Assert.assertEquals(abilityService.findAll().size(), 2);
         Assert.assertEquals(abilityService.findById(ability.getId()), ability);
         Assert.assertEquals(abilityService.findById(ability2.getId()), ability2);
     }
@@ -111,9 +110,9 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
         a.setName("b");
         
         abilityService.create(a);
-        Assert.assertEquals(abilityService.findAll().size(), 3);
-        abilityService.delete(a);
-        Assert.assertEquals(abilityService.findAll().size(), 2);
+        int abilitiesCount = abilityService.findAll().size();
+        abilityService.delete(a.getId());
+        Assert.assertEquals(abilityService.findAll().size(), abilitiesCount - 1);
         Assert.assertNull(abilityService.findById(a.getId()));
     }
 }
