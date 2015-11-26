@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Entity.History;
-import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
@@ -45,18 +44,6 @@ public class HistoryServiceImpl implements HistoryService {
     public List<History> getAllHistories() {
         return historyDao.findAll();
     }
-
- /*   @Override
-    public void addSpook(History h, Spook s) {
- //       h.addSpook(s);
-        historyDao.update(h);
-    }*/
-
-  /*  @Override
-    public void removeSpook(History h, Spook s) {
-     //   h.remove(s);
-  //      h.update(h);
-    }*/
     
     @Override
     public List<History> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2) {
