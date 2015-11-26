@@ -74,5 +74,4 @@ public class HouseFacadeImpl implements HouseFacade {
     public List<HouseDTO> searchHousesByName(String filter) {
         return beanMappingService.mapTo(houseService.searchHousesByName(filter), HouseDTO.class);
     }
-    
 }

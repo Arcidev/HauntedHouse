@@ -53,4 +53,10 @@ public class HistoryServiceImpl implements HistoryService {
         
         return abilities;
     }
+
+    @Override
+    public Spook getSpookByHistoryId(int historyId) {
+        History history = historyDao.findById(historyId);
+        return history.getSpook();
+    }
 }

@@ -54,17 +54,17 @@ public interface AbilityService {
     /**
      * Adds ability to spook
      *
-     * @param ability
-     * @param spook
+     * @param abilityId
+     * @param spookId
      */
-    void addToSpook(Ability ability, Spook spook);
+    void addToSpook(int abilityId, int spookId);
     /**
      * Removes ability from spook
      *
-     * @param ability
-     * @param spook
+     * @param abilityId
+     * @param spookId
      */
-    void removeFromSpook(Ability ability, Spook spook);
+    void removeFromSpook(int abilityId, int spookId);
     
     /**
      * Finds all abilities whiche name matches filter
@@ -73,4 +73,6 @@ public interface AbilityService {
      * @return abilities matched by filter
      */
     List<Ability> searchAbilitiesByName(String filter);
+    
+     public List<Spook> getSpooksByAbilityId(int spookId);
 }

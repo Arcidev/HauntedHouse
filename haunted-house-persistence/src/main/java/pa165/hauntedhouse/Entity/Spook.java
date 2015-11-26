@@ -48,7 +48,7 @@ public class Spook  {
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)    
     private Set<History> histories = new HashSet<>();
     
-    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER, cascade = CascadeType.PERSIST) 
+    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL) 
     private Set<Ability> abilities = new HashSet<>();
     
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -79,6 +79,9 @@ public class Spook  {
     
     public House getHouse() {
         return house;
+    }
+     public void removeHistory(History history) {
+        histories.remove(history);
     }
 
     public void setHouse(House house) {

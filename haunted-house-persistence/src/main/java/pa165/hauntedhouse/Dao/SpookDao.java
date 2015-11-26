@@ -55,5 +55,12 @@ public interface SpookDao {
      * @return the spook with specified name
      */
     public Spook findByName(String name);
+    /**
+     * Searches spooks name by filter
+     * 
+     * @param filter
+     * @return spooks that match the filter
+     */
+    public List<Spook> searchByName(String filter);
 }
 

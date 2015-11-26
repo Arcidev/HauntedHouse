@@ -83,4 +83,5 @@ public interface HistoryService {
      * @return history in date1 and date2
      */
     List<History> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2);
+    public Spook getSpookByHistoryId(int historyId);
 }

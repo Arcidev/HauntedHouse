@@ -5,6 +5,7 @@
  */
 package pa165.hauntedhouse.Facade;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dto.HistoryDTO;
