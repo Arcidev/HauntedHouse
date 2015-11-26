@@ -108,4 +108,5 @@ public interface SpookService {
      * @return spooks matched by filter
      */
     List<Spook> searchSpooksByName(String filter);
+    
 }

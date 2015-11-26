@@ -100,14 +100,10 @@ public class SpookFacadeImpl implements SpookFacade {
     public List<SpookDTO> searchSpooksByName(String filter) {
         return beanMappingService.mapTo(spookService.searchSpooksByName(filter), SpookDTO.class);
     }
-
+    
     @Override
-    public void getHistorySpook(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        /*@Override
     public SpookDTO getHistorySpook(int historyId) {
         return beanMappingService.mapTo(historyService.getSpookByHistoryId(historyId), SpookDTO.class);
-    }*/
-    }
+    }    
     
 }

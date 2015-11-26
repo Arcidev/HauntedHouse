@@ -47,7 +47,7 @@ public interface SpookFacade {
     void addAbility(SpookDTO spook, AbilityDTO ability);
     
     
-    void getHistorySpook(int id);
+       SpookDTO getHistorySpook(int historyId);
     
     List<SpookDTO> getAbilitySpooks(int abilityId);
     
@@ -114,5 +114,5 @@ public interface SpookFacade {
      * @param filterName
      * @return spooks matched by filter
      */
-    List<SpookDTO> searchSpooksByName(String filterName);
+    List<SpookDTO> searchSpooksByName(String filterName);    
 }
