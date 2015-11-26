@@ -5,6 +5,7 @@
  */
 package pa165.hauntedhouse.Facade;
 
+import java.util.Date;
 import java.util.List;
 import pa165.hauntedhouse.Dto.HistoryDTO;
 
@@ -20,22 +21,7 @@ public class HistoryFacadeImpl implements HistoryFacade {
     }
 
     @Override
-    public void deleteHistory(int historyId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void updateHistory(HistoryDTO h) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void addToSpook(int historyId, int spookId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeFromSpook(int historyId, int spookId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -51,6 +37,16 @@ public class HistoryFacadeImpl implements HistoryFacade {
 
     @Override
     public List<HistoryDTO> getSpookHistory(int spookId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deleteHistory(HistoryDTO h) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<HistoryDTO> searchHistoryByRange(Date Date1, Date Date2) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
