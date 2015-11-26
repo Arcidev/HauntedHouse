@@ -12,7 +12,6 @@ import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Entity.History;
 
 /**
- *
  * @author Lucie Smidova
  */
 public class HistoryServiceImpl implements HistoryService {
