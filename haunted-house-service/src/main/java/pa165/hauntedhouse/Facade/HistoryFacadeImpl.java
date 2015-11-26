@@ -13,7 +13,8 @@ import pa165.hauntedhouse.Service.HistoryService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 
 /**
- *
+ * 
+ * 
  * @author Lucie Smidova
  */
 public class HistoryFacadeImpl implements HistoryFacade {
