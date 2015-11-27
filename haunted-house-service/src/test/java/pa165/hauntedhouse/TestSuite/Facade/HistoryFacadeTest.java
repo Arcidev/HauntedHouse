@@ -53,7 +53,7 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         
         Date d2 = getDate(2015, 12, 13);
         hDTO2.setHistoryDate(d2);
-        hDTO2.setInfo("h2 info");
+        hDTO2.setInfo("h info2");
         historyFacade.createHistory(hDTO);
         historyFacade.createHistory(hDTO2);
     }
@@ -66,15 +66,15 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void updateTest() {
-        hDTO.setInfo("nove info");
+        hDTO.setInfo("hu hu");
         historyFacade.updateHistory(hDTO);
         
         Date d2 = getDate(2015, 10, 13);
         hDTO2.setHistoryDate(d2);
         historyFacade.updateHistory(hDTO2);
         
-        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getID()).getInfo(), "nove info");
-//        Assert.assertEquals((Date) historyFacade.getHistoryById(hDTO2.getID()).getHistoryDate(), d2);
+        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getID()).getInfo(), "hu hu");
+        Assert.assertEquals((Date) historyFacade.getHistoryById(hDTO2.getID()).getHistoryDate(), d2);
     }
     
     @Test
@@ -88,6 +88,11 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         
         Assert.assertTrue(h.get(1).getHistoryDate().before(d4));
         Assert.assertTrue(h.get(1).getHistoryDate().after(d3));
+        
+        List <HistoryDTO> hs = historyFacade.searchHistoryByInfo("h");
+        Assert.assertEquals(h.size(), 2);
+        Assert.assertTrue(h.get(0).getInfo().contains("h"));
+        
     }
     
     @Test

@@ -68,4 +68,12 @@ public interface HistoryService {
      */
     List<History> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2);
     
+    /**
+     * Finds history cointaining pattern in info
+     * 
+     * @param pattern
+     * @return list of histories containing pattern in info
+     */
+    public List<History> searchHistoryByInfo(String pattern);
+    
 }

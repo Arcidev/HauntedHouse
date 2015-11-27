@@ -68,4 +68,12 @@ public interface HistoryFacade {
      * @return history in date1 and date2
      */
     List<HistoryDTO> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2);
+    
+    /**
+     * Finds history cointaining pattern in info
+     * 
+     * @param pattern
+     * @return list of histories containing pattern in info
+     */
+    List<HistoryDTO> searchHistoryByInfo(String pattern);
 }

@@ -69,4 +69,9 @@ public class HistoryFacadeImpl implements HistoryFacade {
     public List<HistoryDTO> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2) {
         return beanMappingService.mapTo(historyService.searchHistoryByRange(Date1, Date2), HistoryDTO.class);
     }
+    
+    @Override
+    public List<HistoryDTO> searchHistoryByInfo(String pattern) {
+        return beanMappingService.mapTo(historyService.searchHistoryByInfo(pattern) , HistoryDTO.class);
+    }
 }

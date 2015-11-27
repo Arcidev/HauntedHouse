@@ -58,6 +58,21 @@ public interface HistoryDao {
      */
     public List<History> findAll();
     
+    /**
+     * Finds history in date range
+     * 
+     * @param Date1
+     * @param Date2
+     * @return history in date1 and date2
+     */
     public List<History> searchByRange(java.util.Date Date1, java.util.Date Date2);
+    
+    /**
+     * Finds history cointaining pattern in info
+     * 
+     * @param pattern
+     * @return list of histories containing pattern in info
+     */
+    public List<History> searchHistoryByInfo(String pattern);
     
 }

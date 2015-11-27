@@ -81,11 +81,11 @@ public class HistoryServiceTest extends AbstractTestNGSpringContextTests {
         spookService.create(s2);
         
         h.setHistoryDate(d);
-        h.setInfo("h1");
+        h.setInfo("1");
         h.setSpook(s);
         
         h2.setHistoryDate(d2);
-        h2.setInfo("h2");
+        h2.setInfo("2");
         h2.setSpook(s2);
         
         historyService.createHistory(h);
@@ -100,9 +100,9 @@ public class HistoryServiceTest extends AbstractTestNGSpringContextTests {
         
     @Test
     public void updateTest() {
-        h2.setInfo("nova h");
+        h2.setInfo("nova ");
         historyService.updateHistory(h2);
-        Assert.assertEquals(historyService.findHistoryById(h2.getID()).getInfo(), "nova h");
+        Assert.assertEquals(historyService.findHistoryById(h2.getID()).getInfo(), "nova ");
     }
     
     @Test
@@ -113,6 +113,10 @@ public class HistoryServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(num_h.size(), 1);
         Assert.assertTrue(num_h.get(0).getHistoryDate().before(d4));
         Assert.assertTrue(num_h.get(0).getHistoryDate().after(d3));
+        
+        List<History> hs = historyService.searchHistoryByInfo("h");
+        Assert.assertEquals(hs.size(), 2);
+        Assert.assertTrue(hs.get(0).getInfo().contains("h"));
     }
     
     @Test

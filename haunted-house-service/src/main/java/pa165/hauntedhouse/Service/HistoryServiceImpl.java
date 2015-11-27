@@ -63,8 +63,19 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
+    public List<History> searchHistoryByInfo(String pattern){
+        List<History> h = historyDao.searchHistoryByInfo(pattern);
+        if (h == null) {
+            return new ArrayList<>();
+        }
+        
+        return h;
+    }
+    
+    @Override
     public Spook getSpookByHistoryId(int historyId) {
         History history = historyDao.findById(historyId);
         return history.getSpook();
     }
+    
 }
