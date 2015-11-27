@@ -6,8 +6,6 @@
 
 package pa165.hauntedhouse.TestSuite.Facade;
 
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,30 +34,26 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests{
     private final HouseDTO house = new HouseDTO();
     private final HouseDTO house2 = new HouseDTO();
     
-    Calendar cal = Calendar.getInstance();
-    Date date = new Date(cal.getTime().getTime());
     
     @BeforeClass
     public void initData(){
-        house.setName("House");
+        house.setName("dom");
         house.setAddress("Serus");
         house.setHistory("HistoryFacadeTest1");
-        house.setHauntedSince(date);
         
-        house2.setName("House2");
+        house2.setName("strom");
         house2.setAddress("NAZDAR");
         house2.setHistory("HistoryFacadeTest2");
-        house2.setHauntedSince(date);
         
         houseFacade.createHouse(house);
         houseFacade.createHouse(house2);
     }
     
-//    @Test
-//    public void createTest() {
-//        Assert.assertEquals(houseFacade.getHouseById(house.getId()), house);
-//        Assert.assertEquals(houseFacade.getHouseById(house2.getId()), house2);
-//    }
+    @Test
+    public void createTest() {
+        Assert.assertEquals(houseFacade.getHouseById(house.getId()), house);
+        Assert.assertEquals(houseFacade.getHouseById(house2.getId()), house2);
+    }
     
     @Test
     public void updateTest() {
@@ -70,17 +64,23 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests{
     }
     
     @Test
+    public void searchTest() {
+        List<HouseDTO> houses = houseFacade.searchHousesByName("dom");
+        Assert.assertEquals(houses.size(), 1);
+        Assert.assertTrue(houses.get(0).getName().contains("dom"));
+    }
+    
+    @Test
     public void deleteTest() {
         HouseDTO h = new HouseDTO();
-        h.setName("House3");
+        h.setName("house3");
         h.setAddress("PP");
         h.setHistory("HistoryFacadeTest3");
-        h.setHauntedSince(date);
         
         houseFacade.createHouse(h);
         int houses = houseFacade.getAllHouses().size();
         houseFacade.deleteHouse(h.getId());
-        Assert.assertEquals(houseFacade.getAllHouses().size(), houses- 1);
+        Assert.assertEquals(houseFacade.getAllHouses().size(), houses-1);
         Assert.assertNull(houseFacade.getHouseById(h.getId()));
     }    
 }

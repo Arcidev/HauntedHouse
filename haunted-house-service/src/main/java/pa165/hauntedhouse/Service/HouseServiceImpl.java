@@ -30,7 +30,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public int create(House house) {
         houseDao.create(house);
-        System.out.println("ID "+house.getName()+" "+house.getAddress()+ " "+house.getHistory()+ " " +house.getId());
+        //System.out.println("ID "+house.getName()+" "+house.getAddress()+ " "+house.getHistory()+ " " +house.getId());
         return house.getId();
     }
 
@@ -58,6 +58,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public List<House> searchHousesByName(String filter) {
         List<House> houses = houseDao.searchByName(filter);
+      //  System.out.println(filter);
         if (houses == null) {
             return new ArrayList<>();
         }
