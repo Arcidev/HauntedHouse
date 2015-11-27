@@ -85,7 +85,8 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests{
     }
     
     @Test
-    public void deleteTest() {       
+    public void deleteTest() {  
+        
         House house3 = new House();
         house3.setAddress("LA");
         house3.setName("Name");
@@ -93,9 +94,10 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests{
         house3.setHauntedSince(date);
         
         houseService.create(house3);
-        Assert.assertEquals(houseService.findAll().size(), 3);
+        int houses = houseService.findAll().size();
+        Assert.assertEquals(houseService.findAll().size(), houses);
         houseService.delete(house3.getId());
-        Assert.assertEquals(houseService.findAll().size(), 2);
+        Assert.assertEquals(houseService.findAll().size(), houses-1);
         Assert.assertNull(houseService.findById(house3.getId()));
     }  
 }
