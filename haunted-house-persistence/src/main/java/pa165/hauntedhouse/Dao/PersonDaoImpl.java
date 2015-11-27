@@ -20,14 +20,24 @@ import pa165.hauntedhouse.Entity.Person;
  */
 @Repository
 @Transactional
-public class PersonDaoImpl implements PersonDao{
+public class PersonDaoImpl implements PersonDao {
     
     @PersistenceContext
     private EntityManager em;
 
     @Override
-    public void create(Person u) {
-        em.persist(u);
+    public void create(Person p) {
+        em.persist(p);
+    }
+    
+    @Override
+    public void update(Person p) {
+        em.merge(p);
+    }
+    
+    @Override
+    public void delete(Person p) {
+        em.remove(em.merge(p));
     }
 
     @Override
@@ -38,8 +48,8 @@ public class PersonDaoImpl implements PersonDao{
     @Override
     public Person findPersonByEmail(String email) {
         try {
-            return em.createQuery("select u from Person u where email = :email", Person.class)
-                    .setParameter("email", email).getSingleResult();
+            return em.createQuery("select u from Person u where lower(email) = :email", Person.class)
+                    .setParameter("email", email.trim().toLowerCase()).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
         }
@@ -53,7 +63,7 @@ public class PersonDaoImpl implements PersonDao{
     @Override
     public List<Person> searchByLastName(String filter) {
         try {
-            return em.createQuery("select u from Person u where lastName like :filter", Person.class)
+            return em.createQuery("select u from Person u where lower(lastName) like :filter", Person.class)
                     .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;

@@ -41,11 +41,13 @@ public class PersonTest extends AbstractTestNGSpringContextTests{
         person1.setLastName("Wick");
         person1.setEmail("john.wick@gmail.com");
         person1.setUserRole(UserRole.USER);
+        person1.setPasswordHash("b");
         
         person2.setFirstName("Will");
         person2.setLastName("Smith");
         person2.setEmail("will.smith@gmail.com");
         person2.setUserRole(UserRole.ADMIN);
+        person2.setPasswordHash("d");
         
         personDao.create(person1);
         personDao.create(person2);
@@ -74,6 +76,7 @@ public class PersonTest extends AbstractTestNGSpringContextTests{
         person1.setLastName("Wick");
         person1.setEmail("john.wick@mail.com");
         person1.setUserRole(UserRole.USER);
+        person1.setPasswordHash("what");
 
         personDao.create(person1);
 

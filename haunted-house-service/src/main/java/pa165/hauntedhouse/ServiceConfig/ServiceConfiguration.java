@@ -40,6 +40,7 @@ public class ServiceConfiguration {
             mapping(History.class, HistoryDTO.class);
             mapping(House.class, HouseDTO.class);
             mapping(Spook.class, SpookDTO.class);
+            mapping(Person.class, PersonDTO.class);
         }
     }
 }

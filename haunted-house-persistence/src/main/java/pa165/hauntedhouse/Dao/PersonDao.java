@@ -15,7 +15,11 @@ import pa165.hauntedhouse.Entity.Person;
  */
 public interface PersonDao {
     
-    public void create(Person u);
+    public void create(Person p);
+    
+    public void update(Person p);
+    
+    public void delete(Person p);
     
     public Person findById(int id);
     
@@ -24,5 +28,4 @@ public interface PersonDao {
     public List<Person> findAll();
     
     public List<Person> searchByLastName(String filter);
-    
 }
