@@ -101,7 +101,7 @@ public class SpookServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testSearch() {
         List<Spook> spooks = spookService.searchSpooksByName("Spookie 2");
-        Assert.assertEquals(spooks.size(), 1);
+        Assert.assertEquals(spooks.size(), 2);
         Assert.assertTrue(spooks.get(0).getName().contains("Spookie 2"));        
         
     }
