@@ -33,7 +33,7 @@ public class HistoryFacadeImpl implements HistoryFacade {
     public void createHistory(HistoryDTO h) {
         h.setId(historyService.createHistory(beanMappingService.mapTo(h, History.class)));
     }
-
+    
     @Override
     public void deleteHistory(int id) {
         historyService.deleteHistory(id);
