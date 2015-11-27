@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dao.HistoryDao;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
+import pa165.hauntedhouse.Exception.DbException;
 import pa165.hauntedhouse.PersistenceConfig.PersistenceApplicationContext;
 
 /**
@@ -68,7 +69,7 @@ public class HistoryTest extends AbstractTestNGSpringContextTests{
         Assert.assertTrue(history.contains(history2));
     }
     
-    @Test(expectedExceptions = ConstraintViolationException.class)
+    @Test(expectedExceptions = DbException.class)
     public void importWithoutDate() {
         History history = new History();
         history.setInfo("InfoInfo");
