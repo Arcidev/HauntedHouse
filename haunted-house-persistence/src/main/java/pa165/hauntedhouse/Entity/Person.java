@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import org.dozer.Mapping;
 import pa165.hauntedhouse.Enums.UserRole;
 
 /**
@@ -25,6 +26,7 @@ public class Person {
        
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Mapping
     private int id;
     
     @NotNull
@@ -37,9 +39,8 @@ public class Person {
     @NotNull
     private String lastName;
     
+    @NotNull
     private String passwordHash;
-    
-    private String passwordSalt;
     
     @Enumerated
     @NotNull
@@ -50,13 +51,6 @@ public class Person {
      */
     public int getId() {
         return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -114,20 +108,6 @@ public class Person {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
-
-    /**
-     * @return the passwordSalt
-     */
-    public String getPasswordSalt() {
-        return passwordSalt;
-    }
-
-    /**
-     * @param passwordSalt the passwordSalt to set
-     */
-    public void setPasswordSalt(String passwordSalt) {
-        this.passwordSalt = passwordSalt;
-    }
     
         /**
      * @return the userRole
@@ -159,16 +139,20 @@ public class Person {
         return id == u.getId() &&
                 (firstName == null ? u.getFirstName() == null : firstName.equals(u.getFirstName())) &&
                 (lastName == null ? u.getLastName() == null : lastName.equals(u.getLastName())) &&
-                (email == null ? u.getEmail() == null : email.equals(u.getEmail()));
+                (email == null ? u.getEmail() == null : email.equals(u.getEmail()) &&
+                (passwordHash == null ? u.getPasswordHash() == null : passwordHash.equals(u.getPasswordHash())) &&
+                userRole == u.getUserRole());
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.firstName);
-        hash = 59 * hash + Objects.hashCode(this.lastName);
-        hash = 59 * hash + Objects.hashCode(this.email);
+        int hash = 3;
+        hash = 89 * hash + this.id;
+        hash = 89 * hash + Objects.hashCode(this.email);
+        hash = 89 * hash + Objects.hashCode(this.firstName);
+        hash = 89 * hash + Objects.hashCode(this.lastName);
+        hash = 89 * hash + Objects.hashCode(this.passwordHash);
+        hash = 89 * hash + Objects.hashCode(this.userRole);
         return hash;
-    }  
+    }
 }
