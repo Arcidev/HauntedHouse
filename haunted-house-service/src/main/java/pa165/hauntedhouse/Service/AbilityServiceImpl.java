@@ -36,6 +36,9 @@ public class AbilityServiceImpl implements AbilityService {
     @Override
     public void update(Ability ability) {
         Ability a = abilityDao.findById(ability.getId());
+        if (a == null) {
+            throw new IllegalArgumentException("Ability does not exist");
+        }
         a.setInfo(ability.getName());
         a.setInfo(ability.getInfo());
         
@@ -45,6 +48,9 @@ public class AbilityServiceImpl implements AbilityService {
     @Override
     public void delete(int id) {
         Ability a = abilityDao.findById(id);
+        if (a == null) {
+            throw new IllegalArgumentException("Ability does not exist");
+        }
         abilityDao.delete(a);
     }
 
@@ -62,6 +68,10 @@ public class AbilityServiceImpl implements AbilityService {
     public void addToSpook(int abilityId, int spookId) {
         Ability a = abilityDao.findById(abilityId);
         Spook s = spookDao.findById(spookId);
+        if (a == null || s == null) {
+            throw new IllegalArgumentException("Ability or Spook does not exist with passed ids");
+        }
+        
         a.addSpook(s);
         spookDao.update(s); // updates ability with cascade
     }
@@ -70,6 +80,10 @@ public class AbilityServiceImpl implements AbilityService {
     public void removeFromSpook(int abilityId, int spookId) {
         Ability a = abilityDao.findById(abilityId);
         Spook s = spookDao.findById(spookId);
+        if (a == null || s == null) {
+            throw new IllegalArgumentException("Ability or Spook does not exist with passed ids");
+        }
+        
         a.remove(s);
         spookDao.update(s); // updates ability with cascade
     }
