@@ -7,7 +7,6 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.AbilityDTO;
-import pa165.hauntedhouse.Dto.SpookDTO;
 
 /**
  *

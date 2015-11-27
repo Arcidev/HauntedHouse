@@ -8,6 +8,7 @@ package pa165.hauntedhouse.Facade;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dto.HouseDTO;
 import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Service.HouseService;
@@ -19,6 +20,7 @@ import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
  * @author Milan
  */
 @Service
+@Transactional
 public class HouseFacadeImpl implements HouseFacade {
     
     @Autowired

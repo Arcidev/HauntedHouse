@@ -8,6 +8,7 @@ package pa165.hauntedhouse.Facade;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dto.HistoryDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.History;
@@ -22,6 +23,7 @@ import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
  * @author Martin Durcansky
  */
 @Service
+@Transactional
 public class SpookFacadeImpl implements SpookFacade {
     @Autowired
     private BeanMappingService beanMappingService;

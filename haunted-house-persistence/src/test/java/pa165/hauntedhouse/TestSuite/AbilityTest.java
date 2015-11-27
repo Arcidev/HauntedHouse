@@ -66,8 +66,6 @@ public class AbilityTest extends AbstractTestNGSpringContextTests{
     
     @BeforeClass
     public void createTestData() {
-        
-        Date date = getTestDate();
         Time timeSince = getTime(20, 45, 30);
         Time timeUntil = getTime(6, 30, 00);
         

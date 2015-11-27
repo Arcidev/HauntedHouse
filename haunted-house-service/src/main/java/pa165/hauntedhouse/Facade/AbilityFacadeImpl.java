@@ -8,8 +8,8 @@ package pa165.hauntedhouse.Facade;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dto.AbilityDTO;
-import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Service.AbilityService;
 import pa165.hauntedhouse.Service.SpookService;
@@ -20,6 +20,7 @@ import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
  * @author Andrej Dobes
  */
 @Service
+@Transactional
 public class AbilityFacadeImpl implements AbilityFacade {
 
     @Autowired
