@@ -39,7 +39,7 @@ public class AbilityServiceImpl implements AbilityService {
         if (a == null) {
             throw new IllegalArgumentException("Ability does not exist");
         }
-        a.setInfo(ability.getName());
+        a.setName(ability.getName());
         a.setInfo(ability.getInfo());
         
         abilityDao.update(a);

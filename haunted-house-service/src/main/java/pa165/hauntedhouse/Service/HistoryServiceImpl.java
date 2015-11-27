@@ -30,6 +30,9 @@ public class HistoryServiceImpl implements HistoryService {
     @Override
     public void updateHistory(History h) {
         History his = historyDao.findById(h.getID());
+        if (his == null) {
+            throw new IllegalArgumentException("History does not exist");
+        }
         his.setInfo(h.getInfo());
         his.setHistoryDate(h.getHistoryDate());
         
@@ -38,7 +41,10 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public void deleteHistory(int id) {
-        History h = historyDao.findById(id);
+        History h = historyDao.findById(id);  
+        if (h == null) {
+            throw new IllegalArgumentException("History does not exist");
+        }
         historyDao.delete(h);
     }
 

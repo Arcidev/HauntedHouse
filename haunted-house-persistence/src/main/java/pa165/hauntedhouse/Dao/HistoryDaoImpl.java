@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.History;
+import pa165.hauntedhouse.Exception.DbException;
 
 /**
  *
@@ -26,27 +27,52 @@ public class HistoryDaoImpl implements HistoryDao{
     
     @Override
     public void create(History h) {
-        em.persist(h);
+        try {
+            em.persist(h);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: duplicate entity", e);
+        }
+        
     }
 
     @Override
     public void delete(History h) {
-         em.remove(em.merge(h));
+        try {
+            em.remove(em.merge(h));
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
+         
     }
     
     @Override
     public void update(History h){
-        em.merge(h);
+        try {
+            em.merge(h);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
+        
     }
     
     @Override
     public History findById(int id) {
-        return em.find(History.class, id);
+        try {
+            return em.find(History.class, id);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
+        
     }
 
     @Override
     public List<History> findAll() {
-        return em.createQuery("select h from History h", History.class).getResultList();
+        try {
+            return em.createQuery("select h from History h", History.class).getResultList();
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
+       
     }
 
     @Override
@@ -56,6 +82,8 @@ public class HistoryDaoImpl implements HistoryDao{
                     .setParameter("date", historyDate).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
 
     }
@@ -67,6 +95,8 @@ public class HistoryDaoImpl implements HistoryDao{
                     .setParameter("date1", historyDate1).setParameter("date2", historyDate2).getResultList();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
     
@@ -77,6 +107,8 @@ public class HistoryDaoImpl implements HistoryDao{
                     .setParameter("pat", '%' + pattern.toLowerCase() + '%').setMaxResults(num).getResultList();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
 }
