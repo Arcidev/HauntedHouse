@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Exception.DbException;
 
 /**
  *
@@ -26,28 +27,47 @@ public class AbilityDaoImpl implements AbilityDao {
     
     @Override
     public Ability findById(int id) {
-        return em.find(Ability.class, id);
+        try {
+            return em.find(Ability.class, id);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
-     
   
     @Override
     public void create(Ability a) {
-        em.persist(a);
+        try {
+            em.persist(a);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: duplicate entity", e);
+        }
     }
     
     @Override
     public void delete(Ability a) {
-        em.remove(em.merge(a));
+        try {
+            em.remove(em.merge(a));
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
     
     @Override
     public void update(Ability a) {
-        em.merge(a);
+        try {
+            em.merge(a);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
 
     @Override
     public List<Ability> findAll() {
-        return em.createQuery("select a from Ability a", Ability.class).getResultList();
+        try {
+            return em.createQuery("select a from Ability a", Ability.class).getResultList();
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
 
     @Override
@@ -57,6 +77,8 @@ public class AbilityDaoImpl implements AbilityDao {
                     .setParameter("name", name).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
     
@@ -67,6 +89,8 @@ public class AbilityDaoImpl implements AbilityDao {
                     .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
 }

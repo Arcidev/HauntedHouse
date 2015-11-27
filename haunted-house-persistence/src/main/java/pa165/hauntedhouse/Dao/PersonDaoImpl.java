@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.Person;
+import pa165.hauntedhouse.Exception.DbException;
 
 /**
  *
@@ -27,22 +28,38 @@ public class PersonDaoImpl implements PersonDao {
 
     @Override
     public void create(Person p) {
-        em.persist(p);
+        try {
+            em.persist(p);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
     
     @Override
     public void update(Person p) {
-        em.merge(p);
+        try {
+            em.merge(p);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
     
     @Override
     public void delete(Person p) {
-        em.remove(em.merge(p));
+        try {
+            em.remove(em.merge(p));
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
 
     @Override
     public Person findById(int id) {
-        return em.find(Person.class, id);
+        try {
+            return em.find(Person.class, id);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
 
     @Override
@@ -52,12 +69,19 @@ public class PersonDaoImpl implements PersonDao {
                     .setParameter("email", email.trim().toLowerCase()).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
 
     @Override
     public List<Person> findAll() {
-        return em.createQuery("select u from Person u", Person.class).getResultList();
+        try {
+            return em.createQuery("select u from Person u", Person.class).getResultList();
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
+        
     }
     
     @Override
@@ -67,6 +91,8 @@ public class PersonDaoImpl implements PersonDao {
                     .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
 }

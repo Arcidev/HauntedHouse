@@ -95,6 +95,9 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
         for (AbilityDTO a : abilities) {
             Assert.assertTrue(a.getName().contains("Why")); // I don't believe that Java can handle case insensitive
         }
+        
+        abilities = abilityFacade.searchAbilitiesByName("I AM INVINSIBLE");
+        Assert.assertEquals(abilities.size(), 0);
     }
     
     @Test
