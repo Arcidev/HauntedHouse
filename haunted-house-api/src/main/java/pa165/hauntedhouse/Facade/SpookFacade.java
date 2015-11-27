@@ -85,14 +85,14 @@ public interface SpookFacade {
      * @param spookId
      * @param houseId
      */
-    void setHouse(int spookId, int houseId);
+    //void setHouse(int spookId, int houseId);
 
     /**
      * Removes house from spook
      * 
      * @param spookId
      */
-    void removeHouse(int spookId);
+    //void removeHouse(int spookId);
     
     /**
      * Gets all spooks

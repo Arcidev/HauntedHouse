@@ -84,7 +84,7 @@ public class SpookFacadeImpl implements SpookFacade {
    
     
 
-    @Override
+    /*@Override
     public void setHouse(int spookId, int houseId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -92,7 +92,7 @@ public class SpookFacadeImpl implements SpookFacade {
     @Override
     public void removeHouse(int spookId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 
    @Override
     public List<SpookDTO> getAllSpooks() {
