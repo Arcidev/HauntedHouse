@@ -37,13 +37,17 @@ public class SpookFacadeImpl implements SpookFacade {
     private HistoryService historyService;
 
     @Override
-    public int createSpook(SpookDTO s) {        
-        return spookService.create(beanMappingService.mapTo(s, Spook.class));
+    public void createSpook(SpookDTO s) {        
+        s.setId(spookService.create(beanMappingService.mapTo(s, Spook.class)));
     }
 
-    @Override
+    /*@Override
     public void deleteSpook(SpookDTO s) {        
         spookService.delete(beanMappingService.mapTo(s, Spook.class));
+    }*/
+    @Override
+    public void deleteSpook(int id) {
+        spookService.delete(id);
     }
 
     @Override
@@ -52,13 +56,15 @@ public class SpookFacadeImpl implements SpookFacade {
     }
 
     @Override
-    public void addAbility(SpookDTO s, AbilityDTO a) {        
-        spookService.addAbility(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(a, Ability.class));
+    public void addToAbility(int spookId, int abilityId) {        
+        //spookService.addAbility(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(a, Ability.class));
+        spookService.addToAbility(spookId,abilityId);
     }
 
     @Override
-    public void removeAbility(SpookDTO s, AbilityDTO a) {       
-       spookService.removeAbility(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(a, Ability.class)); 
+    public void removeFromAbility(int spookId, int abilityId) {       
+      // spookService.removeAbility(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(a, Ability.class)); 
+        abilityService.removeFromSpook(spookId, abilityId);
     }
     
     @Override
@@ -78,7 +84,7 @@ public class SpookFacadeImpl implements SpookFacade {
    
     
 
-    @Override
+    /*@Override
     public void setHouse(int spookId, int houseId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -86,7 +92,7 @@ public class SpookFacadeImpl implements SpookFacade {
     @Override
     public void removeHouse(int spookId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 
    @Override
     public List<SpookDTO> getAllSpooks() {

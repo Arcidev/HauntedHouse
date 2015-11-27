@@ -68,8 +68,11 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
         spook2.setName("Testing");
         spook2.setHauntsSince(time);
         spook2.setHauntsUntil(time);
-        spook.setId(spookFacade.createSpook(spook));
-        spook2.setId(spookFacade.createSpook(spook2));
+        //spook.setId(spookFacade.createSpook(spook));
+        //spook2.setId(spookFacade.createSpook(spook2));
+        spookFacade.createSpook(spook);
+        spookFacade.createSpook(spook2);
+        
         
         abilityFacade.addToSpook(ability.getId(), spook.getId());
         abilityFacade.addToSpook(ability2.getId(), spook.getId());
