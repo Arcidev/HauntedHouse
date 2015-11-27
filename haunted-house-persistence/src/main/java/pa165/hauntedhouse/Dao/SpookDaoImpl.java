@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.Spook;
+import pa165.hauntedhouse.Exception.DbException;
 /**
  *
  * @author Martin Durcansky
@@ -25,25 +26,46 @@ public class SpookDaoImpl implements SpookDao{
     
     @Override
     public Spook findById(int id) {
+        try {
         return em.find(Spook.class, id);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
+        
     }
     @Override
     public void create(Spook spk) {
+        try {
         em.persist(spk);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: duplicate entity", e);
+        }
     }
     @Override
     public void update(Spook spk) {
+        try {
         em.merge(spk);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
 
     @Override
     public void delete(Spook spk) {
+         try {
         em.remove(em.merge(spk));
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
 
     @Override
     public List<Spook> findAll() {
+        try {
         return em.createQuery("select spk from Spook spk", Spook.class).getResultList();
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
 
     @Override
@@ -53,6 +75,8 @@ public class SpookDaoImpl implements SpookDao{
                     .setParameter("name", name).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
 
     }
@@ -63,6 +87,8 @@ public class SpookDaoImpl implements SpookDao{
                     .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
     
