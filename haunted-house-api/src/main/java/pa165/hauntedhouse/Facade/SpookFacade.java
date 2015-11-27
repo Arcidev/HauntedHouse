@@ -22,32 +22,33 @@ public interface SpookFacade {
      * @param s
      * @return id of newly created spook
      */
-    int createSpook(SpookDTO s);
+    void createSpook(SpookDTO spk);
 
     /**
      * Removes existing spook 
      * 
      * @param s
      */
-    void deleteSpook(SpookDTO s);
+    void deleteSpook(int id);
 
     /**
      * Updates existing spook
      * 
      * @param s
      */
-    void updateSpook(SpookDTO s);
+    void updateSpook(SpookDTO spk);
 
     /**
      * Adds ability to spook
      * 
-     * @param spook
-     * @param ability
+     * 
+     * @param spookId
+     * @param abilityId
      */
-    void addAbility(SpookDTO spook, AbilityDTO ability);
+    void addToAbility(int spookId, int abilityId);
     
     
-       SpookDTO getHistorySpook(int historyId);
+    SpookDTO getHistorySpook(int historyId);
     
     List<SpookDTO> getAbilitySpooks(int abilityId);
     
@@ -55,12 +56,12 @@ public interface SpookFacade {
     
 
     /**
-     * Removes ability from spook
+     * Removes spook from ability
      * 
-     * @param spook
-     * @param ability
+     * @param spookId
+     * @param abilityId
      */
-    void removeAbility(SpookDTO spook, AbilityDTO ability);
+    void removeFromAbility(int spookId, int abilityId);
 
     /**
      * Adds history to spook

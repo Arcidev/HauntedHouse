@@ -38,7 +38,7 @@ public class SpookDaoImpl implements SpookDao{
 
     @Override
     public void delete(Spook spk) {
-        em.remove(spk);
+        em.remove(em.merge(spk));
     }
 
     @Override
@@ -59,8 +59,8 @@ public class SpookDaoImpl implements SpookDao{
     @Override
     public List<Spook> searchByName(String filter) {
         try {
-            return em.createQuery("select sp from Spook sp where name like :filter", Spook.class)
-                    .setParameter("filter", filter).getResultList();
+            return em.createQuery("select sp from Spook sp where lower(name) like :filter", Spook.class)
+                    .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
         }

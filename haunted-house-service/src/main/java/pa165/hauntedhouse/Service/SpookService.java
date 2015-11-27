@@ -35,9 +35,9 @@ public interface SpookService {
     /**
      * Removes existing spook
      * 
-     * @param spook
-     */
-    void delete(Spook spook);
+     * @param id
+     */    
+    void delete(int id);
     
     /**
      * Get spooky by id.
@@ -54,21 +54,15 @@ public interface SpookService {
      */
     List<Spook> findAll();
     
-    /**
-     * Adds spook to ability
-     *
-     * @param ability
-     * @param spook
-     */
-    void addAbility(Spook spook, Ability ability);
+        void addToAbility(int spookId, int abilityId);
     
     /**
      * Removes spook from ability
      *
-     * @param ability
-     * @param spook
+     * @param abilityId
+     * @param spookId
      */
-    void removeAbility(Spook spook, Ability ability);
+    void removeFromAbility(int spookId, int abilityId);
     /**
      * Adds history to spook
      *

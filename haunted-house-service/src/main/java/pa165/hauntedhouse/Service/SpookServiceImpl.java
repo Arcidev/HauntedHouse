@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pa165.hauntedhouse.Dao.AbilityDao;
 import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.History;
@@ -26,6 +27,8 @@ public class SpookServiceImpl implements SpookService {
     
     @Autowired
     private SpookDao spookDao;
+    @Autowired
+    private AbilityDao abilityDao;
     
     @Override
     public int create(Spook spook) {
@@ -39,8 +42,9 @@ public class SpookServiceImpl implements SpookService {
     }
 
     @Override
-    public void delete(Spook spook) {
-        spookDao.delete(spook);
+    public void delete(int id) {
+        Spook s = spookDao.findById(id);
+        spookDao.delete(s);
     }
 
     @Override
@@ -69,14 +73,18 @@ public class SpookServiceImpl implements SpookService {
         return spook.getHouse();
     }
     @Override
-    public void addAbility(Spook spook, Ability ability) {
-        spook.addAbility(ability);
-        spookDao.update(spook);
+    public void addToAbility(int spookId, int abilityId) {
+        Spook s = spookDao.findById(spookId);
+        Ability a = abilityDao.findById(abilityId);
+        s.addAbility(a);
+        abilityDao.update(a);        
     }
-    
-    public void removeAbility(Spook spook, Ability ability) {
-        spook.removeAbility(ability);
-        spookDao.update(spook);
+    @Override
+    public void removeFromAbility(int spookId, int abilityId) {
+        Spook s = spookDao.findById(spookId);
+        Ability a = abilityDao.findById(abilityId);
+        s.removeAbility(a);
+        abilityDao.update(a);
     }
     public void addHistory(Spook spook, History history) {
         spook.addHistory(history);
