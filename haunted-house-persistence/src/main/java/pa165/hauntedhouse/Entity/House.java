@@ -42,7 +42,6 @@ public class House {
     @NotNull
     private String history;
     
-    @NotNull
     private Date hauntedSince;
     
     @OneToMany(fetch=FetchType.EAGER)    
