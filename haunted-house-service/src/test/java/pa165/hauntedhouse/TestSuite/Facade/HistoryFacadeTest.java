@@ -89,9 +89,13 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(h.get(1).getHistoryDate().before(d4));
         Assert.assertTrue(h.get(1).getHistoryDate().after(d3));
         
-        List <HistoryDTO> hs = historyFacade.searchHistoryByInfo("h");
-        Assert.assertEquals(h.size(), 2);
-        Assert.assertTrue(h.get(0).getInfo().contains("h"));
+        List <HistoryDTO> hs = historyFacade.searchTopHistoryByInfo("h", 1);
+        Assert.assertEquals(hs.size(), 1);
+        Assert.assertTrue(hs.get(0).getInfo().contains("h"));
+        
+        hs = historyFacade.searchTopHistoryByInfo("h", 3);
+        Assert.assertEquals(hs.size(), 2);
+        Assert.assertTrue(hs.get(0).getInfo().contains("h"));
         
     }
     

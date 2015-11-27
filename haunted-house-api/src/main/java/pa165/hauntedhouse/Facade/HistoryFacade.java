@@ -72,8 +72,9 @@ public interface HistoryFacade {
     /**
      * Finds history cointaining pattern in info
      * 
+     * @param  top
      * @param pattern
-     * @return list of histories containing pattern in info
+     * @return list of exact number of histories containing pattern in info order by id
      */
-    List<HistoryDTO> searchHistoryByInfo(String pattern);
+    List<HistoryDTO> searchTopHistoryByInfo(String pattern, int top);
 }

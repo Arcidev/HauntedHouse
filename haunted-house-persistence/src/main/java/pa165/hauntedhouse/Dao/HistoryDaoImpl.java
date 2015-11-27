@@ -71,10 +71,10 @@ public class HistoryDaoImpl implements HistoryDao{
     }
     
     @Override
-    public List<History> searchHistoryByInfo(String pattern) {
+    public List<History> searchTopHistoryByInfo(String pattern, int num) {
         try {
-            return em.createQuery("select h from History h where lower(h.historyInfo) like :pat", History.class)
-                    .setParameter("pat", '%' + pattern.toLowerCase() + '%').getResultList();
+            return em.createQuery("select h from History h where lower(h.historyInfo) like :pat order by h.id desc", History.class)
+                    .setParameter("pat", '%' + pattern.toLowerCase() + '%').setMaxResults(num).getResultList();
         } catch (NoResultException nrf) {
             return null;
         }

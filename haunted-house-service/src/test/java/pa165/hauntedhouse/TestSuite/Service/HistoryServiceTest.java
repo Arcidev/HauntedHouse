@@ -114,8 +114,12 @@ public class HistoryServiceTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(num_h.get(0).getHistoryDate().before(d4));
         Assert.assertTrue(num_h.get(0).getHistoryDate().after(d3));
         
-        List<History> hs = historyService.searchHistoryByInfo("h");
+        List<History> hs = historyService.searchTopHistoryByInfo("h", 3);
         Assert.assertEquals(hs.size(), 2);
+        Assert.assertTrue(hs.get(0).getInfo().contains("h"));
+        
+        hs = historyService.searchTopHistoryByInfo("h", 1);
+        Assert.assertEquals(hs.size(), 1);
         Assert.assertTrue(hs.get(0).getInfo().contains("h"));
     }
     

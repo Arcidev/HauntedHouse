@@ -63,8 +63,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
 
     @Override
-    public List<History> searchHistoryByInfo(String pattern){
-        List<History> h = historyDao.searchHistoryByInfo(pattern);
+    public List<History> searchTopHistoryByInfo(String pattern, int top){
+        List<History> h = historyDao.searchTopHistoryByInfo(pattern, top);
         if (h == null) {
             return new ArrayList<>();
         }

@@ -70,9 +70,10 @@ public interface HistoryDao {
     /**
      * Finds history cointaining pattern in info
      * 
+     * @param  top
      * @param pattern
-     * @return list of histories containing pattern in info
+     * @return list of exact number of histories containing pattern in info order by id
      */
-    public List<History> searchHistoryByInfo(String pattern);
+    List<History> searchTopHistoryByInfo(String pattern, int top);
     
 }

@@ -71,7 +71,8 @@ public class HistoryFacadeImpl implements HistoryFacade {
     }
     
     @Override
-    public List<HistoryDTO> searchHistoryByInfo(String pattern) {
-        return beanMappingService.mapTo(historyService.searchHistoryByInfo(pattern) , HistoryDTO.class);
+    public List<HistoryDTO> searchTopHistoryByInfo(String pattern, int top) {
+        return beanMappingService.mapTo(historyService.searchTopHistoryByInfo(pattern, top) , HistoryDTO.class);
     }
+    
 }
