@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Exception.DbException;
 
 /**
  *
@@ -27,27 +28,47 @@ public class HouseDaoImpl implements HouseDao{
 
     @Override
     public House findById(int id) {
-        return em.find(House.class, id);
+        try {
+            return em.find(House.class, id);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
 
     @Override
     public void create(House hs) {
-        em.persist(hs);
+        try {
+            em.persist(hs);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: duplicate entity", e);
+        }
     }
 
     @Override
     public void delete(House hs) {
-        em.remove(em.merge(hs));
+        try {
+            em.remove(em.merge(hs));
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
     
     @Override
     public void update(House hs) {
-        em.merge(hs);
+        try {
+            em.merge(hs);
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
+        }
     }
 
     @Override
     public List<House> findAll() {
+        try {
         return em.createQuery("select hs from House hs", House.class).getResultList();
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
 
     @Override
@@ -57,6 +78,8 @@ public class HouseDaoImpl implements HouseDao{
                     .setParameter("name", name).getSingleResult();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
 
@@ -67,6 +90,8 @@ public class HouseDaoImpl implements HouseDao{
                     .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
     }
 }

@@ -30,18 +30,29 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public int create(House house) {
         houseDao.create(house);
-        //System.out.println("ID "+house.getName()+" "+house.getAddress()+ " "+house.getHistory()+ " " +house.getId());
         return house.getId();
     }
 
     @Override
     public void update(House house) {
-        houseDao.update(house);
+        House h = houseDao.findById(house.getId());
+        if(h ==null) {
+            throw new IllegalArgumentException("House does not exist");
+        }
+        h.setAddress(house.getAddress());
+        h.setName(house.getName());
+        h.setHauntedSince(house.getHauntedSince());
+        h.setHistory(house.getHistory());
+        
+        houseDao.update(h);
     }
 
     @Override
     public void delete(int id) {
         House h = houseDao.findById(id);
+        if(h ==null) {
+            throw new IllegalArgumentException("House does not exist");
+        }
         houseDao.delete(h);
     }
 
@@ -58,7 +69,6 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public List<House> searchHousesByName(String filter) {
         List<House> houses = houseDao.searchByName(filter);
-      //  System.out.println(filter);
         if (houses == null) {
             return new ArrayList<>();
         }
