@@ -32,14 +32,14 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     private final HistoryDTO hDTO = new HistoryDTO();
     private final HistoryDTO hDTO2 = new HistoryDTO();
     
-    private Date getDate(int year, int month, int day, int hour, int min, int sec) {
+    private Date getDate(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DAY_OF_MONTH, day);
-        cal.set( Calendar.HOUR_OF_DAY, hour );
-        cal.set( Calendar.MINUTE, min );
-        cal.set( Calendar.SECOND, sec );
+        cal.set( Calendar.HOUR_OF_DAY, 0 );
+        cal.set( Calendar.MINUTE, 0 );
+        cal.set( Calendar.SECOND, 0 );
         cal.set( Calendar.MILLISECOND, 0 );
         
         return new Date(cal.getTime().getTime());
@@ -47,11 +47,11 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     
     @BeforeClass
     public void createData(){
-        Date d = getDate(2015, 12, 19, 20, 30, 40);
+        Date d = getDate(2015, 12, 19);
         hDTO.setHistoryDate(d);
         hDTO.setInfo("h info");
         
-        Date d2 = getDate(2015, 12, 13, 2, 45, 10);
+        Date d2 = getDate(2015, 12, 13);
         hDTO2.setHistoryDate(d2);
         hDTO2.setInfo("h2 info");
         historyFacade.createHistory(hDTO);
@@ -69,7 +69,7 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         hDTO.setInfo("nove info");
         historyFacade.updateHistory(hDTO);
         
-        Date d2 = getDate(2015, 10, 13, 2, 45, 10);
+        Date d2 = getDate(2015, 10, 13);
         hDTO2.setHistoryDate(d2);
         historyFacade.updateHistory(hDTO2);
         
@@ -79,8 +79,8 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void searchTest() {
-        Date d3 = getDate(2015, 9, 13, 2, 45, 10);
-        Date d4 = getDate(2016, 12, 19, 20, 30, 40);
+        Date d3 = getDate(2015, 9, 13);
+        Date d4 = getDate(2016, 12, 19);
         List <HistoryDTO> h = historyFacade.searchHistoryByRange(d3, d4);
         Assert.assertEquals(h.size(), 2);
         Assert.assertTrue(h.get(0).getHistoryDate().before(d4));
@@ -93,7 +93,7 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void deleteTest() {
         HistoryDTO hDTO3 = new HistoryDTO();
-        Date d5 = getDate(1995, 9, 13, 2, 45, 10);
+        Date d5 = getDate(1995, 9, 13);
         
         hDTO3.setHistoryDate(d5);
         hDTO3.setInfo("h info3");
