@@ -37,7 +37,7 @@ public class HouseDaoImpl implements HouseDao{
 
     @Override
     public void delete(House hs) {
-        em.remove(hs);
+        em.remove(em.merge(hs));
     }
     
     @Override
@@ -64,7 +64,7 @@ public class HouseDaoImpl implements HouseDao{
     public List<House> searchByName(String filter) {
         try {
             return em.createQuery("select hs from House hs where name like :filter", House.class)
-                    .setParameter("filter", filter).getResultList();
+                    .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
         }

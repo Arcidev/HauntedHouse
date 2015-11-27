@@ -7,7 +7,6 @@ package pa165.hauntedhouse.Service;
 
 import java.util.List;
 import pa165.hauntedhouse.Entity.House;
-import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
@@ -32,9 +31,9 @@ public interface HouseService {
     /**
      * Removes existing house
      * 
-     * @param house
+     * @param id
      */
-    void delete(House house);
+    void delete(int id);
     
     /**
      * Get house by id.
@@ -62,16 +61,16 @@ public interface HouseService {
     /**
      * Adds house to spook
      *
-     * @param house
-     * @param spook
+     * @param houseId
+     * @param spookId
      */
-    void addToSpook(House house, Spook spook);
+    void addToSpook(int houseId, int spookId);
     /**
      * Removes house from spook
      *
-     * @param house
-     * @param spook
+     * @param houseId
+     * @param spookId
      */
-    void removeFromSpook(House house, Spook spook);
+    void removeFromSpook(int houseId, int spookId);
     
 }

@@ -7,10 +7,9 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import pa165.hauntedhouse.Dto.HouseDTO;
-import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.House;
-import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.HouseService;
 import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
@@ -19,6 +18,7 @@ import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
  *
  * @author Milan
  */
+@Service
 public class HouseFacadeImpl implements HouseFacade {
     
     @Autowired
@@ -31,13 +31,13 @@ public class HouseFacadeImpl implements HouseFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public int createHouse(HouseDTO h) {
-        return houseService.create(beanMappingService.mapTo(h, House.class));
+    public void createHouse(HouseDTO h) {
+        h.setId(houseService.create(beanMappingService.mapTo(h, House.class)));
     }
 
     @Override
     public void deleteHouse(int houseId) {
-        houseService.delete(beanMappingService.mapTo(houseId, House.class));
+        houseService.delete(houseId);
     }
 
     @Override
@@ -46,13 +46,13 @@ public class HouseFacadeImpl implements HouseFacade {
     }
 
     @Override
-    public void addSpook(HouseDTO house, SpookDTO spook) {
-        houseService.addToSpook(beanMappingService.mapTo(house, House.class), beanMappingService.mapTo(spook, Spook.class));
+    public void addSpook(int houseId, int spookId) {
+        houseService.addToSpook(houseId, spookId);
     }
 
     @Override
-    public void removeSpook(HouseDTO house, SpookDTO spook) {
-        houseService.removeFromSpook(beanMappingService.mapTo(house, House.class), beanMappingService.mapTo(spook, Spook.class));
+    public void removeSpook(int houseId, int spookId) {
+        houseService.removeFromSpook(houseId, spookId);
     }
 
     @Override
@@ -62,7 +62,11 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Override
     public HouseDTO getHouseById(int id) {
-        return beanMappingService.mapTo(houseService.findById(id), HouseDTO.class);
+        House h = houseService.findById(id);
+        if (h == null) {
+            return null;
+        } 
+        return beanMappingService.mapTo(h, HouseDTO.class);
     }
 
     @Override

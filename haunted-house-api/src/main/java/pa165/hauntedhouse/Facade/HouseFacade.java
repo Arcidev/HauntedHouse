@@ -7,7 +7,6 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.HouseDTO;
-import pa165.hauntedhouse.Dto.SpookDTO;
 
 /**
  *
@@ -19,9 +18,8 @@ public interface HouseFacade {
      * Creates new house
      * 
      * @param h
-     * @return id of newly created house
      */
-    int createHouse(HouseDTO h);
+    void createHouse(HouseDTO h);
 
     /**
      * Removes existing house by id
@@ -40,18 +38,18 @@ public interface HouseFacade {
     /**
      * Adds spook to house
      * 
-     * @param house
-     * @param spook
+     * @param houseId
+     * @param spookId
      */
-    void addSpook(HouseDTO house, SpookDTO spook);
+    void addSpook(int houseId, int spookId);
 
     /**
      * Removes spook from house
      * 
-     * @param house
-     * @param spook
+     * @param houseId
+     * @param spookId
      */
-    void removeSpook(HouseDTO house, SpookDTO spook);
+    void removeSpook(int houseId, int spookId);
 
     /**
      * Gets all houses
