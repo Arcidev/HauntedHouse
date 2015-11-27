@@ -31,7 +31,7 @@ public class PersonDaoImpl implements PersonDao {
         try {
             em.persist(p);
         } catch(Exception e) {
-            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+            throw new DbException("Entity manager has failed - possible cause: duplicate entity", e);
         }
     }
     

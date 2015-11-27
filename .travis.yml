@@ -3,6 +3,9 @@ language: java
 git:
   depth: 1
 
+jdk:
+  - oraclejdk8
+
 branches:
   only:
     - master
