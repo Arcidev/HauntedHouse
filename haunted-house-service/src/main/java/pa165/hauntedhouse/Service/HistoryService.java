@@ -25,9 +25,9 @@ public interface HistoryService {
     /**
      * Removes existing history by id
      * 
-     * @param h
+     * @param id
      */
-    void deleteHistory(History h);
+    void deleteHistory(int id);
 
     /**
      * Updates existing history
@@ -35,22 +35,6 @@ public interface HistoryService {
      * @param h
      */
     void updateHistory(History h);
-
-    /**
-     * Adds history to spook
-     * 
-     * @param h
-     * @param s
-     */
- //   void addSpook(History h, Spook s);
-
-    /**
-     * Removes history from spook
-     * 
-     * @param h
-     * @param s
-     */
-  //  void removeSpook(History h, Spook s);
 
     /**
      * Gets all histories
@@ -68,12 +52,12 @@ public interface HistoryService {
     History findHistoryById(int id);
 
     /**
-     * Gets spook history
+     * Gets spook connected to history
      * 
-     * @param s
-     * @return spook history
+     * @param historyId
+     * @return spook
      */
-  //  List<History> getSpookHistory(Spook s);
+    public Spook getSpookByHistoryId(int historyId);
     
     /**
      * Finds history in date range
@@ -83,5 +67,5 @@ public interface HistoryService {
      * @return history in date1 and date2
      */
     List<History> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2);
-    public Spook getSpookByHistoryId(int historyId);
+    
 }

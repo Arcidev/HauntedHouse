@@ -5,10 +5,11 @@
  */
 package pa165.hauntedhouse.Facade;
 
-import java.util.Date;
 import java.util.List;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import pa165.hauntedhouse.Dto.HistoryDTO;
+import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Service.HistoryService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
@@ -18,6 +19,7 @@ import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
  * 
  * @author Lucie Smidova
  */
+@Service
 public class HistoryFacadeImpl implements HistoryFacade {
     
     @Autowired
@@ -28,13 +30,13 @@ public class HistoryFacadeImpl implements HistoryFacade {
     
 
     @Override
-    public int createHistory(HistoryDTO h) {
-        return historyService.createHistory(beanMappingService.mapTo(h, History.class));
+    public void createHistory(HistoryDTO h) {
+        h.setId(historyService.createHistory(beanMappingService.mapTo(h, History.class)));
     }
 
     @Override
-    public void deleteHistory(HistoryDTO h) {
-        historyService.deleteHistory(beanMappingService.mapTo(h, History.class));
+    public void deleteHistory(int id) {
+        historyService.deleteHistory(id);
     }
 
     @Override
@@ -50,9 +52,18 @@ public class HistoryFacadeImpl implements HistoryFacade {
 
     @Override
     public HistoryDTO getHistoryById(int id) {
-        return beanMappingService.mapTo(historyService.findHistoryById(id) , HistoryDTO.class);
+        History h = historyService.findHistoryById(id);
+        if (h == null) {
+            return null;
+        }
+        
+        return beanMappingService.mapTo(h, HistoryDTO.class);
     }
 
+    @Override
+    public SpookDTO getSpookByHistoryId(int historyId) {
+        return beanMappingService.mapTo(historyService.getSpookByHistoryId(historyId), SpookDTO.class);
+    }
     
     @Override
     public List<HistoryDTO> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2) {

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Andrej Dobes
+ * @author Lucie Smidova
  */
 public class HistoryDTO {
     private int id;
@@ -20,7 +20,11 @@ public class HistoryDTO {
     public int getID(){
         return id;
     }
- 
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Date getHistoryDate(){
         return historyDate;
     }

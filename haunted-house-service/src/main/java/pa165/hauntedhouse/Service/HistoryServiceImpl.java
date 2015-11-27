@@ -29,11 +29,16 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Override
     public void updateHistory(History h) {
+        History his = historyDao.findById(h.getID());
+        his.setInfo(h.getInfo());
+        his.setHistoryDate(h.getHistoryDate());
+        
         historyDao.update(h);
     }
 
     @Override
-    public void deleteHistory(History h) {
+    public void deleteHistory(int id) {
+        History h = historyDao.findById(id);
         historyDao.delete(h);
     }
 

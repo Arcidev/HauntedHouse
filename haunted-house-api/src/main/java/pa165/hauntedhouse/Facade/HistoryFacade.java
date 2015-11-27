@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.HistoryDTO;
+import pa165.hauntedhouse.Dto.SpookDTO;
 
 /**
  *
@@ -18,16 +19,16 @@ public interface HistoryFacade {
      * Creates new history
      * 
      * @param h
-     * @return id of newly created history
+     * 
      */
-    int createHistory(HistoryDTO h);
+    void createHistory(HistoryDTO h);
 
     /**
      * Removes existing history by id
      * 
-     * @param h
+     * @param id
      */
-    void deleteHistory(HistoryDTO h);
+    void deleteHistory(int id);
 
     /**
      * Updates existing history
@@ -36,6 +37,14 @@ public interface HistoryFacade {
      */
     void updateHistory(HistoryDTO h);
 
+    /**
+     * Gets spook connected to history
+     * 
+     * @param historyId
+     * @return spook
+     */
+    public SpookDTO getSpookByHistoryId(int historyId);
+    
     /**
      * Gets all histories
      * 
