@@ -33,21 +33,8 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
     @Autowired
     SpookFacade spookFacade;
     private final SpookDTO spook = new SpookDTO();
-    private final SpookDTO spook2 = new SpookDTO();
+    private final SpookDTO spook2 = new SpookDTO();    
     
-    /*private Date getTestDate() {
-        Calendar cal = Calendar.getInstance();
-        cal.set( Calendar.YEAR, 1989 );
-        cal.set( Calendar.MONTH, Calendar.FEBRUARY );
-        cal.set( Calendar.DATE, 14 );
-    
-        cal.set( Calendar.HOUR_OF_DAY, 17 );
-        cal.set( Calendar.MINUTE, 20 );
-        //cal.set( Calendar.SECOND, 30 );
-        //cal.set( Calendar.MILLISECOND, 0 );
-        
-        return new Date(cal.getTime().getTime());
-    }*/
     
     private Time getTime(int hour, int min, int sec) {
         Calendar cal = Calendar.getInstance();
@@ -59,8 +46,7 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
     }
     
     @BeforeClass
-    public void createData(){
-       // Date date = getTestDate();
+    public void createData(){       
         Time timeSince = getTime(20, 45, 30);
         Time timeUntil = getTime(6, 30, 00);
         spook.setName("Casper");
@@ -76,11 +62,7 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
         spookFacade.createSpook(spook);
         spookFacade.createSpook(spook2);
     }
-    /*@Test
-    public void testDataCreation() {
-        Assert.assertEquals(spookFacade.getSpookById(spook.getId()), spook);
-        Assert.assertEquals(spookFacade.getSpookById(spook2.getId()), spook2);
-    }*/
+    
     @Test
     public void testAssociation() {      
         AbilityDTO ability = new AbilityDTO();
@@ -122,7 +104,7 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
         int spooksCount = spookFacade.getAllSpooks().size();
         spookFacade.deleteSpook(s.getId());
         Assert.assertEquals(spookFacade.getAllSpooks().size(), spooksCount - 1);
-       // Assert.assertNull(spookFacade.getSpookById(s.getId()));
+       
     }
     @Test
     public void testSearch() {

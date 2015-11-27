@@ -14,7 +14,7 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import pa165.hauntedhouse.Dto.SpookDTO;
+//import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
@@ -52,7 +52,7 @@ public class SpookServiceTest extends AbstractTestNGSpringContextTests {
         spook.setHistory("Foo");
         spook.setHauntsSince(time);
         spook.setHauntsUntil(time);
-        spook2.setName("Spookie 2");
+        spook2.setName("Spookie 24");
         spook2.setHistory("Foo 2");
         spook2.setHauntsSince(time);
         spook2.setHauntsUntil(time);
@@ -61,12 +61,7 @@ public class SpookServiceTest extends AbstractTestNGSpringContextTests {
         spookService.create(spook);
         spookService.create(spook2);
     }
-   /* @Test
-    public void testCreation() {
-        Assert.assertEquals(abilityService.findById(ability.getId()), ability);
-        Assert.assertEquals(abilityService.findById(ability2.getId()), ability2);
-        Assert.assertEquals(spookService.findById(spook.getId()), spook);
-    }*/
+   
     
     @Test
     public void testAssociation() {
@@ -100,9 +95,9 @@ public class SpookServiceTest extends AbstractTestNGSpringContextTests {
     }
     @Test
     public void testSearch() {
-        List<Spook> spooks = spookService.searchSpooksByName("Spookie 2");
-        Assert.assertEquals(spooks.size(), 2);
-        Assert.assertTrue(spooks.get(0).getName().contains("Spookie 2"));        
+        List<Spook> spooks2 = spookService.searchSpooksByName("Spookie 24");
+        Assert.assertEquals(spooks2.size(), 1);
+        Assert.assertTrue(spooks2.get(0).getName().contains("Spookie 24"));        
         
     }
     

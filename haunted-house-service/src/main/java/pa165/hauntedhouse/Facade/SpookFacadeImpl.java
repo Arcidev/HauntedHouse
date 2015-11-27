@@ -8,10 +8,8 @@ package pa165.hauntedhouse.Facade;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.HistoryDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
-import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
@@ -41,10 +39,6 @@ public class SpookFacadeImpl implements SpookFacade {
         s.setId(spookService.create(beanMappingService.mapTo(s, Spook.class)));
     }
 
-    /*@Override
-    public void deleteSpook(SpookDTO s) {        
-        spookService.delete(beanMappingService.mapTo(s, Spook.class));
-    }*/
     @Override
     public void deleteSpook(int id) {
         spookService.delete(id);
@@ -56,15 +50,13 @@ public class SpookFacadeImpl implements SpookFacade {
     }
 
     @Override
-    public void addToAbility(int spookId, int abilityId) {        
-        //spookService.addAbility(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(a, Ability.class));
-        spookService.addToAbility(spookId,abilityId);
+    public void addToAbility(int spookId, int abilityId) {     
+         spookService.addToAbility(spookId,abilityId);
     }
 
     @Override
     public void removeFromAbility(int spookId, int abilityId) {       
-      // spookService.removeAbility(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(a, Ability.class)); 
-        abilityService.removeFromSpook(spookId, abilityId);
+       abilityService.removeFromSpook(spookId, abilityId);
     }
     
     @Override
@@ -81,18 +73,7 @@ public class SpookFacadeImpl implements SpookFacade {
     public void removeHistory(SpookDTO s, HistoryDTO h) {
         spookService.removeHistory(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(h, History.class));
     }
-   
-    
-
-    /*@Override
-    public void setHouse(int spookId, int houseId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeHouse(int spookId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
+       
 
    @Override
     public List<SpookDTO> getAllSpooks() {
