@@ -54,12 +54,12 @@ public class HistoryServiceImpl implements HistoryService {
     
     @Override
     public List<History> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2) {
-        List<History> abilities = historyDao.searchByRange(Date1, Date2);
-        if (abilities == null) {
+        List<History> h = historyDao.searchByRange(Date1, Date2);
+        if (h == null) {
             return new ArrayList<>();
         }
         
-        return abilities;
+        return h;
     }
 
     @Override
