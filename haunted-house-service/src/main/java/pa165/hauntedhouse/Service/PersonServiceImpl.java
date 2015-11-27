@@ -50,7 +50,7 @@ public class PersonServiceImpl implements PersonService {
     public void delete(int id) {
         Person person = findById(id);
         if (person == null) {
-            return;
+            throw new IllegalArgumentException("House does not exist");
         }
         personDao.delete(person);
     }
