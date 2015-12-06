@@ -34,7 +34,6 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests{
     private final HouseDTO house = new HouseDTO();
     private final HouseDTO house2 = new HouseDTO();
     
-    
     @BeforeClass
     public void initData(){
         house.setName("dom");
