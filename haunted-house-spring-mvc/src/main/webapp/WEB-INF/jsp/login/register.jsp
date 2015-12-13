@@ -15,7 +15,7 @@
 <login:header>
 <jsp:attribute name="body">
     <div class="login-form center-block">
-        <form name='loginForm' action="<c:url value='j_spring_security_check' />" method='POST'>
+        <form:form name='loginForm' action="${pageContext.request.contextPath}/register" modelAttribute="userCreate" method='POST'>
             <div class="form-group">
                 <span>${firstName}:</span>
                 <input class="login-input" type='text' name='firstName' value=''>
@@ -39,7 +39,7 @@
             <div class="form-group">
                 <input class="m-btn black register-button button-100" name="submit" type="submit" value="${register}" />
             </div>
-        </form>
+        </form:form>
     </div>
 </jsp:attribute>
 </login:header>

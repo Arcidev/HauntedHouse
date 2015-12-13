@@ -85,9 +85,7 @@
                 <div class="alert alert-warning" role="alert"><c:out value="${alert_warning}"/></div>
             </c:if>
 
-            <div>
-                <jsp:invoke fragment="body"/>
-            </div>
+            <jsp:invoke fragment="body"/>
         </div>
         <div class="container">
             <!-- footer -->
