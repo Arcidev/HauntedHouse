@@ -4,7 +4,7 @@
 <%@ attribute name="body" fragment="true" required="true" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="header" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
@@ -14,13 +14,23 @@
         <title><c:out value="${title}"/></title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
+        <link href="<c:url value="/resources/style/m-buttons.min.css" />" rel="stylesheet">
+        <link href="<c:url value="/resources/style/default.css" />" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <jsp:invoke fragment="head"/>
     </head>
+    
+    <fmt:message var="home" key="navigation.home"/>
+    <fmt:message var="spooks" key="navigation.spooks"/>
+    <fmt:message var="abilities" key="navigation.abilities"/>
+    <fmt:message var="houses" key="navigation.houses"/>
+    <fmt:message var="signUp" key="navigation.signUp"/>
+    <fmt:message var="login" key="navigation.login"/>
+    
     <body>
         <!-- navigation bar -->
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-inverse navbar-static-top">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -32,14 +42,14 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="${activePage == "Home" ? "active": ""}"><a href="home">Home</a></li>
-                    <li class="${activePage == "Spooks" ? "active": ""}"><a href="javascript:void(0)">Spooks</a></li>
-                    <li class="${activePage == "Abilities" ? "active": ""}"><a href="ability">Abilities</a></li>
-                    <li class="${activePage == "Houses" ? "active": ""}"><a href="javascript:void(0)">Houses</a></li>
+                    <li class="${activePage == "Home" ? "active": ""}"><a href="home">${home}</a></li>
+                    <li class="${activePage == "Spooks" ? "active": ""}"><a href="javascript:void(0)">${spooks}</a></li>
+                    <li class="${activePage == "Abilities" ? "active": ""}"><a href="ability">${abilities}</a></li>
+                    <li class="${activePage == "Houses" ? "active": ""}"><a href="javascript:void(0)">${houses}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="${activePage == "SignUp" ? "active": ""}"><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> Sing Up</a></li>
-                    <li class="${activePage == "Login" ? "active": ""}"><a href="javascript:void(0)"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li class="${activePage == "SignUp" ? "active": ""}"><a href="register"><span class="glyphicon glyphicon-user"></span> ${signUp}</a></li>
+                    <li class="${activePage == "Login" ? "active": ""}"><a href="login"><span class="glyphicon glyphicon-log-in"></span> ${login}</a></li>
                 </ul>
             </div>
           </div>
@@ -78,7 +88,8 @@
             <div>
                 <jsp:invoke fragment="body"/>
             </div>
-
+        </div>
+        <div class="container">
             <!-- footer -->
             <footer class="footer">
                 <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>

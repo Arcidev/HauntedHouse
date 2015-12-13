@@ -1,0 +1,29 @@
+.login-input {
+    float: right;
+    width: 200px;
+}
+
+.register-button {
+    margin: auto;
+    display: block;
+}
+
+.login-form {
+    width: 330px;
+}
+
+.login-button-left {
+  margin-left: 18%;
+}
+.login-button-right {
+  margin-right: 18%;
+  float: right;
+}
+
+button-100 {
+    width: 100px;
+}
+
+footer p {
+    text-align: center;
+}
