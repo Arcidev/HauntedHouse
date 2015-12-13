@@ -29,27 +29,23 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Project name</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="javascript:void(0)">Spooks</a></li>
-                    <li><a href="javascript:void(0)">Abilities</a></li>
-                    <li><a href="javascript:void(0)">Houses</a></li>
+                    <li class="${activePage == "Home" ? "active": ""}"><a href="home">Home</a></li>
+                    <li class="${activePage == "Spooks" ? "active": ""}"><a href="javascript:void(0)">Spooks</a></li>
+                    <li class="${activePage == "Abilities" ? "active": ""}"><a href="ability">Abilities</a></li>
+                    <li class="${activePage == "Houses" ? "active": ""}"><a href="javascript:void(0)">Houses</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="${activePage == "SignUp" ? "active": ""}"><a href="javascript:void(0)"><span class="glyphicon glyphicon-user"></span> Sing Up</a></li>
+                    <li class="${activePage == "Login" ? "active": ""}"><a href="javascript:void(0)"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
           </div>
         </nav>
 
         <div class="container">
-
-            <c:if test="${not empty title}">
-                <div class="page-header">
-                    <h1><c:out value="${title}"/></h1>
-                </div>
-            </c:if>
-
             <!-- authenticated user info -->
             <c:if test="${not empty authenticatedUser}">
             <div class="row">

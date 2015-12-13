@@ -13,13 +13,17 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
+import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 /**
  * @author Andrej Dobes
  */
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = "pa165.hauntedhouse.mvc.controllers")
+@Import(ServiceConfiguration.class)
+@ComponentScan(basePackages = "pa165.hauntedhouse.MVC.Controllers")
 public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
     public static final String TEXTS = "Texts";
@@ -31,6 +35,15 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home");
+    }
+    
+    /**
+     * Maps resources
+     * @param registry
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 
     /**
@@ -72,6 +85,4 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     public Validator validator() {
         return new LocalValidatorFactoryBean();
     }
-
-
 }
