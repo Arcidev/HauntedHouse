@@ -18,6 +18,7 @@ import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dao.PersonDao;
 import pa165.hauntedhouse.Entity.Person;
 import pa165.hauntedhouse.Enums.UserRole;
+import pa165.hauntedhouse.Exception.DbException;
 import pa165.hauntedhouse.PersistenceConfig.PersistenceApplicationContext;
 
 /**
@@ -58,12 +59,12 @@ public class PersonTest extends AbstractTestNGSpringContextTests{
         Assert.assertTrue(person.contains(person2));
     }
     
-    @Test(expectedExceptions = ExceptionInInitializerError.class)
+    @Test(expectedExceptions = DbException.class)
     public void test(){
         Person person1 = new Person();
         person1.setFirstName("Johny");
         person1.setLastName("Wick");
-        person1.setEmail("john.wickmail.com");
+        person1.setEmail("john.wickmail@mail.com");
         person1.setUserRole(UserRole.USER);
         
         personDao.create(person1);

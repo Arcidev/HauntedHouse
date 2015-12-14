@@ -15,14 +15,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
+import pa165.hauntedhouse.SampleData.SampleDataConfiguration;
 
 /**
  * @author Andrej Dobes
  */
 @EnableWebMvc
 @Configuration
-@Import(ServiceConfiguration.class)
+@Import(SampleDataConfiguration.class)
 @ComponentScan(basePackages = "pa165.hauntedhouse.MVC.Controllers")
 public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 

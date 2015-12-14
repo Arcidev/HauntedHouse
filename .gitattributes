@@ -1,0 +1,13 @@
+# Ignore external libraries from statistics
+haunted-house-spring-mvc/src/main/webapp/resources/style/m-buttons.min.css linguist-vendored
+
+# Whitespace rules
+# strict (no trailing, no tabs)
+*.java      whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+*.jsp       whitespace=trailing-space,space-before-tab,tab-in-indent,cr-at-eol
+*.css        whitespace=trailing-space,space-before-tab,cr-at-eol
+
+# normal (no trailing)
+*.txt        whitespace=trailing-space,space-before-tab,cr-at-eol
+*.xml        whitespace=trailing-space,space-before-tab,cr-at-eol
+

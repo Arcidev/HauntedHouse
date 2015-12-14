@@ -33,5 +33,6 @@
         <module>haunted-house-service</module>
         <module>haunted-house-rest</module>
         <module>haunted-house-spring-mvc</module>
+        <module>haunted-house-sample-data</module>
     </modules>
 </project>

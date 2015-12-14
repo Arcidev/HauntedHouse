@@ -21,7 +21,7 @@
     <dependencies>
         <dependency>
             <groupId>pa165</groupId>
-            <artifactId>haunted-house-service</artifactId>
+            <artifactId>haunted-house-sample-data</artifactId>
             <version>1.0</version>
         </dependency>
         <dependency>
@@ -74,7 +74,6 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.1.2</version>
         </dependency>
         <dependency>
             <groupId>taglibs</groupId>
@@ -101,5 +100,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

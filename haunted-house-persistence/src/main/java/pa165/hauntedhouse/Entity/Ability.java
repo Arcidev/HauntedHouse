@@ -14,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import org.dozer.Mapping;
@@ -36,6 +37,11 @@ public class Ability {
     @NotNull
     private String info;
     
+    @Lob
+    private byte[] image;
+
+    private String imageMimeType;
+    
     @ManyToMany(targetEntity=Spook.class, mappedBy="abilities", fetch=FetchType.EAGER) 
     private Set<Spook> spooks = new HashSet<>(); 
 
@@ -57,6 +63,22 @@ public class Ability {
     
     public void setInfo(String info) {
         this.info = info;
+    }
+    
+    public byte[] getImage() {
+        return image;
+    }
+    
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+    
+    public String getImageMimeType() {
+        return imageMimeType;
+    }
+
+    public void setImageMimeType(String imageMimeType) {
+        this.imageMimeType = imageMimeType;
     }
     
     public Set<Spook> getSpooks() {

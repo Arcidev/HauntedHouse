@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.AbilityDTO;
+import pa165.hauntedhouse.Dto.AbilityInfoDTO;
 
 /**
  *
@@ -58,6 +59,13 @@ public interface AbilityFacade {
      */
     List<AbilityDTO> getAllAbilities();
 
+    /**
+     * Gets all basic ability infoes
+     * 
+     * @return all ability infoes
+     */
+    List<AbilityInfoDTO> getAllAbilityInfoes();
+            
     /**
      * Gets ability by id
      * 

@@ -20,10 +20,38 @@
   float: right;
 }
 
-button-100 {
+.anchor-image, .anchor-image:hover {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.ability-container {
+    width: 100%;
+    height: auto;
+}
+
+.inline-block-content {
+    width: 170px;
+    float: none;
+    display:inline-block;
+    vertical-align: top;
+}
+
+.ability-container > img {
+    display: block;
+    margin: auto;
+}
+
+.manage-buttons-container {
+    margin-bottom: 15px;
+}
+
+.button-100 {
     width: 100px;
 }
 
 footer p {
     text-align: center;
 }
+

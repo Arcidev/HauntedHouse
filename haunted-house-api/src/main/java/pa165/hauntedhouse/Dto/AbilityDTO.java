@@ -5,67 +5,27 @@
  */
 package pa165.hauntedhouse.Dto;
 
-import java.util.Objects;
-
 /**
  *
  * @author Andrej Dobes
  */
-public class AbilityDTO {
-    private int id;
-    private String name;
-    private String info;
+public class AbilityDTO extends AbilityInfoDTO {
+    private byte[] image;
+    private String imageMimeType;
 
-    public void setId(int id) {
-        this.id = id;
+    public byte[] getImage() {
+        return image;
     }
     
-    public int getId() {
-        return id;
+    public void setImage(byte[] image) {
+        this.image = image;
     }
     
-    public String getName() {
-        return name;
-    }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getInfo() {
-        return info;
-    }
-    
-    public void setInfo(String info) {
-        this.info = info;
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        
-        if (obj == null) {
-            return false;
-        }
-        
-        if (!(obj instanceof AbilityDTO)) {
-            return false;
-        }
-        
-        AbilityDTO a = (AbilityDTO)obj;
-        return id == a.getId() &&
-                (name == null ? a.getName() == null : name.equals(a.getName())) &&
-                (info == null ? a.getInfo() == null : info.equals(a.getInfo()));
+    public String getImageMimeType() {
+        return imageMimeType;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.info);
-        return hash;
+    public void setImageMimeType(String imageMimeType) {
+        this.imageMimeType = imageMimeType;
     }
 }

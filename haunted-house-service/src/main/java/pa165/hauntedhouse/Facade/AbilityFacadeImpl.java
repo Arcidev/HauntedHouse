@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dto.AbilityDTO;
+import pa165.hauntedhouse.Dto.AbilityInfoDTO;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Service.AbilityService;
 import pa165.hauntedhouse.Service.SpookService;
@@ -60,6 +61,11 @@ public class AbilityFacadeImpl implements AbilityFacade {
     @Override
     public List<AbilityDTO> getAllAbilities() {
         return beanMappingService.mapTo(abilityService.findAll(), AbilityDTO.class);
+    }
+    
+    @Override
+    public List<AbilityInfoDTO> getAllAbilityInfoes() {
+        return beanMappingService.mapTo(abilityService.findAll(), AbilityInfoDTO.class);
     }
 
     @Override
