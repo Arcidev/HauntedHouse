@@ -14,21 +14,7 @@
     <div>
         <img src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
         <h2>${house.name}</h2>
-        <span>${house.info}</span>
-        <c:if test="${not empty spooks}">
-            <h3>Spooks using this ability:</h3>
-            <c:forEach items="${spooks}" var="spook" varStatus="ic">
-                <div>
-                    <a class="anchor-no-decor" href="${pageContext.request.contextPath}/spook/${spook.id}">
-                        <div class="ability-spook">
-                            <img src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}"/>
-                        </div>
-                        <strong>${spook.name}</strong>
-                    </a>
-                </div>
-            </c:forEach>
-        </c:if>
-        
+        <span>${house.info}</span>        
     </div>
     
 </jsp:attribute>
