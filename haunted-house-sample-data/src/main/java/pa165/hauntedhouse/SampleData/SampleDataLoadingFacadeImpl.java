@@ -81,10 +81,17 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             JPEG);                                                              // mimeType
         
         House h1 = house("Sorotity House",                                      //name
-            "Address",                                                          //address
+            "Sorority Street, NY",                                              //address
             "House..................................",                          // history
-            getDate(21, 15, 00),                                                // hauntedSince                                                 // hauntsUntil
+            getDate(1896, 05, 02),                                              // hauntedSince                                                 // hauntsUntil
             HOUSES_FOLDER + "sorority.jpg",                                     // imageFile
+            JPEG); 
+        
+        House h2 = house("Frat House",                                          //name
+            "Haunt street, LA",                                                 //address
+            "House2..................................",                         // history
+            getDate(1967, 10, 07),                                              // hauntedSince                                                 // hauntsUntil
+            HOUSES_FOLDER + "frat.jpg",                                         // imageFile
             JPEG); 
         
         abilityService.addToSpook(a1.getId(), s1.getId());
@@ -96,6 +103,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         abilityService.addToSpook(a4.getId(), s2.getId());
         
         houseService.addToSpook(h1.getId(), s1.getId());
+        houseService.addToSpook(h2.getId(), s2.getId());
     }
     
     private Ability ability(String name, String info, String imageFile, String mimeType) throws IOException {
@@ -160,7 +168,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Calendar cal = Calendar.getInstance();
         cal.set( Calendar.YEAR, year );
         cal.set( Calendar.MONTH, month );
-        cal.set( Calendar.DATE, day );        
+        cal.set( Calendar.DAY_OF_MONTH, day );        
         return new Date(cal.getTime().getTime());
     }
 }

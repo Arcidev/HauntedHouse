@@ -14,8 +14,22 @@
     <div>
         <img src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
         <h2>${house.name}</h2>
-        <span>${house.info}</span>        
+        <p><b>Adress: </b><span>${house.address}</span></p>
+        <p><b>History: </b><span>${house.history}</span></p>
+        <p><b>HauntedSince: </b><span>${house.hauntedSince.toString()}</span></p>
+        <c:if test="${not empty spooks}">
+            <h3>Spooks which haunt in this house:</h3>
+            <c:forEach items="${spooks}" var="spook" varStatus="ic">
+                <div>
+                    <a class="anchor-no-decor" href="${pageContext.request.contextPath}/spook/${spook.id}">
+                        <div class="ability-spook">
+                            <img src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}"/>
+                        </div>
+                        <strong>${spook.name}</strong>
+                    </a>
+                </div>
+            </c:forEach>
+        </c:if>
     </div>
-    
 </jsp:attribute>
 </house:header>

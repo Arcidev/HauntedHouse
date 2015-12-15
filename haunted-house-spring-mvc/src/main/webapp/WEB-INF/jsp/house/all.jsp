@@ -19,9 +19,9 @@
             </a>
         </div>
         <c:forEach items="${houses}" var="house" varStatus="ic">
-            <div class="inline-block-content"><!-- bootstrap responsive grid -->
+            <div class="inline-block-content-house"><!-- bootstrap responsive grid -->
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/house/${house.id}">
-                    <div class="house-container">
+                    <div class="ability-container">
                         <img src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
                         <span>${house.name}</span>
                     </div>
