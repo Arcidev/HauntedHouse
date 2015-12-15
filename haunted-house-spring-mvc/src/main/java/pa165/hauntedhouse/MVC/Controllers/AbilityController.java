@@ -6,7 +6,6 @@
 package pa165.hauntedhouse.MVC.Controllers;
 
 import java.io.IOException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import pa165.hauntedhouse.Dto.AbilityDTO;
+import pa165.hauntedhouse.Dto.AbilityInfoDTO;
+import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.AbilityFacade;
+import pa165.hauntedhouse.Facade.SpookFacade;
 
 /**
  *
@@ -34,8 +35,11 @@ public class AbilityController {
     @Autowired
     private AbilityFacade abilityFacade;
     
+    @Autowired
+    private SpookFacade spookFacade;
+    
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
-    public String home(Model model) {
+    public String abilities(Model model) {
         model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
         model.addAttribute("activePage", "Abilities");
         model.addAttribute("abilities", abilityFacade.getAllAbilityInfoes());
@@ -43,17 +47,18 @@ public class AbilityController {
         return "ability/all";
     }
     
-    @RequestMapping("/image/{id}")
-    public void productImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        AbilityDTO ability = abilityFacade.getAbilityById(id);
-        byte[] image = ability.getImage();
-        if(image==null) {
-            response.sendRedirect(request.getContextPath()+"/no-image.png");
-        } else {
-            response.setContentType(ability.getImageMimeType());
-            ServletOutputStream out = response.getOutputStream();
-            out.write(image);
-            out.flush();
+    @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
+    public String ability(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
+        model.addAttribute("activePage", "Abilities");
+        
+        AbilityInfoDTO ability = abilityFacade.getAbilityInfoById(id);
+        if (ability == null) {
+            throw new HttpNotFound("There is no creature listed by id: " + id);
         }
+        
+        model.addAttribute("ability", ability);
+        model.addAttribute("spooks", spookFacade.getAbilitySpookInfoes(ability.getId()));
+        return "ability/view";
     }
 }

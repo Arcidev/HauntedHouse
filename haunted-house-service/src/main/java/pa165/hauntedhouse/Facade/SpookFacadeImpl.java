@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dto.HistoryDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
+import pa165.hauntedhouse.Dto.SpookInfoDTO;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
@@ -65,7 +66,12 @@ public class SpookFacadeImpl implements SpookFacade {
     public List<SpookDTO> getAbilitySpooks(int abilityId) {
         return beanMappingService.mapTo(abilityService.getSpooksByAbilityId(abilityId), SpookDTO.class);
     }
-
+    
+    @Override
+    public List<SpookInfoDTO> getAbilitySpookInfoes(int abilityId) {
+        return beanMappingService.mapTo(abilityService.getSpooksByAbilityId(abilityId), SpookInfoDTO.class);
+    }
+    
     @Override
     public void addHistory(SpookDTO s, HistoryDTO h) {
         spookService.addHistory(beanMappingService.mapTo(s, Spook.class), beanMappingService.mapTo(h, History.class));        

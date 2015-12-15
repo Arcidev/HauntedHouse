@@ -8,6 +8,7 @@ package pa165.hauntedhouse.Facade;
 import java.util.List;
 import pa165.hauntedhouse.Dto.HistoryDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
+import pa165.hauntedhouse.Dto.SpookInfoDTO;
 
 /**
  *
@@ -15,7 +16,6 @@ import pa165.hauntedhouse.Dto.SpookDTO;
  */
 public interface SpookFacade {
 
-    
     void createSpook(SpookDTO spk);
 
     void deleteSpook(int id);
@@ -28,18 +28,16 @@ public interface SpookFacade {
     
     List<SpookDTO> getAbilitySpooks(int abilityId);
     
-     
+    List<SpookInfoDTO> getAbilitySpookInfoes(int abilityId);
+
     void removeFromAbility(int spookId, int abilityId);
 
-    
     void addHistory(SpookDTO spook, HistoryDTO history);
 
-    
     void removeHistory(SpookDTO spook, HistoryDTO history);  
         
     List<SpookDTO> getAllSpooks();
 
-    
     SpookDTO getSpookById(int id);
     
     List<SpookDTO> searchSpooksByName(String filterName);    

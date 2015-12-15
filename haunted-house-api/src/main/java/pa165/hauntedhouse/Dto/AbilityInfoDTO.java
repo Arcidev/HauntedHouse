@@ -51,11 +51,11 @@ public class AbilityInfoDTO {
             return false;
         }
         
-        if (!(obj instanceof AbilityDTO)) {
+        if (!(obj instanceof AbilityInfoDTO)) {
             return false;
         }
         
-        AbilityDTO a = (AbilityDTO)obj;
+        AbilityInfoDTO a = (AbilityInfoDTO)obj;
         return id == a.getId() &&
                 (name == null ? a.getName() == null : name.equals(a.getName())) &&
                 (info == null ? a.getInfo() == null : info.equals(a.getInfo()));

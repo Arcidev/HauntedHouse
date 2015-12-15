@@ -42,14 +42,14 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="${activePage == "Home" ? "active": ""}"><a href="home">${home}</a></li>
+                    <li class="${activePage == "Home" ? "active": ""}"><a href="${pageContext.request.contextPath}/home">${home}</a></li>
                     <li class="${activePage == "Spooks" ? "active": ""}"><a href="javascript:void(0)">${spooks}</a></li>
-                    <li class="${activePage == "Abilities" ? "active": ""}"><a href="ability">${abilities}</a></li>
+                    <li class="${activePage == "Abilities" ? "active": ""}"><a href="${pageContext.request.contextPath}/ability">${abilities}</a></li>
                     <li class="${activePage == "Houses" ? "active": ""}"><a href="javascript:void(0)">${houses}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="${activePage == "SignUp" ? "active": ""}"><a href="register"><span class="glyphicon glyphicon-user"></span> ${signUp}</a></li>
-                    <li class="${activePage == "Login" ? "active": ""}"><a href="login"><span class="glyphicon glyphicon-log-in"></span> ${login}</a></li>
+                    <li class="${activePage == "SignUp" ? "active": ""}"><a href="${pageContext.request.contextPath}/register"><span class="glyphicon glyphicon-user"></span> ${signUp}</a></li>
+                    <li class="${activePage == "Login" ? "active": ""}"><a href="${pageContext.request.contextPath}/login"><span class="glyphicon glyphicon-log-in"></span> ${login}</a></li>
                 </ul>
             </div>
           </div>

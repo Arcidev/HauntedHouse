@@ -18,6 +18,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -46,6 +47,11 @@ public class Spook  {
     
     @NotNull
     private Time hauntsUntil;
+    
+    @Lob
+    private byte[] image;
+
+    private String imageMimeType;
         
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)    
     private Set<History> histories = new HashSet<>();
@@ -90,7 +96,21 @@ public class Spook  {
         this.house = house;
     }
     
-   
+    public byte[] getImage() {
+         return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getImageMimeType() {
+        return imageMimeType;
+    }
+
+    public void setImageMimeType(String imageMimeType) {
+        this.imageMimeType = imageMimeType;
+    }
 
     public int getId() {
         return id;

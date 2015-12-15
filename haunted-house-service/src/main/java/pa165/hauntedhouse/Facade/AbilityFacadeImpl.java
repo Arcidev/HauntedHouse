@@ -77,6 +77,16 @@ public class AbilityFacadeImpl implements AbilityFacade {
         
         return beanMappingService.mapTo(a, AbilityDTO.class);
     }
+    
+    @Override
+    public AbilityInfoDTO getAbilityInfoById(int id) {
+        Ability a = abilityService.findById(id);
+        if (a == null) {
+            return null;
+        }
+        
+        return beanMappingService.mapTo(a, AbilityInfoDTO.class);
+    }
 
     @Override
     public List<AbilityDTO> getSpookAbilities(int spookId) {

@@ -20,10 +20,25 @@
   float: right;
 }
 
-.anchor-image, .anchor-image:hover {
+.anchor-no-decor, .anchor-no-decor:hover {
     text-decoration: none;
     color: black;
+}
+
+.ability-image {
     text-align: center;
+}
+
+.ability-spook {
+    width: 100px;
+    display: inline-block;
+    height: 52px;
+}
+
+.ability-spook > img {
+    max-width: 100px;
+    max-height: 50px;
+    margin: auto;
 }
 
 .ability-container {

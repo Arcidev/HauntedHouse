@@ -20,9 +20,9 @@
         </div>
         <c:forEach items="${abilities}" var="ability" varStatus="ic">
             <div class="inline-block-content"><!-- bootstrap responsive grid -->
-                <a class="anchor-image" href="${pageContext.request.contextPath}/ability/${ability.id}">
+                <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/ability/${ability.id}">
                     <div class="ability-container">
-                        <img src="${pageContext.request.contextPath}/ability/image/${ability.id}" alt="${noImage}">
+                        <img src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
                         <span>${ability.name}</span>
                     </div>
                 </a>

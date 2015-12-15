@@ -75,6 +75,14 @@ public interface AbilityFacade {
     AbilityDTO getAbilityById(int id);
 
     /**
+     * Gets ability info by id
+     * 
+     * @param id
+     * @return ability info by id
+     */
+    AbilityInfoDTO getAbilityInfoById(int id);
+    
+    /**
      * Gets spook abilities
      * 
      * @param spookId

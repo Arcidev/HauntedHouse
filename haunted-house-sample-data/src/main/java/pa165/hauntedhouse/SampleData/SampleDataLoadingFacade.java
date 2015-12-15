@@ -9,7 +9,7 @@ import java.io.IOException;
 
 /**
  *
- * @author Andrej
+ * @author Andrej Dobes
  */
 public interface SampleDataLoadingFacade {
     void loadData() throws IOException;
