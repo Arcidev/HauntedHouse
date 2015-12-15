@@ -43,7 +43,7 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="${activePage == "Home" ? "active": ""}"><a href="${pageContext.request.contextPath}/home">${home}</a></li>
-                    <li class="${activePage == "Spooks" ? "active": ""}"><a href="javascript:void(0)">${spooks}</a></li>
+                    <li class="${activePage == "Spooks" ? "active": ""}"><a href="${pageContext.request.contextPath}/spook">${spooks}</a></li>
                     <li class="${activePage == "Abilities" ? "active": ""}"><a href="${pageContext.request.contextPath}/ability">${abilities}</a></li>
                     <li class="${activePage == "Houses" ? "active": ""}"><a href="${pageContext.request.contextPath}/house">${houses}</a></li>
                 </ul>

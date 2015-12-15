@@ -27,6 +27,19 @@ public interface SpookFacade {
     SpookDTO getHistorySpook(int historyId);
     
     List<SpookDTO> getAbilitySpooks(int abilityId);
+    /**
+     * Gets all basic spook infoes
+     * 
+     * @return all spook infoes
+     */
+    List<SpookInfoDTO> getAllSpookInfoes();
+    /**
+     * Gets spook info by id
+     * 
+     * @param id
+     * @return spook info by id
+     */
+    SpookInfoDTO getSpookInfoById(int id);
     
     List<SpookInfoDTO> getAbilitySpookInfoes(int abilityId);
 

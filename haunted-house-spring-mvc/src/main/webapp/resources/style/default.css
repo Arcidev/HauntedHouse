@@ -59,6 +59,12 @@
     display:inline-block;
     vertical-align: top;
 }
+.inline-block-content-spook {
+    width: 100px;
+    float: none;
+    display:inline-block;
+    vertical-align: top;
+}
 
 .ability-container > img {
     display: block;
