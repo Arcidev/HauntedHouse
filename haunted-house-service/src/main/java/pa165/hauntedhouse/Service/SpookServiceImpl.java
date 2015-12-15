@@ -64,7 +64,9 @@ public class SpookServiceImpl implements SpookService {
             return new ArrayList<>();
         }
         
-        return new ArrayList<>(spook.getAbilities());
+        ArrayList<Ability> abilities = new ArrayList<>(spook.getAbilities());
+        abilities.removeIf(x -> !x.isVisible());
+        return abilities;
     }
 
     @Override
@@ -86,6 +88,7 @@ public class SpookServiceImpl implements SpookService {
         s.removeAbility(a);
         abilityDao.update(a);
     }
+    @Override
     public void addHistory(Spook spook, History history) {
         spook.addHistory(history);
         spookDao.update(spook);

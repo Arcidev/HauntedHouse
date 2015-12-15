@@ -40,9 +40,11 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
     public void createData(){
         ability.setName("Why Mr. Anderson ?!");
         ability.setInfo("What?");
+        ability.setVisible(true);
         
         ability2.setName("Why you still persist?");
         ability2.setInfo("Because tests are for n00bs!!!");
+        ability2.setVisible(true);
         
         abilityFacade.createAbility(ability);
         abilityFacade.createAbility(ability2);
@@ -113,6 +115,7 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
         AbilityDTO a = new AbilityDTO();
         a.setInfo("a");
         a.setName("b");
+        a.setVisible(true);
         
         abilityFacade.createAbility(a);
         int abilitiesCount = abilityFacade.getAllAbilities().size();

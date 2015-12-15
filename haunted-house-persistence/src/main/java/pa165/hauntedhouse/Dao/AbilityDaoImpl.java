@@ -64,7 +64,7 @@ public class AbilityDaoImpl implements AbilityDao {
     @Override
     public List<Ability> findAll() {
         try {
-            return em.createQuery("select a from Ability a", Ability.class).getResultList();
+            return em.createQuery("select a from Ability a where visible = true", Ability.class).getResultList();
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
@@ -85,7 +85,7 @@ public class AbilityDaoImpl implements AbilityDao {
     @Override
     public List<Ability> searchByName(String filter) {
         try {
-            return em.createQuery("select a from Ability a where lower(name) like :filter", Ability.class)
+            return em.createQuery("select a from Ability a where visible = true and lower(name) like :filter", Ability.class)
                     .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;

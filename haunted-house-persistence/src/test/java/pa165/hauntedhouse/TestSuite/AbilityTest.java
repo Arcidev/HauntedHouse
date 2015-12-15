@@ -71,7 +71,8 @@ public class AbilityTest extends AbstractTestNGSpringContextTests{
         
         Ability ability = new Ability();
         ability.setName("Vydavanie zvukov");
-        ability.setInfo("piskanie");        
+        ability.setInfo("piskanie"); 
+        ability.setVisible(true);
         
         Spook spook = new Spook();
         spook.setName("Kasper");
@@ -94,6 +95,7 @@ public class AbilityTest extends AbstractTestNGSpringContextTests{
         Ability ability2 = new Ability();
         ability2.setName("Kricanie");
         ability2.setInfo("zensky krik");
+        ability2.setVisible(true);
         abilityDao.create(ability2);
         spookDao.update(spook);
         spookDao.update(spook2);

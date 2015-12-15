@@ -53,6 +53,14 @@ public interface AbilityFacade {
     void removeFromSpook(int abilityId, int spookId);
 
     /**
+     * Sets ability visibility
+     * 
+     * @param abilityId
+     * @param visible
+     */
+    void setVisible(int abilityId, boolean visible);
+    
+    /**
      * Gets all abilities
      * 
      * @return all abilities
