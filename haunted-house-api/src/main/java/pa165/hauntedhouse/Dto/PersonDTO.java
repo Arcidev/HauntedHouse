@@ -6,6 +6,9 @@
 package pa165.hauntedhouse.Dto;
 
 import java.util.Objects;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 import pa165.hauntedhouse.Enums.UserRole;
 
 /**
@@ -15,12 +18,17 @@ import pa165.hauntedhouse.Enums.UserRole;
 public class PersonDTO {
     private int id;
     
+    @Email
+    @NotEmpty
     private String email;
     
+    @NotEmpty
     private String firstName;
     
+    @NotEmpty
     private String lastName;
     
+    @Size(min = 6)
     private String password;
     
     private UserRole userRole;

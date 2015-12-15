@@ -17,24 +17,49 @@
     <div class="login-form center-block">
         <form:form name='loginForm' action="${pageContext.request.contextPath}/register" modelAttribute="userCreate" method='POST'>
             <div class="form-group">
-                <span>${firstName}:</span>
-                <input class="login-input" type='text' name='firstName' value=''>
+                <p>
+                    <span>${firstName}:</span>
+                    <input class="login-input" type='text' name='firstName' value="${userCreate.firstName}">
+                </p>
+                <c:if test="${not empty firstName_error}">
+                    <p class="input_error">*${firstName_error}</p>
+                </c:if>
             </div>
             <div class="form-group">
-                <span>${lastName}:</span>
-                <input class="login-input" type='text' name='lastName' value=''>
+                <p>
+                    <span>${lastName}:</span>
+                    <input class="login-input" type='text' name='lastName' value="${userCreate.lastName}">
+                </p>
+                <c:if test="${not empty lastName_error}">
+                    <p class="input_error">*${lastName_error}</p>
+                </c:if>
             </div>
             <div class="form-group">
-                <span>${email}:</span>
-                <input class="login-input" type='text' name='email' value=''>
+                <p>
+                    <span>${email}:</span>
+                    <input class="login-input" type='text' name='email' value="${userCreate.email}">
+                </p>
+                <c:if test="${not empty email_error}">
+                    <p class="input_error">*${email_error}</p>
+                </c:if>
             </div>
             <div class="form-group">
-                <span>${password}:</span>
-                <input class="login-input" type='password' name='password' />
+                <p>
+                    <span>${password}:</span>
+                    <input class="login-input" type='password' name='password' value="${userCreate.password}" />
+                </p>
+                <c:if test="${not empty password_error}">
+                    <p class="input_error">*${password_error}</p>
+                </c:if>
             </div>
             <div class="form-group">
-                <span>${passwordAgain}:</span>
-                <input class="login-input" type='password' name='passwordAgain' />
+                <p>
+                    <span>${passwordAgain}:</span>
+                    <input class="login-input" type='password' name='passwordAgain' value="${userCreate.passwordAgain}" />
+                </p>
+                <c:if test="${not empty passwordAgain_error}">
+                    <p class="input_error">*${passwordAgain_error}</p>
+                </c:if>
             </div>
             <div class="form-group">
                 <input class="m-btn black register-button button-100" name="submit" type="submit" value="${register}" />

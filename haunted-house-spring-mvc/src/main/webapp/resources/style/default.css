@@ -66,6 +66,11 @@
     width: 100px;
 }
 
+.input_error {
+    padding-left: 15px;
+    color: red;
+}
+
 footer p {
     text-align: center;
 }

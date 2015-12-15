@@ -13,8 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import org.dozer.Mapping;
+import org.hibernate.validator.constraints.Email;
 import pa165.hauntedhouse.Enums.UserRole;
 
 /**
@@ -30,7 +30,7 @@ public class Person {
     private int id;
     
     @NotNull
-    @Pattern(regexp="^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$")
+    @Email
     private String email;
     
     @NotNull

@@ -12,6 +12,7 @@ import pa165.hauntedhouse.Enums.UserRole;
  * @author Andrej Dobes
  */
 public class PersonCreateDTO extends PersonDTO {
+    
     private String passwordAgain;
     
     public PersonCreateDTO() {

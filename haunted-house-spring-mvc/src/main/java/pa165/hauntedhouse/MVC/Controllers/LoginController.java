@@ -11,6 +11,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,8 +57,17 @@ public class LoginController {
     }
     
     @RequestMapping(value="/register", method = RequestMethod.POST)
-    public String registerPost(@Valid @ModelAttribute("userCreate") PersonCreateDTO user, Model model, UriComponentsBuilder uriBuilder) {
-        /// TODO: add validations
+    public String registerPost(@Valid @ModelAttribute("userCreate") PersonCreateDTO user, BindingResult bindingResult, Model model, UriComponentsBuilder uriBuilder) {
+        if (bindingResult.hasErrors() || !user.getPasswordAgain().equals(user.getPassword())) {
+            bindingResult.getFieldErrors().stream().forEach((fe) -> {
+                model.addAttribute(fe.getField() + "_error", fe.getDefaultMessage());
+            });
+            
+            if (!user.getPasswordAgain().equals(user.getPassword())) {
+                model.addAttribute("passwordAgain_error", "passwords do not match");
+            }
+            return "login/register";
+        }
         
         personFacade.create(user);
         
