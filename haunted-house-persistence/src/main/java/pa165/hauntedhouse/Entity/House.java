@@ -16,6 +16,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import org.dozer.Mapping;
@@ -43,6 +44,11 @@ public class House {
     private String history;
     
     private Date hauntedSince;
+    
+    @Lob
+    private byte[] image;
+
+    private String imageMimeType;
     
     @OneToMany(fetch=FetchType.EAGER)    
     private Set<Spook> spooks = new HashSet<>();
@@ -156,4 +162,32 @@ public class House {
         hash = 59 * hash + Objects.hashCode(this.hauntedSince);
         return hash;
     }     
+
+    /**
+     * @return the image
+     */
+    public byte[] getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the imageMimeType
+     */
+    public String getImageMimeType() {
+        return imageMimeType;
+    }
+
+    /**
+     * @param imageMimeType the imageMimeType to set
+     */
+    public void setImageMimeType(String imageMimeType) {
+        this.imageMimeType = imageMimeType;
+    }
 }

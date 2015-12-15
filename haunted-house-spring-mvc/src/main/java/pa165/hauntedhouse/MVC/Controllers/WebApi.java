@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pa165.hauntedhouse.Dto.AbilityDTO;
+import pa165.hauntedhouse.Dto.HouseDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Facade.AbilityFacade;
+import pa165.hauntedhouse.Facade.HouseFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
 
 /**
@@ -31,6 +33,9 @@ public class WebApi {
     @Autowired
     private SpookFacade spookFacade;
     
+    @Autowired
+    private HouseFacade houseFacade;
+    
     @RequestMapping("/ability/{id}")
     public void abilityImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         AbilityDTO ability = abilityFacade.getAbilityById(id);
@@ -41,6 +46,12 @@ public class WebApi {
     public void spookImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         SpookDTO spook = spookFacade.getSpookById(id);
         setImage(spook.getImage(), spook.getImageMimeType(), request, response);
+    }
+    
+    @RequestMapping("/house/{id}")
+    public void houseImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HouseDTO house = houseFacade.getHouseById(id);
+        setImage(house.getImage(), house.getImageMimeType(), request, response);
     }
     
     private void setImage(byte[] image, String mimeType, HttpServletRequest request, HttpServletResponse response) throws IOException {

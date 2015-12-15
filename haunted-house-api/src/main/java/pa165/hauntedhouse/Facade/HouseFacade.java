@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.HouseDTO;
+import pa165.hauntedhouse.Dto.HouseInfoDTO;
 
 /**
  *
@@ -80,4 +81,19 @@ public interface HouseFacade {
      * @return houses matched by filter
      */
     List<HouseDTO> searchHousesByName(String filterName);
+    
+     /**
+     * Gets all basic house infoes
+     * 
+     * @return all house infoes
+     */
+    List<HouseInfoDTO> getAllHouseInfoes();
+    
+    /**
+     * Gets house info by id
+     * 
+     * @param id
+     * @return house info by id
+     */
+    HouseInfoDTO getHouseInfoById(int id);
 }

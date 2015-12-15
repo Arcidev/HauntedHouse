@@ -45,7 +45,7 @@
                     <li class="${activePage == "Home" ? "active": ""}"><a href="${pageContext.request.contextPath}/home">${home}</a></li>
                     <li class="${activePage == "Spooks" ? "active": ""}"><a href="javascript:void(0)">${spooks}</a></li>
                     <li class="${activePage == "Abilities" ? "active": ""}"><a href="${pageContext.request.contextPath}/ability">${abilities}</a></li>
-                    <li class="${activePage == "Houses" ? "active": ""}"><a href="javascript:void(0)">${houses}</a></li>
+                    <li class="${activePage == "Houses" ? "active": ""}"><a href="${pageContext.request.contextPath}/house">${houses}</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="${activePage == "SignUp" ? "active": ""}"><a href="${pageContext.request.contextPath}/register"><span class="glyphicon glyphicon-user"></span> ${signUp}</a></li>

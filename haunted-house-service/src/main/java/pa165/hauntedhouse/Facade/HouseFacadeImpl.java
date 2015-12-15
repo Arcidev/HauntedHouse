@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dto.HouseDTO;
+import pa165.hauntedhouse.Dto.HouseInfoDTO;
 import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Service.HouseService;
 import pa165.hauntedhouse.Service.SpookService;
@@ -79,5 +80,20 @@ public class HouseFacadeImpl implements HouseFacade {
     @Override
     public List<HouseDTO> searchHousesByName(String filter) {
         return beanMappingService.mapTo(houseService.searchHousesByName(filter), HouseDTO.class);
+    }
+
+    @Override
+    public List<HouseInfoDTO> getAllHouseInfoes() {
+        return beanMappingService.mapTo(houseService.findAll(), HouseInfoDTO.class);
+    }
+
+    @Override
+    public HouseInfoDTO getHouseInfoById(int id) {
+        House h = houseService.findById(id);
+        if (h == null) {
+            return null;
+        }
+        
+        return beanMappingService.mapTo(h, HouseInfoDTO.class);
     }
 }

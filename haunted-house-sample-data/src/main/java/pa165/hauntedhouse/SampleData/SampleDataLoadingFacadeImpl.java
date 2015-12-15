@@ -8,14 +8,17 @@ package pa165.hauntedhouse.SampleData;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
+import pa165.hauntedhouse.Service.HouseService;
 import pa165.hauntedhouse.Service.SpookService;
 
 /**
@@ -29,12 +32,16 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     public static final String JPEG = "image/jpeg";
     public static final String ABILITIES_FOLDER = "abilities/";
     public static final String SPOOKS_FOLDER = "spooks/";
+    public static final String HOUSES_FOLDER = "houses/";
     
     @Autowired
     private AbilityService abilityService;
     
     @Autowired
     private SpookService spookService;
+    
+    @Autowired
+    private HouseService houseService;
     
     @Override
     @SuppressWarnings("unused")
@@ -73,6 +80,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             SPOOKS_FOLDER + "vampire.jpg",                                      // imageFile
             JPEG);                                                              // mimeType
         
+        House h1 = house("Sorotity House",                                      //name
+            "Address",                                                          //address
+            "House..................................",                          // history
+            getDate(21, 15, 00),                                                // hauntedSince                                                 // hauntsUntil
+            HOUSES_FOLDER + "sorority.jpg",                                     // imageFile
+            JPEG); 
+        
         abilityService.addToSpook(a1.getId(), s1.getId());
         abilityService.addToSpook(a2.getId(), s1.getId());
         abilityService.addToSpook(a3.getId(), s1.getId());
@@ -80,6 +94,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         abilityService.addToSpook(a2.getId(), s2.getId());
         abilityService.addToSpook(a3.getId(), s2.getId());
         abilityService.addToSpook(a4.getId(), s2.getId());
+        
+        houseService.addToSpook(h1.getId(), s1.getId());
     }
     
     private Ability ability(String name, String info, String imageFile, String mimeType) throws IOException {
@@ -104,6 +120,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return s;
     }
     
+    private House house(String name, String address, String history, Date hauntedSince, String imageFile, String mimeType) throws IOException{
+        House h = new House();
+        h.setName(name);
+        h.setAddress(address);
+        h.setHistory(history);
+        h.setHauntedSince(hauntedSince);
+        h.setImage(readImage(imageFile));
+        h.setImageMimeType(mimeType);
+        houseService.create(h);
+        return h;
+    }
+    
     private byte[] readImage(String file) throws IOException {
         try (InputStream is = this.getClass().getResourceAsStream("/" + file)) {
             int nRead;
@@ -125,5 +153,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         cal.set(Calendar.MILLISECOND, 0);
         
         return new Time(cal.getTime().getTime());
+    }
+    
+    private Date getDate(int year, int month, int day) {
+        Calendar cal = Calendar.getInstance();
+        cal.set( Calendar.YEAR, year );
+        cal.set( Calendar.MONTH, month );
+        cal.set( Calendar.DATE, day );        
+        return new Date(cal.getTime().getTime());
     }
 }
