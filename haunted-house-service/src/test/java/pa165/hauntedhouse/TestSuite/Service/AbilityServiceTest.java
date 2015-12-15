@@ -42,9 +42,11 @@ public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
     public void initData() {
         ability.setInfo("lol");
         ability.setName("troll");
+        ability.setVisible(true);
         
         ability2.setInfo("lololo");
         ability2.setName("trololo");
+        ability2.setVisible(true);
         
         Calendar cal = Calendar.getInstance();
         Time time = new Time(cal.getTime().getTime());
@@ -108,6 +110,7 @@ public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
         Ability a = new Ability();
         a.setInfo("a");
         a.setName("b");
+        a.setVisible(true);
         
         abilityService.create(a);
         int abilitiesCount = abilityService.findAll().size();

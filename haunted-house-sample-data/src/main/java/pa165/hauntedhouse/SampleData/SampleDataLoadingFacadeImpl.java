@@ -104,6 +104,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         a.setInfo(info);
         a.setImage(readImage(imageFile));
         a.setImageMimeType(mimeType);
+        a.setVisible(true);
         abilityService.create(a);
         return a;
     }

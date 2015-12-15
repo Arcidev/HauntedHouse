@@ -67,6 +67,14 @@ public interface AbilityService {
     void removeFromSpook(int abilityId, int spookId);
     
     /**
+     * Sets ability visibility
+     * 
+     * @param abilityId
+     * @param visible
+     */
+    void setVisible(int abilityId, boolean visible);
+    
+    /**
      * Finds all abilities whiche name matches filter
      * 
      * @param filter

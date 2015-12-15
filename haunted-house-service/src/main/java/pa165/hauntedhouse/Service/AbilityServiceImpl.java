@@ -41,6 +41,7 @@ public class AbilityServiceImpl implements AbilityService {
         }
         a.setName(ability.getName());
         a.setInfo(ability.getInfo());
+        a.setVisible(ability.isVisible());
         
         abilityDao.update(a);
     }
@@ -89,6 +90,16 @@ public class AbilityServiceImpl implements AbilityService {
     }
     
     @Override
+    public void setVisible(int abilityId, boolean visible) {
+        Ability a = abilityDao.findById(abilityId);
+        if (a == null) {
+            throw new IllegalArgumentException("Ability does not exist");
+        }
+        a.setVisible(visible);
+        abilityDao.update(a);
+    }
+    
+    @Override
     public List<Ability> searchAbilitiesByName(String filter) {
         List<Ability> abilities = abilityDao.searchByName(filter);
         if (abilities == null) {
@@ -104,7 +115,7 @@ public class AbilityServiceImpl implements AbilityService {
         if (ability == null) {
             return new ArrayList<>();
         }
-        
+
         return new ArrayList<>(ability.getSpooks());
     }
 }

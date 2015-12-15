@@ -57,6 +57,11 @@ public class AbilityFacadeImpl implements AbilityFacade {
     public void removeFromSpook(int abilityId, int spookId) {
          abilityService.removeFromSpook(abilityId, spookId);
     }
+    
+    @Override
+    public void setVisible(int abilityId, boolean visible) {
+        abilityService.setVisible(abilityId, visible);
+    }
 
     @Override
     public List<AbilityDTO> getAllAbilities() {

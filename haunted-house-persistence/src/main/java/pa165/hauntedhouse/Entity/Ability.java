@@ -42,6 +42,8 @@ public class Ability {
 
     private String imageMimeType;
     
+    private boolean visible;
+    
     @ManyToMany(targetEntity=Spook.class, mappedBy="abilities", fetch=FetchType.EAGER) 
     private Set<Spook> spooks = new HashSet<>(); 
 
@@ -79,6 +81,14 @@ public class Ability {
 
     public void setImageMimeType(String imageMimeType) {
         this.imageMimeType = imageMimeType;
+    }
+    
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
     
     public Set<Spook> getSpooks() {
