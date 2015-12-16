@@ -42,7 +42,7 @@
     <fmt:message var="signUp" key="navigation.signUp"/>
     <fmt:message var="login" key="navigation.login"/>
     
-    <body background="${pageContext.request.contextPath}/resources/images/home.jpg">
+    <body>
         <!-- navigation bar -->
         <nav class="navbar navbar-inverse navbar-static-top">
           <div class="container">

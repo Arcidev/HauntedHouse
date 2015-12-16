@@ -4,15 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<link href="${pageContext.request.contextPath}/resources/style/background.css" rel="stylesheet">
 
 <home:header>
 <jsp:attribute name="body">
-    
-    <div>
-        <p class = "nieco">Haunted House<p>
-        <p class = "info">Tu bude nejaky popis</p>
-        <p class = "info">A este par teplych slov dame tu</p>
+
+    <div class="jumbotron">
+        <h1>Hello World</h1>
     </div>
     
 </jsp:attribute>
