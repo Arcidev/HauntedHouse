@@ -10,7 +10,6 @@
 
 <house:header>
 <jsp:attribute name="body">
-
     <div>
         <img src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
         <h2>${house.name}</h2>
