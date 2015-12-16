@@ -42,7 +42,7 @@
     <fmt:message var="signUp" key="navigation.signUp"/>
     <fmt:message var="login" key="navigation.login"/>
     
-    <body>
+    <body background="${pageContext.request.contextPath}/resources/images/home.jpg">
         <!-- navigation bar -->
         <nav class="navbar navbar-inverse navbar-static-top">
           <div class="container">
@@ -107,6 +107,5 @@
                 <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
             </footer>
         </div>
-            <body background="${pageContext.request.contextPath}/resources/images/home.jpg">"/>
     </body>
 </html>
