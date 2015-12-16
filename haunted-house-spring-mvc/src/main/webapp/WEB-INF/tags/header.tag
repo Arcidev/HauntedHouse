@@ -107,5 +107,6 @@
                 <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
             </footer>
         </div>
+            <body background="${pageContext.request.contextPath}/resources/images/home.jpg">"/>
     </body>
 </html>

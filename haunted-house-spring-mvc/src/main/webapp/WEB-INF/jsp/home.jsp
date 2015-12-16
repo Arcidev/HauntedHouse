@@ -8,9 +8,9 @@
 
 <home:header>
 <jsp:attribute name="body">
-    <body background="${pageContext.request.contextPath}/resources/images/home.jpg">"/>
-    <div class="animated fadeInUp">
-        <p>Haunted House<p>
+    
+    <div>
+        <p class = "nieco">Haunted House<p>
         <p class = "info">Tu bude nejaky popis</p>
         <p class = "info">A este par teplych slov dame tu</p>
     </div>
