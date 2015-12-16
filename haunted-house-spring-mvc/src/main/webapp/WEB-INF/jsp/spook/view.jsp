@@ -10,11 +10,11 @@
 <spook:header>
     <jsp:attribute name="body">
         <div>
-        <img src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
+        <img class="img-ability" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
         <h2>${spook.name}</h2>
         <p><b>History: </b><span>${spook.history}</span></p>
-        <p><b>HauntedSince: </b><span>${spook.hauntedSince.toString()}</span></p>
-        <p><b>HauntedUntil: </b><span>${spook.hauntedUntiil.toString()}</span></p>  
+        <%--<p><b>HauntedSince: </b><span>${spook.hauntedSince.toString()}</span></p>
+        <p><b>HauntedUntil: </b><span>${spook.hauntedUntiil.toString()}</span></p> --%> 
          <c:if test="${not empty abilities}">
             <h3>those abilities are used:</h3>
             <c:forEach items="${abilities}" var="ability" varStatus="ic">
@@ -27,7 +27,7 @@
                     </a>
                 </div>
             </c:forEach>
-        </c:if>
+</c:if> 
             
     </div>
         
