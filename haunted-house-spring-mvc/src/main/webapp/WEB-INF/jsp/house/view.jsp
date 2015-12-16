@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <fmt:message var="addHouse" key="house.addHouse"/>
-<fmt:message var="noImage" key="house.noImage"/>
+<fmt:message var="noImage" key="misc.noImage"/>
 
 <house:header>
 <jsp:attribute name="body">

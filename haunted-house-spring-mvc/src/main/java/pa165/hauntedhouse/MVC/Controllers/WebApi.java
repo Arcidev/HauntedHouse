@@ -39,12 +39,20 @@ public class WebApi {
     @RequestMapping("/ability/{id}")
     public void abilityImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         AbilityDTO ability = abilityFacade.getAbilityById(id);
+        if (ability == null) {
+            response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
+            return;
+        }
         setImage(ability.getImage(), ability.getImageMimeType(), request, response);
     }
     
     @RequestMapping("/spook/{id}")
     public void spookImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         SpookDTO spook = spookFacade.getSpookById(id);
+        if (spook == null) {
+            response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
+            return;
+        }
         setImage(spook.getImage(), spook.getImageMimeType(), request, response);
     }
     
@@ -55,8 +63,8 @@ public class WebApi {
     }
     
     private void setImage(byte[] image, String mimeType, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if(image==null) {
-            response.sendRedirect(request.getContextPath()+"/no-image.png");
+        if(image == null) {
+            response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
         } else {
             response.setContentType(mimeType);
             ServletOutputStream out = response.getOutputStream();

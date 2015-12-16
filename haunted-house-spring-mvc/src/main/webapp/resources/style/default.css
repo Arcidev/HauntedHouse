@@ -79,6 +79,60 @@
     width: 100px;
 }
 
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.ability-img-block {
+    width:200px;
+}
+
+.ability-img-block > p, .ability-img-block > img, .ability-img-block > input {
+    margin: auto;
+    display: block;
+}
+
+.ability-img-block > img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-bottom: 5px;
+}
+
+.ability-edit-block {
+    width: 500px
+}
+
+.ability-edit-block > p, .ability-edit-block > span, .ability-edit-block > textarea {
+    margin-left: 15px;
+}
+
+.ability-edit-block > textarea {
+    margin-right: 15px;
+    width: 95%;
+    height: 100px;
+}
+
+.img-ability {
+    max-height: 56px;
+    max-width: 56px;
+}
+
 .input_error {
     padding-left: 15px;
     color: red;

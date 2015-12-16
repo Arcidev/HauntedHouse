@@ -6,14 +6,14 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <fmt:message var="addAbility" key="ability.addAbility"/>
-<fmt:message var="noImage" key="ability.noImage"/>
+<fmt:message var="noImage" key="misc.noImage"/>
 
 <ability:header>
 <jsp:attribute name="body">
 
     <div class="jumbotron">
         <div class="manage-buttons-container">
-            <a href="/ability/new" class="m-btn black">
+            <a href="${pageContext.request.contextPath}/ability/new" class="m-btn black">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${addAbility}
             </a>
@@ -22,7 +22,7 @@
             <div class="inline-block-content"><!-- bootstrap responsive grid -->
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/ability/${ability.id}">
                     <div class="ability-container">
-                        <img src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
+                        <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
                         <span>${ability.name}</span>
                     </div>
                 </a>

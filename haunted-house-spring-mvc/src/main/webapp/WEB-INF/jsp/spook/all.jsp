@@ -6,7 +6,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <fmt:message var="addSpook" key="spook.addSpook"/>
-<fmt:message var="noImage" key="spook.noImage"/>
+<fmt:message var="noImage" key="misc.noImage"/>
 
 <spook:header>
     <jsp:attribute name="body">

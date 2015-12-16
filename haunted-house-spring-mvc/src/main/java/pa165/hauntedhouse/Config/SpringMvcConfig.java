@@ -14,6 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import pa165.hauntedhouse.SampleData.SampleDataConfiguration;
 
@@ -84,5 +86,17 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public Validator validator() {
         return new LocalValidatorFactoryBean();
+    }
+    
+    /**
+     * Inicialize MultipartResolver for file uploads (Max 10MB)
+     * 
+     * @return MultipartResolver
+     */
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(10000000);
+        return multipartResolver;
     }
 }

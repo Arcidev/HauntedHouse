@@ -41,7 +41,10 @@ public class AbilityServiceImpl implements AbilityService {
         }
         a.setName(ability.getName());
         a.setInfo(ability.getInfo());
-        a.setVisible(ability.isVisible());
+        if (ability.getImage() != null) {
+            a.setImage(ability.getImage());
+            a.setImageMimeType(a.getImageMimeType());
+        }
         
         abilityDao.update(a);
     }

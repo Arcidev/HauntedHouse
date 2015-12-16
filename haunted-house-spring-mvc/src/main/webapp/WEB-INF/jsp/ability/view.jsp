@@ -6,17 +6,25 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <fmt:message var="addAbility" key="ability.addAbility"/>
-<fmt:message var="noImage" key="ability.noImage"/>
+<fmt:message var="editAbility" key="ability.editAbility"/>
+<fmt:message var="abilitySpooks" key="ability.abilitySpooks"/>
+<fmt:message var="noImage" key="misc.noImage"/>
 
 <ability:header>
 <jsp:attribute name="body">
 
     <div>
-        <img src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
+        <div class="manage-buttons-container">
+            <a href="/HauntedHouse/ability/edit/${ability.id}" class="m-btn black">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                ${editAbility}
+            </a>
+        </div>
+        <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
         <h2>${ability.name}</h2>
         <span>${ability.info}</span>
         <c:if test="${not empty spooks}">
-            <h3>Spooks using this ability:</h3>
+            <h3>${abilitySpooks}:</h3>
             <c:forEach items="${spooks}" var="spook" varStatus="ic">
                 <div>
                     <a class="anchor-no-decor" href="${pageContext.request.contextPath}/spook/${spook.id}">

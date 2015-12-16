@@ -6,16 +6,24 @@
 package pa165.hauntedhouse.MVC.Controllers;
 
 import java.io.IOException;
+import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriComponentsBuilder;
+import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.AbilityInfoDTO;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.AbilityFacade;
@@ -48,17 +56,62 @@ public class AbilityController {
     }
     
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
-    public String ability(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String ability(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
         model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
         model.addAttribute("activePage", "Abilities");
         
         AbilityInfoDTO ability = abilityFacade.getAbilityInfoById(id);
         if (ability == null) {
-            throw new HttpNotFound("There is no creature listed by id: " + id);
+            throw new HttpNotFound("There is no ability listed by id: " + id);
         }
         
         model.addAttribute("ability", ability);
         model.addAttribute("spooks", spookFacade.getAbilitySpookInfoes(ability.getId()));
         return "ability/view";
+    }
+    
+    @RequestMapping(value = { "new" }, method = RequestMethod.GET)
+    public String newAbility(Model model) {
+        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
+        model.addAttribute("activePage", "Abilities");
+        model.addAttribute("abilityEdit", new AbilityInfoDTO());
+        
+        return "ability/edit";
+    }
+    
+    @RequestMapping(value = { "edit/{id}" }, method = RequestMethod.GET)
+    public String editAbility(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
+        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
+        model.addAttribute("activePage", "Abilities");
+        
+        AbilityInfoDTO ability = abilityFacade.getAbilityInfoById(id);
+        if (ability == null) {
+            throw new HttpNotFound("There is no ability listed by id: " + id);
+        }
+        
+        model.addAttribute("abilityEdit", ability);
+        return "ability/edit";
+    }
+    
+    @RequestMapping(value = { "/editAbility" }, method = RequestMethod.POST)
+    public String editPost(@Valid @ModelAttribute("abilityEdit") AbilityDTO ability, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getFieldErrors().stream().forEach((fe) -> {
+                model.addAttribute(fe.getField() + "_error", fe.getDefaultMessage());
+            });
+            return "ability/edit";
+        }
+        
+        if (file != null && file.getSize() > 0) {
+            ability.setImage(file.getBytes());
+            ability.setImageMimeType(new MimetypesFileTypeMap().getContentType(file.getName()));
+        }
+        
+        if (ability.getId() == 0)
+            abilityFacade.createAbility(ability);
+        else
+            abilityFacade.updateAbility(ability);
+        
+        return "redirect:" + uriBuilder.path("/ability/" + ability.getId()).build().toString();
     }
 }
