@@ -1,6 +1,8 @@
 package pa165.hauntedhouse.Dto;
 
 import java.util.Objects;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,9 +15,15 @@ import java.util.Objects;
  * @author Andrej Dobes
  */
 public class AbilityInfoDTO {
+    
     private int id;
+    
+    @NotEmpty
     private String name;
+    
+    @Size(min = 10)
     private String info;
+    
     private boolean visible;
     
     public void setId(int id) {

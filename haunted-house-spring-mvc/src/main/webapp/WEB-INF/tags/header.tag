@@ -18,6 +18,20 @@
         <link href="<c:url value="/resources/style/default.css" />" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            function onImageFileInputChange(inputFile, imgId, errorId) {
+                if (inputFile.files && inputFile.files[0]) {
+                    if (inputFile.files[0].size > 500 * 1024) {
+                        document.getElementById(imgId).src = '${pageContext.request.contextPath}/resources/images/error.png';
+                        document.getElementById(errorId).style.display = 'block';
+                        inputFile.value = '';
+                    } else {
+                        document.getElementById(errorId).style.display = 'none';
+                        document.getElementById(imgId).src = URL.createObjectURL(inputFile.files[0]);
+                    }                  
+                }
+            }
+        </script>
         <jsp:invoke fragment="head"/>
     </head>
     

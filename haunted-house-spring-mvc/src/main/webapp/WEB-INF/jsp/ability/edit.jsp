@@ -13,14 +13,7 @@
 <fmt:message var="description" key="misc.description"/>
 <fmt:message var="create" key="misc.create"/>
 <fmt:message var="edit" key="misc.edit"/>
-
-<script type="text/javascript">
-    function onFileInputChange(input) {
-        if (input.files && input.files[0]) {
-            document.getElementById('abilityImageId').src = URL.createObjectURL(input.files[0]);
-        }
-    }
-</script>
+<fmt:message var="fileExceededSize" key="misc.fileExceededSize"/>
 
 <ability:header>
 <jsp:attribute name="body">
@@ -31,18 +24,25 @@
             <h3>${abilityImage}</h3>
             <div class="form-group ability-img-block">
                 <img id="abilityImageId" src="${pageContext.request.contextPath}/webApi/ability/${abilityEdit.id}" alt="${noImage}" style="">
+                <p id="abilityImageErrorId" style="display: none" class="input_error">*${fileExceededSize}</p>
                 <p class="m-btn black btn-file button-100">
-                    ${browse} <input name="file" id="imageFileId" type="file" accept="image/*" onchange="onFileInputChange(this)">
+                    ${browse} <input name="file" id="imageFileId" type="file" accept="image/*" onchange="onImageFileInputChange(this, 'abilityImageId', 'abilityImageErrorId')">
                 </p>
             </div>
             <h3>${abilityInfo}</h3>
             <div class="form-group ability-edit-block">
                 <span>${name}:</span>
                 <input type="text" name="name" value="${abilityEdit.name}" />
+                <c:if test="${not empty name_error}">
+                    <p class="input_error">*${name_error}</p>
+                </c:if>
             </div>
             <div class="form-group ability-edit-block">
                 <p>${description}:</p>
                 <textarea name="info">${abilityEdit.info}</textarea>
+                <c:if test="${not empty info_error}">
+                    <p class="input_error">*${info_error}</p>
+                </c:if>
             </div>
             <div class="ability-img-block">
                 <c:choose>

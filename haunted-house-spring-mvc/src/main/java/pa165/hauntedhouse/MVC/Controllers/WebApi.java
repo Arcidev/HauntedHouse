@@ -19,6 +19,7 @@ import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.HouseFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
+import pa165.hauntedhouse.Iterface.ImageContainer;
 
 /**
  *
@@ -39,11 +40,7 @@ public class WebApi {
     @RequestMapping("/ability/{id}")
     public void abilityImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         AbilityDTO ability = abilityFacade.getAbilityById(id);
-        if (ability == null) {
-            response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
-            return;
-        }
-        setImage(ability.getImage(), ability.getImageMimeType(), request, response);
+        setImage(ability, request, response);
     }
     
     @RequestMapping("/spook/{id}")
@@ -53,22 +50,22 @@ public class WebApi {
             response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
             return;
         }
-        setImage(spook.getImage(), spook.getImageMimeType(), request, response);
+        setImage(spook, request, response);
     }
     
     @RequestMapping("/house/{id}")
     public void houseImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HouseDTO house = houseFacade.getHouseById(id);
-        setImage(house.getImage(), house.getImageMimeType(), request, response);
+        setImage(house, request, response);
     }
     
-    private void setImage(byte[] image, String mimeType, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if(image == null) {
+    private void setImage(ImageContainer imgContainer, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if(imgContainer == null || imgContainer.getImage() == null) {
             response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
         } else {
-            response.setContentType(mimeType);
+            response.setContentType(imgContainer.getImageMimeType());
             ServletOutputStream out = response.getOutputStream();
-            out.write(image);
+            out.write(imgContainer.getImage());
             out.flush();
         }
     }

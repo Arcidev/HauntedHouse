@@ -96,7 +96,7 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(10000000);
+        multipartResolver.setMaxUploadSize(500 * 1024);
         return multipartResolver;
     }
 }

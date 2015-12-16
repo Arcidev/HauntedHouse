@@ -6,6 +6,7 @@
 package pa165.hauntedhouse.MVC.Controllers;
 
 import java.io.IOException;
+import java.util.Optional;
 import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +36,7 @@ import pa165.hauntedhouse.Facade.SpookFacade;
  */
 @Controller
 @RequestMapping("/ability")
-public class AbilityController {
+public class AbilityController extends BaseController {
     
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
@@ -94,7 +95,7 @@ public class AbilityController {
     }
     
     @RequestMapping(value = { "/editAbility" }, method = RequestMethod.POST)
-    public String editPost(@Valid @ModelAttribute("abilityEdit") AbilityDTO ability, BindingResult bindingResult, @RequestParam("file") MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
+    public String editPost(@Valid @ModelAttribute("abilityEdit") AbilityDTO ability, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().stream().forEach((fe) -> {
                 model.addAttribute(fe.getField() + "_error", fe.getDefaultMessage());
@@ -102,11 +103,7 @@ public class AbilityController {
             return "ability/edit";
         }
         
-        if (file != null && file.getSize() > 0) {
-            ability.setImage(file.getBytes());
-            ability.setImageMimeType(new MimetypesFileTypeMap().getContentType(file.getName()));
-        }
-        
+        setImageFromFile(file, ability);
         if (ability.getId() == 0)
             abilityFacade.createAbility(ability);
         else
