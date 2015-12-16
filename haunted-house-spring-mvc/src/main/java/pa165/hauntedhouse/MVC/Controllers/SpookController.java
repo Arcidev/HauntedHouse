@@ -29,7 +29,7 @@ import pa165.hauntedhouse.Facade.SpookFacade;
  */
 @Controller
 @RequestMapping("/spook")
-public class SpookController {
+public class SpookController extends BaseController {
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
     
@@ -41,16 +41,14 @@ public class SpookController {
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String spooks(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Spooks");
+        inicializeCall(model, messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()), "Spooks");
         model.addAttribute("spooks", spookFacade.getAllSpookInfoes());
         
         return "spook/all";
     }
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
     public String spook(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        model.addAttribute("title", messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Spooks");
+        inicializeCall(model, messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()), "Spooks");
         
         SpookInfoDTO spook = spookFacade.getSpookInfoById(id);
         if (spook == null) {

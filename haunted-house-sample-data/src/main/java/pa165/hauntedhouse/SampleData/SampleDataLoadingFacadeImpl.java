@@ -16,9 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Person;
 import pa165.hauntedhouse.Entity.Spook;
+import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Service.AbilityService;
 import pa165.hauntedhouse.Service.HouseService;
+import pa165.hauntedhouse.Service.PersonService;
 import pa165.hauntedhouse.Service.SpookService;
 
 /**
@@ -42,6 +45,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     
     @Autowired
     private HouseService houseService;
+    
+    @Autowired
+    private PersonService personService;
     
     @Override
     @SuppressWarnings("unused")
@@ -94,6 +100,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             HOUSES_FOLDER + "frat.jpg",                                         // imageFile
             JPEG); 
         
+        person("John", "Newman", "newman@admin.com", "Heslo1234", UserRole.ADMIN);
+        
         abilityService.addToSpook(a1.getId(), s1.getId());
         abilityService.addToSpook(a2.getId(), s1.getId());
         abilityService.addToSpook(a3.getId(), s1.getId());
@@ -129,7 +137,17 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         return s;
     }
     
-    private House house(String name, String address, String history, Date hauntedSince, String imageFile, String mimeType) throws IOException{
+    private Person person(String name, String lastName, String email, String password, UserRole role) {
+        Person person = new Person();
+        person.setFirstName(name);
+        person.setLastName(lastName);
+        person.setEmail(email);
+        person.setUserRole(role);
+        personService.create(person, password);
+        return person;
+    }
+    
+    private House house(String name, String address, String history, Date hauntedSince, String imageFile, String mimeType) throws IOException {
         House h = new House();
         h.setName(name);
         h.setAddress(address);

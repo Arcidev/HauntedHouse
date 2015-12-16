@@ -18,15 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Andrej Dobes
  */
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
     
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
     
     @RequestMapping(value = { "", "/home" }, method = RequestMethod.GET)
     public String home(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.project", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Home");
+        inicializeCall(model, messageSource.getMessage("navigation.project", null, LocaleContextHolder.getLocale()), "Home");
         
         return "home";
     }

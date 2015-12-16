@@ -12,7 +12,6 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +24,7 @@ import pa165.hauntedhouse.Facade.PersonFacade;
  * @author Andrej Dobes
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
     
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
@@ -35,22 +34,14 @@ public class LoginController {
     
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String login(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.login", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Login");
+        inicializeCall(model, messageSource.getMessage("navigation.login", null, LocaleContextHolder.getLocale()), "Login");
         
         return "login/login";
     }
     
-    @RequestMapping(value="/authenticate", method = RequestMethod.POST)
-    public String authenticate(Model model, UriComponentsBuilder uriBuilder) {
-        
-        return "redirect:" + uriBuilder.path("/home").build().toString();
-    }
-    
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public String register(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.signUp", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "SignUp");
+        inicializeCall(model, messageSource.getMessage("navigation.signUp", null, LocaleContextHolder.getLocale()), "SignUp");
         model.addAttribute("userCreate", new PersonCreateDTO());
         
         return "login/register";

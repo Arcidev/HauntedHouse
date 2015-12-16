@@ -25,7 +25,7 @@ import pa165.hauntedhouse.SampleData.SampleDataConfiguration;
 @EnableWebMvc
 @Configuration
 @Import(SampleDataConfiguration.class)
-@ComponentScan(basePackages = "pa165.hauntedhouse.MVC.Controllers")
+@ComponentScan(basePackages = { "pa165.hauntedhouse.MVC.Controllers", "pa165.hauntedhouse.Config" })
 public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
     public static final String TEXTS = "Texts";

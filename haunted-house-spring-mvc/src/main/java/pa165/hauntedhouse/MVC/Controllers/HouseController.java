@@ -27,7 +27,7 @@ import pa165.hauntedhouse.Facade.SpookFacade;
  */
 @Controller
 @RequestMapping("/house")
-public class HouseController {
+public class HouseController extends BaseController {
     
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
@@ -40,8 +40,7 @@ public class HouseController {
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String houses(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Houses");
+        inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
         model.addAttribute("houses", houseFacade.getAllHouses());
         
         return "house/all";
@@ -49,8 +48,7 @@ public class HouseController {
     
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
     public String house(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        model.addAttribute("title", messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Houses");
+        inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
         
         HouseInfoDTO house = houseFacade.getHouseInfoById(id);
         if (house == null) {

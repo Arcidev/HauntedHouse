@@ -14,6 +14,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -49,8 +51,7 @@ public class AbilityController extends BaseController {
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String abilities(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         model.addAttribute("abilities", abilityFacade.getAllAbilityInfoes());
         
         return "ability/all";
@@ -58,8 +59,7 @@ public class AbilityController extends BaseController {
     
     @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
     public String ability(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         
         AbilityInfoDTO ability = abilityFacade.getAbilityInfoById(id);
         if (ability == null) {
@@ -73,8 +73,7 @@ public class AbilityController extends BaseController {
     
     @RequestMapping(value = { "new" }, method = RequestMethod.GET)
     public String newAbility(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         model.addAttribute("abilityEdit", new AbilityInfoDTO());
         
         return "ability/edit";
@@ -82,8 +81,7 @@ public class AbilityController extends BaseController {
     
     @RequestMapping(value = { "edit/{id}" }, method = RequestMethod.GET)
     public String editAbility(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         
         AbilityInfoDTO ability = abilityFacade.getAbilityInfoById(id);
         if (ability == null) {
