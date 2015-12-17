@@ -88,7 +88,7 @@ public class HouseController extends BaseController{
         return "house/edit";
     }
     
-    @RequestMapping(value = { "/editHouse" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)
     public String editPost(@Valid @ModelAttribute("houseEdit") HouseDTO house, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().stream().forEach((fe) -> {

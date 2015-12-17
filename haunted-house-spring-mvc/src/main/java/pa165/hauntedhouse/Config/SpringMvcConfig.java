@@ -102,6 +102,10 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
         return multipartResolver;
     }
     
+    /**
+     * Gets csrf validatior
+     * @return
+     */
     @Bean
     public RequestDataValueProcessor requestDataValueProcessor() {
         return new CsrfRequestDataValueProcessor();

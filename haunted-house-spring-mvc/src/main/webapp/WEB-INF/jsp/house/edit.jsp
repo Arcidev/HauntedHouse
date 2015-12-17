@@ -20,7 +20,7 @@
 <jsp:attribute name="body">
 
     <div>
-        <form:form name='loginForm' enctype="multipart/form-data" action="${pageContext.request.contextPath}/house/editHouse" modelAttribute="houseEdit" method='POST'>
+        <form:form name='loginForm' enctype="multipart/form-data" action="${pageContext.request.contextPath}/house/edit?${_csrf.parameterName}=${_csrf.token}" modelAttribute="houseEdit" method='POST'>
             <input type="hidden" name="id" value ="${houseEdit.id}" />
             <h3>${houseImage}</h3>
             <div class="form-group house-img-block">

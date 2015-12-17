@@ -31,10 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers(HttpMethod.GET, "/spook/edit/**").access("hasRole('ADMIN')")
         .antMatchers(HttpMethod.GET, "/house/edit/**").access("hasRole('ADMIN')")
         .antMatchers(HttpMethod.GET, "/history/edit/**").access("hasRole('ADMIN')")
-        .antMatchers(HttpMethod.POST, "/ability/edit").authenticated()
-        .antMatchers(HttpMethod.POST, "/spook/edit").authenticated()
-        .antMatchers(HttpMethod.POST, "/house/edit").authenticated()
-        .antMatchers(HttpMethod.POST, "/history/edit").authenticated()
         .antMatchers("/ability/new/**").authenticated()
         .antMatchers("/spook/new/**").authenticated()
         .antMatchers("/house/new/**").authenticated()
@@ -44,8 +40,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and().logout().logoutUrl("/logout").logoutSuccessUrl("/home")
         .and().csrf()
         .and().exceptionHandling().accessDeniedPage("/denied");
-      
-      http.csrf().disable();
     }
     
     @Override
