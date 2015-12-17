@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+house2.setHauntedSince(Date.valueOf("2009-8-11"));
  */
 package pa165.hauntedhouse.Dao;
 
@@ -86,6 +87,18 @@ public class HistoryDaoImpl implements HistoryDao{
             throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }
 
+    }
+    
+    @Override
+    public List<History> getAllSpooksHistories(int spookId){
+        try {
+            return em.createQuery("select h from History h where h.spook = :s", History.class)
+                    .setParameter("s", spookId).getResultList();
+        } catch (NoResultException nrf) {
+            return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
     }
     
     @Override

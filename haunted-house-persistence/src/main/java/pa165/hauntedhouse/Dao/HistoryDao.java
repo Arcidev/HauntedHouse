@@ -59,6 +59,13 @@ public interface HistoryDao {
     public List<History> findAll();
     
     /**
+     * Gets all histories
+     * @param spookId
+     * @return all records of spooks history
+     */
+    List<History> getAllSpooksHistories(int spookId);
+    
+    /**
      * Finds history in date range
      * 
      * @param Date1
