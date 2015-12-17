@@ -122,7 +122,13 @@
     margin-left: 15px;
 }
 
-.house-edit-block {
+.ability-edit-block > textarea {
+    margin-right: 15px;
+    width: 95%;
+    height: 100px;
+}
+
+.house-edit-block{
     width: 500px
 }
 
@@ -130,7 +136,7 @@
     font-weight: bold;
 }
 
-.ability-edit-block > textarea {
+.house-edit-block > textarea {
     margin-right: 15px;
     width: 95%;
     height: 100px;

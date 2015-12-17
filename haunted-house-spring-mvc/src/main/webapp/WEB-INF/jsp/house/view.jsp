@@ -16,17 +16,19 @@
 <jsp:attribute name="body">
 
     <div>
+        <c:if test="${userRole == 'ADMIN'}">
         <div class="manage-buttons-container">
             <a href="/HauntedHouse/house/edit/${house.id}" class="m-btn black">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${editHouse}
             </a>
         </div>
+        </c:if>
         <img class = "img-house" src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
         <h2>${house.name}</h2>
         <p><b>${address} : </b><span>${house.address}</span></p>
         <p><b>${history} : </b><span>${house.history}</span></p>
-        <p><b>${date} : </b><span>${house.hauntedSince.toString()}</span></p>
+        <p><b>${date} : </b><span>${house.hauntedSince}</span></p>
         <c:if test="${not empty spooks}">
             <h3>Spooks which haunt in this house:</h3>
             <c:forEach items="${spooks}" var="spook" varStatus="ic">

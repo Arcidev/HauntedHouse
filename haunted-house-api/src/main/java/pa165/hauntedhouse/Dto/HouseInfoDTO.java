@@ -7,6 +7,8 @@ package pa165.hauntedhouse.Dto;
 
 import java.sql.Date;
 import java.util.Objects;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -14,9 +16,16 @@ import java.util.Objects;
  */
 public class HouseInfoDTO {
     private int id;
+    
+    @NotEmpty
     private String name;
+    
+    @NotEmpty
     private String address;
+    
+    @Size(min = 20)
     private String history;
+    
     private Date hauntedSince;
     
     public int getId() {

@@ -40,7 +40,7 @@ public interface SpookFacade {
      * @return spook info by id
      */
     SpookInfoDTO getSpookInfoById(int id);
-    
+        
     List<SpookInfoDTO> getAbilitySpookInfoes(int abilityId);
 
     void removeFromAbility(int spookId, int abilityId);
