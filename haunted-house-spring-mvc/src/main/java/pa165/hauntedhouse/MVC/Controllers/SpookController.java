@@ -88,7 +88,7 @@ public class SpookController extends BaseController {
         return "spook/edit";
     }
     
-    @RequestMapping(value = { "/editSpook" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)
     public String editPost(@Valid @ModelAttribute("spookEdit") SpookDTO spook, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().stream().forEach((fe) -> {

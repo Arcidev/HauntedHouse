@@ -9,7 +9,6 @@ import java.io.IOException;
 import javax.activation.MimetypesFileTypeMap;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,10 +32,9 @@ public abstract class BaseController {
         model.addAttribute("title", title);
         model.addAttribute("activePage", activePage);
         
-        SecurityContext securityContext = SecurityContextHolder.getContext();
-        Authentication authentication = securityContext.getAuthentication();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication instanceof UsernamePasswordAuthenticationToken) {
-            model.addAttribute("userName", authentication.getName());
+            model.addAttribute("isAuthenticated", true);
             model.addAttribute("userRole", authentication.getAuthorities().isEmpty() ? UserRole.USER.toString() : authentication.getAuthorities().iterator().next());
         }
     }

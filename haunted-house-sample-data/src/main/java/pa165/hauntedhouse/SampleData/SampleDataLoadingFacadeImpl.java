@@ -33,6 +33,7 @@ import pa165.hauntedhouse.Service.SpookService;
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     
     public static final String JPEG = "image/jpeg";
+    public static final String PNG = "image/png";
     public static final String ABILITIES_FOLDER = "abilities/";
     public static final String SPOOKS_FOLDER = "spooks/";
     public static final String HOUSES_FOLDER = "houses/";
@@ -76,8 +77,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             "Scary ghost that haunts everyone... Why? Because he can!", // history
             getTime(18, 30, 00),                                        // hauntsSince
             getTime(6, 45, 00),                                         // hauntsUntil
-            SPOOKS_FOLDER + "ghost.jpg",                                // imageFile
-            JPEG);                                                      // mimeType
+            SPOOKS_FOLDER + "ghost.png",                                // imageFile
+            PNG);                                                       // mimeType
         
         Spook s2 = spook("Vampire",                                             // name
             "Killed by humans for cannibalism... Now he haunts for eternity.",  // history

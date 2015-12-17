@@ -19,7 +19,7 @@
 <jsp:attribute name="body">
 
     <div>
-        <form:form name='loginForm' enctype="multipart/form-data" action="${pageContext.request.contextPath}/spook/editSpook" modelAttribute="spookEdit" method='POST'>
+        <form:form enctype="multipart/form-data" action="${pageContext.request.contextPath}/spook/edit" modelAttribute="spookEdit" method='POST'>
             <input type="hidden" name="id" value ="${spookEdit.id}" />
             <h3>${spookImage}</h3>
             <div class="form-group ability-img-block">

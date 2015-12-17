@@ -5,6 +5,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="header" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
@@ -64,8 +65,14 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <c:choose>
-                        <c:when test="${not empty userName}">
-                            <li><a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-out"></span> ${logout}</a></li>
+                        <c:when test="${isAuthenticated}">
+                            <li>
+                                <form:form action="${pageContext.request.contextPath}/logout" method="post" id="logoutForm">
+                                    <button type="submit" class="navigation-button">
+                                        <span class="glyphicon glyphicon-log-out"></span> ${logout}
+                                    </button>
+                                </form:form>
+                            </li>
                         </c:when>    
                         <c:otherwise>
                             <li class="${activePage == "SignUp" ? "active": ""}"><a href="${pageContext.request.contextPath}/register"><span class="glyphicon glyphicon-user"></span> ${signUp}</a></li>

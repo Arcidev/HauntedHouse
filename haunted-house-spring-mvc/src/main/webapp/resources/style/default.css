@@ -160,6 +160,33 @@
     color: red;
 }
 
+.navigation-button {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: #9d9d9d;
+}
+
+.navigation-button:hover {
+    color: #fff;
+}
+
+.navbar-nav > li > form > button {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li > form > button {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
 footer p {
     text-align: center;
 }

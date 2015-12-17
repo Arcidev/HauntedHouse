@@ -14,9 +14,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.support.RequestDataValueProcessor;
 import pa165.hauntedhouse.SampleData.SampleDataConfiguration;
 
 /**
@@ -98,5 +100,10 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(500 * 1024);
         return multipartResolver;
+    }
+    
+    @Bean
+    public RequestDataValueProcessor requestDataValueProcessor() {
+        return new CsrfRequestDataValueProcessor();
     }
 }

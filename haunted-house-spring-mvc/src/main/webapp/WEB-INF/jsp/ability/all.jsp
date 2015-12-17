@@ -12,12 +12,14 @@
 <jsp:attribute name="body">
 
     <div class="jumbotron">
-        <div class="manage-buttons-container">
-            <a href="${pageContext.request.contextPath}/ability/new" class="m-btn black">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                ${addAbility}
-            </a>
-        </div>
+        <c:if test="${isAuthenticated}">
+            <div class="manage-buttons-container">
+                <a href="${pageContext.request.contextPath}/ability/new" class="m-btn black">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    ${addAbility}
+                </a>
+            </div>
+        </c:if>
         <c:forEach items="${abilities}" var="ability" varStatus="ic">
             <div class="inline-block-content"><!-- bootstrap responsive grid -->
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/ability/${ability.id}">

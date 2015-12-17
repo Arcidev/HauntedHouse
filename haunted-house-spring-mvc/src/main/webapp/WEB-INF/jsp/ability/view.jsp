@@ -14,12 +14,14 @@
 <jsp:attribute name="body">
 
     <div>
-        <div class="manage-buttons-container">
-            <a href="/HauntedHouse/ability/edit/${ability.id}" class="m-btn black">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                ${editAbility}
-            </a>
-        </div>
+        <c:if test="${userRole == 'ADMIN'}">
+            <div class="manage-buttons-container">
+                <a href="/HauntedHouse/ability/edit/${ability.id}" class="m-btn black">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    ${editAbility}
+                </a>
+            </div>
+        </c:if>
         <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
         <h2>${ability.name}</h2>
         <span>${ability.info}</span>

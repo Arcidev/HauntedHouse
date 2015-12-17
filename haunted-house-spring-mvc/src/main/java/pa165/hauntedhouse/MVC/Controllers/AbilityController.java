@@ -37,7 +37,7 @@ import pa165.hauntedhouse.Facade.SpookFacade;
  * @author Andrej Dobes
  */
 @Controller
-@RequestMapping("/ability")
+@RequestMapping("ability")
 public class AbilityController extends BaseController {
     
     @Autowired
@@ -57,7 +57,7 @@ public class AbilityController extends BaseController {
         return "ability/all";
     }
     
-    @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "{id}" }, method = RequestMethod.GET)
     public String ability(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
         inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         
@@ -92,7 +92,7 @@ public class AbilityController extends BaseController {
         return "ability/edit";
     }
     
-    @RequestMapping(value = { "/editAbility" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "edit" }, method = RequestMethod.POST)
     public String editPost(@Valid @ModelAttribute("abilityEdit") AbilityDTO ability, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().stream().forEach((fe) -> {
