@@ -105,4 +105,5 @@ public interface AbilityFacade {
      * @return abilities matched by filter
      */
     List<AbilityDTO> searchAbilitiesByName(String filter);
+    List<AbilityInfoDTO> getSpookAbilityInfoes(int spookId);
 }

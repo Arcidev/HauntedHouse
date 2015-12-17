@@ -45,11 +45,7 @@ public class WebApi {
     
     @RequestMapping("/spook/{id}")
     public void spookImage(@PathVariable int id, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        SpookDTO spook = spookFacade.getSpookById(id);
-        if (spook == null) {
-            response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
-            return;
-        }
+        SpookDTO spook = spookFacade.getSpookById(id);       
         setImage(spook, request, response);
     }
     
