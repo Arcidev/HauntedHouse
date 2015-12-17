@@ -20,35 +20,43 @@ public interface AbilityDao {
      * @param id
      * @return the ability with specified id
      */
-    public Ability findById(int id);
+    Ability findById(int id);
     
     /**
      * Creates new ability
      * 
      * @param a
      */
-    public void create(Ability a);
+    void create(Ability a);
     
     /**
      * Deletes existing ability
      * 
      * @param a
      */
-    public void delete(Ability a);
+    void delete(Ability a);
     
     /**
      * Updates existing ability
      * 
      * @param a
      */
-    public void update(Ability a);
+    void update(Ability a);
     
     /**
      * Gets all abilities that are stored in database
      * 
      * @return the list of all abilities
      */
-    public List<Ability> findAll();
+    List<Ability> findAll();
+    
+    /**
+     * Gets all abilities that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible abilities
+     */
+    List<Ability> findAllByVisibility(boolean visible);
     
     /**
      * Returns an ability with specified name from database
@@ -56,7 +64,7 @@ public interface AbilityDao {
      * @param name
      * @return the ability with specified name
      */
-    public Ability findByName(String name);
+    Ability findByName(String name);
     
     /**
      * Searches abilities name by filter
@@ -64,5 +72,5 @@ public interface AbilityDao {
      * @param filter
      * @return abilities that match the filter
      */
-    public List<Ability> searchByName(String filter);
+    List<Ability> searchByName(String filter);
 }

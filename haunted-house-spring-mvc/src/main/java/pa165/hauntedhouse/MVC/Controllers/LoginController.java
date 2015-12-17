@@ -65,6 +65,12 @@ public class LoginController extends BaseController {
             return "login/register";
         }
         
+        // check if user already exists
+        if (personFacade.findPersonByEmail(user.getEmail()) != null) {
+            model.addAttribute("email_error", "user already exists");
+            return "login/register";
+        }
+        
         personFacade.create(user);
         SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(UserRole.USER.toString()))));
         return "redirect:" + uriBuilder.path("/home").build().toString();

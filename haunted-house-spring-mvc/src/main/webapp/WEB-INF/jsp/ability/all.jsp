@@ -7,6 +7,7 @@
 
 <fmt:message var="addAbility" key="ability.addAbility"/>
 <fmt:message var="noImage" key="misc.noImage"/>
+<fmt:message var="hAbilities" key="ability.hiddenAbilities"/>
 
 <ability:header>
 <jsp:attribute name="body">
@@ -30,6 +31,19 @@
                 </a>
             </div>
         </c:forEach>
+        <c:if test="${not empty hiddenAbilities}">
+            <h3>${hAbilities}</h3>
+            <c:forEach items="${hiddenAbilities}" var="ability" varStatus="ic">
+                <div class="inline-block-content"><!-- bootstrap responsive grid -->
+                    <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/ability/${ability.id}">
+                        <div class="ability-container">
+                            <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
+                            <span>${ability.name}</span>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </c:if>
     </div>
     
 </jsp:attribute>

@@ -56,7 +56,7 @@ public class Spook  {
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)    
     private Set<History> histories = new HashSet<>();
     
-    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER, cascade = CascadeType.ALL) 
+    @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER, cascade = CascadeType.PERSIST) 
     private Set<Ability> abilities = new HashSet<>();
     
     @ManyToOne(cascade = CascadeType.PERSIST)

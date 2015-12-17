@@ -64,7 +64,17 @@ public class AbilityDaoImpl implements AbilityDao {
     @Override
     public List<Ability> findAll() {
         try {
-            return em.createQuery("select a from Ability a where visible = true", Ability.class).getResultList();
+            return em.createQuery("select a from Ability a", Ability.class).getResultList();
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
+    }
+    
+    @Override
+    public List<Ability> findAllByVisibility(boolean visible) {
+        try {
+            return em.createQuery("select a from Ability a where visible = :visible", Ability.class)
+                    .setParameter("visible", visible).getResultList();
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }

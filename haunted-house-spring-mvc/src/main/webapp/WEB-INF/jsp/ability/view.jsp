@@ -9,6 +9,9 @@
 <fmt:message var="editAbility" key="ability.editAbility"/>
 <fmt:message var="abilitySpooks" key="ability.abilitySpooks"/>
 <fmt:message var="noImage" key="misc.noImage"/>
+<fmt:message var="makeVisible" key="misc.makeVisible"/>
+<fmt:message var="makeInvisible" key="misc.makeInvisible"/>
+<fmt:message var="remove" key="misc.remove"/>
 
 <ability:header>
 <jsp:attribute name="body">
@@ -20,6 +23,20 @@
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     ${editAbility}
                 </a>
+                <c:choose>
+                    <c:when test="${ability.visible}">
+                        <a href="/HauntedHouse/ability/visible/${ability.id}/false" class="m-btn black">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            ${makeInvisible}
+                        </a>
+                    </c:when>    
+                    <c:otherwise>
+                        <a href="/HauntedHouse/ability/visible/${ability.id}/true" class="m-btn black">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            ${makeVisible}
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </c:if>
         <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">

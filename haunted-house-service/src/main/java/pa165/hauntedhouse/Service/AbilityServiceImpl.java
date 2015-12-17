@@ -67,6 +67,11 @@ public class AbilityServiceImpl implements AbilityService {
     public List<Ability> findAll() {
         return abilityDao.findAll();
     }
+    
+    @Override
+    public List<Ability> findAllByVisibility(boolean visible) {
+        return abilityDao.findAllByVisibility(visible);
+    }
 
     @Override
     public void addToSpook(int abilityId, int spookId) {

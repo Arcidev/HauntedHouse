@@ -69,8 +69,8 @@ public class AbilityFacadeImpl implements AbilityFacade {
     }
     
     @Override
-    public List<AbilityInfoDTO> getAllAbilityInfoes() {
-        return beanMappingService.mapTo(abilityService.findAll(), AbilityInfoDTO.class);
+    public List<AbilityInfoDTO> getAllAbilityInfoesByVisibility(boolean visible) {
+        return beanMappingService.mapTo(abilityService.findAllByVisibility(visible), AbilityInfoDTO.class);
     }
 
     @Override

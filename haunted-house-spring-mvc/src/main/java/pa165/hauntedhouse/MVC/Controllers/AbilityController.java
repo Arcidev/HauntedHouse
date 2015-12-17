@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.AbilityInfoDTO;
+import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -48,7 +49,10 @@ public class AbilityController extends BaseController {
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String abilities(Model model) {
         inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
-        model.addAttribute("abilities", abilityFacade.getAllAbilityInfoes());
+        model.addAttribute("abilities", abilityFacade.getAllAbilityInfoesByVisibility(true));
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            model.addAttribute("hiddenAbilities", abilityFacade.getAllAbilityInfoesByVisibility(false));
+        }
         
         return "ability/all";
     }
@@ -104,5 +108,12 @@ public class AbilityController extends BaseController {
             abilityFacade.updateAbility(ability);
         
         return "redirect:" + uriBuilder.path("/ability/" + ability.getId()).build().toString();
+    }
+    
+    @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET)
+    public String setVisible(@PathVariable int id, @PathVariable boolean visible, Model model, UriComponentsBuilder uriBuilder) {
+        abilityFacade.setVisible(id, visible);
+        
+        return "redirect:" + uriBuilder.path("/ability/" + id).build().toString();
     }
 }
