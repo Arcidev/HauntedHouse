@@ -54,7 +54,7 @@
 }
 
 .inline-block-content-house {
-    width: 250px;
+    width: 150px;
     float: none;
     display:inline-block;
     vertical-align: top;
@@ -122,10 +122,27 @@
     margin-left: 15px;
 }
 
+.house-edit-block {
+    width: 500px
+}
+
+.house-edit-block p{
+    font-weight: bold;
+}
+
 .ability-edit-block > textarea {
     margin-right: 15px;
     width: 95%;
     height: 100px;
+}
+
+.house-img-block {
+    width:200px;
+}
+.house-img-block > img {
+    max-width: 150px;
+    max-height: 150px;
+    margin-bottom: 5px;
 }
 
 .img-ability {

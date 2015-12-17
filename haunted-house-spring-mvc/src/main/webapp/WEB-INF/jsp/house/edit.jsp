@@ -23,40 +23,40 @@
         <form:form name='loginForm' enctype="multipart/form-data" action="${pageContext.request.contextPath}/house/editHouse" modelAttribute="houseEdit" method='POST'>
             <input type="hidden" name="id" value ="${houseEdit.id}" />
             <h3>${houseImage}</h3>
-            <div class="form-group ability-img-block">
-                <img id="abilityImageId" src="${pageContext.request.contextPath}/webApi/house/${houseEdit.id}" alt="${noImage}" style="">
+            <div class="form-group house-img-block">
+                <img id="houseImageId" src="${pageContext.request.contextPath}/webApi/house/${houseEdit.id}" alt="${noImage}" style="">
                 <p id="abilityImageErrorId" style="display: none" class="input_error">*${fileExceededSize}</p>
                 <p class="m-btn black btn-file button-100">
                     ${browse} <input name="file" id="imageFileId" type="file" accept="image/*" onchange="onImageFileInputChange(this, 'abilityImageId', 'abilityImageErrorId')">
                 </p>
             </div>
             <h3>${houseInfo}</h3>
-            <div class="form-group ability-edit-block">
-                <span>${name}:</span>
+            <div class="form-group house-edit-block">
+                <p>${name}:</p>
                 <input type="text" name="name" value="${houseEdit.name}" />
                 <c:if test="${not empty name_error}">
                     <p class="input_error">*${name_error}</p>
                 </c:if>
             </div>
-            <div class="form-group ability-edit-block">
+            <div class="form-group house-edit-block">
                 <p>${address}:</p>
-                <textarea name="address">${houseEdit.address}</textarea>
+                <input type="text" name="address" value="${houseEdit.address}"/>
                 <c:if test="${not empty info_error}">
                     <p class="input_error">*${info_error}</p>
                 </c:if>
             </div>
-                <div class="form-group ability-edit-block">
+                <div class="form-group house-edit-block">
                 <p>${history}:</p>
                 <textarea name="history">${houseEdit.history}</textarea>
                 <c:if test="${not empty info_error}">
                     <p class="input_error">*${info_error}</p>
                 </c:if>
             </div>
-            <div class = "form-group ability-edit-block">
+            <div class = "form-group house-edit-block">
                 <p>${date}:</p>
-                <form:input path="hauntedSince" id="date" type="text" placeholder="YYYY-MM-DD"/>	
+                <input type="date" value="${houseEdit.hauntedSince}" placeholder="YYYY-MM-DD"/>
             </div>
-            <div class="ability-img-block">
+            <div class="house-img-block">
                 <c:choose>
                     <c:when test="${houseEdit.id == 0}">
                         <input class="m-btn black button-100" type="submit" value="${create}" />

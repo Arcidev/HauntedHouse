@@ -69,8 +69,7 @@ public class HouseController extends BaseController{
     
     @RequestMapping(value = { "new" }, method = RequestMethod.GET)
     public String newHouse(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Houses");
+        inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
         model.addAttribute("houseEdit", new HouseInfoDTO());
         
         return "house/edit";
@@ -78,8 +77,7 @@ public class HouseController extends BaseController{
     
     @RequestMapping(value = { "edit/{id}" }, method = RequestMethod.GET)
     public String editHouse(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("title", messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Houses");
+        inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
         
         HouseInfoDTO house = houseFacade.getHouseInfoById(id);
         if (house == null) {
