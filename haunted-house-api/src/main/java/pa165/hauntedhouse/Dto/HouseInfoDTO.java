@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author Andrej Dobes
+ * @author Milan Matijka
  */
 public class HouseInfoDTO {
     private int id;
@@ -67,11 +67,11 @@ public class HouseInfoDTO {
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof HouseDTO)) {
+        if (!(obj instanceof HouseInfoDTO)) {
             return false;
         }
         
-        HouseDTO hs = (HouseDTO)obj;
+        HouseInfoDTO hs = (HouseInfoDTO)obj;
         return id == hs.getId() &&
                 (name == null ? hs.getName() == null : name.equals(hs.getName())) &&
                 (address == null ? hs.getAddress() == null : address.equals(hs.getAddress())) &&

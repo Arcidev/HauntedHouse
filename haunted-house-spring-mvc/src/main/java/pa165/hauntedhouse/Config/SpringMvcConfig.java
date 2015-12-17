@@ -14,9 +14,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.support.RequestDataValueProcessor;
 import pa165.hauntedhouse.SampleData.SampleDataConfiguration;
 
 /**
@@ -25,7 +27,7 @@ import pa165.hauntedhouse.SampleData.SampleDataConfiguration;
 @EnableWebMvc
 @Configuration
 @Import(SampleDataConfiguration.class)
-@ComponentScan(basePackages = "pa165.hauntedhouse.MVC.Controllers")
+@ComponentScan(basePackages = { "pa165.hauntedhouse.MVC.Controllers", "pa165.hauntedhouse.Config" })
 public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
     public static final String TEXTS = "Texts";
@@ -98,5 +100,14 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         multipartResolver.setMaxUploadSize(500 * 1024);
         return multipartResolver;
+    }
+    
+    /**
+     * Gets csrf validatior
+     * @return
+     */
+    @Bean
+    public RequestDataValueProcessor requestDataValueProcessor() {
+        return new CsrfRequestDataValueProcessor();
     }
 }

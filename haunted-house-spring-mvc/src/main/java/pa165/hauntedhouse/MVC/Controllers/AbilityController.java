@@ -6,8 +6,6 @@
 package pa165.hauntedhouse.MVC.Controllers;
 
 import java.io.IOException;
-import java.util.Optional;
-import javax.activation.MimetypesFileTypeMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -35,7 +33,7 @@ import pa165.hauntedhouse.Facade.SpookFacade;
  * @author Andrej Dobes
  */
 @Controller
-@RequestMapping("/ability")
+@RequestMapping("ability")
 public class AbilityController extends BaseController {
     
     @Autowired
@@ -49,17 +47,15 @@ public class AbilityController extends BaseController {
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String abilities(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         model.addAttribute("abilities", abilityFacade.getAllAbilityInfoes());
         
         return "ability/all";
     }
     
-    @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "{id}" }, method = RequestMethod.GET)
     public String ability(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         
         AbilityInfoDTO ability = abilityFacade.getAbilityInfoById(id);
         if (ability == null) {
@@ -73,8 +69,7 @@ public class AbilityController extends BaseController {
     
     @RequestMapping(value = { "new" }, method = RequestMethod.GET)
     public String newAbility(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         model.addAttribute("abilityEdit", new AbilityInfoDTO());
         
         return "ability/edit";
@@ -82,8 +77,7 @@ public class AbilityController extends BaseController {
     
     @RequestMapping(value = { "edit/{id}" }, method = RequestMethod.GET)
     public String editAbility(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) {
-        model.addAttribute("title", messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Abilities");
+        inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
         
         AbilityInfoDTO ability = abilityFacade.getAbilityInfoById(id);
         if (ability == null) {
@@ -94,7 +88,7 @@ public class AbilityController extends BaseController {
         return "ability/edit";
     }
     
-    @RequestMapping(value = { "/editAbility" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "edit" }, method = RequestMethod.POST)
     public String editPost(@Valid @ModelAttribute("abilityEdit") AbilityDTO ability, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().stream().forEach((fe) -> {

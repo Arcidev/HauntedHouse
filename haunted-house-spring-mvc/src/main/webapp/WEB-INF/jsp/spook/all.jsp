@@ -21,7 +21,7 @@
             <div class="inline-block-content-spook"><!-- bootstrap responsive grid -->
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">
                     <div class="ability-container">
-                        <img src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
+                        <img class="img-ability" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
                         <span>${spook.name}</span>
                     </div>
                 </a>

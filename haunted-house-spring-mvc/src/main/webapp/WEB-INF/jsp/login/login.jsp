@@ -13,7 +13,7 @@
 <login:header>
 <jsp:attribute name="body">
     <div class="login-form center-block">
-        <form name='loginForm' action="<c:url value='authenticate' />" method='POST'>
+        <form:form name='loginForm' action="${pageContext.request.contextPath}/login" method='POST'>
             <div class="form-group">
                 <span>${email}:</span>
                 <input class="login-input" type='text' name='email' value=''>
@@ -24,9 +24,11 @@
             </div>
             <div class="form-group">
                 <input class="m-btn black login-button-left button-100" name="submit" type="submit" value="${login}" />
-                <input class="m-btn login-button-right button-100" name="submit" type="submit" value="${register}" />
+                <a class="m-btn login-button-right button-100" href="${pageContext.request.contextPath}/register">
+                    ${register}
+                </a>
             </div>
-        </form>
+        </form:form>
     </div>
 </jsp:attribute>
 </login:header>

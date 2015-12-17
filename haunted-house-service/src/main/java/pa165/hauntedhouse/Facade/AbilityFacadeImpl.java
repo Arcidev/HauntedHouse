@@ -102,5 +102,9 @@ public class AbilityFacadeImpl implements AbilityFacade {
     public List<AbilityDTO> searchAbilitiesByName(String filter) {
         return beanMappingService.mapTo(abilityService.searchAbilitiesByName(filter), AbilityDTO.class);
     }
+    @Override
+    public List<AbilityInfoDTO> getSpookAbilityInfoes(int spookId) {
+        return beanMappingService.mapTo(spookService.getAbilitiesBySpookId(spookId), AbilityInfoDTO.class);
+    }
     
 }

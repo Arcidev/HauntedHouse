@@ -5,19 +5,23 @@
  */
 package pa165.hauntedhouse.MVC.Controllers;
 
+import java.util.Collections;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.PersonCreateDTO;
+import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Facade.PersonFacade;
 
 /**
@@ -25,7 +29,7 @@ import pa165.hauntedhouse.Facade.PersonFacade;
  * @author Andrej Dobes
  */
 @Controller
-public class LoginController {
+public class LoginController extends BaseController {
     
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
@@ -33,30 +37,22 @@ public class LoginController {
     @Autowired
     private PersonFacade personFacade;
     
-    @RequestMapping(value="/login", method = RequestMethod.GET)
+    @RequestMapping(value="login", method = RequestMethod.GET)
     public String login(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.login", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "Login");
+        inicializeCall(model, messageSource.getMessage("navigation.login", null, LocaleContextHolder.getLocale()), "Login");
         
         return "login/login";
     }
     
-    @RequestMapping(value="/authenticate", method = RequestMethod.POST)
-    public String authenticate(Model model, UriComponentsBuilder uriBuilder) {
-        
-        return "redirect:" + uriBuilder.path("/home").build().toString();
-    }
-    
-    @RequestMapping(value="/register", method = RequestMethod.GET)
+    @RequestMapping(value="register", method = RequestMethod.GET)
     public String register(Model model) {
-        model.addAttribute("title", messageSource.getMessage("navigation.signUp", null, LocaleContextHolder.getLocale()));
-        model.addAttribute("activePage", "SignUp");
+        inicializeCall(model, messageSource.getMessage("navigation.signUp", null, LocaleContextHolder.getLocale()), "SignUp");
         model.addAttribute("userCreate", new PersonCreateDTO());
         
         return "login/register";
     }
     
-    @RequestMapping(value="/register", method = RequestMethod.POST)
+    @RequestMapping(value="register", method = RequestMethod.POST)
     public String registerPost(@Valid @ModelAttribute("userCreate") PersonCreateDTO user, BindingResult bindingResult, Model model, UriComponentsBuilder uriBuilder) {
         if (bindingResult.hasErrors() || !user.getPasswordAgain().equals(user.getPassword())) {
             bindingResult.getFieldErrors().stream().forEach((fe) -> {
@@ -70,7 +66,7 @@ public class LoginController {
         }
         
         personFacade.create(user);
-        
+        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), Collections.singletonList(new SimpleGrantedAuthority(UserRole.USER.toString()))));
         return "redirect:" + uriBuilder.path("/home").build().toString();
     }
 }
