@@ -13,7 +13,7 @@
 
     <div class="jumbotron">
         <div class="manage-buttons-container">
-            <a href="/house/new" class="m-btn black">
+            <a href="${pageContext.request.contextPath}/house/new" class="m-btn black">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${addHouse}
             </a>
@@ -22,7 +22,7 @@
             <div class="inline-block-content-house"><!-- bootstrap responsive grid -->
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/house/${house.id}">
                     <div class="ability-container">
-                        <img src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
+                        <img class = "img-house" src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
                         <span>${house.name}</span>
                     </div>
                 </a>

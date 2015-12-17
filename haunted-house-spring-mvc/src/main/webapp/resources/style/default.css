@@ -133,6 +133,11 @@
     max-width: 56px;
 }
 
+.img-house {
+    max-height: 150px;
+    max-width: 150px;
+}
+
 .input_error {
     padding-left: 15px;
     color: red;
