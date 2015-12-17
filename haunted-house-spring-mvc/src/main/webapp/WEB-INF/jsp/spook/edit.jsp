@@ -19,7 +19,7 @@
 <jsp:attribute name="body">
 
     <div>
-        <form:form enctype="multipart/form-data" action="${pageContext.request.contextPath}/spook/edit" modelAttribute="spookEdit" method='POST'>
+        <form:form enctype="multipart/form-data" action="${pageContext.request.contextPath}/spook/edit?${_csrf.parameterName}=${_csrf.token}" modelAttribute="spookEdit" method='POST'>
             <input type="hidden" name="id" value ="${spookEdit.id}" />
             <h3>${spookImage}</h3>
             <div class="form-group ability-img-block">

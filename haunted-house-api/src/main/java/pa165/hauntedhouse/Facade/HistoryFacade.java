@@ -53,6 +53,13 @@ public interface HistoryFacade {
     List<HistoryDTO> getAllHistories();
 
     /**
+     * Gets all histories
+     * @param spookId
+     * @return all records of spooks history
+     */
+    List<HistoryDTO> getAllSpooksHistories(int spookId);
+    
+    /**
      * Gets history by id
      * 
      * @param id

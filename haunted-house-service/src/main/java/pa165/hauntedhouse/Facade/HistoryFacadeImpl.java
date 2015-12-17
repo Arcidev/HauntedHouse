@@ -51,6 +51,11 @@ public class HistoryFacadeImpl implements HistoryFacade {
     public List<HistoryDTO> getAllHistories() {
         return beanMappingService.mapTo(historyService.getAllHistories(), HistoryDTO.class);
     }
+    
+    @Override
+    public List<HistoryDTO> getAllSpooksHistories(int spookId){
+        return beanMappingService.mapTo(historyService.getAllSpooksHistories(spookId), HistoryDTO.class);
+    }
 
     @Override
     public HistoryDTO getHistoryById(int id) {
