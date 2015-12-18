@@ -35,9 +35,9 @@ public class AbilityController {
     @Autowired
     private SpookFacade spookFacade;
     
-    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<AbilityInfoDTO> abilities(@RequestParam(value = "searchFilter", required = false) String searchFilter) {
-        return searchFilter != null ? abilityFacade.searchAbilitiesByName(searchFilter, true) : abilityFacade.getAllAbilityInfoesByVisibility(true);
+    @RequestMapping(value = "all/{visible}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final List<AbilityInfoDTO> abilities(@PathVariable boolean visible, @RequestParam(value = "searchFilter", required = false) String searchFilter) {
+        return searchFilter != null ? abilityFacade.searchAbilitiesByName(searchFilter, visible) : abilityFacade.getAllAbilityInfoesByVisibility(visible);
     }
     
     @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
