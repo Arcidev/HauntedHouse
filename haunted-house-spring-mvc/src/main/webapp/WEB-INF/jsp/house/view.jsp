@@ -12,9 +12,11 @@
 <fmt:message var="address" key="house.address"/>
 <fmt:message var="history" key="house.history"/>
 <fmt:message var="date" key="house.date"/>
+<fmt:message var="removeSpook" key="house.removeSpook"/>
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="makeVisible" key="misc.makeVisible"/>
 <fmt:message var="makeInvisible" key="misc.makeInvisible"/>
+
 
 <house:header>
 <jsp:attribute name="body">
@@ -22,19 +24,19 @@
     <div>
         <c:if test="${userRole == 'ADMIN'}">
         <div class="manage-buttons-container">
-            <a href="${pageContext.request.contextPath}/house/edit/${house.id}" class="m-btn black">
+            <a href="/HauntedHouse/house/edit/${house.id}" class="m-btn black">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${editHouse}
             </a>
             <c:choose>
                     <c:when test="${house.visible}">
-                        <a href="${pageContext.request.contextPath}/house/visible/${house.id}/false" class="m-btn black">
+                        <a href="/HauntedHouse/house/visible/${house.id}/false" class="m-btn black">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             ${makeInvisible}
                         </a>
                     </c:when>    
                     <c:otherwise>
-                        <a href="${pageContext.request.contextPath}/house/visible/${house.id}/true" class="m-btn black">
+                        <a href="/HauntedHouse/house/visible/${house.id}/true" class="m-btn black">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             ${makeVisible}
                         </a>
@@ -55,6 +57,11 @@
             <h3>${houseSpooks}</h3>
             <c:forEach items="${spooks}" var="spook" varStatus="ic">
                 <div>
+                    <c:if test="${userRole == 'ADMIN'}">
+                        <button onclick="showPopup('${pageContext.request.contextPath}/house/removeSpook/${house.id}/${spook.id}', '${removeSpook}')" class="m-btn">
+                           <span class="glyphicon glyphicon-minus"></span>
+                       </button>
+                    </c:if>
                     <a class="anchor-no-decor" href="${pageContext.request.contextPath}/spook/${spook.id}">
                         <div class="house-spook">
                             <img src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}"/>
@@ -63,6 +70,20 @@
                     </a>
                 </div>
             </c:forEach>
+        </c:if>
+            <c:if test="${userRole == 'ADMIN' && not empty notAssignedSpooks}">
+            <h3>Add spook</h3>
+            <form:form action="${pageContext.request.contextPath}/house/addSpook">
+                <input type="hidden" name="houseId" value="${house.id}" />
+                <select name="spookId">
+                    <c:forEach items="${notAssignedSpooks}" var="spook" varStatus="ic">
+                        <option value="${spook.id}">
+                            ${spook.name}
+                        </option>
+                    </c:forEach>
+                </select>
+                <input type="submit" class="m-btn black" />
+            </form:form>
         </c:if>
     </div>
 </jsp:attribute>

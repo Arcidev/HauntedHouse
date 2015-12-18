@@ -6,6 +6,7 @@
 package pa165.hauntedhouse.MVC.Controllers;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.HouseDTO;
 import pa165.hauntedhouse.Dto.HouseInfoDTO;
+import pa165.hauntedhouse.Dto.SpookInfoDTO;
 import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.HouseFacade;
@@ -67,8 +69,14 @@ public class HouseController extends BaseController{
             throw new HttpNotFound("There is no house listed by id: " + id);
         }
         
+        List<SpookInfoDTO> spooks = spookFacade.getHouseSpookInfoes(house.getId());
         model.addAttribute("house", house);
         model.addAttribute("spooks", spookFacade.getHouseSpookInfoes(house.getId()));
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            List<SpookInfoDTO> notAssignedSpooks = spookFacade.getAllSpookInfoesByVisibility(true);
+            notAssignedSpooks.removeAll(spooks);
+            model.addAttribute("notAssignedSpooks", notAssignedSpooks);
+        }
         return "house/view";
     }
     
@@ -93,13 +101,16 @@ public class HouseController extends BaseController{
         return "house/edit";
     }
     
-    @RequestMapping(value = "/delete/{deleteId}", method = RequestMethod.POST)
-    public String deleteEvent(@PathVariable("deleteId") int deleteId, RedirectAttributes redirectAttributes,
-                              UriComponentsBuilder uriComponentsBuilder){
+    @RequestMapping(value = {"delete/{deleteId}"}, method = RequestMethod.POST)
+    public String deleteHouse(@PathVariable int deleteId,Model model, HttpServletRequest request, HttpServletResponse response){
+        System.out.println("SOM VYPIS");
+        inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
         HouseDTO house = houseFacade.getHouseById(deleteId);
+        
         houseFacade.deleteHouse(deleteId);
-        redirectAttributes.addFlashAttribute("alert_success", "House \"" + house.getName() + "\" was removed");
-        return "redirect:/house/all";
+        model.addAttribute("houseDelete", house);
+        
+        return "house/all";
     }
     
     @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)
@@ -125,5 +136,19 @@ public class HouseController extends BaseController{
         houseFacade.setVisible(id, visible);
         
         return "redirect:" + uriBuilder.path("/house/" + id).build().toString();
+    }
+    
+    @RequestMapping(value = { "removeSpook/{houseId}/{spookId}" }, method = RequestMethod.GET)
+    public String removeSpook(@PathVariable int houseId, @PathVariable int spookId, UriComponentsBuilder uriBuilder) {
+        houseFacade.removeSpook(houseId, spookId);
+        
+        return "redirect:" + uriBuilder.path("/house/" + houseId).build().toString();
+    }
+    
+    @RequestMapping(value = { "addSpook" }, method = RequestMethod.POST)
+    public String addSpook(@RequestParam("houseId") int houseId, @RequestParam("spookId") int spookId, UriComponentsBuilder uriBuilder) {
+        houseFacade.addSpook(houseId, spookId);
+        
+        return "redirect:" + uriBuilder.path("/house/" + houseId).build().toString();
     }
 }
