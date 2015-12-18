@@ -67,6 +67,11 @@ public class AbilityServiceImpl implements AbilityService {
     public List<Ability> findAll() {
         return abilityDao.findAll();
     }
+    
+    @Override
+    public List<Ability> findAllByVisibility(boolean visible) {
+        return abilityDao.findAllByVisibility(visible);
+    }
 
     @Override
     public void addToSpook(int abilityId, int spookId) {
@@ -103,8 +108,8 @@ public class AbilityServiceImpl implements AbilityService {
     }
     
     @Override
-    public List<Ability> searchAbilitiesByName(String filter) {
-        List<Ability> abilities = abilityDao.searchByName(filter);
+    public List<Ability> searchAbilitiesByName(String filter, boolean visible) {
+        List<Ability> abilities = abilityDao.searchByName(filter, visible);
         if (abilities == null) {
             return new ArrayList<>();
         }

@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.HouseDTO;
 import pa165.hauntedhouse.Dto.HouseInfoDTO;
+import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.HouseFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -48,7 +50,10 @@ public class HouseController extends BaseController{
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String houses(Model model) {
         inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
-        model.addAttribute("houses", houseFacade.getAllHouses());
+        model.addAttribute("houses", houseFacade.getAllHouseInfoesByVisibility(true));
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            model.addAttribute("hiddenHouses", houseFacade.getAllHouseInfoesByVisibility(false));
+        }
         
         return "house/all";
     }
@@ -63,7 +68,7 @@ public class HouseController extends BaseController{
         }
         
         model.addAttribute("house", house);
-     //   model.addAttribute("spooks", spookFacade(house.getId()));
+        model.addAttribute("spooks", spookFacade.getHouseSpookInfoes(house.getId()));
         return "house/view";
     }
     
@@ -88,6 +93,15 @@ public class HouseController extends BaseController{
         return "house/edit";
     }
     
+    @RequestMapping(value = "/delete/{deleteId}", method = RequestMethod.POST)
+    public String deleteEvent(@PathVariable("deleteId") int deleteId, RedirectAttributes redirectAttributes,
+                              UriComponentsBuilder uriComponentsBuilder){
+        HouseDTO house = houseFacade.getHouseById(deleteId);
+        houseFacade.deleteHouse(deleteId);
+        redirectAttributes.addFlashAttribute("alert_success", "House \"" + house.getName() + "\" was removed");
+        return "redirect:/house/all";
+    }
+    
     @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)
     public String editPost(@Valid @ModelAttribute("houseEdit") HouseDTO house, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
@@ -104,5 +118,12 @@ public class HouseController extends BaseController{
             houseFacade.updateHouse(house);
         
         return "redirect:" + uriBuilder.path("/house/" + house.getId()).build().toString();
+    }
+    
+    @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET)
+    public String setVisible(@PathVariable int id, @PathVariable boolean visible, Model model, UriComponentsBuilder uriBuilder) {
+        houseFacade.setVisible(id, visible);
+        
+        return "redirect:" + uriBuilder.path("/house/" + id).build().toString();
     }
 }

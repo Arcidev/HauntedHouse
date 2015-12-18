@@ -99,7 +99,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         History hi2 = history(s1, getDate(2015,10,12), "History2 for Ghost");
         History hi3 = history(s2, getDate(2015,12,12), "History for Vampire");
         
-        House h1 = house("Sorotity House",                                      //name
+        House h1 = house("Sorority House",                                      //name
             "Sorority Street, NY",                                              //address
             "House..................................",                          // history
             getDate(1896, 05, 02),                                              // hauntedSince                                                 // hauntsUntil
@@ -124,7 +124,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         abilityService.addToSpook(a4.getId(), s2.getId());
         
         houseService.addToSpook(h1.getId(), s1.getId());
-        houseService.addToSpook(h2.getId(), s2.getId());
+        houseService.addToSpook(h1.getId(), s2.getId());
     }
     
     private Ability ability(String name, String info, String imageFile, String mimeType) throws IOException {
@@ -155,6 +155,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         s.setHauntsUntil(hauntsUntil);
         s.setImage(readImage(imageFile));
         s.setImageMimeType(mimeType);
+        s.setVisible(true);
         spookService.create(s);
         return s;
     }
@@ -177,6 +178,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         h.setHauntedSince(hauntedSince);
         h.setImage(readImage(imageFile));
         h.setImageMimeType(mimeType);
+        h.setVisible(true);
         houseService.create(h);
         return h;
     }

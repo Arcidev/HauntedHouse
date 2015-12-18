@@ -51,6 +51,14 @@ public interface HouseFacade {
      * @param spookId
      */
     void removeSpook(int houseId, int spookId);
+    
+    /**
+     * Sets house visibility
+     * 
+     * @param houseId
+     * @param visible
+     */
+    void setVisible(int houseId, boolean visible);
 
     /**
      * Gets all houses
@@ -82,13 +90,6 @@ public interface HouseFacade {
      */
     List<HouseDTO> searchHousesByName(String filterName);
     
-     /**
-     * Gets all basic house infoes
-     * 
-     * @return all house infoes
-     */
-    List<HouseInfoDTO> getAllHouseInfoes();
-    
     /**
      * Gets house info by id
      * 
@@ -96,4 +97,12 @@ public interface HouseFacade {
      * @return house info by id
      */
     HouseInfoDTO getHouseInfoById(int id);
+    
+    /**
+     * Gets all houses that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible houses
+     */
+    List<HouseInfoDTO> getAllHouseInfoesByVisibility(boolean visible);
 }

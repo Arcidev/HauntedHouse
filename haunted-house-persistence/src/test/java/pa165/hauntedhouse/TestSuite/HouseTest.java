@@ -78,6 +78,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         h3.setAddress("Les");
         h3.setHauntedSince(date);
         h3.setHistory("Pernikova historie");
+        h3.setVisible(true);
         
         Spook spook = new Spook();
         spook.setName("Skorobezhlavy Nick");
@@ -96,6 +97,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         h.setAddress("Prasinky");
         h.setHauntedSince(date);
         h.setHistory("Chroptici historie");
+        h.setVisible(true);
         
         houseDao.create(h);
         
@@ -104,6 +106,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         h2.setAddress("Les");
         h2.setHauntedSince(date);
         h2.setHistory("Historie kuri nozky");
+        h2.setVisible(true);
         
         houseDao.create(h2);
         

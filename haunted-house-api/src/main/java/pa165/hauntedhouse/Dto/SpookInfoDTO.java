@@ -18,6 +18,7 @@ public class SpookInfoDTO {
     private String history;
     private Time hauntsSince;
     private Time hauntsUntil;
+    private boolean visible;
 
     public void setId(int id) {
         this.id = id;
@@ -55,6 +56,13 @@ public class SpookInfoDTO {
     }
     public Time getHauntsUntil() {
         return hauntsUntil;
+    }
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
     
     @Override

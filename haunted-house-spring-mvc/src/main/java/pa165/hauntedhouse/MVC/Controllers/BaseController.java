@@ -38,4 +38,13 @@ public abstract class BaseController {
             model.addAttribute("userRole", authentication.getAuthorities().isEmpty() ? UserRole.USER.toString() : authentication.getAuthorities().iterator().next());
         }
     }
+    
+    protected String getUserRole() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && authentication instanceof UsernamePasswordAuthenticationToken) {
+            return authentication.getAuthorities().isEmpty() ? UserRole.USER.toString() : authentication.getAuthorities().iterator().next().toString();
+        }
+        
+        return UserRole.USER.toString();
+    }
 }

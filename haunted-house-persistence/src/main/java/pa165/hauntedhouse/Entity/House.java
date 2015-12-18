@@ -50,6 +50,8 @@ public class House {
 
     private String imageMimeType;
     
+    private boolean visible;
+    
     @OneToMany(fetch=FetchType.EAGER)    
     private Set<Spook> spooks = new HashSet<>();
     
@@ -132,6 +134,48 @@ public class House {
         this.spooks.remove(spook);
     }
     
+    /**
+     * @return the image
+     */
+    public byte[] getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    /**
+     * @return the imageMimeType
+     */
+    public String getImageMimeType() {
+        return imageMimeType;
+    }
+
+    /**
+     * @param imageMimeType the imageMimeType to set
+     */
+    public void setImageMimeType(String imageMimeType) {
+        this.imageMimeType = imageMimeType;
+    }
+
+    /**
+     * @return the visible
+     */
+    public boolean isVisible() {
+        return visible;
+    }
+
+    /**
+     * @param visible the visible to set
+     */
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -161,33 +205,5 @@ public class House {
         hash = 59 * hash + Objects.hashCode(this.history);
         hash = 59 * hash + Objects.hashCode(this.hauntedSince);
         return hash;
-    }     
-
-    /**
-     * @return the image
-     */
-    public byte[] getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
-    /**
-     * @return the imageMimeType
-     */
-    public String getImageMimeType() {
-        return imageMimeType;
-    }
-
-    /**
-     * @param imageMimeType the imageMimeType to set
-     */
-    public void setImageMimeType(String imageMimeType) {
-        this.imageMimeType = imageMimeType;
-    }
+    }    
 }

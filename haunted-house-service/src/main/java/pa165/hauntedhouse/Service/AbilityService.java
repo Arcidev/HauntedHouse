@@ -52,6 +52,14 @@ public interface AbilityService {
     List<Ability> findAll();
 
     /**
+     * Gets all abilities that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible abilities
+     */
+    List<Ability> findAllByVisibility(boolean visible);
+    
+    /**
      * Adds ability to spook
      *
      * @param abilityId
@@ -78,9 +86,10 @@ public interface AbilityService {
      * Finds all abilities whiche name matches filter
      * 
      * @param filter
+     * @param visible
      * @return abilities matched by filter
      */
-    List<Ability> searchAbilitiesByName(String filter);
+    List<Ability> searchAbilitiesByName(String filter, boolean visible);
     
     /**
      * Finds all spooks associated with passed abilityId

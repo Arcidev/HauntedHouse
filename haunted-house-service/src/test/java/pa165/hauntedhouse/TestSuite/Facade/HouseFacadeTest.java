@@ -39,10 +39,12 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests{
         house.setName("dom");
         house.setAddress("Serus");
         house.setHistory("HistoryFacadeTest1");
+        house.setVisible(true);
         
         house2.setName("strom");
         house2.setAddress("NAZDAR");
         house2.setHistory("HistoryFacadeTest2");
+        house2.setVisible(true);
         
         houseFacade.createHouse(house);
         houseFacade.createHouse(house2);
@@ -75,6 +77,7 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests{
         h.setName("house3");
         h.setAddress("PP");
         h.setHistory("HistoryFacadeTest3");
+        h.setVisible(true);
         
         houseFacade.createHouse(h);
         int houses = houseFacade.getAllHouses().size();

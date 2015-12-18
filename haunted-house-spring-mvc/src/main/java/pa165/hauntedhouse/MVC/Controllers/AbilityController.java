@@ -6,6 +6,7 @@
 package pa165.hauntedhouse.MVC.Controllers;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -24,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.AbilityInfoDTO;
+import pa165.hauntedhouse.Dto.SpookInfoDTO;
+import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -46,9 +49,14 @@ public class AbilityController extends BaseController {
     private SpookFacade spookFacade;
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
-    public String abilities(Model model) {
+    public String abilities(Model model, @RequestParam(value = "searchFilter", required = false) String searchFilter) {
         inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
-        model.addAttribute("abilities", abilityFacade.getAllAbilityInfoes());
+        
+        model.addAttribute("abilities", searchFilter != null ? abilityFacade.searchAbilitiesByName(searchFilter, true) : abilityFacade.getAllAbilityInfoesByVisibility(true));
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            model.addAttribute("hiddenAbilities", searchFilter != null ? abilityFacade.searchAbilitiesByName(searchFilter, false) : abilityFacade.getAllAbilityInfoesByVisibility(false));
+        }
+        model.addAttribute("searchFilter", searchFilter);
         
         return "ability/all";
     }
@@ -62,8 +70,14 @@ public class AbilityController extends BaseController {
             throw new HttpNotFound("There is no ability listed by id: " + id);
         }
         
+        List<SpookInfoDTO> spooks = spookFacade.getAbilitySpookInfoes(ability.getId());
         model.addAttribute("ability", ability);
-        model.addAttribute("spooks", spookFacade.getAbilitySpookInfoes(ability.getId()));
+        model.addAttribute("spooks", spooks);
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            List<SpookInfoDTO> notAssignedSpooks = spookFacade.getAllSpookInfoesByVisibility(true);
+            notAssignedSpooks.removeAll(spooks);
+            model.addAttribute("notAssignedSpooks", notAssignedSpooks);
+        }
         return "ability/view";
     }
     
@@ -104,5 +118,26 @@ public class AbilityController extends BaseController {
             abilityFacade.updateAbility(ability);
         
         return "redirect:" + uriBuilder.path("/ability/" + ability.getId()).build().toString();
+    }
+    
+    @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET)
+    public String setVisible(@PathVariable int id, @PathVariable boolean visible, UriComponentsBuilder uriBuilder) {
+        abilityFacade.setVisible(id, visible);
+        
+        return "redirect:" + uriBuilder.path("/ability/" + id).build().toString();
+    }
+    
+    @RequestMapping(value = { "removeSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET)
+    public String removeSpook(@PathVariable int abilityId, @PathVariable int spookId, UriComponentsBuilder uriBuilder) {
+        abilityFacade.removeFromSpook(abilityId, spookId);
+        
+        return "redirect:" + uriBuilder.path("/ability/" + abilityId).build().toString();
+    }
+    
+    @RequestMapping(value = { "addSpook" }, method = RequestMethod.POST)
+    public String addSpook(@RequestParam("abilityId") int abilityId, @RequestParam("spookId") int spookId, UriComponentsBuilder uriBuilder) {
+        abilityFacade.addToSpook(abilityId, spookId);
+        
+        return "redirect:" + uriBuilder.path("/ability/" + abilityId).build().toString();
     }
 }

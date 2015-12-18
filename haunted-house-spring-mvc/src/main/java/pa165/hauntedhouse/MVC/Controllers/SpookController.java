@@ -26,6 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.AbilityInfoDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Dto.SpookInfoDTO;
+import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -35,7 +36,7 @@ import pa165.hauntedhouse.Facade.SpookFacade;
  * @author Martin Durcansky
  */
 @Controller
-@RequestMapping("/spook")
+@RequestMapping("spook")
 public class SpookController extends BaseController {
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
@@ -47,13 +48,18 @@ public class SpookController extends BaseController {
     private SpookFacade spookFacade;
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
-    public String spooks(Model model) {
+    public String spooks(Model model, @RequestParam(value = "searchFilter", required = false) String searchFilter) {
         inicializeCall(model, messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()), "Spooks");
-        model.addAttribute("spooks", spookFacade.getAllSpookInfoes());
+        
+        model.addAttribute("spooks", searchFilter != null ? spookFacade.searchSpooksByName(searchFilter, true) : spookFacade.getAllSpookInfoesByVisibility(true));
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            model.addAttribute("hiddenSpooks", searchFilter != null ? spookFacade.searchSpooksByName(searchFilter, false) : spookFacade.getAllSpookInfoesByVisibility(false));
+        }
+        model.addAttribute("searchFilter", searchFilter);
         
         return "spook/all";
     }
-    @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "{id}" }, method = RequestMethod.GET)
     public String spook(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
         inicializeCall(model, messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()), "Spooks");
         
@@ -63,7 +69,7 @@ public class SpookController extends BaseController {
         }
         
         model.addAttribute("spook", spook);
-        //model.addAttribute("abilities", abilityFacade.getSpookAbilityInfoes(spook.getId()));
+        model.addAttribute("abilities", abilityFacade.getSpookAbilityInfoes(spook.getId()));
         return "spook/view";
     }
     
@@ -88,7 +94,7 @@ public class SpookController extends BaseController {
         return "spook/edit";
     }
     
-    @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "edit" }, method = RequestMethod.POST)
     public String editPost(@Valid @ModelAttribute("spookEdit") SpookDTO spook, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldErrors().stream().forEach((fe) -> {
@@ -104,6 +110,13 @@ public class SpookController extends BaseController {
             spookFacade.updateSpook(spook);
         
         return "redirect:" + uriBuilder.path("/spook/" + spook.getId()).build().toString();
+    }
+    
+    @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET)
+    public String setVisible(@PathVariable int id, @PathVariable boolean visible, Model model, UriComponentsBuilder uriBuilder) {
+        spookFacade.setVisible(id, visible);
+        
+        return "redirect:" + uriBuilder.path("/spook/" + id).build().toString();
     }
     
 }

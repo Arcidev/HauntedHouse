@@ -38,7 +38,28 @@ public class SpookServiceImpl implements SpookService {
     
     @Override
     public void update(Spook spook) {
-        spookDao.update(spook);
+        Spook a = spookDao.findById(spook.getId());
+        if (a == null) {
+            throw new IllegalArgumentException("spook does not exist");
+        }
+        a.setName(spook.getName());
+        a.setHistory(spook.getHistory());
+        a.setHauntsSince(spook.getHauntsSince());
+        a.setHauntsUntil(spook.getHauntsUntil());        
+        if (spook.getImage() != null) {
+            a.setImage(spook.getImage());
+            a.setImageMimeType(a.getImageMimeType());
+        }
+        spookDao.update(a);
+    }
+    @Override
+    public void setVisible(int spookId, boolean visible) {
+        Spook a = spookDao.findById(spookId);
+        if (a == null) {
+            throw new IllegalArgumentException("spook does not exist");
+        }
+        a.setVisible(visible);
+        spookDao.update(a);
     }
 
     @Override
@@ -95,8 +116,8 @@ public class SpookServiceImpl implements SpookService {
     }
 
     @Override
-    public List<Spook> searchSpooksByName(String filter) {
-         List<Spook> spooks = spookDao.searchByName(filter);
+    public List<Spook> searchSpooksByName(String filter, boolean visible) {
+         List<Spook> spooks = spookDao.searchByName(filter,  visible);
         if (spooks == null) {
             return new ArrayList<>();
         }        
@@ -107,5 +128,9 @@ public class SpookServiceImpl implements SpookService {
     public void removeHistory(Spook spook, History history) {
         spook.removeHistory(history);
         spookDao.update(spook);
+    }
+    @Override
+    public List<Spook> findAllByVisibility(boolean visible) {
+        return spookDao.findAllByVisibility(visible);
     }
 }

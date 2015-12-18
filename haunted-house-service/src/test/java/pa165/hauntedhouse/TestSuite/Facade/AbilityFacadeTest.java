@@ -15,6 +15,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dto.AbilityDTO;
+import pa165.hauntedhouse.Dto.AbilityInfoDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -88,17 +89,17 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
     
     @Test
     public void testSearch() {
-        List<AbilityDTO> abilities = abilityFacade.searchAbilitiesByName("persist");
+        List<AbilityInfoDTO> abilities = abilityFacade.searchAbilitiesByName("persist", true);
         Assert.assertEquals(abilities.size(), 1);
         Assert.assertTrue(abilities.get(0).getName().contains("persist"));
         
-        abilities = abilityFacade.searchAbilitiesByName("why"); // must be searching case insensitive
+        abilities = abilityFacade.searchAbilitiesByName("why", true); // must be searching case insensitive
         Assert.assertEquals(abilities.size(), 2);
-        for (AbilityDTO a : abilities) {
+        for (AbilityInfoDTO a : abilities) {
             Assert.assertTrue(a.getName().contains("Why")); // I don't believe that Java can handle case insensitive
         }
         
-        abilities = abilityFacade.searchAbilitiesByName("I AM INVINSIBLE");
+        abilities = abilityFacade.searchAbilitiesByName("I AM INVINSIBLE", true);
         Assert.assertEquals(abilities.size(), 0);
     }
     

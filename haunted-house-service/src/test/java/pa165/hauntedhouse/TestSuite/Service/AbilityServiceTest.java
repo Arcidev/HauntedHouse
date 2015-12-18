@@ -86,11 +86,11 @@ public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void testSearch() {
-        List<Ability> abilities = abilityService.searchAbilitiesByName("lol");
+        List<Ability> abilities = abilityService.searchAbilitiesByName("lol", true);
         Assert.assertEquals(abilities.size(), 1);
         Assert.assertTrue(abilities.get(0).getName().contains("lol"));
         
-        abilities = abilityService.searchAbilitiesByName("trol");
+        abilities = abilityService.searchAbilitiesByName("trol", true);
         Assert.assertEquals(abilities.size(), 2);
         for (Ability a : abilities) {
             Assert.assertTrue(a.getName().contains("trol"));

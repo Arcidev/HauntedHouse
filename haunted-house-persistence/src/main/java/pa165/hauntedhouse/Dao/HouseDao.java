@@ -20,33 +20,41 @@ public interface HouseDao {
      * @param id
      * @return the house with specified id
      */
-    public House findById(int id);
+    House findById(int id);
     
     /**
      * Creates new house
      * 
      * @param hs
      */
-    public void create(House hs);
+    void create(House hs);
     
     /**
      * Deletes existing house
      * 
      * @param hs
      */
-    public void delete(House hs);
+    void delete(House hs);
     /**
      * Updates existing house
      * 
      * @param hs
      */
-    public void update(House hs);
+    void update(House hs);
     /**
      * Gets all houses that are stored in database
      * 
      * @return the list of all houses
      */
-    public List<House> findAll();
+    List<House> findAll();
+    
+    /**
+     * Gets all houses that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible houses
+     */
+    List<House> findAllByVisibility(boolean visible);
     
     /**
      * Returns a house with specified name from database
@@ -54,7 +62,7 @@ public interface HouseDao {
      * @param name
      * @return the house with specified name
      */
-    public House findByName(String name);
+    House findByName(String name);
     
     /**
      * Searches houses name by filter
@@ -62,5 +70,5 @@ public interface HouseDao {
      * @param filter
      * @return house that match the filter
      */
-    public List<House> searchByName(String filter);
+    List<House> searchByName(String filter);
 }

@@ -68,12 +68,13 @@ public interface AbilityFacade {
     List<AbilityDTO> getAllAbilities();
 
     /**
-     * Gets all basic ability infoes
+     * Gets all abilities that are stored in database based on their visibility
      * 
-     * @return all ability infoes
+     * @param visible
+     * @return all visible or invisible abilities
      */
-    List<AbilityInfoDTO> getAllAbilityInfoes();
-            
+    List<AbilityInfoDTO> getAllAbilityInfoesByVisibility(boolean visible);
+    
     /**
      * Gets ability by id
      * 
@@ -102,8 +103,16 @@ public interface AbilityFacade {
      * Finds all abilities whiche name matches filter
      * 
      * @param filter
+     * @param visible
      * @return abilities matched by filter
      */
-    List<AbilityDTO> searchAbilitiesByName(String filter);
+    List<AbilityInfoDTO> searchAbilitiesByName(String filter, boolean visible);
+    
+    /**
+     * Gets spook ability infoes
+     * 
+     * @param spookId
+     * @return all spook ability infoes
+     */
     List<AbilityInfoDTO> getSpookAbilityInfoes(int spookId);
 }

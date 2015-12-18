@@ -16,6 +16,7 @@ import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
 import pa165.hauntedhouse.Service.HistoryService;
+import pa165.hauntedhouse.Service.HouseService;
 import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 
@@ -34,8 +35,12 @@ public class SpookFacadeImpl implements SpookFacade {
     
     @Autowired
     private SpookService spookService;
+    
     @Autowired
     private HistoryService historyService;
+    
+    @Autowired
+    private HouseService houseService;
 
     @Override
     public void createSpook(SpookDTO s) {        
@@ -94,8 +99,8 @@ public class SpookFacadeImpl implements SpookFacade {
     }
 
     @Override
-    public List<SpookDTO> searchSpooksByName(String filter) {
-        return beanMappingService.mapTo(spookService.searchSpooksByName(filter), SpookDTO.class);
+    public List<SpookInfoDTO> searchSpooksByName(String filter, boolean visible) {
+        return beanMappingService.mapTo(spookService.searchSpooksByName(filter, visible), SpookInfoDTO.class);
     }
     
     @Override
@@ -103,10 +108,10 @@ public class SpookFacadeImpl implements SpookFacade {
         return beanMappingService.mapTo(historyService.getSpookByHistoryId(historyId), SpookDTO.class);
     }      
   
-    @Override
+    /*@Override
     public List<SpookInfoDTO> getAllSpookInfoes() {
         return beanMappingService.mapTo(spookService.findAll(), SpookInfoDTO.class);
-    }
+    }*/
     public SpookInfoDTO getSpookInfoById(int id) {
         Spook s = spookService.findById(id);
         if (s == null) {
@@ -114,6 +119,19 @@ public class SpookFacadeImpl implements SpookFacade {
         }
         
         return beanMappingService.mapTo(s, SpookInfoDTO.class);
+    }
+
+    @Override
+    public List<SpookInfoDTO> getHouseSpookInfoes(int houseId) {
+        return beanMappingService.mapTo(houseService.getSpooksByHouseId(houseId), SpookInfoDTO.class);
+    }
+    @Override
+    public void setVisible(int spookId, boolean visible) {
+        spookService.setVisible(spookId,visible);
+    }
+    @Override
+    public List<SpookInfoDTO> getAllSpookInfoesByVisibility(boolean visible) {
+        return beanMappingService.mapTo(spookService.findAllByVisibility(visible), SpookInfoDTO.class);
     }
     
 }

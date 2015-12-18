@@ -48,7 +48,7 @@ public interface HistoryService {
      * @param spookId
      * @return all records of spooks history
      */
-    List<History> getAllSpooksHistories(int spookId);
+    List<History> getAllSpooksHistories(Spook spookId);
     /**
      * Gets history by id
      * 

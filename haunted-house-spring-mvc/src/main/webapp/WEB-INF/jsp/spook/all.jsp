@@ -7,15 +7,24 @@
 
 <fmt:message var="addSpook" key="spook.addSpook"/>
 <fmt:message var="noImage" key="misc.noImage"/>
+<fmt:message var="hidSpooks" key="spook.hidSpooks"/>
+<fmt:message var="search" key="misc.search"/>
 
 <spook:header>
     <jsp:attribute name="body">
         <div class="jumbotron">
-        <div class="manage-buttons-container">
-            <a href="/spook/new" class="m-btn black">
+            <div class="manage-buttons-container">
+         <c:if test="${isAuthenticated}">        
+            <a href="${pageContext.request.contextPath}/spook/new" class="m-btn black"> 
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${addSpook}
             </a>
+        
+         </c:if>
+            <form class="search-box" action="${pageContext.request.contextPath}/spook" method="GET">
+                <input type="text" class="search-square" name="searchFilter" value="${searchFilter}" />
+                <input class="m-btn black" type="submit" value="${search}" />
+            </form>
         </div>
         <c:forEach items="${spooks}" var="spook" varStatus="ic">
             <div class="inline-block-content-spook"><!-- bootstrap responsive grid -->
@@ -27,8 +36,20 @@
                 </a>
             </div>
         </c:forEach>
+        <c:if test="${not empty hiddenSpooks}">
+            <h3>${hidSpooks}</h3>
+            <c:forEach items="${hiddenSpooks}" var="spook" varStatus="ic">
+                <div class="inline-block-content-house"><!-- bootstrap responsive grid -->
+                    <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">
+                        <div class="ability-container">
+                            <img class="img-house" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
+                            <span>${spook.name}</span>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </c:if>
        </div> 
-    </jsp:attribute>
-    
+    </jsp:attribute>    
     
 </spook:header>

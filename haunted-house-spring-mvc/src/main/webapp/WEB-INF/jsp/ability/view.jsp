@@ -9,6 +9,9 @@
 <fmt:message var="editAbility" key="ability.editAbility"/>
 <fmt:message var="abilitySpooks" key="ability.abilitySpooks"/>
 <fmt:message var="noImage" key="misc.noImage"/>
+<fmt:message var="makeVisible" key="misc.makeVisible"/>
+<fmt:message var="makeInvisible" key="misc.makeInvisible"/>
+<fmt:message var="removeAbility" key="ability.removeSpook"/>
 
 <ability:header>
 <jsp:attribute name="body">
@@ -17,9 +20,23 @@
         <c:if test="${userRole == 'ADMIN'}">
             <div class="manage-buttons-container">
                 <a href="/HauntedHouse/ability/edit/${ability.id}" class="m-btn black">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-plus"></span>
                     ${editAbility}
                 </a>
+                <c:choose>
+                    <c:when test="${ability.visible}">
+                        <a href="/HauntedHouse/ability/visible/${ability.id}/false" class="m-btn black">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            ${makeInvisible}
+                        </a>
+                    </c:when>    
+                    <c:otherwise>
+                        <a href="/HauntedHouse/ability/visible/${ability.id}/true" class="m-btn black">
+                            <span class="glyphicon glyphicon-cog"></span>
+                            ${makeVisible}
+                        </a>
+                    </c:otherwise>
+                </c:choose>
             </div>
         </c:if>
         <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
@@ -29,6 +46,11 @@
             <h3>${abilitySpooks}:</h3>
             <c:forEach items="${spooks}" var="spook" varStatus="ic">
                 <div>
+                    <c:if test="${userRole == 'ADMIN'}">
+                        <button onclick="showPopup('${pageContext.request.contextPath}/ability/removeSpook/${ability.id}/${spook.id}', '${removeAbility}')" class="m-btn">
+                            <span class="glyphicon glyphicon-minus"></span>
+                        </button>
+                    </c:if>
                     <a class="anchor-no-decor" href="${pageContext.request.contextPath}/spook/${spook.id}">
                         <div class="ability-spook">
                             <img src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}"/>
@@ -37,6 +59,20 @@
                     </a>
                 </div>
             </c:forEach>
+        </c:if>
+        <c:if test="${userRole == 'ADMIN' && not empty notAssignedSpooks}">
+            <h3>Add spook</h3>
+            <form:form action="${pageContext.request.contextPath}/ability/addSpook">
+                <input type="hidden" name="abilityId" value="${ability.id}" />
+                <select name="spookId">
+                    <c:forEach items="${notAssignedSpooks}" var="spook" varStatus="ic">
+                        <option value="${spook.id}">
+                            ${spook.name}
+                        </option>
+                    </c:forEach>
+                </select>
+                <input type="submit" class="m-btn black" />
+            </form:form>
         </c:if>
         
     </div>

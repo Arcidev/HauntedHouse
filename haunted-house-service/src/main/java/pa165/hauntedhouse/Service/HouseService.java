@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Service;
 
 import java.util.List;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
@@ -51,6 +52,14 @@ public interface HouseService {
     List<House> findAll();
     
     /**
+     * Gets all houses that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible housesS
+     */
+    List<House> findAllByVisibility(boolean visible);
+    
+    /**
      * Finds all abilities whiche name matches filter
      * 
      * @param filter
@@ -72,5 +81,21 @@ public interface HouseService {
      * @param spookId
      */
     void removeFromSpook(int houseId, int spookId);
+    
+    /**
+     * Sets house visibility
+     * 
+     * @param houseId
+     * @param visible
+     */
+    void setVisible(int houseId, boolean visible);
+    
+    /**
+     * Finds all spooks which haunt in this house
+     * 
+     * @param houseId
+     * @return all spooks which haunt in this house
+     */
+    public List<Spook> getSpooksByHouseId(int houseId);
     
 }

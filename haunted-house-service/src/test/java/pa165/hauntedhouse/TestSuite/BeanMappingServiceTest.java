@@ -101,7 +101,7 @@ public class BeanMappingServiceTest extends AbstractTestNGSpringContextTests
     @Test
     public void testHouseMap(){
         HouseDTO houseDto = beanMappingService.mapTo(house, HouseDTO.class);
-        
+       
         Assert.assertEquals(houseDto.getHistory(), "None");
         Assert.assertEquals(houseDto.getName(), "Test house");
         Assert.assertEquals(houseDto.getAddress(), "Some adress");

@@ -8,7 +8,9 @@
 <fmt:message var="browse" key="misc.browse"/>
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="spookImage" key="spook.image"/>
-<fmt:message var="historyInfo" key="history.info"/>
+<fmt:message var="history" key="spook.history"/>
+<fmt:message var="hauntsSince" key="spook.hauntsSince"/>
+<fmt:message var="hauntsUntil" key="spook.hauntsUntil"/>
 <fmt:message var="name" key="misc.name"/>
 <fmt:message var="description" key="misc.description"/>
 <fmt:message var="create" key="misc.create"/>
@@ -37,11 +39,25 @@
                     <p class="input_error">*${name_error}</p>
                 </c:if>
             </div>
+             <div class="form-group ability-edit-block">
+                <p>${history}:</p>                
+                <input type="text" name="history" value="${spookEdit.history}"/>
+                <c:if test="${not empty history_error}">
+                    <p class="input_error">*${history_error}</p>
+                </c:if>
+            </div>
             <div class="form-group ability-edit-block">
-                <p>${description}:</p>
-                <textarea name="info">${spookEdit.history}</textarea>
-                <c:if test="${not empty info_error}">
-                    <p class="input_error">*${info_error}</p>
+                <p>${hauntsSince}:</p>                
+                <input type="text" name="hauntsSince" value="${spookEdit.hauntsSince}" " placeholder="HH:MM:SS"/>
+                <c:if test="${not empty hauntsSince_error}">
+                    <p class="input_error">*${hauntsSince_error}</p>
+                </c:if>
+            </div>
+            <div class="form-group ability-edit-block">
+                <p>${hauntsUntil}:</p>                
+                <input type="text" name="hauntsUntil" value="${spookEdit.hauntsUntil}" placeholder="HH:MM:SS"/>
+                <c:if test="${not empty hauntsUntil_error}">
+                    <p class="input_error">*${hauntsUntil_error}</p>
                 </c:if>
             </div>
             <div class="ability-img-block">

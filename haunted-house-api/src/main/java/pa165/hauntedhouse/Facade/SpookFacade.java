@@ -32,7 +32,7 @@ public interface SpookFacade {
      * 
      * @return all spook infoes
      */
-    List<SpookInfoDTO> getAllSpookInfoes();
+   // List<SpookInfoDTO> getAllSpookInfoes();
     /**
      * Gets spook info by id
      * 
@@ -40,8 +40,10 @@ public interface SpookFacade {
      * @return spook info by id
      */
     SpookInfoDTO getSpookInfoById(int id);
-    
+        
     List<SpookInfoDTO> getAbilitySpookInfoes(int abilityId);
+    
+    List<SpookInfoDTO> getHouseSpookInfoes(int houseId);
 
     void removeFromAbility(int spookId, int abilityId);
 
@@ -53,5 +55,26 @@ public interface SpookFacade {
 
     SpookDTO getSpookById(int id);
     
-    List<SpookDTO> searchSpooksByName(String filterName);    
+   /**
+     * Finds all spooks whiche name matches filter
+     * 
+     * @param filter
+     * @param visible
+     * @return abilities matched by filter
+     */
+    List<SpookInfoDTO> searchSpooksByName(String filter, boolean visible);
+    /**
+     * Sets spook visibility
+     * 
+     * @param spookId
+     * @param visible
+     */
+    void setVisible(int spookId, boolean visible);
+    /**
+     * Gets all spooks that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible spooks
+     */
+    List<SpookInfoDTO> getAllSpookInfoesByVisibility(boolean visible);
 }

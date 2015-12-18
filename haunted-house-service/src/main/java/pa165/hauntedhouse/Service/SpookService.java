@@ -47,6 +47,20 @@ public interface SpookService {
     public House getHouseBySpookId(int spookId);
     
     
-    List<Spook> searchSpooksByName(String filter);
+    List<Spook> searchSpooksByName(String filter, boolean visible);
+    /**
+     * Gets all spooks that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible spooks
+     */
+    List<Spook> findAllByVisibility(boolean visible);
+    /**
+     * Sets spook visibility
+     * 
+     * @param spookId
+     * @param visible
+     */
+    void setVisible(int spookId, boolean visible);
     
 }
