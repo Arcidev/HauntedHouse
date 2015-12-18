@@ -33,6 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/history/edit/**").access("hasRole('ADMIN')")
         .antMatchers("/ability/visible/**").access("hasRole('ADMIN')")
         .antMatchers("/house/visible/**").access("hasRole('ADMIN')")
+        .antMatchers("/spook/visible/**").access("hasRole('ADMIN')")
         .antMatchers("/house/delete/**").access("hasRole('ADMIN')")
         .antMatchers("/ability/new/**").authenticated()
         .antMatchers("/spook/new/**").authenticated()

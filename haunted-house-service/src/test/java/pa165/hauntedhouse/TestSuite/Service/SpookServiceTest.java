@@ -52,10 +52,14 @@ public class SpookServiceTest extends AbstractTestNGSpringContextTests {
         spook.setHistory("Foo");
         spook.setHauntsSince(time);
         spook.setHauntsUntil(time);
+        spook.setVisible(true);
+        
         spook2.setName("Spookie 24");
         spook2.setHistory("Foo 2");
         spook2.setHauntsSince(time);
         spook2.setHauntsUntil(time);
+        spook2.setVisible(true);
+        
         abilityService.create(ability);
         abilityService.create(ability2);
         spookService.create(spook);

@@ -108,10 +108,10 @@ public class SpookFacadeImpl implements SpookFacade {
         return beanMappingService.mapTo(historyService.getSpookByHistoryId(historyId), SpookDTO.class);
     }      
   
-    @Override
+    /*@Override
     public List<SpookInfoDTO> getAllSpookInfoes() {
         return beanMappingService.mapTo(spookService.findAll(), SpookInfoDTO.class);
-    }
+    }*/
     public SpookInfoDTO getSpookInfoById(int id) {
         Spook s = spookService.findById(id);
         if (s == null) {
@@ -124,6 +124,14 @@ public class SpookFacadeImpl implements SpookFacade {
     @Override
     public List<SpookInfoDTO> getHouseSpookInfoes(int houseId) {
         return beanMappingService.mapTo(houseService.getSpooksByHouseId(houseId), SpookInfoDTO.class);
+    }
+    @Override
+    public void setVisible(int spookId, boolean visible) {
+        spookService.setVisible(spookId,visible);
+    }
+    @Override
+    public List<SpookInfoDTO> getAllSpookInfoesByVisibility(boolean visible) {
+        return beanMappingService.mapTo(spookService.findAllByVisibility(visible), SpookInfoDTO.class);
     }
     
 }

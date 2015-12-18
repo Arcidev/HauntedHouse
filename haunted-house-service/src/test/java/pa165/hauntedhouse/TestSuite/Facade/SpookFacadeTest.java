@@ -53,11 +53,13 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
         spook.setHauntsSince(timeSince);
         spook.setHauntsUntil(timeUntil);
         spook.setHistory("Casper history");
+        spook.setVisible(true);
         
         spook2.setName("Casper2");
         spook2.setHauntsSince(timeSince);
         spook2.setHauntsUntil(timeUntil);
-        spook2.setHistory("Casper history2");    
+        spook2.setHistory("Casper history2"); 
+        spook2.setVisible(true);
                 
         spookFacade.createSpook(spook);
         spookFacade.createSpook(spook2);

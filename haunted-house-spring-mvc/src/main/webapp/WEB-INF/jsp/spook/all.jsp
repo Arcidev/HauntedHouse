@@ -7,6 +7,7 @@
 
 <fmt:message var="addSpook" key="spook.addSpook"/>
 <fmt:message var="noImage" key="misc.noImage"/>
+<fmt:message var="hidSpooks" key="spook.hidSpooks"/>
 
 <spook:header>
     <jsp:attribute name="body">
@@ -29,6 +30,19 @@
                 </a>
             </div>
         </c:forEach>
+        <c:if test="${not empty hiddenSpooks}">
+            <h3>${hidSpooks}</h3>
+            <c:forEach items="${hiddenSpooks}" var="spook" varStatus="ic">
+                <div class="inline-block-content-house"><!-- bootstrap responsive grid -->
+                    <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">
+                        <div class="ability-container">
+                            <img class="img-house" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
+                            <span>${spook.name}</span>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
+        </c:if>
        </div> 
     </jsp:attribute>    
     

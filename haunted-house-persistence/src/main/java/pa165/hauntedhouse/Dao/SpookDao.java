@@ -20,33 +20,33 @@ public interface SpookDao {
      * @param id
      * @return the spook with specified id
      */
-    public Spook findById(int id);
+     Spook findById(int id);
     
     /**
      * Creates new spook
      * 
      * @param spk
      */
-    public void create(Spook spk);
+     void create(Spook spk);
     /**
      * Updates existing spook
      * 
      * @param spk
      */
-    public void update(Spook spk);
+     void update(Spook spk);
     /**
      * Deletes existing spook
      * 
      * @param spk
      */
     
-    public void delete(Spook spk);
+     void delete(Spook spk);
     /**
      * Gets all spooks that are stored in database
      * 
      * @return the list of all spooks
      */
-    public List<Spook> findAll();
+     List<Spook> findAll();
     
     /**
      * Returns an spook with specified name from database
@@ -54,13 +54,20 @@ public interface SpookDao {
      * @param name
      * @return the spook with specified name
      */
-    public Spook findByName(String name);
+     Spook findByName(String name);
     /**
      * Searches spooks name by filter
      * 
      * @param filter
      * @return spooks that match the filter
      */
-    public List<Spook> searchByName(String filter);
+     List<Spook> searchByName(String filter);
+    /**
+     * Gets all spooks that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible spooks
+     */
+    List<Spook> findAllByVisibility(boolean visible);
 }
 

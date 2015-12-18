@@ -48,5 +48,19 @@ public interface SpookService {
     
     
     List<Spook> searchSpooksByName(String filter);
+    /**
+     * Gets all spooks that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible spooks
+     */
+    List<Spook> findAllByVisibility(boolean visible);
+    /**
+     * Sets spook visibility
+     * 
+     * @param spookId
+     * @param visible
+     */
+    void setVisible(int spookId, boolean visible);
     
 }

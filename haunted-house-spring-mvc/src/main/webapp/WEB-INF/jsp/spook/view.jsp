@@ -12,6 +12,8 @@
 <fmt:message var="history" key="spook.history"/>
 <fmt:message var="spookAbilities" key="spook.spookAbilities"/>
 <fmt:message var="noImage" key="misc.noImage"/>
+<fmt:message var="makeVisible" key="misc.makeVisible"/>
+<fmt:message var="makeInvisible" key="misc.makeInvisible"/>
 
 <spook:header>
     <jsp:attribute name="body">
@@ -21,7 +23,21 @@
             <a href="/HauntedHouse/spook/edit/${spook.id}" class="m-btn black">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${editSpook}
-            </a>        
+            </a>  
+            <c:choose>
+                    <c:when test="${spook.visible}">
+                        <a href="/HauntedHouse/spook/visible/${spook.id}/false" class="m-btn black">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            ${makeInvisible}
+                        </a>
+                    </c:when>    
+                    <c:otherwise>
+                        <a href="/HauntedHouse/spook/visible/${spook.id}/true" class="m-btn black">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            ${makeVisible}
+                        </a>
+                    </c:otherwise>
+                </c:choose>
         </div>
             </c:if>
         <img class="img-ability" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">

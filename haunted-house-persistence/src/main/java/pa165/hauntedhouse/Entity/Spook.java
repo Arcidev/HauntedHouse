@@ -48,6 +48,8 @@ public class Spook  {
     @NotNull
     private Time hauntsUntil;
     
+    private boolean visible;
+    
     @Lob
     private byte[] image;
 
@@ -144,6 +146,13 @@ public class Spook  {
     }
     public Time getHauntsUntil() {
         return hauntsUntil;
+    }
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
     
    
