@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.HouseDTO;
 import pa165.hauntedhouse.Dto.HouseInfoDTO;
@@ -67,7 +68,7 @@ public class HouseController extends BaseController{
         }
         
         model.addAttribute("house", house);
-     //   model.addAttribute("spooks", spookFacade(house.getId()));
+        model.addAttribute("spooks", spookFacade.getHouseSpookInfoes(house.getId()));
         return "house/view";
     }
     
@@ -90,6 +91,15 @@ public class HouseController extends BaseController{
         
         model.addAttribute("houseEdit", house);
         return "house/edit";
+    }
+    
+    @RequestMapping(value = "/delete/{deleteId}", method = RequestMethod.POST)
+    public String deleteEvent(@PathVariable("deleteId") int deleteId, RedirectAttributes redirectAttributes,
+                              UriComponentsBuilder uriComponentsBuilder){
+        HouseDTO house = houseFacade.getHouseById(deleteId);
+        houseFacade.deleteHouse(deleteId);
+        redirectAttributes.addFlashAttribute("alert_success", "House \"" + house.getName() + "\" was removed");
+        return "redirect:/house/all";
     }
     
     @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)

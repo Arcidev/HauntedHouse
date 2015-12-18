@@ -7,6 +7,8 @@
 
 <fmt:message var="addHouse" key="house.addHouse"/>
 <fmt:message var="editHouse" key="house.editHouse"/>
+<fmt:message var="deleteHouse" key="house.deleteHouse"/>
+<fmt:message var="houseSpooks" key="house.houseSpooks"/>
 <fmt:message var="address" key="house.address"/>
 <fmt:message var="history" key="house.history"/>
 <fmt:message var="date" key="house.date"/>
@@ -39,6 +41,10 @@
                         </a>
                     </c:otherwise>
                 </c:choose>
+            <a href="/HauntedHouse/house/delete/${house.id}" class="m-btn black">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                ${deleteHouse}
+            </a>
         </div>
         </c:if>
         <img class = "img-house" src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
@@ -47,11 +53,11 @@
         <p><b>${history} : </b><span>${house.history}</span></p>
         <p><b>${date} : </b><span>${house.hauntedSince}</span></p>
         <c:if test="${not empty spooks}">
-            <h3>Spooks which haunt in this house:</h3>
+            <h3>${houseSpooks}</h3>
             <c:forEach items="${spooks}" var="spook" varStatus="ic">
                 <div>
                     <a class="anchor-no-decor" href="${pageContext.request.contextPath}/spook/${spook.id}">
-                        <div class="ability-spook">
+                        <div class="house-spook">
                             <img src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}"/>
                         </div>
                         <strong>${spook.name}</strong>

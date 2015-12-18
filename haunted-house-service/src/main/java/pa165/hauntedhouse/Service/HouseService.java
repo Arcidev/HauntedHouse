@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Service;
 
 import java.util.List;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
@@ -88,5 +89,13 @@ public interface HouseService {
      * @param visible
      */
     void setVisible(int houseId, boolean visible);
+    
+    /**
+     * Finds all spooks which haunt in this house
+     * 
+     * @param houseId
+     * @return all spooks which haunt in this house
+     */
+    public List<Spook> getSpooksByHouseId(int houseId);
     
 }

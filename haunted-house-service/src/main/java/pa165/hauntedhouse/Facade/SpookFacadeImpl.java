@@ -16,6 +16,7 @@ import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
 import pa165.hauntedhouse.Service.HistoryService;
+import pa165.hauntedhouse.Service.HouseService;
 import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 
@@ -34,8 +35,12 @@ public class SpookFacadeImpl implements SpookFacade {
     
     @Autowired
     private SpookService spookService;
+    
     @Autowired
     private HistoryService historyService;
+    
+    @Autowired
+    private HouseService houseService;
 
     @Override
     public void createSpook(SpookDTO s) {        
@@ -114,6 +119,11 @@ public class SpookFacadeImpl implements SpookFacade {
         }
         
         return beanMappingService.mapTo(s, SpookInfoDTO.class);
+    }
+
+    @Override
+    public List<SpookInfoDTO> getHouseSpookInfoes(int houseId) {
+        return beanMappingService.mapTo(houseService.getSpooksByHouseId(houseId), SpookInfoDTO.class);
     }
     
 }

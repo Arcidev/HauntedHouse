@@ -42,6 +42,8 @@ public interface SpookFacade {
     SpookInfoDTO getSpookInfoById(int id);
         
     List<SpookInfoDTO> getAbilitySpookInfoes(int abilityId);
+    
+    List<SpookInfoDTO> getHouseSpookInfoes(int houseId);
 
     void removeFromAbility(int spookId, int abilityId);
 

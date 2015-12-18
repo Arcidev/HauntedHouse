@@ -151,6 +151,18 @@
     margin-bottom: 5px;
 }
 
+.house-spook {
+    width: 100px;
+    display: inline-block;
+    height: 52px;
+}
+
+.house-spook > img {
+    max-width: 100px;
+    max-height: 50px;
+    margin: auto;
+}
+
 .img-ability {
     max-height: 56px;
     max-width: 56px;

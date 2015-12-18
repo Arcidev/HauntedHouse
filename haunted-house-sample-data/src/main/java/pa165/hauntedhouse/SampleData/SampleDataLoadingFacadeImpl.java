@@ -87,7 +87,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             SPOOKS_FOLDER + "vampire.jpg",                                      // imageFile
             JPEG);                                                              // mimeType
         
-        House h1 = house("Sorotity House",                                      //name
+        House h1 = house("Sorority House",                                      //name
             "Sorority Street, NY",                                              //address
             "House..................................",                          // history
             getDate(1896, 05, 02),                                              // hauntedSince                                                 // hauntsUntil
@@ -112,7 +112,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         abilityService.addToSpook(a4.getId(), s2.getId());
         
         houseService.addToSpook(h1.getId(), s1.getId());
-        houseService.addToSpook(h2.getId(), s2.getId());
+        houseService.addToSpook(h1.getId(), s2.getId());
     }
     
     private Ability ability(String name, String info, String imageFile, String mimeType) throws IOException {

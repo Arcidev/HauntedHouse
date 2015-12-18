@@ -83,6 +83,9 @@ public class HouseServiceImpl implements HouseService {
     public void addToSpook(int houseId, int spookId) {
         House h = houseDao.findById(houseId);
         Spook s = spookDao.findById(spookId);
+        if (h == null || s == null) {
+            throw new IllegalArgumentException("House or Spook does not exist with passed ids");
+        }
         h.addSpook(s);
         spookDao.update(s);
     }
@@ -91,6 +94,9 @@ public class HouseServiceImpl implements HouseService {
     public void removeFromSpook(int houseId, int spookId) {
         House h = houseDao.findById(houseId);
         Spook s = spookDao.findById(spookId);
+        if (h == null || s == null) {
+            throw new IllegalArgumentException("House or Spook does not exist with passed ids");
+        }
         h.removeSpook(s);
         spookDao.update(s);
     }
@@ -108,5 +114,15 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public List<House> findAllByVisibility(boolean visible) {
         return houseDao.findAllByVisibility(visible);
+    }
+    
+    @Override
+    public List<Spook> getSpooksByHouseId(int houseId){
+    House house = houseDao.findById(houseId);
+        if (house == null) {
+            return new ArrayList<>();
+        }
+
+        return new ArrayList<>(house.getSpooks());
     }
 }
