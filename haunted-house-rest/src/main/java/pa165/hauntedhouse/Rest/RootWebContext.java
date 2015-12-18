@@ -29,7 +29,7 @@ import pa165.hauntedhouse.SampleData.SampleDataConfiguration;
 @EnableWebMvc
 @Configuration
 @Import(SampleDataConfiguration.class)
-@ComponentScan(basePackages = {"pa165.hauntedhouse.controllers"})
+@ComponentScan(basePackages = {"pa165.hauntedhouse.Controllers"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override

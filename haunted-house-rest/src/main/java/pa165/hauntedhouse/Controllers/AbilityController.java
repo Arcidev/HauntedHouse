@@ -26,7 +26,7 @@ import pa165.hauntedhouse.Facade.SpookFacade;
  * @author Andrej Dobes
  */
 @RestController
-@RequestMapping("/ability")
+@RequestMapping("ability")
 public class AbilityController {
     
     @Autowired
@@ -61,7 +61,7 @@ public class AbilityController {
     }
 
     
-    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public AbilityInfoDTO create(@RequestBody AbilityDTO ability) {
         abilityFacade.createAbility(ability);
         return abilityFacade.getAbilityById(ability.getId());
