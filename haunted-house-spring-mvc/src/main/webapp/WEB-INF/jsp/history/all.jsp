@@ -25,6 +25,7 @@
         <tr>
             <th>id</th>
             <th>info</th>
+            <th>datum</th>
         </tr>
         </thead>
         <tbody>
@@ -32,6 +33,7 @@
             <tr>
                 <td>${history.id}</td>
                 <td><c:out value="${history.info}"/></td>
+                <td><c:out value="${history.historyDate}"/></td>
                 <td>
                 <div class="manage-buttons-container">
                     <a href="${pageContext.request.contextPath}/history/edit/${history.id}" class="m-btn black">

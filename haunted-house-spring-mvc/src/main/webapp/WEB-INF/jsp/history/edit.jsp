@@ -29,6 +29,16 @@
                 </c:if>
             </div>
         </form:form>
+            
+            
+                <c:choose>
+                    <c:when test="${historyEdit.id == 0}">
+                        <input class="m-btn black button-100" type="submit" value="${create}" />
+                    </c:when>    
+                    <c:otherwise>
+                        <input class="m-btn black button-100" type="submit" value="${edit}" />
+                    </c:otherwise>
+                </c:choose>
     </div>
     
 </jsp:attribute>
