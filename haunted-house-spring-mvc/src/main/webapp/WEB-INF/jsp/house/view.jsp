@@ -24,19 +24,19 @@
     <div>
         <c:if test="${userRole == 'ADMIN'}">
         <div class="manage-buttons-container">
-            <a href="/HauntedHouse/house/edit/${house.id}" class="m-btn black">
+            <a href="${pageContext.request.contextPath}/house/edit/${house.id}" class="m-btn black">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${editHouse}
             </a>
             <c:choose>
                 <c:when test="${house.visible}">
-                    <a href="/HauntedHouse/house/visible/${house.id}/false" class="m-btn black">
+                    <a href="${pageContext.request.contextPath}/house/visible/${house.id}/false" class="m-btn black">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         ${makeInvisible}
                     </a>
                 </c:when>    
                 <c:otherwise>
-                    <a href="/HauntedHouse/house/visible/${house.id}/true" class="m-btn black">
+                    <a href="${pageContext.request.contextPath}/house/visible/${house.id}/true" class="m-btn black">
                         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         ${makeVisible}
                     </a>
