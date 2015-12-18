@@ -56,7 +56,7 @@ curl -i -X POST -H "Content-Type: application/json" --data '{"name":"Ability nam
 **Example**
 
 ```
-curl -i -X PUT -H "Content-Type: application/json" --data '{"id": 1, "name":"New ability name", "info":"New ability info", "image": null}' http://localhost:8080/pa165/rest/ability/edit
+curl -i -X PUT -H "Content-Type: application/json" --data '{ "id": 1, "name":"New ability name", "info":"New ability info", "image": "null" }' http://localhost:8080/pa165/rest/ability/edit
 ```
 
 ### Set ability visibility
