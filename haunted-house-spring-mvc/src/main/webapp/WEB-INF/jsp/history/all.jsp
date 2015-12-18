@@ -19,14 +19,6 @@
 <history:header>
 <jsp:attribute name="body">
 
-
-    <div>
-        <div class="manage-buttons-container">
-            <a href="${pageContext.request.contextPath}/history/edit/1" class="m-btn black">
-                <span class="glyphicon" aria-hidden="true"></span>
-                ${editHistory}
-            </a>
-        </div>
             
     <table class="table">
         <thead>
@@ -40,7 +32,16 @@
             <tr>
                 <td>${history.id}</td>
                 <td><c:out value="${history.info}"/></td>
+                <td>
+                <div class="manage-buttons-container">
+                    <a href="${pageContext.request.contextPath}/history/edit/${history.id}" class="m-btn black">
+                        <span class="glyphicon" aria-hidden="true"></span>
+                        ${editHistory}
+                    </a>
+                </div>
+                </td>
             </tr>
+            
         </c:forEach>
         </tbody>
     </table>
