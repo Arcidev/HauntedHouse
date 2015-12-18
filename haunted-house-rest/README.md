@@ -70,3 +70,39 @@ curl -i -X PUT -H "Content-Type: application/json" --data '{ "id": 1, "name":"Ne
 ```
 curl -i -X GET http://localhost:8080/pa165/rest/ability/visible/1/false
 ```
+
+### Add spook to ability
+
+```
+/pa165/rest/ability/addSpook/{abilityId}/{spookId}
+```
+
+**Example**
+
+```
+curl -i -X GET http://localhost:8080/pa165/rest/ability/addSpook/1/2
+```
+
+### Remove spook from ability
+
+```
+/pa165/rest/ability/removeSpook/{abilityId}/{spookId}
+```
+
+**Example**
+
+```
+curl -i -X GET http://localhost:8080/pa165/rest/ability/removeSpook/1/2
+```
+
+### Get ability spooks
+
+```
+/pa165/rest/ability/getSpooks/{id}
+```
+
+**Example**
+
+```
+curl -i -X GET http://localhost:8080/pa165/rest/ability/getSpooks/2
+```

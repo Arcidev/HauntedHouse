@@ -82,4 +82,23 @@ public class AbilityController {
         
         return abilityFacade.getAbilityById(id);
     }
+    
+    @RequestMapping(value = { "addSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET)
+    public List<SpookInfoDTO> addSpook(@PathVariable int abilityId, @PathVariable int spookId) {
+        abilityFacade.addToSpook(abilityId, spookId);
+        
+        return spookFacade.getAbilitySpookInfoes(abilityId);
+    }
+    
+    @RequestMapping(value = { "removeSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET)
+    public List<SpookInfoDTO> removeSpook(@PathVariable int abilityId, @PathVariable int spookId) {
+        abilityFacade.removeFromSpook(abilityId, spookId);
+        
+        return spookFacade.getAbilitySpookInfoes(abilityId);
+    }
+    
+    @RequestMapping(value = { "getSpooks/{id}" }, method = RequestMethod.GET)
+    public List<SpookInfoDTO> removeSpook(@PathVariable int id) {
+        return spookFacade.getAbilitySpookInfoes(id);
+    }
 }
