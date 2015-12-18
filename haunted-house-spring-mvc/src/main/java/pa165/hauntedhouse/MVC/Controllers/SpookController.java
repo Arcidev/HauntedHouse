@@ -48,12 +48,14 @@ public class SpookController extends BaseController {
     private SpookFacade spookFacade;
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
-    public String spooks(Model model) {
+    public String spooks(Model model, @RequestParam(value = "searchFilter", required = false) String searchFilter) {
         inicializeCall(model, messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()), "Spooks");
-        model.addAttribute("spooks", spookFacade.getAllSpookInfoesByVisibility(true));
+        
+        model.addAttribute("spooks", searchFilter != null ? spookFacade.searchSpooksByName(searchFilter, true) : spookFacade.getAllSpookInfoesByVisibility(true));
         if (UserRole.ADMIN.toString().equals(getUserRole())) {
-            model.addAttribute("hiddenSpooks", spookFacade.getAllSpookInfoesByVisibility(false));
+            model.addAttribute("hiddenSpooks", searchFilter != null ? spookFacade.searchSpooksByName(searchFilter, false) : spookFacade.getAllSpookInfoesByVisibility(false));
         }
+        model.addAttribute("searchFilter", searchFilter);
         
         return "spook/all";
     }

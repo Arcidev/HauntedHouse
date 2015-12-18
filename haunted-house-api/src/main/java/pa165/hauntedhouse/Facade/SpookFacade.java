@@ -55,7 +55,14 @@ public interface SpookFacade {
 
     SpookDTO getSpookById(int id);
     
-    List<SpookDTO> searchSpooksByName(String filterName);
+   /**
+     * Finds all spooks whiche name matches filter
+     * 
+     * @param filter
+     * @param visible
+     * @return abilities matched by filter
+     */
+    List<SpookInfoDTO> searchSpooksByName(String filter, boolean visible);
     /**
      * Sets spook visibility
      * 

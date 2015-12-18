@@ -116,8 +116,8 @@ public class SpookServiceImpl implements SpookService {
     }
 
     @Override
-    public List<Spook> searchSpooksByName(String filter) {
-         List<Spook> spooks = spookDao.searchByName(filter);
+    public List<Spook> searchSpooksByName(String filter, boolean visible) {
+         List<Spook> spooks = spookDao.searchByName(filter,  visible);
         if (spooks == null) {
             return new ArrayList<>();
         }        

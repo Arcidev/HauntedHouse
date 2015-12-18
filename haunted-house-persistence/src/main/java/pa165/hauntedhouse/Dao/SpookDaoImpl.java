@@ -81,10 +81,11 @@ public class SpookDaoImpl implements SpookDao{
 
     }
     @Override
-    public List<Spook> searchByName(String filter) {
+    public List<Spook> searchByName(String filter, boolean visible) {
         try {
-            return em.createQuery("select sp from Spook sp where visible = true and lower(name) like :filter", Spook.class)
-                    .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
+            return em.createQuery("select s from Spook s where visible = :visible and lower(name) like :filter", Spook.class)
+                    .setParameter("filter", '%' + filter.toLowerCase() + '%')
+                    .setParameter("visible", visible).getResultList();
         } catch (NoResultException nrf) {
             return null;
         } catch(Exception e) {

@@ -8,18 +8,24 @@
 <fmt:message var="addSpook" key="spook.addSpook"/>
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="hidSpooks" key="spook.hidSpooks"/>
+<fmt:message var="search" key="misc.search"/>
 
 <spook:header>
     <jsp:attribute name="body">
         <div class="jumbotron">
-         <c:if test="${isAuthenticated}">
-        <div class="manage-buttons-container">
+            <div class="manage-buttons-container">
+         <c:if test="${isAuthenticated}">        
             <a href="${pageContext.request.contextPath}/spook/new" class="m-btn black"> 
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${addSpook}
             </a>
-        </div>
+        
          </c:if>
+            <form class="search-box" action="${pageContext.request.contextPath}/spook" method="GET">
+                <input type="text" class="search-square" name="searchFilter" value="${searchFilter}" />
+                <input class="m-btn black" type="submit" value="${search}" />
+            </form>
+        </div>
         <c:forEach items="${spooks}" var="spook" varStatus="ic">
             <div class="inline-block-content-spook"><!-- bootstrap responsive grid -->
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">

@@ -17,6 +17,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
+import pa165.hauntedhouse.Dto.SpookInfoDTO;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
@@ -110,7 +111,7 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
     }
     @Test
     public void testSearch() {
-        List<SpookDTO> spooks = spookFacade.searchSpooksByName("Casper2");
+        List<SpookInfoDTO> spooks = spookFacade.searchSpooksByName("Casper2",true);
         Assert.assertEquals(spooks.size(), 1);
         Assert.assertTrue(spooks.get(0).getName().contains("Casper2"));        
                 

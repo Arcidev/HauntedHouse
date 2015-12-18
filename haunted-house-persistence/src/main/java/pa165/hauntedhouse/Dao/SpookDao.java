@@ -59,9 +59,10 @@ public interface SpookDao {
      * Searches spooks name by filter
      * 
      * @param filter
+     * @param visible
      * @return spooks that match the filter
      */
-     List<Spook> searchByName(String filter);
+     List<Spook> searchByName(String filter, boolean visible);
     /**
      * Gets all spooks that are stored in database based on their visibility
      * 

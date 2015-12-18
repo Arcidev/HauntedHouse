@@ -99,8 +99,8 @@ public class SpookFacadeImpl implements SpookFacade {
     }
 
     @Override
-    public List<SpookDTO> searchSpooksByName(String filter) {
-        return beanMappingService.mapTo(spookService.searchSpooksByName(filter), SpookDTO.class);
+    public List<SpookInfoDTO> searchSpooksByName(String filter, boolean visible) {
+        return beanMappingService.mapTo(spookService.searchSpooksByName(filter, visible), SpookInfoDTO.class);
     }
     
     @Override

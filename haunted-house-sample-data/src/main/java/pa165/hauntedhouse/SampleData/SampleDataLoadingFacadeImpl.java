@@ -134,6 +134,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         s.setHauntsUntil(hauntsUntil);
         s.setImage(readImage(imageFile));
         s.setImageMimeType(mimeType);
+        s.setVisible(true);
         spookService.create(s);
         return s;
     }
