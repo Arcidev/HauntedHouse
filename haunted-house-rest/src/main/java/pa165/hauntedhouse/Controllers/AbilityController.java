@@ -67,7 +67,7 @@ public class AbilityController {
         return abilityFacade.getAbilityById(ability.getId());
     }
     
-    @RequestMapping(value = { "edit" }, method = RequestMethod.PUT)
+    @RequestMapping(value = { "edit" }, method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public AbilityInfoDTO edit(@RequestBody AbilityDTO ability) {
         if (abilityFacade.getAbilityInfoById(ability.getId()) == null) {
             throw new EntityNotFound("There is no ability listed by id: " + ability.getId());
@@ -76,29 +76,42 @@ public class AbilityController {
         return abilityFacade.getAbilityById(ability.getId());
     }
     
-    @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public AbilityInfoDTO setVisible(@PathVariable int id, @PathVariable boolean visible) {
+        if (abilityFacade.getAbilityInfoById(id) == null) {
+            throw new EntityNotFound("There is no ability listed by id: " + id);
+        }
+        
         abilityFacade.setVisible(id, visible);
         
         return abilityFacade.getAbilityById(id);
     }
     
-    @RequestMapping(value = { "addSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "addSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SpookInfoDTO> addSpook(@PathVariable int abilityId, @PathVariable int spookId) {
+        if (abilityFacade.getAbilityInfoById(abilityId) == null) {
+            throw new EntityNotFound("There is no ability listed by id: " + abilityId);
+        }
+        
+        if (spookFacade.getSpookInfoById(spookId) == null) {
+            throw new EntityNotFound("There is no spook listed by id: " + spookId);
+        }
+        
         abilityFacade.addToSpook(abilityId, spookId);
-        
         return spookFacade.getAbilitySpookInfoes(abilityId);
     }
     
-    @RequestMapping(value = { "removeSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "removeSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<SpookInfoDTO> removeSpook(@PathVariable int abilityId, @PathVariable int spookId) {
-        abilityFacade.removeFromSpook(abilityId, spookId);
+        if (abilityFacade.getAbilityInfoById(abilityId) == null) {
+            throw new EntityNotFound("There is no ability listed by id: " + abilityId);
+        }
         
+        if (spookFacade.getSpookInfoById(spookId) == null) {
+            throw new EntityNotFound("There is no spook listed by id: " + spookId);
+        }
+        
+        abilityFacade.removeFromSpook(abilityId, spookId);
         return spookFacade.getAbilitySpookInfoes(abilityId);
-    }
-    
-    @RequestMapping(value = { "getSpooks/{id}" }, method = RequestMethod.GET)
-    public List<SpookInfoDTO> removeSpook(@PathVariable int id) {
-        return spookFacade.getAbilitySpookInfoes(id);
     }
 }

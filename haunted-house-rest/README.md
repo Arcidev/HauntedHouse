@@ -94,15 +94,3 @@ curl -i -X GET http://localhost:8080/pa165/rest/ability/addSpook/1/2
 ```
 curl -i -X GET http://localhost:8080/pa165/rest/ability/removeSpook/1/2
 ```
-
-### Get ability spooks
-
-```
-/pa165/rest/ability/getSpooks/{id}
-```
-
-**Example**
-
-```
-curl -i -X GET http://localhost:8080/pa165/rest/ability/getSpooks/2
-```
