@@ -19,19 +19,19 @@
     <div>
         <c:if test="${userRole == 'ADMIN'}">
             <div class="manage-buttons-container">
-                <a href="/HauntedHouse/ability/edit/${ability.id}" class="m-btn black">
+                <a href="${pageContext.request.contextPath}/ability/edit/${ability.id}" class="m-btn black">
                     <span class="glyphicon glyphicon-plus"></span>
                     ${editAbility}
                 </a>
                 <c:choose>
                     <c:when test="${ability.visible}">
-                        <a href="/HauntedHouse/ability/visible/${ability.id}/false" class="m-btn black">
+                        <a href="${pageContext.request.contextPath}/ability/visible/${ability.id}/false" class="m-btn black">
                             <span class="glyphicon glyphicon-cog"></span>
                             ${makeInvisible}
                         </a>
                     </c:when>    
                     <c:otherwise>
-                        <a href="/HauntedHouse/ability/visible/${ability.id}/true" class="m-btn black">
+                        <a href="${pageContext.request.contextPath}/ability/visible/${ability.id}/true" class="m-btn black">
                             <span class="glyphicon glyphicon-cog"></span>
                             ${makeVisible}
                         </a>
