@@ -60,8 +60,8 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void testDataCreation() {
-        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getID()), hDTO);
-        Assert.assertEquals(historyFacade.getHistoryById(hDTO2.getID()), hDTO2);
+        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getId()), hDTO);
+        Assert.assertEquals(historyFacade.getHistoryById(hDTO2.getId()), hDTO2);
     }
     
     @Test
@@ -73,8 +73,8 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         hDTO2.setHistoryDate(d2);
         historyFacade.updateHistory(hDTO2);
         
-        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getID()).getInfo(), "hu hu");
-        Assert.assertEquals((Date) historyFacade.getHistoryById(hDTO2.getID()).getHistoryDate(), d2);
+        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getId()).getInfo(), "hu hu");
+        Assert.assertEquals((Date) historyFacade.getHistoryById(hDTO2.getId()).getHistoryDate(), d2);
     }
     
     @Test
@@ -109,8 +109,8 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         
         historyFacade.createHistory(hDTO3);
         int num_history = historyFacade.getAllHistories().size();
-        historyFacade.deleteHistory(hDTO3.getID());
+        historyFacade.deleteHistory(hDTO3.getId());
         Assert.assertEquals(historyFacade.getAllHistories().size(), num_history-1);
-        Assert.assertNull(historyFacade.getHistoryById(hDTO3.getID()));
+        Assert.assertNull(historyFacade.getHistoryById(hDTO3.getId()));
     }    
 }

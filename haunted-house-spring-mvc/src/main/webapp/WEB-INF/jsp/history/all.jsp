@@ -14,7 +14,7 @@
 <fmt:message var="addHistory" key="history.addHistory"/>
 <fmt:message var="editHistory" key="history.editHistory"/>
 <fmt:message var="addHistory" key="history.addHistory"/>
-<fmt:message var="histories" key="history.histories"/>
+<fmt:message var="hist" key="history.histories"/>
 
 <history:header>
 <jsp:attribute name="body">
@@ -22,13 +22,13 @@
 
     <div>
         <div class="manage-buttons-container">
-            <a href="/HauntedHouse/history/edit/1" class="m-btn black">
+            <a href="${pageContext.request.contextPath}/history/edit/1" class="m-btn black">
                 <span class="glyphicon" aria-hidden="true"></span>
                 ${editHistory}
             </a>
         </div>
             
-<table class="table">
+    <table class="table">
         <thead>
         <tr>
             <th>id</th>
@@ -36,10 +36,10 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${histories}" var="history">
+        <c:forEach items="${histories}" var="history" varStatus="ic">
             <tr>
                 <td>${history.id}</td>
-                <td><c:out value="${history.name}"/></td>
+                <td><c:out value="${history.info}"/></td>
             </tr>
         </c:forEach>
         </tbody>

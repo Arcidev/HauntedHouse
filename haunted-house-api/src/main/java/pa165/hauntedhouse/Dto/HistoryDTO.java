@@ -20,7 +20,7 @@ public class HistoryDTO {
     @Size(min = 10)
     private String historyInfo;
     
-    public int getID(){
+    public int getId(){
         return id;
     }
     
@@ -59,7 +59,7 @@ public class HistoryDTO {
         }
         
         HistoryDTO h = (HistoryDTO)obj;
-        return id == h.getID()&&
+        return id == h.getId()&&
                 (historyDate == null ? h.getHistoryDate() == null : historyDate.equals(h.getHistoryDate())) &&
                 (historyInfo == null ? h.getInfo() == null : historyInfo.equals(h.getInfo()));
     }
