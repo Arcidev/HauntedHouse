@@ -19,27 +19,27 @@
 <spook:header>
     <jsp:attribute name="body">
          <div>
-             <c:if test="${userRole == 'ADMIN'}">
-            <div class="manage-buttons-container">
-            <a href="${pageContext.request.contextPath}/spook/edit/${spook.id}" class="m-btn black">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                ${editSpook}
-            </a>  
-            <c:choose>
+            <c:if test="${userRole == 'ADMIN'}">
+                <div class="manage-buttons-container">
+                <a href="${pageContext.request.contextPath}/spook/edit/${spook.id}" class="m-btn black">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    ${editSpook}
+                </a>  
+                <c:choose>
                     <c:when test="${spook.visible}">
                         <a href="${pageContext.request.contextPath}/spook/visible/${spook.id}/false" class="m-btn black">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                             ${makeInvisible}
                         </a>
                     </c:when>    
                     <c:otherwise>
                         <a href="${pageContext.request.contextPath}/spook/visible/${spook.id}/true" class="m-btn black">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                             ${makeVisible}
                         </a>
                     </c:otherwise>
                 </c:choose>
-        </div>
+                </div>
             </c:if>
         <img class="img-ability" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
         <h2>${spook.name}</h2>
