@@ -29,23 +29,19 @@
                 ${editHouse}
             </a>
             <c:choose>
-                    <c:when test="${house.visible}">
-                        <a href="/HauntedHouse/house/visible/${house.id}/false" class="m-btn black">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            ${makeInvisible}
-                        </a>
-                    </c:when>    
-                    <c:otherwise>
-                        <a href="/HauntedHouse/house/visible/${house.id}/true" class="m-btn black">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            ${makeVisible}
-                        </a>
-                    </c:otherwise>
-                </c:choose>
-            <a href="/HauntedHouse/house/delete/${house.id}" class="m-btn black">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                ${deleteHouse}
-            </a>
+                <c:when test="${house.visible}">
+                    <a href="/HauntedHouse/house/visible/${house.id}/false" class="m-btn black">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        ${makeInvisible}
+                    </a>
+                </c:when>    
+                <c:otherwise>
+                    <a href="/HauntedHouse/house/visible/${house.id}/true" class="m-btn black">
+                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        ${makeVisible}
+                    </a>
+                </c:otherwise>
+            </c:choose>
         </div>
         </c:if>
         <img class = "img-house" src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">

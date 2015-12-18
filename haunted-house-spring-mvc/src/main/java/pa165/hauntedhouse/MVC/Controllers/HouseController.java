@@ -101,18 +101,6 @@ public class HouseController extends BaseController{
         return "house/edit";
     }
     
-    @RequestMapping(value = {"delete/{deleteId}"}, method = RequestMethod.POST)
-    public String deleteHouse(@PathVariable int deleteId,Model model, HttpServletRequest request, HttpServletResponse response){
-        System.out.println("SOM VYPIS");
-        inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
-        HouseDTO house = houseFacade.getHouseById(deleteId);
-        
-        houseFacade.deleteHouse(deleteId);
-        model.addAttribute("houseDelete", house);
-        
-        return "house/all";
-    }
-    
     @RequestMapping(value = { "/edit" }, method = RequestMethod.POST)
     public String editPost(@Valid @ModelAttribute("houseEdit") HouseDTO house, BindingResult bindingResult, @RequestParam(value = "file", required = false) MultipartFile file, Model model, UriComponentsBuilder uriBuilder) throws IOException {
         if (bindingResult.hasErrors()) {
