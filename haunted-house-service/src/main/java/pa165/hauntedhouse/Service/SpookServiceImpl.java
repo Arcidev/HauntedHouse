@@ -93,6 +93,10 @@ public class SpookServiceImpl implements SpookService {
     @Override
     public House getHouseBySpookId(int spookId) {
         Spook spook = spookDao.findById(spookId);
+        if (spook == null || !spook.isVisible()) {
+            return null;
+        }
+        
         return spook.getHouse();
     }
     @Override

@@ -123,6 +123,8 @@ public class HouseServiceImpl implements HouseService {
             return new ArrayList<>();
         }
 
-        return new ArrayList<>(house.getSpooks());
+        ArrayList<Spook> spooks = new ArrayList<>(house.getSpooks());
+        spooks.removeIf(x -> !x.isVisible());
+        return spooks;
     }
 }

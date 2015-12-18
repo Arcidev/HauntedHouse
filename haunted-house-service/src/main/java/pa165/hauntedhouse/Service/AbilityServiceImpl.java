@@ -124,6 +124,8 @@ public class AbilityServiceImpl implements AbilityService {
             return new ArrayList<>();
         }
 
-        return new ArrayList<>(ability.getSpooks());
+        ArrayList<Spook> spooks = new ArrayList<>(ability.getSpooks());
+        spooks.removeIf(x -> !x.isVisible());
+        return spooks;
     }
 }

@@ -74,7 +74,11 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Override
     public HouseDTO getSpookHouse(int spookId) {
-        return beanMappingService.mapTo(spookService.getHouseBySpookId(spookId), HouseDTO.class);
+        House house = spookService.getHouseBySpookId(spookId);
+        if (house == null) {
+            return null;
+        }
+        return beanMappingService.mapTo(house, HouseDTO.class);
     }
 
     @Override

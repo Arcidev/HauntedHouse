@@ -95,7 +95,11 @@ public class SpookFacadeImpl implements SpookFacade {
 
     @Override
     public SpookDTO getSpookById(int id) {
-        return beanMappingService.mapTo(spookService.findById(id), SpookDTO.class);
+        Spook spook = spookService.findById(id);
+        if (spook == null) {
+            return null;
+        }
+        return beanMappingService.mapTo(spook, SpookDTO.class);
     }
 
     @Override
