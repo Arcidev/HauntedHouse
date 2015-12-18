@@ -11,12 +11,14 @@
 <spook:header>
     <jsp:attribute name="body">
         <div class="jumbotron">
+         <c:if test="${isAuthenticated}">
         <div class="manage-buttons-container">
-            <a href="/spook/new" class="m-btn black">
+            <a href="${pageContext.request.contextPath}/spook/new" class="m-btn black"> 
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${addSpook}
             </a>
         </div>
+         </c:if>
         <c:forEach items="${spooks}" var="spook" varStatus="ic">
             <div class="inline-block-content-spook"><!-- bootstrap responsive grid -->
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">
@@ -28,7 +30,6 @@
             </div>
         </c:forEach>
        </div> 
-    </jsp:attribute>
-    
+    </jsp:attribute>    
     
 </spook:header>

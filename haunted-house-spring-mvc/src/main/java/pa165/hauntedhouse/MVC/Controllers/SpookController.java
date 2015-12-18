@@ -53,7 +53,7 @@ public class SpookController extends BaseController {
         
         return "spook/all";
     }
-    @RequestMapping(value = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(value = { "{id}" }, method = RequestMethod.GET)
     public String spook(@PathVariable int id, Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
         inicializeCall(model, messageSource.getMessage("navigation.spooks", null, LocaleContextHolder.getLocale()), "Spooks");
         
@@ -63,7 +63,7 @@ public class SpookController extends BaseController {
         }
         
         model.addAttribute("spook", spook);
-        //model.addAttribute("abilities", abilityFacade.getSpookAbilityInfoes(spook.getId()));
+        model.addAttribute("abilities", abilityFacade.getSpookAbilityInfoes(spook.getId()));
         return "spook/view";
     }
     
