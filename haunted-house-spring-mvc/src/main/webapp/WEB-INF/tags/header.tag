@@ -32,6 +32,16 @@
                     }                  
                 }
             }
+            
+            function showPopup(href, message) {
+                document.getElementById('popupAnchorId').href = href;
+                document.getElementById('popupParagraphId').innerHTML = message;
+                document.getElementById('popupDivId').style.display = 'block';
+            }
+            
+            function hidePopup() {
+                document.getElementById('popupDivId').style.display = 'none';
+            }
         </script>
         <jsp:invoke fragment="head"/>
     </head>
@@ -43,8 +53,24 @@
     <fmt:message var="signUp" key="navigation.signUp"/>
     <fmt:message var="login" key="navigation.login"/>
     <fmt:message var="logout" key="navigation.logout"/>
+    <fmt:message var="yes" key="popup.yes"/>
+    <fmt:message var="no" key="popup.no"/>
     
     <body>
+        <div id="popupDivId" style="display: none">
+            <div class="white-content">
+                <div class="form-group">
+                    <p id="popupParagraphId"></p>
+                    <a id="popupAnchorId" class="m-btn black button-100 popup-button-left">
+                        ${yes}
+                    </a>
+                    <button onclick="hidePopup()" class="m-btn button-100 popup-button-right">
+                        ${no}
+                    </button>
+                </div>
+            </div>
+            <div id="popupOverlayId" class="black-overlay"></div>
+        </div>
         <!-- navigation bar -->
         <nav class="navbar navbar-inverse navbar-static-top">
           <div class="container">

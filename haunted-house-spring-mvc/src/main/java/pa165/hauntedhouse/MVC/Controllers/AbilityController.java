@@ -113,9 +113,16 @@ public class AbilityController extends BaseController {
     }
     
     @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET)
-    public String setVisible(@PathVariable int id, @PathVariable boolean visible, Model model, UriComponentsBuilder uriBuilder) {
+    public String setVisible(@PathVariable int id, @PathVariable boolean visible, UriComponentsBuilder uriBuilder) {
         abilityFacade.setVisible(id, visible);
         
         return "redirect:" + uriBuilder.path("/ability/" + id).build().toString();
+    }
+    
+    @RequestMapping(value = { "removeSpook/{abilityId}/{spookId}" }, method = RequestMethod.GET)
+    public String removeSpook(@PathVariable int abilityId, @PathVariable int spookId, UriComponentsBuilder uriBuilder) {
+        abilityFacade.removeFromSpook(abilityId, spookId);
+        
+        return "redirect:" + uriBuilder.path("/ability/" + abilityId).build().toString();
     }
 }

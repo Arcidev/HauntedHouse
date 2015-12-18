@@ -34,7 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .antMatchers("/ability/visible/**").access("hasRole('ADMIN')")
         .antMatchers("/house/visible/**").access("hasRole('ADMIN')")
         .antMatchers("/spook/visible/**").access("hasRole('ADMIN')")
-        .antMatchers("/house/delete/**").access("hasRole('ADMIN')")
+        .antMatchers("/ability/removeSpook/**").access("hasRole('ADMIN')")
         .antMatchers("/ability/new/**").authenticated()
         .antMatchers("/spook/new/**").authenticated()
         .antMatchers("/house/new/**").authenticated()
