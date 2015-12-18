@@ -51,6 +51,14 @@ public interface HouseService {
     List<House> findAll();
     
     /**
+     * Gets all houses that are stored in database based on their visibility
+     * 
+     * @param visible
+     * @return all visible or invisible housesS
+     */
+    List<House> findAllByVisibility(boolean visible);
+    
+    /**
      * Finds all abilities whiche name matches filter
      * 
      * @param filter
@@ -72,5 +80,13 @@ public interface HouseService {
      * @param spookId
      */
     void removeFromSpook(int houseId, int spookId);
+    
+    /**
+     * Sets house visibility
+     * 
+     * @param houseId
+     * @param visible
+     */
+    void setVisible(int houseId, boolean visible);
     
 }

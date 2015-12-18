@@ -36,10 +36,12 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests{
         house.setAddress("KE");
         house.setName("building");
         house.setHistory("HistoryServiceTest");
+        house.setVisible(true);
         
         house2.setAddress("BA");
         house2.setName("house2");
         house2.setHistory("HistoryServiceTest2");
+        house2.setVisible(true);
         
         houseService.create(house);
         houseService.create(house2);
@@ -71,6 +73,7 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests{
         house3.setAddress("LA");
         house3.setName("Name");
         house3.setHistory("HistoryServiceTest3");
+        house3.setVisible(true);
         
         houseService.create(house3);
         int houses = houseService.findAll().size();

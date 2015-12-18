@@ -11,6 +11,9 @@
 <fmt:message var="history" key="house.history"/>
 <fmt:message var="date" key="house.date"/>
 <fmt:message var="noImage" key="misc.noImage"/>
+<fmt:message var="makeVisible" key="misc.makeVisible"/>
+<fmt:message var="makeInvisible" key="misc.makeInvisible"/>
+<fmt:message var="remove" key="misc.remove"/>
 
 <house:header>
 <jsp:attribute name="body">
@@ -22,6 +25,20 @@
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 ${editHouse}
             </a>
+            <c:choose>
+                    <c:when test="${house.visible}">
+                        <a href="/HauntedHouse/house/visible/${house.id}/false" class="m-btn black">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            ${makeInvisible}
+                        </a>
+                    </c:when>    
+                    <c:otherwise>
+                        <a href="/HauntedHouse/house/visible/${house.id}/true" class="m-btn black">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            ${makeVisible}
+                        </a>
+                    </c:otherwise>
+                </c:choose>
         </div>
         </c:if>
         <img class = "img-house" src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">

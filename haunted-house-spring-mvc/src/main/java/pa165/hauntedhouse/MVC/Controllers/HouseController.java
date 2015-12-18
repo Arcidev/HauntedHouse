@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.HouseDTO;
 import pa165.hauntedhouse.Dto.HouseInfoDTO;
+import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.HouseFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -48,7 +49,10 @@ public class HouseController extends BaseController{
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
     public String houses(Model model) {
         inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
-        model.addAttribute("houses", houseFacade.getAllHouses());
+        model.addAttribute("houses", houseFacade.getAllHouseInfoesByVisibility(true));
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            model.addAttribute("hiddenHouses", houseFacade.getAllHouseInfoesByVisibility(false));
+        }
         
         return "house/all";
     }
@@ -104,5 +108,12 @@ public class HouseController extends BaseController{
             houseFacade.updateHouse(house);
         
         return "redirect:" + uriBuilder.path("/house/" + house.getId()).build().toString();
+    }
+    
+    @RequestMapping(value = { "visible/{id}/{visible}" }, method = RequestMethod.GET)
+    public String setVisible(@PathVariable int id, @PathVariable boolean visible, Model model, UriComponentsBuilder uriBuilder) {
+        houseFacade.setVisible(id, visible);
+        
+        return "redirect:" + uriBuilder.path("/house/" + id).build().toString();
     }
 }

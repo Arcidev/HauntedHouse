@@ -15,6 +15,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  * @author Milan Matijka
  */
 public class HouseInfoDTO {
+    
     private int id;
     
     @NotEmpty
@@ -28,44 +29,90 @@ public class HouseInfoDTO {
     
     private Date hauntedSince;
     
+    private boolean visible;  
+    
+    /**
+     * @return the id
+     */
     public int getId() {
         return id;
     }
-    
+
+    /**
+     * @param id the id to set
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return the address
+     */
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String adress) {
-        this.address = adress;
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 
+    /**
+     * @return the history
+     */
     public String getHistory() {
         return history;
     }
 
+    /**
+     * @param history the history to set
+     */
     public void setHistory(String history) {
         this.history = history;
     }
 
+    /**
+     * @return the hauntedSince
+     */
     public Date getHauntedSince() {
         return hauntedSince;
     }
 
+    /**
+     * @param hauntedSince the hauntedSince to set
+     */
     public void setHauntedSince(Date hauntedSince) {
         this.hauntedSince = hauntedSince;
+    }
+    
+    /**
+     * @return the visible
+     */
+    public boolean isVisible() {
+        return visible;
+    }
+
+    /**
+     * @param visible the visible to set
+     */
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
     
     @Override
@@ -81,21 +128,21 @@ public class HouseInfoDTO {
         }
         
         HouseInfoDTO hs = (HouseInfoDTO)obj;
-        return id == hs.getId() &&
-                (name == null ? hs.getName() == null : name.equals(hs.getName())) &&
-                (address == null ? hs.getAddress() == null : address.equals(hs.getAddress())) &&
-                (history == null ? hs.getHistory() == null : history.equals(hs.getHistory())) &&
-                (hauntedSince == null ? hs.getHauntedSince() == null : hauntedSince.equals(hs.getHauntedSince()));
+        return getId() == hs.getId() &&
+                (getName() == null ? hs.getName() == null : getName().equals(hs.getName())) &&
+                (getAddress() == null ? hs.getAddress() == null : getAddress().equals(hs.getAddress())) &&
+                (getHistory() == null ? hs.getHistory() == null : getHistory().equals(hs.getHistory())) &&
+                (getHauntedSince() == null ? hs.getHauntedSince() == null : getHauntedSince().equals(hs.getHauntedSince()));
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.address);
-        hash = 59 * hash + Objects.hashCode(this.history);
-        hash = 59 * hash + Objects.hashCode(this.hauntedSince);
+        hash = 59 * hash + this.getId();
+        hash = 59 * hash + Objects.hashCode(this.getName());
+        hash = 59 * hash + Objects.hashCode(this.getAddress());
+        hash = 59 * hash + Objects.hashCode(this.getHistory());
+        hash = 59 * hash + Objects.hashCode(this.getHauntedSince());
         return hash;
     }     
 }

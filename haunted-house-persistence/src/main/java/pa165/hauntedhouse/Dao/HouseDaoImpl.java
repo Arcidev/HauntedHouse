@@ -86,10 +86,20 @@ public class HouseDaoImpl implements HouseDao{
     @Override
     public List<House> searchByName(String filter) {
         try {
-            return em.createQuery("select hs from House hs where name like :filter", House.class)
+            return em.createQuery("select hs from House hs where visible = true and lower(name) like :filter", House.class)
                     .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
         } catch (NoResultException nrf) {
             return null;
+        } catch(Exception e) {
+            throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
+        }
+    }
+
+    @Override
+    public List<House> findAllByVisibility(boolean visible) {
+        try {
+            return em.createQuery("select h from House h where visible = :visible", House.class)
+                    .setParameter("visible", visible).getResultList();
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: universe exploded", e);
         }

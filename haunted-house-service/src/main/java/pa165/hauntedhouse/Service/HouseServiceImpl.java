@@ -43,6 +43,10 @@ public class HouseServiceImpl implements HouseService {
         h.setName(house.getName());
         h.setHauntedSince(house.getHauntedSince());
         h.setHistory(house.getHistory());
+        if(house.getImage() !=null){
+            h.setImage(house.getImage());
+            h.setImageMimeType(h.getImageMimeType());
+        }
         
         houseDao.update(h);
     }
@@ -89,5 +93,20 @@ public class HouseServiceImpl implements HouseService {
         Spook s = spookDao.findById(spookId);
         h.removeSpook(s);
         spookDao.update(s);
+    }
+
+    @Override
+    public void setVisible(int houseId, boolean visible) {
+        House h = houseDao.findById(houseId);
+        if (h == null) {
+            throw new IllegalArgumentException("House does not exist");
+        }
+        h.setVisible(visible);
+        houseDao.update(h);
+    }
+
+    @Override
+    public List<House> findAllByVisibility(boolean visible) {
+        return houseDao.findAllByVisibility(visible);
     }
 }

@@ -156,6 +156,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         h.setHauntedSince(hauntedSince);
         h.setImage(readImage(imageFile));
         h.setImageMimeType(mimeType);
+        h.setVisible(true);
         houseService.create(h);
         return h;
     }

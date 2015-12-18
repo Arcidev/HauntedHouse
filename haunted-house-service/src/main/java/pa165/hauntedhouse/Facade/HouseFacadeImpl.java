@@ -83,8 +83,8 @@ public class HouseFacadeImpl implements HouseFacade {
     }
 
     @Override
-    public List<HouseInfoDTO> getAllHouseInfoes() {
-        return beanMappingService.mapTo(houseService.findAll(), HouseInfoDTO.class);
+    public List<HouseInfoDTO> getAllHouseInfoesByVisibility(boolean visible) {
+        return beanMappingService.mapTo(houseService.findAllByVisibility(visible), HouseInfoDTO.class);
     }
 
     @Override
@@ -95,5 +95,10 @@ public class HouseFacadeImpl implements HouseFacade {
         }
         
         return beanMappingService.mapTo(h, HouseInfoDTO.class);
+    }
+
+    @Override
+    public void setVisible(int houseId, boolean visible) {
+        houseService.setVisible(houseId,visible);
     }
 }
