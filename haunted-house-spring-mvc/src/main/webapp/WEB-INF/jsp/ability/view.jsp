@@ -60,6 +60,20 @@
                 </div>
             </c:forEach>
         </c:if>
+        <c:if test="${userRole == 'ADMIN' && not empty notAssignedSpooks}">
+            <h3>Add spook</h3>
+            <form:form action="${pageContext.request.contextPath}/ability/addSpook">
+                <input type="hidden" name="abilityId" value="${ability.id}" />
+                <select name="spookId">
+                    <c:forEach items="${notAssignedSpooks}" var="spook" varStatus="ic">
+                        <option value="${spook.id}">
+                            ${spook.name}
+                        </option>
+                    </c:forEach>
+                </select>
+                <input type="submit" class="m-btn black" />
+            </form:form>
+        </c:if>
         
     </div>
     
