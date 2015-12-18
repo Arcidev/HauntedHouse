@@ -257,6 +257,10 @@
   float: right;
 }
 
+.home-paragraph {
+    padding-left: 20px;
+}
+
 footer p {
     text-align: center;
 }
