@@ -9,6 +9,7 @@
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="historyInfo" key="history.info"/>
 <fmt:message var="name" key="misc.name"/>
+<fmt:message var="date" key="history.date"/>
 <fmt:message var="description" key="misc.description"/>
 <fmt:message var="create" key="misc.create"/>
 <fmt:message var="edit" key="misc.edit"/>
@@ -27,6 +28,11 @@
                 <c:if test="${not empty info_error}">
                     <p class="input_error">*${info_error}</p>
                 </c:if>
+            </div>
+                
+                <div class="form-group history-edit-block">
+                <p>${date}:</p>
+                <textarea name="info">${historyEdit.historyDate}</textarea>
             </div>
         </form:form>
             
