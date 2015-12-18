@@ -59,8 +59,8 @@ public class HistoryServiceImpl implements HistoryService {
     }
     
     @Override
-    public List<History> getAllSpooksHistories(int spookId){
-        List<History> h = historyDao.getAllSpooksHistories(spookId);
+    public List<History> getAllSpooksHistories(Spook s){
+        List<History> h = historyDao.getAllSpooksHistories(s);
         if (h == null) {
             return new ArrayList<>();
         }

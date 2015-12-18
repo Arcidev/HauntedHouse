@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import pa165.hauntedhouse.Dto.HistoryDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.History;
+import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.HistoryService;
+import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 
 /**
@@ -29,6 +31,9 @@ public class HistoryFacadeImpl implements HistoryFacade {
     
     @Autowired
     private HistoryService historyService;
+    
+    @Autowired
+    private SpookService spookService;
     
 
     @Override
@@ -54,7 +59,8 @@ public class HistoryFacadeImpl implements HistoryFacade {
     
     @Override
     public List<HistoryDTO> getAllSpooksHistories(int spookId){
-        return beanMappingService.mapTo(historyService.getAllSpooksHistories(spookId), HistoryDTO.class);
+        Spook s = spookService.findById(spookId);
+        return beanMappingService.mapTo(historyService.getAllSpooksHistories(s), HistoryDTO.class);
     }
 
     @Override

@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Dto;
 
 import java.sql.Date;
 import java.util.Objects;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -15,6 +16,8 @@ import java.util.Objects;
 public class HistoryDTO {
     private int id;
     private Date historyDate;
+    
+    @Size(min = 10)
     private String historyInfo;
     
     public int getID(){

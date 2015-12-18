@@ -7,6 +7,7 @@
 
 <fmt:message var="addSpook" key="spook.addSpook"/>
 <fmt:message var="editSpook" key="spook.editSpook"/>
+<fmt:message var="histories" key="history.histories"/>
 <fmt:message var="spookAbilities" key="spook.spookAbilities"/>
 <fmt:message var="noImage" key="misc.noImage"/>
 
@@ -36,8 +37,14 @@
                     </a>
                 </div>
             </c:forEach>
-         </c:if>             
-    </div>       
+         </c:if>  
+          <div>
+            <div class="manage-buttons-container">
+            <a href="/HauntedHouse/history/all/${spook.id}" class="m-btn black">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                ${histories}
+            </a>        
+        </div>
         
     </jsp:attribute>   
     

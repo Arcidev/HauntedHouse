@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.History;
+import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Exception.DbException;
 
 /**
@@ -90,10 +91,10 @@ public class HistoryDaoImpl implements HistoryDao{
     }
     
     @Override
-    public List<History> getAllSpooksHistories(int spookId){
+    public List<History> getAllSpooksHistories(Spook spook){
         try {
             return em.createQuery("select h from History h where h.spook = :s", History.class)
-                    .setParameter("s", spookId).getResultList();
+                    .setParameter("s", spook).getResultList();
         } catch (NoResultException nrf) {
             return null;
         } catch(Exception e) {

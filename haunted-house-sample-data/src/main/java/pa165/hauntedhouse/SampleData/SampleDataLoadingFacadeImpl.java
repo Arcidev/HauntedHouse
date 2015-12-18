@@ -15,11 +15,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Entity.Person;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Service.AbilityService;
+import pa165.hauntedhouse.Service.HistoryService;
 import pa165.hauntedhouse.Service.HouseService;
 import pa165.hauntedhouse.Service.PersonService;
 import pa165.hauntedhouse.Service.SpookService;
@@ -35,11 +37,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     public static final String JPEG = "image/jpeg";
     public static final String PNG = "image/png";
     public static final String ABILITIES_FOLDER = "abilities/";
+    public static final String HISTORY_FOLDER = "histories/";
     public static final String SPOOKS_FOLDER = "spooks/";
     public static final String HOUSES_FOLDER = "houses/";
     
     @Autowired
     private AbilityService abilityService;
+    
+    @Autowired
+    private HistoryService historyService;
     
     @Autowired
     private SpookService spookService;
@@ -73,6 +79,8 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             ABILITIES_FOLDER + "polymorph.jpg",                     // imageFile
             JPEG);                                                  // mimeType
         
+        
+        
         Spook s1 = spook("Ghost",                                       // name
             "Scary ghost that haunts everyone... Why? Because he can!", // history
             getTime(18, 30, 00),                                        // hauntsSince
@@ -86,6 +94,10 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
             getTime(5, 30, 00),                                                 // hauntsUntil
             SPOOKS_FOLDER + "vampire.jpg",                                      // imageFile
             JPEG);                                                              // mimeType
+        
+        History hi1 = history(s1, getDate(2015,12,12), "History1 for Ghost");
+        History hi2 = history(s1, getDate(2015,10,12), "History2 for Ghost");
+        History hi3 = history(s2, getDate(2015,12,12), "History for Vampire");
         
         House h1 = house("Sorotity House",                                      //name
             "Sorority Street, NY",                                              //address
@@ -124,6 +136,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         a.setVisible(true);
         abilityService.create(a);
         return a;
+    }
+    
+    private History history(Spook s, Date d, String info) throws IOException {
+        History h = new History();
+        h.setHistoryDate(d);
+        h.setInfo(info);
+        h.setSpook(s);
+        historyService.createHistory(h);
+        return h;
     }
     
     private Spook spook(String name, String history, Time hauntsSince, Time hauntsUntil, String imageFile, String mimeType) throws IOException {

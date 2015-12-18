@@ -7,6 +7,7 @@ package pa165.hauntedhouse.Dao;
 
 import java.util.List;
 import pa165.hauntedhouse.Entity.History;
+import pa165.hauntedhouse.Entity.Spook;
 
 /**
  *
@@ -58,12 +59,12 @@ public interface HistoryDao {
      */
     public List<History> findAll();
     
-    /**
+   /**
      * Gets all histories
      * @param spookId
      * @return all records of spooks history
      */
-    List<History> getAllSpooksHistories(int spookId);
+    List<History> getAllSpooksHistories(Spook spookId);
     
     /**
      * Finds history in date range
