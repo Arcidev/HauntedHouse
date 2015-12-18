@@ -10,7 +10,7 @@
 <fmt:message var="hauntsSince" key="spook.hauntsSince"/>
 <fmt:message var="hauntsUntil" key="spook.hauntsUntil"/>
 <fmt:message var="history" key="spook.history"/>
-<fmt:message var="histories" key="history.histories"/>
+<fmt:message var="his" key="history.his"/>
 <fmt:message var="spookAbilities" key="spook.spookAbilities"/>
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="makeVisible" key="misc.makeVisible"/>
@@ -63,7 +63,7 @@
             <div class="manage-buttons-container">
                 <a href="${pageContext.request.contextPath}/history/all/${spook.id}" class="m-btn black">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    ${histories}
+                    ${his}
                 </a>        
             </div>
         </div>       
