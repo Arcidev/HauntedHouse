@@ -93,10 +93,11 @@ public class AbilityDaoImpl implements AbilityDao {
     }
     
     @Override
-    public List<Ability> searchByName(String filter) {
+    public List<Ability> searchByName(String filter, boolean visible) {
         try {
-            return em.createQuery("select a from Ability a where visible = true and lower(name) like :filter", Ability.class)
-                    .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
+            return em.createQuery("select a from Ability a where visible = :visible and lower(name) like :filter", Ability.class)
+                    .setParameter("filter", '%' + filter.toLowerCase() + '%')
+                    .setParameter("visible", visible).getResultList();
         } catch (NoResultException nrf) {
             return null;
         } catch(Exception e) {

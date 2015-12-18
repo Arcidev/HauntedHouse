@@ -86,9 +86,10 @@ public interface AbilityService {
      * Finds all abilities whiche name matches filter
      * 
      * @param filter
+     * @param visible
      * @return abilities matched by filter
      */
-    List<Ability> searchAbilitiesByName(String filter);
+    List<Ability> searchAbilitiesByName(String filter, boolean visible);
     
     /**
      * Finds all spooks associated with passed abilityId

@@ -73,6 +73,8 @@
 
 .manage-buttons-container {
     margin-bottom: 15px;
+    width: 100%;
+    display: inline-block;
 }
 
 .button-100 {
@@ -203,6 +205,21 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
+}
+
+.search-box {
+    float: right;
+}
+
+.search-square { 
+    padding: 9px 15px 6px 30px;
+    margin-top: 8px; 
+    background: url('../images/search.png') no-repeat 8px 6px;
+    border:1px solid #2a2e31;
+}
+
+.jumbotron {
+    padding-top: 10px;
 }
 
 footer p {

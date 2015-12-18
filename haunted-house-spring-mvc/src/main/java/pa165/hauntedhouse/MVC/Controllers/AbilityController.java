@@ -47,12 +47,14 @@ public class AbilityController extends BaseController {
     private SpookFacade spookFacade;
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
-    public String abilities(Model model) {
+    public String abilities(Model model, @RequestParam(value = "searchFilter", required = false) String searchFilter) {
         inicializeCall(model, messageSource.getMessage("navigation.abilities", null, LocaleContextHolder.getLocale()), "Abilities");
-        model.addAttribute("abilities", abilityFacade.getAllAbilityInfoesByVisibility(true));
+        
+        model.addAttribute("abilities", searchFilter != null ? abilityFacade.searchAbilitiesByName(searchFilter, true) : abilityFacade.getAllAbilityInfoesByVisibility(true));
         if (UserRole.ADMIN.toString().equals(getUserRole())) {
-            model.addAttribute("hiddenAbilities", abilityFacade.getAllAbilityInfoesByVisibility(false));
+            model.addAttribute("hiddenAbilities", searchFilter != null ? abilityFacade.searchAbilitiesByName(searchFilter, false) : abilityFacade.getAllAbilityInfoesByVisibility(false));
         }
+        model.addAttribute("searchFilter", searchFilter);
         
         return "ability/all";
     }

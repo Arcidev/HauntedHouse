@@ -70,7 +70,8 @@ public interface AbilityDao {
      * Searches abilities name by filter
      * 
      * @param filter
+     * @param visible
      * @return abilities that match the filter
      */
-    List<Ability> searchByName(String filter);
+    List<Ability> searchByName(String filter, boolean visible);
 }

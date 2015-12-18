@@ -15,7 +15,6 @@
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="makeVisible" key="misc.makeVisible"/>
 <fmt:message var="makeInvisible" key="misc.makeInvisible"/>
-<fmt:message var="remove" key="misc.remove"/>
 
 <house:header>
 <jsp:attribute name="body">

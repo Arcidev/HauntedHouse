@@ -108,8 +108,8 @@ public class AbilityServiceImpl implements AbilityService {
     }
     
     @Override
-    public List<Ability> searchAbilitiesByName(String filter) {
-        List<Ability> abilities = abilityDao.searchByName(filter);
+    public List<Ability> searchAbilitiesByName(String filter, boolean visible) {
+        List<Ability> abilities = abilityDao.searchByName(filter, visible);
         if (abilities == null) {
             return new ArrayList<>();
         }
