@@ -27,7 +27,7 @@
             </form>
         </div>
         <c:forEach items="${spooks}" var="spook" varStatus="ic">
-            <div class="inline-block-content-spook"><!-- bootstrap responsive grid -->
+            <div class="inline-block-content-spook">
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">
                     <div class="ability-container">
                         <img class="img-ability" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
@@ -39,7 +39,7 @@
         <c:if test="${not empty hiddenSpooks}">
             <h3>${hidSpooks}</h3>
             <c:forEach items="${hiddenSpooks}" var="spook" varStatus="ic">
-                <div class="inline-block-content-house"><!-- bootstrap responsive grid -->
+                <div class="inline-block-content-house">
                     <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">
                         <div class="ability-container">
                             <img class="img-house" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">

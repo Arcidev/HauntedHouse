@@ -60,12 +60,13 @@ public interface HouseService {
     List<House> findAllByVisibility(boolean visible);
     
     /**
-     * Finds all abilities whiche name matches filter
+     * Finds all abilities which name matches filter
      * 
      * @param filter
+     * @param visible
      * @return abilities matched by filter
      */
-    List<House> searchHousesByName(String filter);
+    List<House> searchHousesByName(String filter, boolean visible);
     
     /**
      * Adds house to spook

@@ -16,7 +16,7 @@
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="makeVisible" key="misc.makeVisible"/>
 <fmt:message var="makeInvisible" key="misc.makeInvisible"/>
-
+<fmt:message var="addSpook" key="spook.addSpook"/>
 
 <house:header>
 <jsp:attribute name="body">
@@ -46,9 +46,9 @@
         </c:if>
         <img class = "img-house" src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">
         <h2>${house.name}</h2>
-        <p><b>${address} : </b><span>${house.address}</span></p>
-        <p><b>${history} : </b><span>${house.history}</span></p>
-        <p><b>${date} : </b><span>${house.hauntedSince}</span></p>
+        <p><b>${address}: </b><span>${house.address}</span></p>
+        <p><b>${history}: </b><span>${house.history}</span></p>
+        <p><b>${date}: </b><span>${house.hauntedSince}</span></p>
         <c:if test="${not empty spooks}">
             <h3>${houseSpooks}</h3>
             <c:forEach items="${spooks}" var="spook" varStatus="ic">
@@ -68,10 +68,10 @@
             </c:forEach>
         </c:if>
             <c:if test="${userRole == 'ADMIN' && not empty notAssignedSpooks}">
-            <h3>Add spook</h3>
+            <h3>${addSpook}</h3>
             <form:form action="${pageContext.request.contextPath}/house/addSpook">
                 <input type="hidden" name="houseId" value="${house.id}" />
-                <select name="spookId">
+                <select class="form-control" name="spookId">
                     <c:forEach items="${notAssignedSpooks}" var="spook" varStatus="ic">
                         <option value="${spook.id}">
                             ${spook.name}

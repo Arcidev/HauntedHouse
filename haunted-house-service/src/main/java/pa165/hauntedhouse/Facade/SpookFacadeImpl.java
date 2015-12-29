@@ -59,12 +59,12 @@ public class SpookFacadeImpl implements SpookFacade {
 
     @Override
     public void addToAbility(int spookId, int abilityId) {     
-         spookService.addToAbility(spookId,abilityId);
+         spookService.addToAbility(spookId, abilityId);
     }
 
     @Override
     public void removeFromAbility(int spookId, int abilityId) {       
-       abilityService.removeFromSpook(spookId, abilityId);
+       abilityService.removeFromSpook(abilityId, spookId);
     }
     
     @Override

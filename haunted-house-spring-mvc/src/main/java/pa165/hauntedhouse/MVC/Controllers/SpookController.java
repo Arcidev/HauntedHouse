@@ -8,6 +8,7 @@ package pa165.hauntedhouse.MVC.Controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -68,8 +69,14 @@ public class SpookController extends BaseController {
             throw new HttpNotFound("There is no creature listed by id: " + id);
         }
         
+        List<AbilityInfoDTO> abilities = abilityFacade.getSpookAbilityInfoes(spook.getId());
         model.addAttribute("spook", spook);
-        model.addAttribute("abilities", abilityFacade.getSpookAbilityInfoes(spook.getId()));
+        model.addAttribute("abilities", abilities);
+        if (UserRole.ADMIN.toString().equals(getUserRole())) {
+            List<AbilityInfoDTO> notAssignedAbilities = abilityFacade.getAllAbilityInfoesByVisibility(true);
+            notAssignedAbilities.removeAll(abilities);
+            model.addAttribute("notAssignedAbilities", notAssignedAbilities);
+        }
         return "spook/view";
     }
     
@@ -119,4 +126,17 @@ public class SpookController extends BaseController {
         return "redirect:" + uriBuilder.path("/spook/" + id).build().toString();
     }
     
+    @RequestMapping(value = { "removeAbility/{spookId}/{abilityId}" }, method = RequestMethod.GET)
+    public String removeAbility(@PathVariable int spookId, @PathVariable int abilityId, UriComponentsBuilder uriBuilder) {
+        spookFacade.removeFromAbility(spookId, abilityId);
+        
+        return "redirect:" + uriBuilder.path("/spook/" + spookId).build().toString();
+    }
+    
+    @RequestMapping(value = { "addAbility" }, method = RequestMethod.POST)
+    public String addAbility(@RequestParam("spookId") int spookId, @RequestParam("abilityId") int abilityId, UriComponentsBuilder uriBuilder) {
+        spookFacade.addToAbility(spookId, abilityId);
+        
+        return "redirect:" + uriBuilder.path("/spook/" + spookId).build().toString();
+    }
 }

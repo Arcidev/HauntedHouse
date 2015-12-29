@@ -66,7 +66,7 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests{
     
     @Test
     public void searchTest() {
-        List<HouseDTO> houses = houseFacade.searchHousesByName("dom");
+        List<HouseDTO> houses = houseFacade.searchHousesByName("dom", true);
         Assert.assertEquals(houses.size(), 1);
         Assert.assertTrue(houses.get(0).getName().contains("dom"));
     }

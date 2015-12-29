@@ -50,11 +50,11 @@ public class HouseController extends BaseController{
     private SpookFacade spookFacade;
     
     @RequestMapping(value = { "" }, method = RequestMethod.GET)
-    public String houses(Model model) {
+    public String houses(Model model, @RequestParam(value = "searchFilter", required = false) String searchFilter) {
         inicializeCall(model, messageSource.getMessage("navigation.houses", null, LocaleContextHolder.getLocale()), "Houses");
-        model.addAttribute("houses", houseFacade.getAllHouseInfoesByVisibility(true));
+        model.addAttribute("houses", searchFilter != null ? houseFacade.searchHousesByName(searchFilter, true) : houseFacade.getAllHouseInfoesByVisibility(true));
         if (UserRole.ADMIN.toString().equals(getUserRole())) {
-            model.addAttribute("hiddenHouses", houseFacade.getAllHouseInfoesByVisibility(false));
+            model.addAttribute("hiddenHouses", searchFilter != null ? houseFacade.searchHousesByName(searchFilter, false) : houseFacade.getAllHouseInfoesByVisibility(false));
         }
         
         return "house/all";

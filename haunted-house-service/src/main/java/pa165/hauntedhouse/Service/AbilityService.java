@@ -83,7 +83,7 @@ public interface AbilityService {
     void setVisible(int abilityId, boolean visible);
     
     /**
-     * Finds all abilities whiche name matches filter
+     * Finds all abilities which name matches filter
      * 
      * @param filter
      * @param visible

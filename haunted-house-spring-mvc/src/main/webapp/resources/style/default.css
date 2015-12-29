@@ -224,7 +224,7 @@
 }
 
 .black-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -259,6 +259,15 @@
 
 .home-paragraph {
     padding-left: 20px;
+}
+
+.form-control {
+    display: inline;
+    width: auto;
+}
+
+.table > thead > tr > th {
+    border-bottom: 0px;
 }
 
 footer p {

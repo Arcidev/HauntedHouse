@@ -84,10 +84,11 @@ public class HouseDaoImpl implements HouseDao{
     }
 
     @Override
-    public List<House> searchByName(String filter) {
+    public List<House> searchByName(String filter, boolean visible) {
         try {
-            return em.createQuery("select hs from House hs where visible = true and lower(name) like :filter", House.class)
-                    .setParameter("filter", '%' + filter.toLowerCase() + '%').getResultList();
+            return em.createQuery("select hs from House hs where visible = :visible and lower(name) like :filter", House.class)
+                    .setParameter("filter", '%' + filter.toLowerCase() + '%')
+                    .setParameter("visible", visible).getResultList();
         } catch (NoResultException nrf) {
             return null;
         } catch(Exception e) {

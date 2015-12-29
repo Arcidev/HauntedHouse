@@ -82,8 +82,8 @@ public class HouseFacadeImpl implements HouseFacade {
     }
 
     @Override
-    public List<HouseDTO> searchHousesByName(String filter) {
-        return beanMappingService.mapTo(houseService.searchHousesByName(filter), HouseDTO.class);
+    public List<HouseDTO> searchHousesByName(String filter, boolean visible) {
+        return beanMappingService.mapTo(houseService.searchHousesByName(filter, visible), HouseDTO.class);
     }
 
     @Override

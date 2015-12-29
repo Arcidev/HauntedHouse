@@ -11,11 +11,11 @@
 <fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="makeVisible" key="misc.makeVisible"/>
 <fmt:message var="makeInvisible" key="misc.makeInvisible"/>
-<fmt:message var="removeAbility" key="ability.removeSpook"/>
+<fmt:message var="removeSpook" key="ability.removeSpook"/>
+<fmt:message var="addSpook" key="spook.addSpook"/>
 
 <ability:header>
 <jsp:attribute name="body">
-
     <div>
         <c:if test="${userRole == 'ADMIN'}">
             <div class="manage-buttons-container">
@@ -47,7 +47,7 @@
             <c:forEach items="${spooks}" var="spook" varStatus="ic">
                 <div>
                     <c:if test="${userRole == 'ADMIN'}">
-                        <button onclick="showPopup('${pageContext.request.contextPath}/ability/removeSpook/${ability.id}/${spook.id}', '${removeAbility}')" class="m-btn">
+                        <button onclick="showPopup('${pageContext.request.contextPath}/ability/removeSpook/${ability.id}/${spook.id}', '${removeSpook}')" class="m-btn">
                             <span class="glyphicon glyphicon-minus"></span>
                         </button>
                     </c:if>
@@ -61,10 +61,10 @@
             </c:forEach>
         </c:if>
         <c:if test="${userRole == 'ADMIN' && not empty notAssignedSpooks}">
-            <h3>Add spook</h3>
+            <h3>${addSpook}</h3>
             <form:form action="${pageContext.request.contextPath}/ability/addSpook">
                 <input type="hidden" name="abilityId" value="${ability.id}" />
-                <select name="spookId">
+                <select class="form-control" name="spookId">
                     <c:forEach items="${notAssignedSpooks}" var="spook" varStatus="ic">
                         <option value="${spook.id}">
                             ${spook.name}
@@ -74,8 +74,6 @@
                 <input type="submit" class="m-btn black" />
             </form:form>
         </c:if>
-        
     </div>
-    
 </jsp:attribute>
 </ability:header>

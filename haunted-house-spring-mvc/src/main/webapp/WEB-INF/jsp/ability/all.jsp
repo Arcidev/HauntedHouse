@@ -27,7 +27,7 @@
             </form>
         </div>
         <c:forEach items="${abilities}" var="ability" varStatus="ic">
-            <div class="inline-block-content"><!-- bootstrap responsive grid -->
+            <div class="inline-block-content">
                 <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/ability/${ability.id}">
                     <div class="ability-container">
                         <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">
@@ -39,7 +39,7 @@
         <c:if test="${not empty hiddenAbilities}">
             <h3>${hAbilities}</h3>
             <c:forEach items="${hiddenAbilities}" var="ability" varStatus="ic">
-                <div class="inline-block-content"><!-- bootstrap responsive grid -->
+                <div class="inline-block-content">
                     <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/ability/${ability.id}">
                         <div class="ability-container">
                             <img class="img-ability" src="${pageContext.request.contextPath}/webApi/ability/${ability.id}" alt="${noImage}">

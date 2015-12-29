@@ -25,7 +25,7 @@
             <input type="hidden" name="id" value ="${spookEdit.id}" />
             <h3>${spookImage}</h3>
             <div class="form-group ability-img-block">
-                <img id="abilityImageId" src="${pageContext.request.contextPath}/webApi/spook/${spookEdit.id}" alt="${noImage}" style="">
+                <img id="spookImageId" src="${pageContext.request.contextPath}/webApi/spook/${spookEdit.id}" alt="${noImage}" style="">
                 <p id="spookImageErrorId" style="display: none" class="input_error">*${fileExceededSize}</p>
                 <p class="m-btn black btn-file button-100">
                     ${browse} <input name="file" id="imageFileId" type="file" accept="image/*" onchange="onImageFileInputChange(this, 'spookImageId', 'spookImageErrorId')">

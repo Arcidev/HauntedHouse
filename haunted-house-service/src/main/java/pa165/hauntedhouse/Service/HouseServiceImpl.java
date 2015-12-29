@@ -71,8 +71,8 @@ public class HouseServiceImpl implements HouseService {
     }    
 
     @Override
-    public List<House> searchHousesByName(String filter) {
-        List<House> houses = houseDao.searchByName(filter);
+    public List<House> searchHousesByName(String filter, boolean visible) {
+        List<House> houses = houseDao.searchByName(filter, visible);
         if (houses == null) {
             return new ArrayList<>();
         }

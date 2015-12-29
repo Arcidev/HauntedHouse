@@ -62,7 +62,7 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests{
     
     @Test
     public void testSearch() {
-        List<House> buildings = houseService.searchHousesByName("house");
+        List<House> buildings = houseService.searchHousesByName("house", true);
         Assert.assertEquals(buildings.size(), 1);
         Assert.assertTrue(buildings.get(0).getName().contains("house"));
     }

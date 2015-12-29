@@ -68,7 +68,8 @@ public interface HouseDao {
      * Searches houses name by filter
      * 
      * @param filter
+     * @param visible
      * @return house that match the filter
      */
-    List<House> searchByName(String filter);
+    List<House> searchByName(String filter, boolean visible);
 }

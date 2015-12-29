@@ -86,9 +86,10 @@ public interface HouseFacade {
      * Finds all houses which name matches the filter
      * 
      * @param filterName
+     * @param visible
      * @return houses matched by filter
      */
-    List<HouseDTO> searchHousesByName(String filterName);
+    List<HouseDTO> searchHousesByName(String filterName, boolean visible);
     
     /**
      * Gets house info by id

@@ -57,7 +57,7 @@ public class WebApi {
     
     private void setImage(ImageContainer imgContainer, HttpServletRequest request, HttpServletResponse response) throws IOException {
         if(imgContainer == null || imgContainer.getImage() == null) {
-            response.sendRedirect(request.getContextPath()+"/resources/images/noImage.png");
+            response.sendRedirect(request.getContextPath() + "/resources/images/noImage.png");
         } else {
             response.setContentType(imgContainer.getImageMimeType());
             ServletOutputStream out = response.getOutputStream();
