@@ -17,6 +17,8 @@
 <fmt:message var="makeInvisible" key="misc.makeInvisible"/>
 <fmt:message var="removeAbility" key="spook.removeAbility"/>
 <fmt:message var="addAbility" key="ability.addAbility"/>
+<fmt:message var="remove" key="spook.remove"/>
+<fmt:message var="removeSpook" key="misc.remove"/>
 
 <spook:header>
     <jsp:attribute name="body">
@@ -45,6 +47,10 @@
                             </a>
                         </c:otherwise>
                     </c:choose>
+                    <button onclick="showPopup('${pageContext.request.contextPath}/spook/remove/${spook.id}', '${removeSpook}')" class="m-btn black">
+                        <span class="glyphicon glyphicon-minus"></span>
+                        ${remove}
+                    </button>
                 </c:if>
             </div>
             <img class="img-ability" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">

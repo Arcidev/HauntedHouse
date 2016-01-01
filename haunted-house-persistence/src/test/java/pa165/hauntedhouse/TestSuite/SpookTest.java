@@ -140,7 +140,7 @@ public class SpookTest extends AbstractTestNGSpringContextTests {
         spookDao.update(spook);
         Assert.assertEquals(spook.getName(), "Jason Voorhees");
         
-        spookDao.delete(spook);
+        spookDao.delete(spook.getId());
         spooks = spookDao.findAll();
         Assert.assertEquals(spooks.size(), spooksCount - 1);
     }

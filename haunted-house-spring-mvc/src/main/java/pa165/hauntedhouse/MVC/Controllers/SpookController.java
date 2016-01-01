@@ -139,4 +139,11 @@ public class SpookController extends BaseController {
         
         return "redirect:" + uriBuilder.path("/spook/" + spookId).build().toString();
     }
+    
+    @RequestMapping(value = { "remove/{spookId}" }, method = RequestMethod.GET)
+    public String removeSpook(@PathVariable("spookId") int spookId, UriComponentsBuilder uriBuilder) {
+        spookFacade.deleteSpook(spookId);
+        
+        return "redirect:" + uriBuilder.path("/spook").build().toString();
+    }
 }

@@ -55,14 +55,13 @@ public class Spook  {
 
     private String imageMimeType;
         
-    @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)    
+    @OneToMany(fetch=FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.REMOVE }, mappedBy = "spook")    
     private Set<History> histories = new HashSet<>();
     
     @ManyToMany(targetEntity=Ability.class, fetch=FetchType.EAGER, cascade = CascadeType.PERSIST) 
     private Set<Ability> abilities = new HashSet<>();
     
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "House_id")
     private House house;
 
     public Set<History> getHistories() {
@@ -78,14 +77,17 @@ public class Spook  {
         return Collections.unmodifiableSet(abilities);
     }
 
-    
     public void addAbility(Ability ability) {
         abilities.add(ability);
-    }     
+    }
     
     public void removeAbility(Ability ability) {
         abilities.remove(ability);
-    }   
+    }
+    
+    public void removeAbilities() {
+        abilities.clear();
+    }
     
     public House getHouse() {
         return house;

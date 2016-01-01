@@ -139,4 +139,11 @@ public class HouseController extends BaseController{
         
         return "redirect:" + uriBuilder.path("/house/" + houseId).build().toString();
     }
+    
+     @RequestMapping(value = { "remove/{houseId}" }, method = RequestMethod.GET)
+    public String removeHouse(@PathVariable("houseId") int houseId, UriComponentsBuilder uriBuilder) {
+        houseFacade.deleteHouse(houseId);
+        
+        return "redirect:" + uriBuilder.path("/house").build().toString();
+    }
 }

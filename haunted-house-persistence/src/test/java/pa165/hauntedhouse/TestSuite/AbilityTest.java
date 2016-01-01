@@ -116,7 +116,7 @@ public class AbilityTest extends AbstractTestNGSpringContextTests{
         abilityDao.update(ability2);
         Assert.assertEquals(ability2.getName(), "Hulakanie");
         
-        abilityDao.delete(ability2);
+        abilityDao.delete(ability2.getId());
         abilities = abilityDao.findAll();
         Assert.assertEquals(abilities.size(), abilitiesCounts - 1);
     }

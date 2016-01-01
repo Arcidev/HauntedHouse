@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Exception.DbException;
 
 /**
@@ -44,9 +45,14 @@ public class AbilityDaoImpl implements AbilityDao {
     }
     
     @Override
-    public void delete(Ability a) {
+    public void delete(int id) {
         try {
-            em.remove(em.merge(a));
+            Ability a = findById(id);
+            em.remove(a);
+            for (Spook spook : a.getSpooks()) {
+                spook.removeAbility(a);
+                em.merge(spook);
+            }
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
         }

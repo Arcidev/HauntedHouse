@@ -37,10 +37,10 @@ public interface SpookDao {
     /**
      * Deletes existing spook
      * 
-     * @param spk
+     * @param id
      */
     
-     void delete(Spook spk);
+     void delete(int id);
     /**
      * Gets all spooks that are stored in database
      * 

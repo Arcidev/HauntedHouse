@@ -44,7 +44,7 @@ public class Ability {
     
     private boolean visible;
     
-    @ManyToMany(targetEntity=Spook.class, mappedBy="abilities", fetch=FetchType.EAGER) 
+    @ManyToMany(targetEntity=Spook.class, mappedBy="abilities", fetch=FetchType.EAGER)
     private Set<Spook> spooks = new HashSet<>(); 
 
     public int getId() {

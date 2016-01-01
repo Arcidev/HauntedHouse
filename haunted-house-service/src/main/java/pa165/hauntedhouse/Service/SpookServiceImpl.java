@@ -64,8 +64,7 @@ public class SpookServiceImpl implements SpookService {
 
     @Override
     public void delete(int id) {
-        Spook s = spookDao.findById(id);
-        spookDao.delete(s);
+        spookDao.delete(id);
     }
 
     @Override

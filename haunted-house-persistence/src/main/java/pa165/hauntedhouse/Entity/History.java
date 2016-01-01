@@ -34,7 +34,6 @@ public class History {
     private String historyInfo;
     
     @ManyToOne
-    @JoinColumn(name = "spook_id")
     private Spook spook;
     
     public Spook getSpook(){
@@ -44,7 +43,6 @@ public class History {
     public void setSpook(Spook spook){
 	this.spook=spook;
     }
-    
     
     public int getID(){
         return id;

@@ -127,7 +127,7 @@ public class HouseTest extends AbstractTestNGSpringContextTests{
         houseDao.update(h);
         Assert.assertEquals(h.getName(), "Panelak na kurnozce");
         
-        houseDao.delete(h);
+        houseDao.delete(h.getId());
         houses = houseDao.findAll();
         Assert.assertEquals(houses.size(), hSum - 1);
     }

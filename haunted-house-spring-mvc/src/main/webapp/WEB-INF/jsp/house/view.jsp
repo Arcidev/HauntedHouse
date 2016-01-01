@@ -17,6 +17,8 @@
 <fmt:message var="makeVisible" key="misc.makeVisible"/>
 <fmt:message var="makeInvisible" key="misc.makeInvisible"/>
 <fmt:message var="addSpook" key="spook.addSpook"/>
+<fmt:message var="remove" key="house.remove"/>
+<fmt:message var="removeHouse" key="misc.remove"/>
 
 <house:header>
 <jsp:attribute name="body">
@@ -42,6 +44,10 @@
                     </a>
                 </c:otherwise>
             </c:choose>
+            <button onclick="showPopup('${pageContext.request.contextPath}/house/remove/${house.id}', '${removeHouse}')" class="m-btn black">
+                <span class="glyphicon glyphicon-minus"></span>
+                ${remove}
+            </button>
         </div>
         </c:if>
         <img class = "img-house" src="${pageContext.request.contextPath}/webApi/house/${house.id}" alt="${noImage}">

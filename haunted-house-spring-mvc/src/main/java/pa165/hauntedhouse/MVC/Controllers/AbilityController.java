@@ -140,4 +140,11 @@ public class AbilityController extends BaseController {
         
         return "redirect:" + uriBuilder.path("/ability/" + abilityId).build().toString();
     }
+    
+    @RequestMapping(value = { "remove/{abilityId}" }, method = RequestMethod.GET)
+    public String removeAbility(@PathVariable("abilityId") int abilityId, UriComponentsBuilder uriBuilder) {
+        abilityFacade.deleteAbility(abilityId);
+        
+        return "redirect:" + uriBuilder.path("/ability").build().toString();
+    }
 }

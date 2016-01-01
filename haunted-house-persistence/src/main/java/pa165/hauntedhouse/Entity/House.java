@@ -52,7 +52,7 @@ public class House {
     
     private boolean visible;
     
-    @OneToMany(fetch=FetchType.EAGER)    
+    @OneToMany(fetch=FetchType.EAGER, mappedBy = "house")    
     private Set<Spook> spooks = new HashSet<>();
     
     /**

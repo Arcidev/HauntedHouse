@@ -11,6 +11,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import pa165.hauntedhouse.Entity.House;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Exception.DbException;
 /**
@@ -51,9 +52,13 @@ public class SpookDaoImpl implements SpookDao{
     }
 
     @Override
-    public void delete(Spook spk) {
-         try {
-        em.remove(em.merge(spk));
+    public void delete(int id) {
+        try {
+            Spook s = findById(id);
+            s.setHouse(null);
+            s.removeAbilities();
+            em.merge(s);
+            em.remove(s);
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
         }

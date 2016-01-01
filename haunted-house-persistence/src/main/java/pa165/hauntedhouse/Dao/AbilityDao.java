@@ -32,9 +32,9 @@ public interface AbilityDao {
     /**
      * Deletes existing ability
      * 
-     * @param a
+     * @param id
      */
-    void delete(Ability a);
+    void delete(int id);
     
     /**
      * Updates existing ability

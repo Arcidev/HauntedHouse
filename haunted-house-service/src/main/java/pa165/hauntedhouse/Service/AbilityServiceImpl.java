@@ -51,11 +51,7 @@ public class AbilityServiceImpl implements AbilityService {
 
     @Override
     public void delete(int id) {
-        Ability a = abilityDao.findById(id);
-        if (a == null) {
-            throw new IllegalArgumentException("Ability does not exist");
-        }
-        abilityDao.delete(a);
+        abilityDao.delete(id);
     }
 
     @Override

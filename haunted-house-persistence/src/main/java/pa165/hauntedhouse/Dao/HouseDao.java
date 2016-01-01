@@ -32,9 +32,9 @@ public interface HouseDao {
     /**
      * Deletes existing house
      * 
-     * @param hs
+     * @param id
      */
-    void delete(House hs);
+    void delete(int id);
     /**
      * Updates existing house
      * 

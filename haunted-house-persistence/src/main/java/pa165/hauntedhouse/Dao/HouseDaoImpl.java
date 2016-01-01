@@ -13,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Exception.DbException;
 
 /**
@@ -45,9 +46,14 @@ public class HouseDaoImpl implements HouseDao{
     }
 
     @Override
-    public void delete(House hs) {
+    public void delete(int id) {
         try {
-            em.remove(em.merge(hs));
+            House h = findById(id);
+            em.remove(h);
+            for (Spook spook : h.getSpooks()) {
+                spook.setHouse(null);
+                em.merge(spook);
+            }
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
         }

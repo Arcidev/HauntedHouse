@@ -53,11 +53,7 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public void delete(int id) {
-        House h = houseDao.findById(id);
-        if(h ==null) {
-            throw new IllegalArgumentException("House does not exist");
-        }
-        houseDao.delete(h);
+        houseDao.delete(id);
     }
 
     @Override
