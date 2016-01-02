@@ -27,7 +27,7 @@
         <c:if test="${userRole == 'ADMIN'}">
         <div class="manage-buttons-container">
             <a href="${pageContext.request.contextPath}/house/edit/${house.id}" class="m-btn black">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 ${editHouse}
             </a>
             <c:choose>

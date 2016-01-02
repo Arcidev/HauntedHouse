@@ -5,46 +5,43 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<fmt:message var="browse" key="misc.browse"/>
-<fmt:message var="noImage" key="misc.noImage"/>
 <fmt:message var="historyInfo" key="history.info"/>
-<fmt:message var="name" key="misc.name"/>
-<fmt:message var="date" key="history.date"/>
+<fmt:message var="date" key="misc.date"/>
 <fmt:message var="description" key="misc.description"/>
 <fmt:message var="create" key="misc.create"/>
 <fmt:message var="edit" key="misc.edit"/>
-<fmt:message var="fileExceededSize" key="misc.fileExceededSize"/>
 
 <history:header>
 <jsp:attribute name="body">
 
     <div>
-        <form:form enctype="multipart/form-data" action="${pageContext.request.contextPath}/history/edit?${_csrf.parameterName}=${_csrf.token}" modelAttribute="historyEdit" method='POST'>
+        <form:form action="${pageContext.request.contextPath}/history/edit" modelAttribute="historyEdit" method='POST'>
             <input type="hidden" name="id" value ="${historyEdit.id}" />
+            <input type="hidden" name="spookId" value ="${historyEdit.spookId}" />
             <h3>${historyInfo}</h3>
-            <div class="form-group history-edit-block">
+            <div class="form-group">
                 <p>${description}:</p>
                 <textarea name="info">${historyEdit.info}</textarea>
-                <c:if test="${not empty info_error}">
-                    <p class="input_error">*${info_error}</p>
+                <c:if test="${not empty historyInfo_error}">
+                    <p class="input_error">*${historyInfo_error}</p>
                 </c:if>
             </div>
-                
-                <div class="form-group history-edit-block">
+            <div class="form-group">
                 <p>${date}:</p>
-                <textarea name="info">${historyEdit.historyDate}</textarea>
+                <input type="text" name="historyDate" placeholder="2000-01-01" value="${historyEdit.historyDate}" />
+                <c:if test="${not empty historyDate_error}">
+                    <p class="input_error">*${historyDate_error}</p>
+                </c:if>
             </div>
+            <c:choose>
+                <c:when test="${historyEdit.id == 0}">
+                    <input class="m-btn black button-100" type="submit" value="${create}" />
+                </c:when>    
+                <c:otherwise>
+                    <input class="m-btn black button-100" type="submit" value="${edit}" />
+                </c:otherwise>
+            </c:choose>
         </form:form>
-            
-            
-                <c:choose>
-                    <c:when test="${historyEdit.id == 0}">
-                        <input class="m-btn black button-100" type="submit" value="${create}" />
-                    </c:when>    
-                    <c:otherwise>
-                        <input class="m-btn black button-100" type="submit" value="${edit}" />
-                    </c:otherwise>
-                </c:choose>
     </div>
     
 </jsp:attribute>

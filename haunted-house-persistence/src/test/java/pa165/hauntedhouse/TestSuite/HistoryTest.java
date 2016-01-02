@@ -10,7 +10,6 @@ import java.sql.Date;
 import java.util.Calendar;
 import java.util.List;
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -99,7 +98,7 @@ public class HistoryTest extends AbstractTestNGSpringContextTests{
         historyDao.create(history1);
         historyDao.create(history2);
         
-        historyDao.delete(history2);
+        historyDao.delete(history2.getID());
         
         List<History> history = historyDao.findAll();
         

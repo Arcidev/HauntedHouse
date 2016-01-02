@@ -7,8 +7,8 @@ package pa165.hauntedhouse.Facade;
 
 import java.util.List;
 import pa165.hauntedhouse.Dto.HistoryDTO;
-import pa165.hauntedhouse.Dto.SpookDTO;
-import pa165.hauntedhouse.Entity.Spook;
+import pa165.hauntedhouse.Dto.HistoryInfoDTO;
+import pa165.hauntedhouse.Dto.SpookInfoDTO;
 
 /**
  *
@@ -36,7 +36,7 @@ public interface HistoryFacade {
      * 
      * @param h
      */
-    void updateHistory(HistoryDTO h);
+    void updateHistory(HistoryInfoDTO h);
 
     /**
      * Gets spook connected to history
@@ -44,21 +44,21 @@ public interface HistoryFacade {
      * @param historyId
      * @return spook
      */
-    public SpookDTO getSpookByHistoryId(int historyId);
+    SpookInfoDTO getSpookByHistoryId(int historyId);
     
     /**
      * Gets all histories
      * 
      * @return all histories
      */
-    List<HistoryDTO> getAllHistories();
+    List<HistoryInfoDTO> getAllHistories();
 
     /**
      * Gets all histories
      * @param spookId
      * @return all records of spooks history
      */
-    List<HistoryDTO> getAllSpooksHistories(int spookId);
+    List<HistoryInfoDTO> getAllSpooksHistories(int spookId);
     
     /**
      * Gets history by id
@@ -75,7 +75,7 @@ public interface HistoryFacade {
      * @param Date2
      * @return history in date1 and date2
      */
-    List<HistoryDTO> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2);
+    List<HistoryInfoDTO> searchHistoryByRange(java.util.Date Date1, java.util.Date Date2);
     
     /**
      * Finds history cointaining pattern in info
@@ -84,5 +84,5 @@ public interface HistoryFacade {
      * @param pattern
      * @return list of exact number of histories containing pattern in info order by id
      */
-    List<HistoryDTO> searchTopHistoryByInfo(String pattern, int top);
+    List<HistoryInfoDTO> searchTopHistoryByInfo(String pattern, int top);
 }

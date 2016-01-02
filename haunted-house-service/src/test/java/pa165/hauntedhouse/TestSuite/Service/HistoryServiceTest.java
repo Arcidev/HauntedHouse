@@ -82,14 +82,12 @@ public class HistoryServiceTest extends AbstractTestNGSpringContextTests {
         
         h.setHistoryDate(d);
         h.setInfo("1");
-        h.setSpook(s);
         
         h2.setHistoryDate(d2);
         h2.setInfo("2");
-        h2.setSpook(s2);
         
-        historyService.createHistory(h);
-        historyService.createHistory(h2);
+        historyService.createHistory(h, s.getId());
+        historyService.createHistory(h2, s2.getId());
     }
     
     @Test
@@ -130,7 +128,7 @@ public class HistoryServiceTest extends AbstractTestNGSpringContextTests {
         h3.setHistoryDate(d5);
         h3.setInfo("h3");
         
-        historyService.createHistory(h3);
+        historyService.createHistory(h3, s2.getId());
         int num_h = historyService.getAllHistories().size();
         historyService.deleteHistory(h3.getID());
         Assert.assertEquals(historyService.getAllHistories().size(), num_h-1);

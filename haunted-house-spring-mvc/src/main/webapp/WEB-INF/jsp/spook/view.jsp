@@ -30,7 +30,7 @@
                 </a>
                 <c:if test="${userRole == 'ADMIN'}">
                     <a href="${pageContext.request.contextPath}/spook/edit/${spook.id}" class="m-btn black">
-                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-edit"></span>
                         ${editSpook}
                     </a>  
                     <c:choose>

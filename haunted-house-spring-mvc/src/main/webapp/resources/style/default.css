@@ -267,7 +267,19 @@
 }
 
 .table > thead > tr > th {
-    border-bottom: 0px;
+    border-bottom: 0;
+}
+
+.table > tbody > tr > td {
+    vertical-align: middle;
+}
+
+td > .m-btn {
+    margin-top: 0;
+}
+
+.removeRow {
+    width: 42px;
 }
 
 footer p {

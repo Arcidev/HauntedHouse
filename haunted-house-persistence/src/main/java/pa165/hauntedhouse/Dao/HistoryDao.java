@@ -20,21 +20,21 @@ public interface HistoryDao {
      * 
      * @param h
      */
-    public void create(History h);
+    void create(History h);
     
     /**
      * Deletes history record
      * 
-     * @param h
+     * @param id
      */
-    public void delete(History h);
+    void delete(int id);
     
     /**
      * Updates history record
      * 
      * @param h
      */
-    public void update(History h);
+    void update(History h);
     
      /**
      * Returns a history record with specified id from database
@@ -42,7 +42,7 @@ public interface HistoryDao {
      * @param id
      * @return the ability with specified id
      */
-    public History findById(int id);
+    History findById(int id);
     
      /**
      * Returns a history record with specified date from database
@@ -50,14 +50,14 @@ public interface HistoryDao {
      * @param Date
      * @return the history record with specified date
      */
-    public History findByDate(java.util.Date Date);
+    History findByDate(java.util.Date Date);
     
     /**
      * Returns list of all history records that are stored in database
      * 
      * @return the list of all history records
      */
-    public List<History> findAll();
+    List<History> findAll();
     
    /**
      * Gets all histories
@@ -73,7 +73,7 @@ public interface HistoryDao {
      * @param Date2
      * @return history in date1 and date2
      */
-    public List<History> searchByRange(java.util.Date Date1, java.util.Date Date2);
+    List<History> searchByRange(java.util.Date Date1, java.util.Date Date2);
     
     /**
      * Finds history cointaining pattern in info
@@ -83,5 +83,4 @@ public interface HistoryDao {
      * @return list of exact number of histories containing pattern in info order by id
      */
     List<History> searchTopHistoryByInfo(String pattern, int top);
-    
 }

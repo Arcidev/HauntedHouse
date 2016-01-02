@@ -142,8 +142,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         History h = new History();
         h.setHistoryDate(d);
         h.setInfo(info);
-        h.setSpook(s);
-        historyService.createHistory(h);
+        historyService.createHistory(h, s.getId());
         return h;
     }
     

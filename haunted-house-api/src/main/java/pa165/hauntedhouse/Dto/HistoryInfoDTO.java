@@ -3,50 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pa165.hauntedhouse.Entity;
-
+package pa165.hauntedhouse.Dto;
 
 import java.sql.Date;
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-import org.dozer.Mapping;
+import javax.validation.constraints.Size;
+
 /**
  *
  * @author Lucie Smidova
- * date, id, info
  */
-@Entity
-public class History {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Mapping
+public class HistoryInfoDTO {
     private int id;
-    
-    @NotNull
     private Date historyDate;
     
+    @Size(min = 10)
     private String historyInfo;
     
-    @ManyToOne(targetEntity=Spook.class)
-    private Spook spook;
-    
-    public Spook getSpook(){
-	return spook;
-    }
-    
-    public void setSpook(Spook spook){
-	this.spook=spook;
-    }
-    
-    public int getID(){
+    public int getId(){
         return id;
     }
- 
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public Date getHistoryDate(){
         return historyDate;
     }
@@ -73,22 +54,22 @@ public class History {
             return false;
         }
         
-        if (!(obj instanceof History)) {
+        if (!(obj instanceof HistoryInfoDTO)) {
             return false;
         }
         
-        History h = (History)obj;
-        return id == ((History)obj).getID()&&
+        HistoryInfoDTO h = (HistoryInfoDTO)obj;
+        return id == h.getId()&&
                 (historyDate == null ? h.getHistoryDate() == null : historyDate.equals(h.getHistoryDate())) &&
                 (historyInfo == null ? h.getInfo() == null : historyInfo.equals(h.getInfo()));
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + this.id;
-        hash = 37 * hash + Objects.hashCode(this.historyDate);
-        hash = 37 * hash + Objects.hashCode(this.historyInfo);
+        int hash = 3;
+        hash = 43 * hash + this.id;
+        hash = 43 * hash + Objects.hashCode(this.historyDate);
+        hash = 43 * hash + Objects.hashCode(this.historyInfo);
         return hash;
     }
 }

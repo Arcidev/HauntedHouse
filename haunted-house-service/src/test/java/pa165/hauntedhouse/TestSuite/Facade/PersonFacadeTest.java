@@ -11,7 +11,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dto.PersonDTO;
-import pa165.hauntedhouse.Entity.Person;
 import pa165.hauntedhouse.Enums.UserRole;
 import pa165.hauntedhouse.Facade.PersonFacade;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;

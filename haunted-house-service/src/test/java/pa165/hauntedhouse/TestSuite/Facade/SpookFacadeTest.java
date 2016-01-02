@@ -36,7 +36,6 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
     private final SpookDTO spook = new SpookDTO();
     private final SpookDTO spook2 = new SpookDTO();    
     
-    
     private Time getTime(int hour, int min, int sec) {
         Calendar cal = Calendar.getInstance();
         cal.set( Calendar.HOUR_OF_DAY, hour );

@@ -17,7 +17,7 @@
         <div class="manage-buttons-container">
             <c:if test="${isAuthenticated}">
                 <a href="${pageContext.request.contextPath}/ability/new" class="m-btn black">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-plus"></span>
                     ${addAbility}
                 </a>
             </c:if>

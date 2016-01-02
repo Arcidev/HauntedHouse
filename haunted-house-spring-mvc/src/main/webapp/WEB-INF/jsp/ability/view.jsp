@@ -22,7 +22,7 @@
         <c:if test="${userRole == 'ADMIN'}">
             <div class="manage-buttons-container">
                 <a href="${pageContext.request.contextPath}/ability/edit/${ability.id}" class="m-btn black">
-                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="glyphicon glyphicon-edit"></span>
                     ${editAbility}
                 </a>
                 <c:choose>

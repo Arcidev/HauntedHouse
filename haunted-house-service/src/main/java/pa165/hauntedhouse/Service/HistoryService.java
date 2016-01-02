@@ -18,9 +18,10 @@ public interface HistoryService {
      * Creates new history
      * 
      * @param h
+     * @param spookId
      * @return id of newly created history
      */
-    int createHistory(History h);
+    int createHistory(History h, int spookId);
 
     /**
      * Removes existing history by id

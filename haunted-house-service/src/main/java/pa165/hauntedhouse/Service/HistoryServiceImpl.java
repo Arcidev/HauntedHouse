@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pa165.hauntedhouse.Dao.HistoryDao;
+import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.History;
 import pa165.hauntedhouse.Entity.Spook;
 
@@ -21,8 +22,16 @@ public class HistoryServiceImpl implements HistoryService {
     @Autowired
     private HistoryDao historyDao;
     
+    @Autowired
+    private SpookDao spookDao;
+    
      @Override
-    public int createHistory(History h) {
+    public int createHistory(History h, int spookId) {
+        Spook s = spookDao.findById(spookId);
+        if (s == null) {
+            throw new IllegalArgumentException("Not existing spook");
+        }
+        h.setSpook(s);
         historyDao.create(h);
         return h.getID();
     }
@@ -36,16 +45,12 @@ public class HistoryServiceImpl implements HistoryService {
         his.setInfo(h.getInfo());
         his.setHistoryDate(h.getHistoryDate());
         
-        historyDao.update(h);
+        historyDao.update(his);
     }
 
     @Override
     public void deleteHistory(int id) {
-        History h = historyDao.findById(id);  
-        if (h == null) {
-            throw new IllegalArgumentException("History does not exist");
-        }
-        historyDao.delete(h);
+        historyDao.delete(id);
     }
 
     @Override

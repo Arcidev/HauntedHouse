@@ -6,6 +6,7 @@
 package pa165.hauntedhouse.TestSuite.Facade;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.Calendar;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,10 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dto.HistoryDTO;
+import pa165.hauntedhouse.Dto.HistoryInfoDTO;
+import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Facade.HistoryFacade;
+import pa165.hauntedhouse.Facade.SpookFacade;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 /**
@@ -28,9 +32,12 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     @Autowired
     HistoryFacade historyFacade;
     
+    @Autowired
+    SpookFacade spookFacade;
     
     private final HistoryDTO hDTO = new HistoryDTO();
     private final HistoryDTO hDTO2 = new HistoryDTO();
+    private final SpookDTO spook = new SpookDTO();
     
     private Date getDate(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
@@ -45,15 +52,30 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         return new Date(cal.getTime().getTime());
     }
     
+    private Time getTime(int hour, int min, int sec) {
+        Calendar cal = Calendar.getInstance();
+        cal.set( Calendar.HOUR_OF_DAY, hour );
+        cal.set( Calendar.MINUTE, min );
+        cal.set( Calendar.SECOND, sec );      
+        
+        return new Time(cal.getTime().getTime());
+    }
+    
     @BeforeClass
     public void createData(){
-        Date d = getDate(2015, 12, 19);
-        hDTO.setHistoryDate(d);
-        hDTO.setInfo("h info");
+        spook.setHauntsSince(getTime(20, 15, 00));
+        spook.setHauntsUntil(getTime(6, 30, 45));
+        spook.setHistory("s");
+        spook.setName("b");
+        spookFacade.createSpook(spook);
         
-        Date d2 = getDate(2015, 12, 13);
-        hDTO2.setHistoryDate(d2);
+        hDTO.setHistoryDate(getDate(2015, 12, 19));
+        hDTO.setInfo("h info");
+        hDTO.setSpookId(spook.getId());
+        
+        hDTO2.setHistoryDate(getDate(2015, 12, 13));
         hDTO2.setInfo("h info2");
+        hDTO2.setSpookId(spook.getId());
         historyFacade.createHistory(hDTO);
         historyFacade.createHistory(hDTO2);
     }
@@ -81,7 +103,7 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     public void searchTest() {
         Date d3 = getDate(2015, 9, 13);
         Date d4 = getDate(2016, 12, 19);
-        List <HistoryDTO> h = historyFacade.searchHistoryByRange(d3, d4);
+        List <HistoryInfoDTO> h = historyFacade.searchHistoryByRange(d3, d4);
         Assert.assertEquals(h.size(), 2);
         Assert.assertTrue(h.get(0).getHistoryDate().before(d4));
         Assert.assertTrue(h.get(0).getHistoryDate().after(d3));
@@ -89,7 +111,7 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         Assert.assertTrue(h.get(1).getHistoryDate().before(d4));
         Assert.assertTrue(h.get(1).getHistoryDate().after(d3));
         
-        List <HistoryDTO> hs = historyFacade.searchTopHistoryByInfo("h", 1);
+        List <HistoryInfoDTO> hs = historyFacade.searchTopHistoryByInfo("h", 1);
         Assert.assertEquals(hs.size(), 1);
         Assert.assertTrue(hs.get(0).getInfo().contains("h"));
         
@@ -106,7 +128,7 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         
         hDTO3.setHistoryDate(d5);
         hDTO3.setInfo("h info3");
-        
+        hDTO3.setSpookId(spook.getId());
         historyFacade.createHistory(hDTO3);
         int num_history = historyFacade.getAllHistories().size();
         historyFacade.deleteHistory(hDTO3.getId());

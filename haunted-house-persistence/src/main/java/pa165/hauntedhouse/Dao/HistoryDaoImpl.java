@@ -34,13 +34,18 @@ public class HistoryDaoImpl implements HistoryDao{
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: duplicate entity", e);
         }
-        
     }
 
     @Override
-    public void delete(History h) {
+    public void delete(int id) {
         try {
-            em.remove(em.merge(h));
+            History h = findById(id);
+            Spook s = h.getSpook();
+            em.remove(h);
+            if (s != null) {
+                s.removeHistory(h);
+                em.merge(s);
+            }
         } catch(Exception e) {
             throw new DbException("Entity manager has failed - possible cause: not existing entity", e);
         }
