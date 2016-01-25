@@ -7,7 +7,6 @@ package pa165.hauntedhouse.TestSuite.Facade;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -24,12 +23,9 @@ import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dao.AbilityDao;
 import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Dto.AbilityDTO;
-import pa165.hauntedhouse.Dto.AbilityInfoDTO;
-import pa165.hauntedhouse.Dto.SpookDTO;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Facade.AbilityFacade;
-import pa165.hauntedhouse.Facade.SpookFacade;
 import pa165.hauntedhouse.Service.AbilityService;
 import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
@@ -66,7 +62,6 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
     private Ability ability2;
     private Spook spook;
     private AbilityDTO abilityDto;
-    private AbilityDTO abilityDto2;
     
     @BeforeMethod
     public void createData(){
@@ -89,7 +84,6 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
         spook.setHauntsUntil(Time.valueOf("10:15:30"));
         
         abilityDto = mapper.mapTo(ability, AbilityDTO.class);
-        abilityDto2 = mapper.mapTo(ability2, AbilityDTO.class);
     }
     
     @Test
@@ -106,8 +100,6 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
     
     @Test
     public void findAbility(){
-        List <Ability> abilities = new ArrayList<>();
-        abilities.add(ability);
         when(abilityDao.findById(1)).thenReturn(ability);
         Assert.assertEquals(ability.getName(),abilityFacade.getAbilityById(1).getName());
     }

@@ -67,19 +67,19 @@ public class HistoryServiceTest extends AbstractTestNGSpringContextTests {
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DAY_OF_MONTH, day);
-        cal.set( Calendar.HOUR_OF_DAY, 0 );
-        cal.set( Calendar.MINUTE, 0 );
-        cal.set( Calendar.SECOND, 0 );
-        cal.set( Calendar.MILLISECOND, 0 );
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
         
         return new Date(cal.getTime().getTime());
     }
     
     private Time getTime(int hour, int min, int sec) {
         Calendar cal = Calendar.getInstance();
-        cal.set( Calendar.HOUR_OF_DAY, hour );
-        cal.set( Calendar.MINUTE, min );
-        cal.set( Calendar.SECOND, sec );      
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, min);
+        cal.set(Calendar.SECOND, sec);      
         
         return new Time(cal.getTime().getTime());
     }

@@ -103,8 +103,6 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests{
         
     @Test
     public void findHouse(){
-        List <House> houses = new ArrayList<>();
-        houses.add(house);
         when(houseDao.findById(1)).thenReturn(house);
         Assert.assertEquals(house.getName(),houseFacade.getHouseById(1).getName());
     }

@@ -49,10 +49,6 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests{
     @Autowired
     private HouseService houseService;
     
-    @InjectMocks
-    @Autowired
-    private SpookService spookService;
-        
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
@@ -85,7 +81,6 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests{
         spook.setHauntsSince(time);
         spook.setHauntsUntil(time);
         spook.setVisible(true);
-        
     }
     
     @Test

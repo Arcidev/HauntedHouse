@@ -122,7 +122,6 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
         when(beanMappingService.mapTo(hDTO, History.class)).thenReturn(h);
         hDTO.setInfo("huhu");
         historyFacade.updateHistory(hDTO);
-        String expected = hDTO.getInfo();
         verify(hdto).updateHistory(h);
         Assert.assertEquals(historyFacade.getHistoryById(hDTO.getId()), hdto.findHistoryById(h.getID()));
     }

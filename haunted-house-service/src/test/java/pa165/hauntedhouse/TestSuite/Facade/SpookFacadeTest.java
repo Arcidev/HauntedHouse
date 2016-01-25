@@ -5,7 +5,6 @@
  */
 package pa165.hauntedhouse.TestSuite.Facade;
 
-import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
 import java.util.List;
@@ -28,6 +27,7 @@ import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
+    
     @Autowired
     AbilityFacade abilityFacade;
     
@@ -66,32 +66,13 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
     }
     
     @Test
-    public void testAssociation() {      
-        AbilityDTO ability = new AbilityDTO();
-        AbilityDTO ability2 = new AbilityDTO();
-        ability.setName("Why Mr. Anderson ?!");
-        ability.setInfo("What?");
-        
-        ability2.setName("Why you still persist?");
-        ability2.setInfo("Because tests are for n00bs!!!");
-        
-        abilityFacade.createAbility(ability);
-        abilityFacade.createAbility(ability2);
-        
-        
-//        spookFacade.addToAbility(spook.getId(), ability.getId());
- //       spookFacade.addToAbility(spook2.getId(), ability.getId());
-    //    Assert.assertEquals(spookFacade.getAbilitySpooks(ability.getId()).size(), 2);
-        
-        
-    }
-    @Test
     public void testUpdate() {
         spook.setHistory("Casper history8");
         spookFacade.updateSpook(spook);
         
         Assert.assertEquals(spookFacade.getSpookById(spook.getId()).getHistory(), "Casper history8");
     }
+    
     @Test
     public void testDelete() {
         Time timeSince = getTime(20, 45, 30);
@@ -108,6 +89,7 @@ public class SpookFacadeTest extends AbstractTestNGSpringContextTests{
         Assert.assertEquals(spookFacade.getAllSpooks().size(), spooksCount - 1);
        
     }
+    
     @Test
     public void testSearch() {
         List<SpookInfoDTO> spooks = spookFacade.searchSpooksByName("Casper2",true);
