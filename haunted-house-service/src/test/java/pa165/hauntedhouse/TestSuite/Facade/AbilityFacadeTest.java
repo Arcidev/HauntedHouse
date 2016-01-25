@@ -6,19 +6,32 @@
 package pa165.hauntedhouse.TestSuite.Facade;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pa165.hauntedhouse.Dao.AbilityDao;
+import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.AbilityInfoDTO;
 import pa165.hauntedhouse.Dto.SpookDTO;
+import pa165.hauntedhouse.Entity.Ability;
+import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
+import pa165.hauntedhouse.Service.AbilityService;
+import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 /**
@@ -28,17 +41,39 @@ import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
     
+    @Mock
+    private AbilityDao abilityDao;
+    
+    @Mock
+    private SpookDao spookDao;
+    
+    @InjectMocks
     @Autowired
-    AbilityFacade abilityFacade;
+    private AbilityService abilityService;
     
     @Autowired
-    SpookFacade spookFacade;
+    private AbilityFacade abilityFacade;
     
-    private final AbilityDTO ability = new AbilityDTO();
-    private final AbilityDTO ability2 = new AbilityDTO();
+    @Autowired
+    private BeanMappingService mapper;
     
     @BeforeClass
+    public void initClass() {
+        MockitoAnnotations.initMocks(this);
+    }
+    
+    private Ability ability;
+    private Ability ability2;
+    private Spook spook;
+    private AbilityDTO abilityDto;
+    private AbilityDTO abilityDto2;
+    
+    @BeforeMethod
     public void createData(){
+        ability = new Ability();
+        ability2 = new Ability();
+        spook = new Spook();
+        
         ability.setName("Why Mr. Anderson ?!");
         ability.setInfo("What?");
         ability.setVisible(true);
@@ -47,81 +82,55 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests  {
         ability2.setInfo("Because tests are for n00bs!!!");
         ability2.setVisible(true);
         
-        abilityFacade.createAbility(ability);
-        abilityFacade.createAbility(ability2);
+        spook.setName("meno");
+        spook.setVisible(true);
+        spook.setHistory("historia");
+        spook.setHauntsSince(Time.valueOf("15:14:13"));
+        spook.setHauntsUntil(Time.valueOf("10:15:30"));
+        
+        abilityDto = mapper.mapTo(ability, AbilityDTO.class);
+        abilityDto2 = mapper.mapTo(ability2, AbilityDTO.class);
     }
     
     @Test
-    public void testDataCreation() {
-        Assert.assertEquals(abilityFacade.getAbilityById(ability.getId()), ability);
-        Assert.assertEquals(abilityFacade.getAbilityById(ability2.getId()), ability2);
+    public void createTest() {
+        abilityFacade.createAbility(abilityDto);
+        verify(abilityDao).create(ability);
+    }
+    
+    @Test
+    public void deleteTest(){
+        abilityFacade.deleteAbility(abilityDto.getId());
+        verify(abilityDao).delete(ability.getId());
+    }
+    
+    @Test
+    public void findAbility(){
+        List <Ability> abilities = new ArrayList<>();
+        abilities.add(ability);
+        when(abilityDao.findById(1)).thenReturn(ability);
+        Assert.assertEquals(ability.getName(),abilityFacade.getAbilityById(1).getName());
+    }
+    
+    @Test
+    public void shouldFindAllAbilities(){
+        List <Ability> abilities = new ArrayList<>();
+        abilities.add(ability);
+        abilities.add(ability2);
+        when(abilityDao.findAll()).thenReturn(abilities);
+        List <AbilityDTO> abilitiesDTO = abilityFacade.getAllAbilities();
+        Assert.assertEquals(mapper.mapTo(abilities, AbilityDTO.class), abilitiesDTO);
+        Assert.assertEquals(abilityService.findAll().size(), 2);
     }
     
     @Test
     public void testAssociation() {
-        Calendar cal = Calendar.getInstance();
-        Time time = new Time(cal.getTime().getTime());
-        SpookDTO spook = new SpookDTO();
-        SpookDTO spook2 = new SpookDTO();
-        spook.setHistory("I");
-        spook.setName("Really");
-        spook.setHauntsSince(time);
-        spook.setHauntsUntil(time);
-        spook2.setHistory("Hate");
-        spook2.setName("Testing");
-        spook2.setHauntsSince(time);
-        spook2.setHauntsUntil(time);        
-        spookFacade.createSpook(spook);
-        spookFacade.createSpook(spook2);
-        
-        
-        abilityFacade.addToSpook(ability.getId(), spook.getId());
-        abilityFacade.addToSpook(ability2.getId(), spook.getId());
-        Assert.assertEquals(abilityFacade.getSpookAbilities(spook.getId()).size(), 2);
-        
-        abilityFacade.removeFromSpook(ability.getId(), spook.getId());
-        Assert.assertEquals(abilityFacade.getSpookAbilities(spook.getId()).size(), 1);
-        
-        abilityFacade.addToSpook(ability.getId(), spook2.getId());
-        abilityFacade.addToSpook(ability2.getId(), spook2.getId());
-        Assert.assertEquals(abilityFacade.getSpookAbilities(spook2.getId()).size(), 2);
-    }
-    
-    @Test
-    public void testSearch() {
-        List<AbilityInfoDTO> abilities = abilityFacade.searchAbilitiesByName("persist", true);
-        Assert.assertEquals(abilities.size(), 1);
-        Assert.assertTrue(abilities.get(0).getName().contains("persist"));
-        
-        abilities = abilityFacade.searchAbilitiesByName("why", true); // must be searching case insensitive
-        Assert.assertEquals(abilities.size(), 2);
-        for (AbilityInfoDTO a : abilities) {
-            Assert.assertTrue(a.getName().contains("Why")); // I don't believe that Java can handle case insensitive
-        }
-        
-        abilities = abilityFacade.searchAbilitiesByName("I AM INVINSIBLE", true);
-        Assert.assertEquals(abilities.size(), 0);
-    }
-    
-    @Test
-    public void testUpdate() {
-        ability.setInfo("New Info");
-        abilityFacade.updateAbility(ability);
-        
-        Assert.assertEquals(abilityFacade.getAbilityById(ability.getId()).getInfo(), "New Info");
-    }
-    
-    @Test
-    public void testDelete() {
-        AbilityDTO a = new AbilityDTO();
-        a.setInfo("a");
-        a.setName("b");
-        a.setVisible(true);
-        
-        abilityFacade.createAbility(a);
-        int abilitiesCount = abilityFacade.getAllAbilities().size();
-        abilityFacade.deleteAbility(a.getId());
-        Assert.assertEquals(abilityFacade.getAllAbilities().size(), abilitiesCount - 1);
-        Assert.assertNull(abilityFacade.getAbilityById(a.getId()));
+        when(abilityDao.findById(1)).thenReturn(ability);
+        when(spookDao.findById(1)).thenReturn(spook);
+        ability.addSpook(spook);
+        Assert.assertEquals(ability.getSpooks().size(), 1);
+        Assert.assertEquals(spook.getAbilities().size(), 1);
+        ability.remove(spook);
+        Assert.assertEquals(ability.getSpooks().size(), 0);
     }
 }

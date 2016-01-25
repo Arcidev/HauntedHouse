@@ -7,19 +7,30 @@ package pa165.hauntedhouse.TestSuite.Facade;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.service.spi.ServiceException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pa165.hauntedhouse.Dto.HistoryDTO;
 import pa165.hauntedhouse.Dto.HistoryInfoDTO;
-import pa165.hauntedhouse.Dto.SpookDTO;
+import pa165.hauntedhouse.Entity.History;
+import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Facade.HistoryFacade;
-import pa165.hauntedhouse.Facade.SpookFacade;
+import pa165.hauntedhouse.Facade.HistoryFacadeImpl;
+import pa165.hauntedhouse.Service.HistoryService;
+import pa165.hauntedhouse.ServiceConfig.Service.BeanMappingService;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 /**
@@ -29,15 +40,20 @@ import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     
-    @Autowired
+    @Mock
+    private HistoryService hdto;
+    
+    @Mock
+    private BeanMappingService beanMappingService;
+    
+    @InjectMocks
     HistoryFacade historyFacade;
     
-    @Autowired
-    SpookFacade spookFacade;
+    private History h;
+    private HistoryDTO hDTO;
+    private HistoryDTO hDTO2;
     
-    private final HistoryDTO hDTO = new HistoryDTO();
-    private final HistoryDTO hDTO2 = new HistoryDTO();
-    private final SpookDTO spook = new SpookDTO();
+    private Spook spook;
     
     private Date getDate(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
@@ -62,77 +78,71 @@ public class HistoryFacadeTest extends AbstractTestNGSpringContextTests {
     }
     
     @BeforeClass
+    public void setup() throws ServiceException {
+        historyFacade = new HistoryFacadeImpl();
+        MockitoAnnotations.initMocks(this);
+    }
+    
+    @BeforeMethod
     public void createData(){
+        hDTO = new HistoryDTO();
+        hDTO2 = new HistoryDTO();
+        spook = new Spook();
+        h = new History();
         spook.setHauntsSince(getTime(20, 15, 00));
         spook.setHauntsUntil(getTime(6, 30, 45));
         spook.setHistory("s");
         spook.setName("b");
-        spookFacade.createSpook(spook);
         
         hDTO.setHistoryDate(getDate(2015, 12, 19));
         hDTO.setInfo("h info");
-        hDTO.setSpookId(spook.getId());
+        hDTO.setSpookId(1);
         
         hDTO2.setHistoryDate(getDate(2015, 12, 13));
         hDTO2.setInfo("h info2");
-        hDTO2.setSpookId(spook.getId());
-        historyFacade.createHistory(hDTO);
-        historyFacade.createHistory(hDTO2);
+        hDTO2.setSpookId(1);
+        
+        h.setHistoryDate(getDate(2015, 12, 19));
+        h.setInfo("h info");
+        h.setSpook(spook);
     }
     
     @Test
     public void testDataCreation() {
-        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getId()), hDTO);
-        Assert.assertEquals(historyFacade.getHistoryById(hDTO2.getId()), hDTO2);
+        when(beanMappingService.mapTo(hDTO, History.class)).thenReturn(h);
+        historyFacade.createHistory(hDTO);
+        int expected = hDTO.getId();
+        verify(hdto).createHistory(h, 1);
+        assertEquals(expected, h.getID());
     }
     
     @Test
     public void updateTest() {
-        hDTO.setInfo("hu hu");
+        
+        when(beanMappingService.mapTo(hDTO, History.class)).thenReturn(h);
+        hDTO.setInfo("huhu");
         historyFacade.updateHistory(hDTO);
-        
-        Date d2 = getDate(2015, 10, 13);
-        hDTO2.setHistoryDate(d2);
-        historyFacade.updateHistory(hDTO2);
-        
-        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getId()).getInfo(), "hu hu");
-        Assert.assertEquals((Date) historyFacade.getHistoryById(hDTO2.getId()).getHistoryDate(), d2);
+        String expected = hDTO.getInfo();
+        verify(hdto).updateHistory(h);
+        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getId()), hdto.findHistoryById(h.getID()));
     }
     
     @Test
-    public void searchTest() {
-        Date d3 = getDate(2015, 9, 13);
-        Date d4 = getDate(2016, 12, 19);
-        List <HistoryInfoDTO> h = historyFacade.searchHistoryByRange(d3, d4);
-        Assert.assertEquals(h.size(), 2);
-        Assert.assertTrue(h.get(0).getHistoryDate().before(d4));
-        Assert.assertTrue(h.get(0).getHistoryDate().after(d3));
-        
-        Assert.assertTrue(h.get(1).getHistoryDate().before(d4));
-        Assert.assertTrue(h.get(1).getHistoryDate().after(d3));
-        
-        List <HistoryInfoDTO> hs = historyFacade.searchTopHistoryByInfo("h", 1);
-        Assert.assertEquals(hs.size(), 1);
-        Assert.assertTrue(hs.get(0).getInfo().contains("h"));
-        
-        hs = historyFacade.searchTopHistoryByInfo("h", 3);
-        Assert.assertEquals(hs.size(), 2);
-        Assert.assertTrue(hs.get(0).getInfo().contains("h"));
-        
+    public void searchTest() {        
+        List<History> hs = new ArrayList<>();
+        hs.add(h);
+        when(hdto.getAllHistories()).thenReturn(hs);
+        List <HistoryInfoDTO> hDTO = historyFacade.getAllHistories();
+        Assert.assertEquals(beanMappingService.mapTo(hs, HistoryInfoDTO.class), hDTO); 
     }
     
     @Test
     public void deleteTest() {
-        HistoryDTO hDTO3 = new HistoryDTO();
-        Date d5 = getDate(1995, 9, 13);
         
-        hDTO3.setHistoryDate(d5);
-        hDTO3.setInfo("h info3");
-        hDTO3.setSpookId(spook.getId());
-        historyFacade.createHistory(hDTO3);
-        int num_history = historyFacade.getAllHistories().size();
-        historyFacade.deleteHistory(hDTO3.getId());
-        Assert.assertEquals(historyFacade.getAllHistories().size(), num_history-1);
-        Assert.assertNull(historyFacade.getHistoryById(hDTO3.getId()));
+        when(beanMappingService.mapTo(hDTO, History.class)).thenReturn(h);
+        historyFacade.deleteHistory(hDTO.getId());
+        verify(hdto).deleteHistory(h.getID());
+        Assert.assertNull(historyFacade.getHistoryById(hDTO.getId()));
+        Assert.assertEquals(historyFacade.getHistoryById(hDTO.getId()), hdto.findHistoryById(h.getID()));
     }    
 }

@@ -6,18 +6,27 @@
 package pa165.hauntedhouse.TestSuite.Service;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import org.hibernate.service.spi.ServiceException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pa165.hauntedhouse.Dao.AbilityDao;
+import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.Ability;
 import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.AbilityService;
-import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 /**
@@ -27,19 +36,31 @@ import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
     
+    @Mock
+    private AbilityDao abilityDao;
+    
+    @Mock
+    private SpookDao spookDao;
+        
     @Autowired
+    @InjectMocks
     private AbilityService abilityService;
     
-    @Autowired
-    private SpookService spookService;
-    
-    private final Ability ability = new Ability();
-    private final Ability ability2 = new Ability();
-    private final Spook spook = new Spook();
-    private final Spook spook2 = new Spook();
-    
     @BeforeClass
+    public void setup() throws ServiceException {
+        MockitoAnnotations.initMocks(this);
+    }
+    
+    private Ability ability;
+    private Ability ability2;
+    private Spook spook;
+    
+    @BeforeMethod
     public void initData() {
+        ability = new Ability();
+        ability2 = new Ability();
+        spook = new Spook();
+        
         ability.setInfo("lol");
         ability.setName("troll");
         ability.setVisible(true);
@@ -54,68 +75,48 @@ public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
         spook.setHistory("Foo");
         spook.setHauntsSince(time);
         spook.setHauntsUntil(time);
-        spook2.setName("Spookie 2");
-        spook2.setHistory("Foo 2");
-        spook2.setHauntsSince(time);
-        spook2.setHauntsUntil(time);
-        abilityService.create(ability);
-        abilityService.create(ability2);
-        spookService.create(spook);
-        spookService.create(spook2);
+        spook.setVisible(true);
     }
     
     @Test
-    public void testCreation() {
-        Assert.assertEquals(abilityService.findById(ability.getId()), ability);
-        Assert.assertEquals(abilityService.findById(ability2.getId()), ability2);
+    public void createTest(){
+        abilityService.create(ability);
+        verify(abilityDao).create(ability);
+    }
+    
+    @Test
+    public void findById(){
+        int id = 1;
+        int id2 = 2;        
+        when(abilityDao.findById(id)).thenReturn(ability);
+        Assert.assertEquals(abilityService.findById(id), ability);
+        
+        when(abilityDao.findById(id2)).thenReturn(ability2);
+        Assert.assertEquals(abilityService.findById(id2), ability2);
+    }
+                
+    @Test
+    public void deleteTest() {  
+        abilityService.delete(ability.getId());
+        verify(abilityDao).delete(ability.getId());
+    }   
+        
+    @Test
+    public void shouldGetAllAbilities()  {
+        List<Ability> abilities = new ArrayList<>();
+        abilities.add(ability);
+        abilities.add(ability2);
+
+        when(abilityDao.findAll()).thenReturn(abilities);
+        Assert.assertEquals(abilityService.findAll(),abilities);
     }
     
     @Test
     public void testAssociation() {
-        abilityService.addToSpook(ability.getId(), spook.getId());
-        abilityService.addToSpook(ability2.getId(), spook.getId());
-        Assert.assertEquals(spookService.getAbilitiesBySpookId(spook.getId()).size(), 2);
-        
-        abilityService.removeFromSpook(ability.getId(), spook.getId());
-        Assert.assertEquals(spookService.getAbilitiesBySpookId(spook.getId()).size(), 1);
-        
-        abilityService.addToSpook(ability.getId(), spook2.getId());
-        abilityService.addToSpook(ability2.getId(), spook2.getId());
-        Assert.assertEquals(spookService.getAbilitiesBySpookId(spook2.getId()).size(), 2);
-    }
-    
-    @Test
-    public void testSearch() {
-        List<Ability> abilities = abilityService.searchAbilitiesByName("lol", true);
-        Assert.assertEquals(abilities.size(), 1);
-        Assert.assertTrue(abilities.get(0).getName().contains("lol"));
-        
-        abilities = abilityService.searchAbilitiesByName("trol", true);
-        Assert.assertEquals(abilities.size(), 2);
-        for (Ability a : abilities) {
-            Assert.assertTrue(a.getName().contains("trol"));
-        }
-    }
-    
-    @Test
-    public void testUpdate() {
-        ability.setInfo("New Info");
-        abilityService.update(ability);
-        
-        Assert.assertEquals(abilityService.findById(ability.getId()).getInfo(), "New Info");
-    }
-    
-    @Test
-    public void testDelete() {
-        Ability a = new Ability();
-        a.setInfo("a");
-        a.setName("b");
-        a.setVisible(true);
-        
-        abilityService.create(a);
-        int abilitiesCount = abilityService.findAll().size();
-        abilityService.delete(a.getId());
-        Assert.assertEquals(abilityService.findAll().size(), abilitiesCount - 1);
-        Assert.assertNull(abilityService.findById(a.getId()));
-    }
+        when(abilityDao.findById(1)).thenReturn(ability);
+        when(spookDao.findById(1)).thenReturn(spook);
+        abilityService.addToSpook(1, 1);
+        int spooks = abilityService.getSpooksByAbilityId(1).size();
+        Assert.assertEquals(spooks, 1);            
+    } 
 }

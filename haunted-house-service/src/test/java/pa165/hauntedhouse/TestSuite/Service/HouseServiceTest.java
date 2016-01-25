@@ -6,15 +6,29 @@
 
 package pa165.hauntedhouse.TestSuite.Service;
 
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import org.hibernate.service.spi.ServiceException;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pa165.hauntedhouse.Dao.HouseDao;
+import pa165.hauntedhouse.Dao.SpookDao;
 import pa165.hauntedhouse.Entity.House;
+import pa165.hauntedhouse.Entity.Spook;
 import pa165.hauntedhouse.Service.HouseService;
+import pa165.hauntedhouse.Service.SpookService;
 import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 /**
@@ -24,61 +38,95 @@ import pa165.hauntedhouse.ServiceConfig.ServiceConfiguration;
 
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class HouseServiceTest extends AbstractTestNGSpringContextTests{
+  
+    @Mock
+    private HouseDao houseDao;
     
+    @Mock
+    private SpookDao spookDao;
+    
+    @InjectMocks
     @Autowired
     private HouseService houseService;
+    
+    @InjectMocks
+    @Autowired
+    private SpookService spookService;
         
-    private final House house = new House();
-    private final House house2 = new House();
-           
     @BeforeClass
-    public void initData() {
-        house.setAddress("KE");
-        house.setName("building");
-        house.setHistory("HistoryServiceTest");
-        house.setVisible(true);
+    public void setup() throws ServiceException {
+        MockitoAnnotations.initMocks(this);
+    }
         
+    private House house;
+    private House house2;
+    private Spook spook;
+           
+    @BeforeMethod
+    public void prepareTestData() {
+        house = new House();
+        house2 = new House();
+        spook = new Spook();
+        
+        house.setAddress("KE");
+        house.setName("buildingbuilding");
+        house.setHistory("HistoryServiceTestHistoryServiceTest");
+        house.setVisible(true);
+
         house2.setAddress("BA");
         house2.setName("house2");
         house2.setHistory("HistoryServiceTest2");
         house2.setVisible(true);
+
+        Calendar cal = Calendar.getInstance();
+        Time time = new Time(cal.getTime().getTime());
+        spook.setName("Spookie");
+        spook.setHistory("Foo");
+        spook.setHauntsSince(time);
+        spook.setHauntsUntil(time);
+        spook.setVisible(true);
         
-        houseService.create(house);
-        houseService.create(house2);
     }
     
     @Test
     public void createTest(){
-        Assert.assertEquals(houseService.findById(house.getId()), house);
-        Assert.assertEquals(houseService.findById(house2.getId()), house2);
+        houseService.create(house);
+        verify(houseDao).create(house);
     }
+            
+    @Test
+    public void findById(){
+        int id = 1;
+        int id2 = 2;        
+        when(houseDao.findById(id)).thenReturn(house);
+        Assert.assertEquals(houseService.findById(id), house);
         
-    @Test
-    public void updateTest() {
-        house.setAddress("NY");
-        houseService.update(house);
-        Assert.assertEquals(houseService.findById(house.getId()).getAddress(), "NY");
+        when(houseDao.findById(id2)).thenReturn(house2);
+        Assert.assertEquals(houseService.findById(id2), house2);
     }
-    
-    @Test
-    public void testSearch() {
-        List<House> buildings = houseService.searchHousesByName("house", true);
-        Assert.assertEquals(buildings.size(), 1);
-        Assert.assertTrue(buildings.get(0).getName().contains("house"));
-    }
-    
+                
     @Test
     public void deleteTest() {  
-        House house3 = new House();
-        house3.setAddress("LA");
-        house3.setName("Name");
-        house3.setHistory("HistoryServiceTest3");
-        house3.setVisible(true);
-        
-        houseService.create(house3);
-        int houses = houseService.findAll().size();
-        houseService.delete(house3.getId());
-        Assert.assertEquals(houseService.findAll().size(), houses-1);
-        Assert.assertNull(houseService.findById(house3.getId()));
+        houseService.delete(house.getId());
+        verify(houseDao).delete(house.getId());
     }   
+        
+    @Test
+    public void shouldGetAllHouses()  {
+        List<House> houses = new ArrayList<>();
+        houses.add(house);
+        houses.add(house2);
+
+        when(houseDao.findAll()).thenReturn(houses);
+        Assert.assertEquals(houseService.findAll(),houses);
+    }
+    
+    @Test
+    public void testAssociation() {
+        when(houseDao.findById(1)).thenReturn(house);
+        when(spookDao.findById(1)).thenReturn(spook);
+        houseService.addToSpook(1, 1);
+        int spooks = houseService.getSpooksByHouseId(1).size();
+        Assert.assertEquals(spooks, 1);            
+    } 
 }
