@@ -39,10 +39,10 @@
         <c:if test="${not empty hiddenSpooks}">
             <h3>${hidSpooks}</h3>
             <c:forEach items="${hiddenSpooks}" var="spook" varStatus="ic">
-                <div class="inline-block-content-house">
+                <div class="inline-block-content-spook">
                     <a class="anchor-no-decor ability-image" href="${pageContext.request.contextPath}/spook/${spook.id}">
                         <div class="ability-container">
-                            <img class="img-house" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
+                            <img class="img-ability" src="${pageContext.request.contextPath}/webApi/spook/${spook.id}" alt="${noImage}">
                             <span>${spook.name}</span>
                         </div>
                     </a>

@@ -28,6 +28,7 @@ import pa165.hauntedhouse.Dto.HouseDTO;
 import pa165.hauntedhouse.Dto.HouseInfoDTO;
 import pa165.hauntedhouse.Dto.SpookInfoDTO;
 import pa165.hauntedhouse.Enums.UserRole;
+import pa165.hauntedhouse.Exception.AccessDenied;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.HouseFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -113,8 +114,10 @@ public class HouseController extends BaseController{
         setImageFromFile(file, house);
         if (house.getId() == 0)
             houseFacade.createHouse(house);
-        else
+        else if (UserRole.ADMIN.toString().equals(getUserRole()))
             houseFacade.updateHouse(house);
+        else
+            throw new AccessDenied("Not an admin");
         
         return "redirect:" + uriBuilder.path("/house/" + house.getId()).build().toString();
     }

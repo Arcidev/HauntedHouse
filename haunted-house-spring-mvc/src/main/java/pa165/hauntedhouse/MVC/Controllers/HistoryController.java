@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.hauntedhouse.Dto.HistoryDTO;
+import pa165.hauntedhouse.Enums.UserRole;
+import pa165.hauntedhouse.Exception.AccessDenied;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.HistoryFacade;
 
@@ -82,8 +84,10 @@ public class HistoryController extends BaseController {
         
         if (history.getId() == 0)
             historyFacade.createHistory(history);
-        else
+        else if (UserRole.ADMIN.toString().equals(getUserRole()))
             historyFacade.updateHistory(history);
+        else
+            throw new AccessDenied("Not an admin");
         
         return "redirect:" + uriBuilder.path("/history/all/" + history.getSpookId()).build().toString();
     }

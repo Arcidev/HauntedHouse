@@ -27,6 +27,7 @@ import pa165.hauntedhouse.Dto.AbilityDTO;
 import pa165.hauntedhouse.Dto.AbilityInfoDTO;
 import pa165.hauntedhouse.Dto.SpookInfoDTO;
 import pa165.hauntedhouse.Enums.UserRole;
+import pa165.hauntedhouse.Exception.AccessDenied;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 import pa165.hauntedhouse.Facade.AbilityFacade;
 import pa165.hauntedhouse.Facade.SpookFacade;
@@ -114,8 +115,10 @@ public class AbilityController extends BaseController {
         setImageFromFile(file, ability);
         if (ability.getId() == 0)
             abilityFacade.createAbility(ability);
-        else
+        else if (UserRole.ADMIN.toString().equals(getUserRole()))
             abilityFacade.updateAbility(ability);
+        else
+            throw new AccessDenied("Not an admin");
         
         return "redirect:" + uriBuilder.path("/ability/" + ability.getId()).build().toString();
     }

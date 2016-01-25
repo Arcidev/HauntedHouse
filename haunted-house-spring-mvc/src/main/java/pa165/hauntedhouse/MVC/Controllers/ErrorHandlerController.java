@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import pa165.hauntedhouse.Exception.AccessDenied;
 import pa165.hauntedhouse.Exception.HttpNotFound;
 
 /**
@@ -23,16 +24,25 @@ import pa165.hauntedhouse.Exception.HttpNotFound;
  */
 @Controller
 @ControllerAdvice
-public class ErrorHandlerController {
+public class ErrorHandlerController extends BaseController {
     
     @Autowired
     private MessageSource messageSource; //resource bundle provided by Spring
     
     @RequestMapping(value = { "denied" }, method = RequestMethod.GET)
     public String accessDenied(Model model) {
+        inicializeCall(model, null, null);
         model.addAttribute("errorTitle", messageSource.getMessage("error.deniedTitle", null, LocaleContextHolder.getLocale()));
         model.addAttribute("errorMessage", messageSource.getMessage("error.deniedMessage", null, LocaleContextHolder.getLocale()));
         return "error";
+    }
+    
+    @ExceptionHandler(AccessDenied.class)
+    public ModelAndView handleAccessDeniedException(AccessDenied ex) {
+        ModelAndView model = new ModelAndView("error");
+        model.addObject("errorTitle", messageSource.getMessage("error.deniedTitle", null, LocaleContextHolder.getLocale()));
+        model.addObject("errorMessage", messageSource.getMessage("error.deniedMessage", null, LocaleContextHolder.getLocale()));
+        return model;
     }
     
     @ExceptionHandler(HttpNotFound.class)
